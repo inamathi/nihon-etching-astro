@@ -1,0 +1,132 @@
+/* src/styles/_mixin.scss */
+@use "sass:map";
+@use "sass:list";
+@use "sass:math";
+@use "@styles/var" as *;
+
+/* =========================
+   Breakpoints (mobile-first)
+   ========================= */
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px,
+);
+
+$bp-order: (sm, md, lg, xl, 2xl);
+
+/* 0.02px（0.01でも可）で境界の重なりを回避 */
+$bp-epsilon: 0.02px;
+
+/* コンテンツ幅 */
+$max-contents: 1100px;
+
+/* ---- internal helpers ---- */
+@function _bp-min($name) {
+  @if $name == xs {
+    @return 0px;
+  }
+  @if map.has-key($breakpoints, $name) {
+    @return map.get($breakpoints, $name);
+  }
+  @error "Unknown breakpoint: #{$name}";
+}
+
+@function _bp-next($name) {
+  $i: list.index($bp-order, $name);
+  @if $i == null {
+    @return null;
+  }
+  @if $i >= list.length($bp-order) {
+    @return null;
+  }
+  @return list.nth($bp-order, $i + 1);
+}
+
+@function _bp-max($name) {
+  $next: _bp-next($name);
+  @if $next == null {
+    @return null;
+  }
+  /* nextのminより少し小さい値をmax扱いにする */
+  @return _bp-min($next) - $bp-epsilon;
+}
+
+/* =========================
+   Public mixins
+   ========================= */
+
+/* up: min-width 以上 */
+@mixin bp-up($name) {
+  @if $name == xs {
+    @content;
+  } @else {
+    @media (min-width: _bp-min($name)) {
+      @content;
+    }
+  }
+}
+
+/* down: max-width 以下（次のBP直前まで） */
+@mixin bp-down($name) {
+  $max: _bp-max($name);
+  @if $max == null {
+    @content;
+  } @else {
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+}
+
+/* only: そのBP帯域だけ（例: md = 768〜1023.98） */
+@mixin bp-only($name) {
+  @if $name == xs {
+    $max: _bp-min(sm) - $bp-epsilon;
+    @media (max-width: $max) {
+      @content;
+    }
+  } @else {
+    $min: _bp-min($name);
+    $max: _bp-max($name);
+
+    @if $max == null {
+      @media (min-width: $min) {
+        @content;
+      }
+    } @else {
+      @media (min-width: $min) and (max-width: $max) {
+        @content;
+      }
+    }
+  }
+}
+
+/* between: 任意の2点の間 */
+@mixin bp-between($from, $to) {
+  $min: _bp-min($from);
+  $max: _bp-max($to);
+
+  @if $max == null {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  }
+}
+
+/* =========================
+   Container
+   ========================= */
+
+/* 標準コンテナ（中央寄せ + 左右パディング） */
+@mixin container($max: $container-max, $px: $container-padding) {
+  max-width: $max;
+  margin-left: auto;
+  margin-right: auto;
+}

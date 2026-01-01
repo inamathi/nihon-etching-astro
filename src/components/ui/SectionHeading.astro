@@ -1,0 +1,116 @@
+---
+type Props = {
+  title: string;
+  subtitle?: string;
+  accent?: "line" | "none";
+  align?: "center" | "left";
+  as?: "h1" | "h2" | "h3";
+  id?: string;
+};
+
+const {
+  title,
+  subtitle,
+  accent = "line",
+  align = "center",
+  as = "h2",
+  id,
+} = Astro.props as Props;
+
+const Tag = as;
+---
+
+<header
+  class={`section-heading section-heading--${align}`}
+  data-section-heading
+>
+  <Tag class="section-heading__title" id={id}>
+    {title}
+  </Tag>
+
+  {subtitle && <p class="section-heading__subtitle">{subtitle}</p>}
+
+  {
+    accent === "line" && (
+      <span class="section-heading__accent" aria-hidden="true" />
+    )
+  }
+</header>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+
+  .section-heading {
+    margin-bottom: 22px;
+
+    &--center {
+      text-align: center;
+    }
+    &--left {
+      text-align: left;
+    }
+  }
+
+  .section-heading__title {
+    margin: 0;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    font-size: clamp(24px, 4.5vw, 40px);
+    color: $color-text;
+  }
+
+  .section-heading__subtitle {
+    margin: 10px 0 0;
+    font-size: clamp(12px, 1.4vw, 14px);
+    letter-spacing: 0.18em;
+    opacity: 0.9;
+    color: $color-text;
+  }
+
+  .section-heading__accent {
+    display: inline-block;
+    width: 56px;
+    height: 3px;
+    border-radius: 99px;
+    margin-top: 12px;
+    background: $color-primary;
+    opacity: 0.9;
+
+    /* 初期は見えない（画面内に入ったら発火） */
+    transform-origin: left center;
+    transform: scaleX(0);
+    will-change: transform;
+  }
+
+  /* 表示領域に入ったら一度だけ再生 */
+  .section-heading.is-inview .section-heading__accent {
+    animation: headingUnderlineIn 720ms ease-out forwards;
+  }
+
+  @keyframes headingUnderlineIn {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  /* 動きを止める設定のユーザー */
+  @media (prefers-reduced-motion: reduce) {
+    .section-heading__accent {
+      animation: none !important;
+      transform: scaleX(1) !important;
+    }
+  }
+
+  @keyframes headingUnderlineIn {
+    to {
+      transform: scaleX(1);
+    }
+  }
+
+  @include bp-down(md) {
+    .section-heading {
+      margin-bottom: 18px;
+    }
+  }
+</style>

@@ -1,5 +1,16 @@
 {
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "checkJs": true,
+    "ignoreDeprecations": "6.0",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "resolveJsonModule": true,
+    "allowJs": true
+  },
+  "include": ["src"],
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"]
 }

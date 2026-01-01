@@ -1,0 +1,23 @@
+// 例：messages オブジェクトの一部として追加
+nav: {
+  top: { ja: "TOP", en: "Top", zh: "首页" },
+
+  company: { ja: "会社情報", en: "Company", zh: "公司信息" },
+  company_overview_access: { ja: "会社概要／アクセス", en: "Overview / Access", zh: "公司概况 / 交通" },
+  company_philosophy_environment: { ja: "経営理念／環境理念", en: "Philosophy / Environmental Policy", zh: "经营理念 / 环境理念" },
+  company_history: { ja: "沿革", en: "History", zh: "沿革" },
+
+  technology: { ja: "技術情報", en: "Technology", zh: "技术信息" },
+  tech_5axis: { ja: "5軸レーザー彫刻", en: "5-Axis Laser Engraving", zh: "五轴激光雕刻" },
+  tech_shibo: { ja: "シボ加工", en: "Texture (Shibo)", zh: "纹理加工（梨地）" },
+  tech_peening: { ja: "ピーニング加工", en: "Peening", zh: "喷丸加工" },
+
+  group: { ja: "グループ", en: "Group", zh: "集团" },
+  group_ne: { ja: "NEグループ（直営）", en: "NE Group (Direct)", zh: "NE集团（直营）" },
+  group_nwn: { ja: "NWNグループ", en: "NWN Group", zh: "NWN集团" },
+  group_sec: { ja: "SECグループ", en: "SEC Group", zh: "SEC集团" },
+
+  recruit: { ja: "採用情報", en: "Careers", zh: "招聘信息" },
+  contact: { ja: "お問い合わせ", en: "Contact", zh: "联系我们" },
+  download: { ja: "ダウンロード", en: "Download", zh: "下载" },
+}

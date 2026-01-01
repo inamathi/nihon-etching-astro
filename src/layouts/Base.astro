@@ -1,0 +1,242 @@
+---
+const { lang = "ja", title = "" } = Astro.props;
+const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en)/, "");
+
+import HeaderDesktop from "@/components/HeaderDesktop.astro";
+import HeaderMobile from "@/components/HeaderMobile.astro";
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <title>{title ? `${title} | Nihon Etching Ltd.` : "Nihon Etching"}</title>
+    <link rel="alternate" hreflang="ja" href={`/ja${pathNoLang}`} />
+    <link rel="alternate" hreflang="en" href={`/en${pathNoLang}`} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="l-page" data-page>
+      <HeaderDesktop lang={lang} />
+      <HeaderMobile lang={lang} />
+      <main id="main">
+        <slot />
+      </main>
+      <footer><small>© Nihon Etching</small></footer>
+    </div>
+  </body>
+
+  <!-- セクションタイトルコンポネント　アニメ発火コントロール -->
+  <script>
+    (() => {
+      // 既に初期化済みなら二重起動しない
+      if (window.__sectionHeadingIOInitialized) return;
+      window.__sectionHeadingIOInitialized = true;
+
+      const targets = document.querySelectorAll("[data-section-heading]");
+      if (!targets.length) return;
+
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+      // 動きOFFの人は即表示（アニメなし）
+      if (reduceMotion) {
+        targets.forEach((el) => el.classList.add("is-inview"));
+        return;
+      }
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const el = entry.target;
+            el.classList.add("is-inview");
+
+            // 一度だけで良いので監視解除
+            io.unobserve(el);
+          });
+        },
+        {
+          // 20%見えたら発火（好みで 0.1〜0.4 程度）
+          threshold: 0.2,
+        }
+      );
+
+      targets.forEach((el) => io.observe(el));
+    })();
+  </script>
+  <!-- ヘッダー挙動制御 -->
+  <script>
+    (() => {
+      if (window.__headerAutoHideInitialized) return;
+      window.__headerAutoHideInitialized = true;
+
+      const headers = Array.from(
+        document.querySelectorAll("[data-site-header]")
+      );
+      if (!headers.length) return;
+
+      const HIDE_THRESHOLD = 32;
+      const NOISE = 2;
+      const TOP_GUARD = 8;
+
+      let lastY = window.scrollY;
+      let acc = 0;
+      let ticking = false;
+
+      function show() {
+        headers.forEach((h) => h.classList.remove("is-hidden"));
+      }
+      function hide() {
+        headers.forEach((h) => h.classList.add("is-hidden"));
+      }
+
+      function update() {
+        const y = window.scrollY;
+        const dy = y - lastY;
+
+        if (y <= TOP_GUARD) {
+          show();
+          acc = 0;
+          lastY = y;
+          ticking = false;
+          return;
+        }
+
+        if (Math.abs(dy) < NOISE) {
+          lastY = y;
+          ticking = false;
+          return;
+        }
+
+        if ((dy > 0 && acc < 0) || (dy < 0 && acc > 0)) acc = 0;
+
+        acc += dy;
+
+        if (acc > HIDE_THRESHOLD) {
+          hide();
+          acc = 0;
+        }
+
+        if (acc < -NOISE) {
+          show();
+          acc = 0;
+        }
+
+        lastY = y;
+        ticking = false;
+      }
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(update);
+        },
+        { passive: true }
+      );
+    })();
+  </script>
+</html>
+
+<style is:global lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  @use "@styles/font" as *;
+  :root {
+    font-size: $font-size-root;
+  }
+  body {
+    font-family: var(--font-body);
+    line-height: var(--line-height-body);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-heading);
+  }
+
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background: $color-bg;
+    color: $color-text;
+    font-family: var(--font-body);
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+    letter-spacing: var(--letter-spacing-body, 0);
+  }
+
+  a {
+    color: $color-link;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  /* 最大幅コンテナ：本文幅を制御 */
+  .l-container {
+    width: min(1100px, 100%);
+    margin-inline: auto;
+  }
+
+  /* フルブリード（背景は全幅） */
+  .l-full {
+    width: 100%;
+  }
+
+  /* Header 出しわけ */
+  .c-header {
+    &--desktop {
+      display: none;
+    }
+    &--mobile {
+      display: block;
+    }
+  }
+
+  @include bp-up(lg) {
+    .c-header {
+      &--desktop {
+        display: block;
+      }
+      &--mobile {
+        display: none;
+      }
+    }
+  }
+  @include bp-down(md) {
+    .l-container {
+      padding-inline: 10px;
+    }
+  }
+
+  :global(html.is-drawer-open) [data-page] {
+    filter: blur(6px);
+  }
+
+  :global(html.is-drawer-open) [data-page] {
+    pointer-events: none;
+  }
+</style>
