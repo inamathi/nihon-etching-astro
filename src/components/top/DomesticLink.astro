@@ -1,0 +1,135 @@
+---
+import { t, toLang, type Lang } from "@/locales/multilingual";
+
+const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
+const lang: Lang = toLang(rawLang);
+const basePath = `/${lang}`;
+---
+
+<div class="wrapper">
+  <!-- 一時確認用 -->
+  <div class="domestic-link-list">
+    <!-- 会社情報 -->
+    <figure class="list-item">
+      <a
+        class="icon-set"
+        href={`${basePath}${t(lang, "domesticLink.company.href")}`}
+      >
+        <img
+          src="/assets/svg/icon_company-nega-nom.svg"
+          alt=""
+          class="no-rotate"
+        />
+        <div class="rotate-container">
+          <img
+            src="/assets/svg/circle.svg"
+            class="rotate"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+      </a>
+      <figcaption>{t(lang, "domesticLink.company.label")}</figcaption>
+    </figure>
+    <!-- 技術情報 -->
+    <figure class="list-item">
+      <a
+        class="icon-set"
+        href={`${basePath}${t(lang, "domesticLink.technology.href")}`}
+      >
+        <img
+          src="/assets/svg/icon_technology-nega-nom.svg"
+          alt=""
+          class="no-rotate"
+        />
+        <div class="rotate-container">
+          <img
+            src="/assets/svg/circle.svg"
+            class="rotate"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+      </a>
+      <figcaption>{t(lang, "domesticLink.technology.label")}</figcaption>
+    </figure>
+    <!-- グループ -->
+    <figure class="list-item">
+      <a
+        class="icon-set"
+        href={`${basePath}${t(lang, "domesticLink.group.href")}`}
+      >
+        <img
+          src="/assets/svg/icon_group-nega-nom.svg"
+          alt=""
+          class="no-rotate"
+        />
+        <div class="rotate-container">
+          <img
+            src="/assets/svg/circle.svg"
+            class="rotate"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+      </a>
+      <figcaption>{t(lang, "domesticLink.group.label")}</figcaption>
+    </figure>
+    <!-- 採用情報 -->
+    <figure class="list-item">
+      <a
+        class="icon-set"
+        href={`${basePath}${t(lang, "domesticLink.recruit.href")}`}
+      >
+        <img
+          src="/assets/svg/icon_recruit-nega-nom.svg"
+          alt=""
+          class="no-rotate"
+        />
+        <div class="rotate-container">
+          <img
+            src="/assets/svg/circle.svg"
+            class="rotate"
+            alt=""
+            aria-hidden="true"
+          />
+        </div>
+      </a>
+      <figcaption>{t(lang, "domesticLink.recruit.label")}</figcaption>
+    </figure>
+  </div>
+
+  <ul class="fnc-btn-list">
+    <li class="list-item">
+      <a
+        class="btn"
+        href={`${basePath}${t(lang, "domesticLink.contact.href")}`}
+      >
+        {t(lang, "domesticLink.contact.label")}
+      </a>
+    </li>
+    <li class="list-item">
+      <a href={`${basePath}${t(lang, "domesticLink.download.href")}`}>
+        {t(lang, "domesticLink.download.label")}
+      </a>
+    </li>
+  </ul>
+</div>
+
+<!-- svgの切り替え -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".icon-set img").forEach((img) => {
+      const def = img.dataset.default;
+      const hov = img.dataset.hover;
+      if (!def || !hov) return;
+
+      img.addEventListener("mouseenter", () => {
+        img.src = hov;
+      });
+      img.addEventListener("mouseleave", () => {
+        img.src = def;
+      });
+    });
+  });
+</script>

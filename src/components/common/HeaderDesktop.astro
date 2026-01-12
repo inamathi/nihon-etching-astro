@@ -1,0 +1,101 @@
+---
+import { t, toLang, type Lang } from "@/locales/multilingual";
+
+const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
+const lang: Lang = toLang(rawLang);
+const basePath = `/${lang}`;
+---
+
+<header class="c-header c-header--desktop" data-site-header>
+  <div class="c-header__inner l-container">
+    <a class="c-header__logo" href={`${basePath}/`}>Nihon Etching</a>
+
+    <nav class="c-gnav" aria-label="Global navigation">
+      <a class="c-gnav__link" href={`${basePath}/`}>
+        {t(lang, "nav.top")}
+      </a>
+
+      <div class="c-gnav__item has-sub">
+        <a class="c-gnav__link" href={`${basePath}/company/overview-access/`}>
+          {t(lang, "nav.company")}
+        </a>
+        <div class="c-gnav__sub">
+          <a
+            class="c-gnav__subLink"
+            href={`${basePath}/company/overview-access/`}
+          >
+            {t(lang, "nav.company_overview_access")}
+          </a>
+          <a class="c-gnav__subLink" href={`${basePath}/company/philosophy/`}>
+            {t(lang, "nav.company_philosophy_environment")}
+          </a>
+          <a class="c-gnav__subLink" href={`${basePath}/company/history/`}>
+            {t(lang, "nav.company_history")}
+          </a>
+        </div>
+      </div>
+
+      <div class="c-gnav__item has-sub">
+        <a class="c-gnav__link" href={`${basePath}/technology/shibo/`}>
+          {t(lang, "nav.technology")}
+        </a>
+        <div class="c-gnav__sub">
+          <a class="c-gnav__subLink" href={`${basePath}/technology/5axis/`}>
+            {t(lang, "nav.tech_5axis")}
+          </a>
+          <a class="c-gnav__subLink" href={`${basePath}/technology/shibo/`}>
+            {t(lang, "nav.tech_shibo")}
+          </a>
+          <a class="c-gnav__subLink" href={`${basePath}/technology/peening/`}>
+            {t(lang, "nav.tech_peening")}
+          </a>
+        </div>
+      </div>
+
+      <div class="c-gnav__item has-sub">
+        <a class="c-gnav__link" href={`${basePath}/group/`}>
+          {t(lang, "nav.group")}
+        </a>
+        <div class="c-gnav__sub">
+          <a class="c-gnav__subLink" href={`${basePath}/group/ne/`}>
+            {t(lang, "nav.group_ne")}
+          </a>
+          <a class="c-gnav__subLink" href={`${basePath}/group/nwn/`}>
+            {t(lang, "nav.group_nwn")}
+          </a>
+          <a class="c-gnav__subLink" href={`${basePath}/group/sec/`}>
+            {t(lang, "nav.group_sec")}
+          </a>
+        </div>
+      </div>
+
+      <a class="c-gnav__link" href={`${basePath}/recruit/`}>
+        {t(lang, "nav.recruit")}
+      </a>
+      <a class="c-gnav__link" href={`${basePath}/contact/`}>
+        {t(lang, "nav.contact")}
+      </a>
+      <a class="c-gnav__link" href={`${basePath}/download/`}>
+        {t(lang, "nav.download")}
+      </a>
+      <!-- 言語切り替えUI -->
+      <div class="c-lang" aria-label="Language">
+        <a
+          class={`c-lang__item ${lang === "ja" ? "is-current" : ""}`}
+          href={`/ja${Astro.url.pathname.replace(/^\/(ja|en|zh)/, "")}`}
+          aria-current={lang === "ja" ? "true" : undefined}
+        >
+          JA
+        </a>
+        <span class="c-lang__sep">|</span>
+        <a
+          class={`c-lang__item ${lang === "en" ? "is-current" : ""}`}
+          href={`/en${Astro.url.pathname.replace(/^\/(ja|en|zh)/, "")}`}
+          aria-current={lang === "en" ? "true" : undefined}
+        >
+          EN
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>

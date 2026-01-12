@@ -1,12 +1,14 @@
 ---
 import Base from "@/layouts/Base.astro";
-import HeroSlider from "@/components/HeroSlider.astro";
-import TopAbout from "@/components/TopAbout.astro";
+import HeroSlider from "@/components/hero/HeroSlider.astro";
+import TopAbout from "@/components/top/TopAbout.astro";
 import SectionHeading from "@/components/ui/SectionHeading.astro";
 import ImageGallery from "@/components/gallery/ImageGallery.astro";
+import DomesticLink from "@/components/top/DomesticLink.astro";
+import Information from "@/components/top/Information.astro";
 import { t, toLang, languages, type Lang } from "@/locales/multilingual";
 import { topGalleries } from "@/data/topGalleries";
-import PdfViewer from "@/components/PdfViewer.astro";
+import PdfViewer from "@/components/common/PdfViewer.astro";
 
 export async function getStaticPaths() {
   // languages に zh を入れていても、将来まだ出したくないならここで絞れる
@@ -14,26 +16,28 @@ export async function getStaticPaths() {
   return buildLangs.map((lang) => ({ params: { lang } }));
 }
 
-const safeLang: Lang = toLang(Astro.params.lang);
+const lang: Lang = toLang(Astro.params.lang);
 ---
 
-<Base lang={safeLang} title={t(safeLang, "site.title")}>
+<Base lang={lang} title={t(lang, "site.title")}>
   <!-- HeroSlider S -->
-  <HeroSlider lang={safeLang} />
+  <HeroSlider lang={lang} />
   <!-- Scroll後のコンテンツ S -->
   <section id="home-content" class="l-container">
-    <TopAbout lang={safeLang} />
+    <TopAbout lang={lang} />
+    <!-- ページ内リンク -->
+    <DomesticLink lang={lang} />
     <!-- Gallery Technology -->
     {
       Object.entries(topGalleries).map(([groupKey, group]) => (
         <section class={`top-gallery top-gallery--${groupKey}`}>
           <SectionHeading
-            title={t(safeLang, group.titleKey)}
-            subtitle={t(safeLang, group.subTitleKey)}
+            title={t(lang, group.titleKey)}
+            subtitle={t(lang, group.subTitleKey)}
             align="center"
             as="h2"
           />
-          <ImageGallery lang={safeLang} items={group.items} />
+          <ImageGallery lang={lang} items={group.items} />
         </section>
       ))
     }
@@ -41,4 +45,6 @@ const safeLang: Lang = toLang(Astro.params.lang);
   <!-- PDFビューワー -->
   <PdfViewer src="/pdf/5axis_laser-2511.pdf" />
   <PdfViewer src="/pdf/technote-tfc-2508.pdf" />
+  <!-- Information -->
+  <Information lang={lang} />
 </Base>

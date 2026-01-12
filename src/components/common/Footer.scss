@@ -1,0 +1,277 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+.c-footer {
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 40px 0 0;
+  border-top: solid 1px $color-primary;
+  margin-top: 40px;
+  &__inner {
+    // l-container 側で width 管理している想定
+  }
+}
+
+.c-footerSitemap {
+  &__grid {
+    display: flex;
+    gap: 40px;
+    justify-content: space-between;
+  }
+
+  &__block {
+    min-width: 0;
+    .c-group-wrapper {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      section {
+        flex: 1;
+      }
+    }
+  }
+
+  &__title {
+    margin: 0 0 12px 0;
+    font-size: $fs-footer-title;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  &__titleLink {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &::after {
+      content: "";
+    }
+    &:link,
+    &:visited {
+      color: $color-gray-400;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 8px;
+  }
+
+  &__item {
+    min-width: 0;
+  }
+
+  &__link {
+    display: inline-block;
+    text-decoration: none;
+    border-left: solid 3px $color-gray-800;
+    font-size: $fs-footer-link;
+    white-space: nowrap;
+    margin-left: 10px;
+    padding: 2px 5px;
+    &:link,
+    &:visited {
+      color: $color-gray-400;
+    }
+
+    &:hover {
+      border-left: solid 3px $color-accent;
+      color: $color-text;
+    }
+  }
+}
+.c-footerService {
+  &__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 10px 0;
+    height: auto;
+    .list-item {
+      a {
+        font-size: $fs-xs;
+        &:link,
+        &:visited {
+          color: $color-text;
+        }
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+.c-footer__corp {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 0 0;
+  color: $color-gray-300;
+  .c-footer__logo {
+    width: 128px;
+  }
+  .c-footer__address {
+    height: max-content;
+    dt {
+      font-size: $fs-m;
+    }
+    dd {
+      font-size: $fs-xs;
+    }
+  }
+}
+
+.c-footerBottom {
+  padding: 10px 0;
+  display: grid;
+  place-items: center;
+  &__logo {
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  &__copy {
+    margin: 0;
+    font-size: $fs-xs;
+    white-space: nowrap;
+    color: $color-gray-500;
+  }
+}
+
+/*=====================================================================
+  for Mobile ============================================================
+  =====================================================================*/
+@include bp-down(md) {
+  .c-footerBottom {
+    display: grid;
+    place-items: center;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .c-footerSitemap {
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 0;
+    }
+
+    &__block[data-acc-item] {
+      border-top: 1px solid rgba($color-gray-600, 0.5);
+      padding: 10px 0;
+    }
+
+    &__title {
+      margin: 0;
+      padding-left: 10px;
+    }
+
+    &__titleLink {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+    }
+
+    // パネルの開閉（最初は閉）
+    &__panel {
+      display: none;
+      padding: 6px 0 12px;
+    }
+
+    &__link {
+      margin-left: 24px;
+    }
+
+    // 開状態
+    &__block[data-acc-state="open"] {
+      .c-footerSitemap__panel {
+        display: block;
+      }
+
+      .c-footerSitemap__titleLink::after {
+        content: "−";
+      }
+    }
+
+    // Group 内の横並びを縦に
+    .c-group-wrapper {
+      display: grid;
+      gap: 10px;
+
+      section {
+        // SPは縦積みなので不要なflexは外す
+      }
+    }
+    .c-footerSitemap__title--sub {
+      padding-left: 24px;
+    }
+
+    // other（採用/問い合わせ/DL）の微調整
+    &__block[data-footer-col="other"] {
+      margin-top: 0; // SPでは段差を作らない
+    }
+
+    // アコーディオン対象の見出しだけ +/-
+    [data-acc-item] {
+      > .c-footerSitemap__title,
+      > .c-footerSitemap__title--sub {
+        .c-footerSitemap__titleLink::after {
+          content: "+";
+          font-size: $fs-s;
+          color: $color-gray-500;
+          line-height: 1;
+          padding-right: 20px;
+        }
+        .no-acc::after {
+          content: "";
+        }
+      }
+
+      &[data-acc-state="open"] {
+        .c-footerSitemap__panel {
+          display: block;
+        }
+
+        // open時は「同じ強さ」で − に上書き（ここが重要）
+        > .c-footerSitemap__title,
+        > .c-footerSitemap__title--sub {
+          .c-footerSitemap__titleLink::after {
+            content: "−";
+          }
+          .no-acc {
+            content: "";
+          }
+        }
+
+        .c-footerSitemap__panel {
+          display: block;
+        }
+      }
+
+      .c-footerSitemap__panel {
+        display: none;
+        padding: 6px 0 12px;
+      }
+    }
+  }
+  .c-footerService {
+    &__list {
+      gap: 10px;
+    }
+  }
+  .c-footer__corp {
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    gap: 0;
+  }
+}

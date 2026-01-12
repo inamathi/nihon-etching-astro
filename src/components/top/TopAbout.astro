@@ -1,0 +1,36 @@
+---
+import { t, type Lang } from "@/locales/multilingual";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+
+const { lang } = Astro.props as { lang: Lang };
+---
+
+<section class="top-about" aria-labelledby="top-about-title">
+  <SectionHeading
+    title={t(lang, "topAbout.title")}
+    subtitle={t(lang, "topAbout.subtitle")}
+    id="top-about-title"
+    as="h2"
+    align="center"
+    accent="line"
+  />
+
+  <div class="top-about__panel">
+    <p class="top-about__tagline">{t(lang, "topAbout.tagline")}</p>
+    <div class="top-about__body">
+      <p>{t(lang, "topAbout.p1")}</p>
+      <p>{t(lang, "topAbout.p2")}</p>
+      <p>{t(lang, "topAbout.p3")}</p>
+    </div>
+
+    <h3 class="top-about__section">{t(lang, "topAbout.sectionTitle")}</h3>
+
+    <ul class="top-about__cards" aria-label={t(lang, "topAbout.sectionTitle")}>
+      <li class="top-about__card">{t(lang, "topAbout.cards.c1")}</li>
+      <li class="top-about__card">{t(lang, "topAbout.cards.c2")}</li>
+      <li class="top-about__card">{t(lang, "topAbout.cards.c3")}</li>
+      <li class="top-about__card">{t(lang, "topAbout.cards.c4")}</li>
+      <li class="top-about__card">{t(lang, "topAbout.cards.c5")}</li>
+    </ul>
+  </div>
+</section>

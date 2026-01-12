@@ -1,0 +1,32 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+
+.c-scrollTop {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: none;
+
+  font-size: 14px;
+  cursor: pointer;
+
+  color: rgba(255, 255, 255, 0.6);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    .c-scrollTop__icon {
+      fill: white;
+    }
+  }
+  &__icon {
+    fill: currentColor;
+  }
+}

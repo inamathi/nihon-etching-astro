@@ -1,0 +1,78 @@
+---
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import CompanyMediaCard from "@/components/group/CompanyMediaCard.astro";
+import { t, type Lang } from "@/locales/multilingual";
+import type { GroupKey, NeRegionKey } from "@/types/group";
+import type { CompanyData } from "@/data/companyOverview";
+import type { FieldDef } from "@/lib/companyCards";
+
+// Props
+type Props = {
+  lang: Lang;
+  basePath: string;
+  groupHeadingKey: string;
+  regionOrder: readonly NeRegionKey[];
+  headingKeyMap: Record<NeRegionKey, string>;
+  companies: CompanyData<GroupKey>[];
+  fields: FieldDef[];
+  detailsHref?: string;
+};
+
+const { lang, groupHeadingKey, regionOrder, headingKeyMap, companies, fields } =
+  Astro.props as Props;
+
+// region毎に絞る（region未設定は落とす）
+const byRegion = (regionKey: NeRegionKey) =>
+  companies.filter((c) => (c.region ?? "").trim() === regionKey);
+---
+
+<section class="l-section l-container">
+  <PageSectionHeading text={t(lang, groupHeadingKey)} />
+
+  {
+    regionOrder.map((regionKey) => {
+      const list = byRegion(regionKey);
+      if (!list.length) return null;
+
+      return (
+        <section
+          class="l-section__area"
+          id={`ne-${regionKey}`}
+          data-region={regionKey}
+        >
+          <PageSectionHeading text={t(lang, headingKeyMap[regionKey])} />
+
+          <div class="c-companyCards">
+            {list.map((company) => (
+              <CompanyMediaCard company={company} lang={lang} fields={fields} />
+            ))}
+          </div>
+        </section>
+      );
+    })
+  }
+</section>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  @use "@styles/font" as *;
+
+  .l-section {
+    padding: 20px 0 40px;
+    display: grid;
+    grid-template-columns: repeat(2 1fr);
+    .l-wrapper {
+      padding-bottom: 40px;
+    }
+  }
+  .c-companyCards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .l-section__area {
+    padding-bottom: 40px;
+  }
+</style>

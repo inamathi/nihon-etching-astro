@@ -1,0 +1,343 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import BreadCrumb from "@/components/common/BreadCrumb.astro";
+import { t, g, getMessage, toLang, type Lang } from "@/locales/multilingual";
+import PageHeader from "@/components/ui/PageHeader.astro";
+
+type AccessNote = {
+  label: { ja: string; en: string };
+  text: { ja: string; en: string };
+};
+
+type Location = {
+  name: { ja: string; en: string };
+  address: { label: { ja: string; en: string }; ja: string; en: string };
+  phone?: { label: { ja: string; en: string }; ja: string; en: string };
+  map?: {
+    lat: number;
+    lng: number;
+    zoom?: number;
+    aria: { ja: string; en: string };
+  };
+  notes?: {
+    car?: AccessNote;
+    train?: AccessNote;
+    taxi?: AccessNote;
+  };
+};
+
+type ProfileItem = {
+  label: { ja: string; en: string };
+  value: { ja: string; en: string };
+};
+
+export const getStaticPaths = async () => {
+  return [{ params: { lang: "ja" } }, { params: { lang: "en" } }];
+};
+
+const { lang: rawLang } = Astro.params as { lang?: string };
+const lang: Lang = toLang(rawLang);
+const basePath = `/${lang}`;
+
+const locations =
+  getMessage<Record<string, Location>>(
+    "company.overview_access.section_access.locations"
+  ) ?? {};
+
+const mapLang = lang === "ja" ? "ja" : "en";
+
+const withHL = (src: string) => {
+  // すでに ? があるかで繋ぎ文字を変える
+  const join = src.includes("?") ? "&" : "?";
+  return `${src}${join}hl=${mapLang}`;
+};
+
+const items =
+  getMessage<Record<string, ProfileItem>>(
+    "company.overview_access.section_overview.items"
+  ) ?? {};
+
+const mapSrc = (lat: number, lng: number, zoom = 16) =>
+  `https://www.google.com/maps?q=${lat},${lng}&z=${zoom}&hl=${mapLang}&output=embed`;
+---
+
+<Base lang={lang} title={t(lang, "company.overview_access.pageTitle")}>
+  <PageHeader
+    eyebrowText="COMPANY"
+    title={t(lang, "company.overview_access.title")}
+    lead={t(lang, "company.overview_access.lead")}
+    imageSrc="/images/pageHeader/pageheader-company.webp"
+    imageAlt=""
+  />
+  <BreadCrumb
+    ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      {
+        label: t(lang, "nav.company"),
+        href: `${basePath}/company/overview-access/`,
+      },
+      { label: t(lang, "company.overview_access.title") },
+    ]}
+  />
+
+  <main class="l-container c-page">
+    <section class="c-section">
+      <PageSectionHeading
+        as="h3"
+        text={t(lang, "company.overview_access.section_overview.title")}
+      />
+      <dl class="c-dl">
+        {
+          Object.entries(items).map(([key, item]) => {
+            const langKey = lang === "zh" ? "en" : (lang as "ja" | "en");
+            const value = item.value[langKey] ?? "";
+            return (
+              <div class="c-dl__row" data-key={key}>
+                <dt class="c-dl__dt">{item.label[langKey]}</dt>
+                <dd class="c-dl__dd">
+                  {value.split("\n").map((line, i) => (
+                    <>
+                      {i > 0 && <br />}
+                      {line}
+                    </>
+                  ))}
+                </dd>
+              </div>
+            );
+          })
+        }
+      </dl>
+    </section>
+
+    <section class="c-section">
+      <PageSectionHeading
+        as="h3"
+        text={t(lang, "company.overview_access.section_access.title")}
+      />
+
+      <div class="c-access">
+        <!-- <p class="c-access__text">
+          {t(lang, "company.overview_access.section_access.note")}
+        </p> -->
+
+        <!-- 後で Google Maps / 地図埋め込みに差し替え想定 -->
+        <div class="c-accessList">
+          {
+            Object.entries(locations).map(([id, loc]) => {
+              const langKey = lang === "zh" ? "en" : (lang as "ja" | "en");
+              return (
+                <article class="c-accessCard" data-location={id}>
+                  <h3 class="c-accessCard__title">{loc.name[langKey]}</h3>
+
+                  <dl class="c-accessCard__dl">
+                    <div class="c-accessCard__row">
+                      <dt class="c-accessCard__dt">
+                        {loc.address.label[langKey]}
+                      </dt>
+                      <dd class="c-accessCard__dd">{loc.address[langKey]}</dd>
+                    </div>
+
+                    {loc.phone && (
+                      <div class="c-accessCard__row">
+                        <dt class="c-accessCard__dt">
+                          {loc.phone.label[langKey]}
+                        </dt>
+                        <dd class="c-accessCard__dd">{loc.phone[langKey]}</dd>
+                      </div>
+                    )}
+                  </dl>
+
+                  {loc.map && (
+                    <div class="c-accessCard__map">
+                      <iframe
+                        class="c-accessCard__iframe"
+                        src={mapSrc(loc.map.lat, loc.map.lng, loc.map.zoom)}
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        aria-label={loc.map.aria[langKey]}
+                      />
+                    </div>
+                  )}
+
+                  {loc.notes && (
+                    <div class="c-accessCard__notes">
+                      {loc.notes.car && (
+                        <p class="c-accessCard__note">
+                          <span class="c-accessCard__noteLabel">
+                            {loc.notes.car.label[langKey]}：
+                          </span>
+                          {loc.notes.car.text[langKey]}
+                        </p>
+                      )}
+                      {loc.notes.train && (
+                        <p class="c-accessCard__note">
+                          <span class="c-accessCard__noteLabel">
+                            {loc.notes.train.label[langKey]}：
+                          </span>
+                          {loc.notes.train.text[langKey]}
+                        </p>
+                      )}
+                      {loc.notes.taxi && (
+                        <p class="c-accessCard__note">
+                          <span class="c-accessCard__noteLabel">
+                            {loc.notes.taxi.label[langKey]}：
+                          </span>
+                          {loc.notes.taxi.text[langKey]}
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+
+  .c-page {
+    padding: 40px 0 60px;
+  }
+
+  .c-dl {
+    margin: 0;
+
+    &__row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 10px;
+      padding: 10px 0;
+      border-top: 1px solid $color-gray-800;
+
+      &:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+    }
+
+    &__dt {
+      margin: 0;
+      font-size: $fs-sm;
+      color: $color-gray-500;
+    }
+
+    &__dd {
+      margin: 0;
+      font-size: $fs-m;
+      color: $color-gray-200;
+      line-height: 1.8;
+    }
+  }
+
+  .c-accessList {
+    display: grid;
+    gap: 22px;
+  }
+  // Google Map & 関連文字
+  .c-accessCard {
+    border-top: 1px solid $color-gray-900;
+    padding-top: 18px;
+
+    &__title {
+      margin: 0 0 12px 0;
+      font-size: $fs-m;
+      color: $color-gray-200;
+    }
+
+    &__dl {
+      margin: 0 0 14px 0;
+    }
+
+    &__row {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 10px;
+      padding: 8px 0;
+      border-top: 1px solid $color-gray-900;
+
+      &:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+    }
+
+    &__dt {
+      margin: 0;
+      font-size: $fs-s;
+      color: $color-gray-500;
+      width: 100px;
+    }
+
+    &__dd {
+      margin: 0;
+      font-size: $fs-s;
+      color: $color-gray-200;
+      line-height: 1.8;
+    }
+
+    &__map {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      max-height: 360px;
+      border: 1px solid $color-gray-800;
+      overflow: hidden;
+      background: $color-gray-900;
+    }
+
+    &__iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    &__notes {
+      margin-top: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    &__note {
+      margin: 0;
+      font-size: $fs-s;
+      line-height: 1.8;
+      color: $color-gray-300;
+    }
+
+    &__noteLabel {
+      font-weight: 600;
+      color: $color-gray-200;
+    }
+  }
+
+  @include bp-down(md) {
+    .c-accessCard {
+      &__row {
+        grid-template-columns: 1fr;
+      }
+
+      &__map {
+        aspect-ratio: 4 / 3;
+        max-height: 300px;
+      }
+    }
+  }
+
+  @include bp-down(md) {
+    .c-page {
+      padding: 0 20px;
+    }
+    .c-dl {
+      &__row {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+</style>

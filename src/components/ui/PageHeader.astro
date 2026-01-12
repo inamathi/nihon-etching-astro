@@ -1,0 +1,54 @@
+---
+type Props = {
+  eyebrowText?: string; // 例: "COMPANY"
+  title: string; // H1
+  lead?: string; // 1〜2行
+  imageSrc?: string; // 画像を使う場合
+  imageAlt?: string; // 情報画像なら入れる（装飾なら空でOK）
+  variant?: "image" | "plain"; // 画像あり/なし
+};
+
+const {
+  eyebrowText,
+  title,
+  lead,
+  imageSrc,
+  imageAlt = "",
+  variant = imageSrc ? "image" : "plain",
+} = Astro.props;
+---
+
+<header class={`c-pageHeader ${variant === "image" ? "has-image" : ""}`}>
+  {
+    variant === "image" && imageSrc && (
+      <div
+        class="c-pageHeader__media"
+        aria-hidden={imageAlt ? undefined : "true"}
+      >
+        <img
+          class="c-pageHeader__img"
+          src={imageSrc}
+          alt={imageAlt}
+          loading="eager"
+          decoding="async"
+        />
+        <span class="c-pageHeader__overlay" aria-hidden="true" />
+      </div>
+    )
+  }
+
+  <div class="c-pageHeader__inner l-container">
+    {
+      eyebrowText && (
+        <p class="c-pageHeader__eyebrow">
+          <span class="c-pageHeader__eyebrowText">{eyebrowText}</span>
+          <span class="c-pageHeader__eyebrowLine" aria-hidden="true" />
+        </p>
+      )
+    }
+
+    <h1 class="c-pageHeader__title">{title}</h1>
+
+    {lead && <p class="c-pageHeader__lead">{lead}</p>}
+  </div>
+</header>

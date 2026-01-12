@@ -1,0 +1,105 @@
+---
+import type { GroupKey } from "@/types/group";
+import { t, type Lang } from "@/locales/multilingual";
+import { pick } from "@/lib/companyView";
+import type { CompanyData } from "@/data/companyOverview";
+import type { FieldDef } from "@/lib/companyView.ts";
+
+type Props = {
+  company: CompanyData<GroupKey>;
+  lang: Lang;
+  fields: FieldDef[];
+};
+
+const { company, lang, fields } = Astro.props;
+
+const isJapan = (company.country ?? "").toLowerCase() === "japan";
+
+// photoAlt は I18nText 想定。なければ空文字。
+const photoAlt = company.photoAlt ? pick(company.photoAlt as any, lang) : "";
+---
+
+<article class="c-companyMediaCard" data-company-card>
+  <!-- ===== タイトル行 ===== -->
+  <div class="c-companyMediaCard__title">
+    <span class="c-companyCard__country" aria-label={company.country}>
+      <svg
+        class={`c-companyCard__countryIcon ${isJapan ? "is-japan" : "is-global"}`}
+        aria-hidden="true"
+      >
+        <use
+          href={isJapan
+            ? "/assets/svg/icon-sprite.svg#icon-country-japan"
+            : "/assets/svg/icon-sprite.svg#icon-country-global"}></use>
+      </svg>
+
+      <span class="c-companyCard__countryLabel">{company.country}</span>
+    </span>
+
+    <div class="c-companyCard__companyName">
+      <span>{pick(company.companyName, lang)}</span>
+      {
+        company.companyNameSecondary && (
+          <span>{pick(company.companyNameSecondary, lang)}</span>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- ===== 本体 ===== -->
+  <div class="l-flex-container">
+    <figure class="c-companyMediaCard__media">
+      {
+        company.photoSrc ? (
+          <img
+            class="c-companyMediaCard__img"
+            src={company.photoSrc}
+            alt={photoAlt}
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div class="c-companyMediaCard__ph" aria-hidden="true" />
+        )
+      }
+    </figure>
+
+    <div class="c-companyMediaCard__body">
+      <dl class="c-companyMediaCard__dl">
+        {
+          fields.map((f) => {
+            const value = (f.getValue(company, lang) ?? "").trim();
+            if (!value) return null;
+
+            if (f.kind === "link") {
+              const href = (f.getHref?.(company, lang) ?? "").trim();
+              if (!href) return null;
+
+              return (
+                <div class="c-companyMediaCard__row" key={f.key}>
+                  <dt class="c-companyMediaCard__dt">
+                    {t(lang, `common.labels.${f.key}`)}
+                  </dt>
+                  <dd class="c-companyMediaCard__dd">
+                    <a href={href} target="_blank" rel="noopener">
+                      {value}
+                    </a>
+                  </dd>
+                </div>
+              );
+            }
+
+            return (
+              <div class="c-companyMediaCard__row" key={f.key}>
+                <dt class="c-companyMediaCard__dt">
+                  {t(lang, `common.labels.${f.key}`)}
+                </dt>
+                <dd class="c-companyMediaCard__dd">{value}</dd>
+              </div>
+            );
+          })
+        }
+      </dl>
+    </div>
+  </div>
+</article>

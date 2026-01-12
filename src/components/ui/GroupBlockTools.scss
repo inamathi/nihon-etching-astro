@@ -1,0 +1,135 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+@use "@styles/font" as *;
+
+.c-companyList {
+  margin: 40px auto;
+  .c-groupBlock__body {
+    overflow: hidden;
+    max-height: 2000px;
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+    transform-origin: top;
+    transition: max-height 260ms ease, opacity 180ms ease, transform 220ms ease;
+    will-change: max-height, opacity, transform;
+  }
+  .c-groupBlock__body[data-group-body] {
+    overflow: hidden;
+    max-height: 2000px; // 十分大きい値（必要なら調整）
+    opacity: 1;
+    transform: translateY(0);
+    transition: max-height 320ms ease, opacity 200ms ease, transform 200ms ease;
+  }
+  &[data-group-state="closed"] {
+    .c-groupBlock__body[data-group-body] {
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-6px); // “畳まれる雰囲気”
+      transition: max-height 320ms ease, opacity 160ms ease,
+        transform 160ms ease;
+    }
+  }
+  .c-groupBlock__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+  .c-companyCards {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    .c-companyCard {
+      padding: 8px 0 10px;
+      &:nth-child(odd) {
+        background: rgba(255, 255, 255, 0.04);
+      }
+      .c-companyCard__dl {
+        & > div {
+          display: flex;
+          gap: 20px;
+          padding: 4px 8px;
+          dt {
+            color: $color-gray-500;
+            font-size: $fs-s;
+            width: 150px;
+            border-right: solid 2px $color-gray-700;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 20px;
+          }
+          dd {
+            display: flex;
+            align-items: center;
+            font-size: $fs-sm;
+          }
+        }
+      }
+    }
+  }
+}
+/* 折りたたみSCSS */
+.c-groupBlock {
+  position: relative;
+
+  &__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+
+    // 既存のタイトル下線演出があるならここに合わせる
+    padding: 0 0 10px;
+  }
+
+  &__title {
+    margin: 0;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    line-height: 1.2;
+  }
+
+  &__note {
+    font-size: 0.9em;
+    opacity: 0.8;
+    white-space: nowrap;
+  }
+
+  &__tools {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
+  &__btn {
+    appearance: none;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.06);
+    color: inherit;
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    &.is-link {
+      // a 用。button と同じ見た目に
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__body {
+    margin-top: 12px;
+  }
+}

@@ -1,0 +1,302 @@
+---
+import type { Lang } from "@/locales/multilingual";
+import { tHero } from "@/locales/heroSlides.i18n";
+import { heroSlides } from "@/components/hero/heroSlides";
+
+const { lang } = Astro.props as { lang: Lang };
+
+// 既存設計に合わせて維持
+const scrollTargetId = "home-content";
+const SLIDE_MS = 6000;
+
+const slides = heroSlides.map((s) => ({
+  ...s,
+  html: tHero(lang, s.key) as string,
+}));
+---
+
+<section
+  class="hero"
+  aria-label="Hero"
+  data-interval={SLIDE_MS}
+  data-lottie-src="/assets/lottie/ne-logo-nega.json"
+  data-stop-at-end="true"
+  data-lottie-freeze-last="true"
+>
+  <div class="hero__bg" aria-hidden="true"></div>
+  <!-- SVGによる背景グラデーション -->
+  <svg class="hero__filters" aria-hidden="true" focusable="false">
+    <filter id="heroWobble" x="-20%" y="-20%" width="140%" height="140%">
+      <!-- ノイズ生成 -->
+      <feTurbulence
+        type="fractalNoise"
+        baseFrequency="0.010 0.020"
+        numOctaves="2"
+        seed="2"
+        result="noise"
+      >
+        <!-- うねり速度：dur を変えると速さが変わる -->
+        <animate
+          attributeName="baseFrequency"
+          dur="12s"
+          values="0.010 0.020;0.018 0.010;0.010 0.020"
+          repeatCount="indefinite"></animate>
+        <animate
+          attributeName="seed"
+          dur="8s"
+          values="2;8;2"
+          repeatCount="indefinite"></animate>
+      </feTurbulence>
+
+      <!-- 境界の歪み（scale が大きいほど“うねり”が強い） -->
+      <feDisplacementMap
+        in="SourceGraphic"
+        in2="noise"
+        scale="28"
+        xChannelSelector="R"
+        yChannelSelector="G"></feDisplacementMap>
+    </filter>
+  </svg>
+
+  <div class="hero__inner">
+    <div class="hero__copy" data-hero-copy aria-live="polite">
+      {
+        slides.map((s, i) => (
+          <div
+            class={`hero__slidecopy ${i === 0 ? "is-active" : ""}`}
+            data-hero-slidecopy
+            data-slide={s.type}
+            data-variant={s.variant}
+            aria-hidden={i === 0 ? "false" : "true"}
+          >
+            <p class={`hero__line ${s.className ?? ""}`} set:html={s.html} />
+
+            {s.type === "lottie" && (
+              <div class="hero__lottie" data-hero-lottie aria-hidden="true" />
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+  <a class="hero__scroll" href={`#${scrollTargetId}`} data-hero-scroll>
+    <span class="hero__scroll-label">SCROLL</span>
+    <!-- <span class="hero__scroll-bar" aria-hidden="true"></span> -->
+  </a>
+</section>
+
+<script>
+  /**
+   * Hero slider (6s default, 12s on final lottie slide)
+   * - Full replacement version
+   * - Uses setTimeout for per-slide duration
+   * - Avoids implicit-any warnings via JSDoc types + explicit casts
+   */
+  (() => {
+    /** @type {HTMLElement | null} */
+    const root = document.querySelector(".hero");
+    if (!root) return;
+
+    /* ------------------------------
+     * smooth scroll
+     * ------------------------------ */
+    /** @type {HTMLAnchorElement | null} */
+    const link = root.querySelector("[data-hero-scroll]");
+    link?.addEventListener("click", (e) => {
+      const href = link.getAttribute("href") || "";
+      if (!href.startsWith("#")) return;
+
+      const target = document.getElementById(href.slice(1));
+      if (!target) return;
+
+      e.preventDefault();
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    /* ------------------------------
+     * slides
+     * ------------------------------ */
+    /** @type {HTMLElement[]} */
+    const slides = Array.from(root.querySelectorAll("[data-hero-slidecopy]"));
+    if (!slides.length) return;
+
+    const DEFAULT_INTERVAL = Number(root.getAttribute("data-interval")) || 6000;
+    const FINAL_INTERVAL = DEFAULT_INTERVAL * 2; // 12s when default is 6s
+
+    let index = 0;
+
+    /** @type {number | null} */
+    let timerId = null;
+
+    const reduceMotion =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ------------------------------
+     * lottie
+     * ------------------------------ */
+
+    /** @type {any | null} */
+    let lottieAnim = null;
+
+    /** @type {Promise<any> | null} */
+    let lottieScriptPromise = null;
+
+    /** @param {HTMLElement} el */
+    function isFinalSlide(el) {
+      // final slide is the lottie slide in your markup
+      return el.getAttribute("data-slide") === "lottie";
+    }
+
+    function loadLottieScript() {
+      if (lottieScriptPromise) return lottieScriptPromise;
+
+      /** @type {any} */
+      const w = window;
+
+      if (w.lottie) {
+        lottieScriptPromise = Promise.resolve(w.lottie);
+        return lottieScriptPromise;
+      }
+
+      lottieScriptPromise = new Promise((resolve, reject) => {
+        const s = document.createElement("script");
+        s.src =
+          "https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js";
+        s.onload = () => resolve(w.lottie);
+        s.onerror = (/** @type {Event} */ err) => reject(err);
+        document.head.appendChild(s);
+      });
+
+      return lottieScriptPromise;
+    }
+
+    /** @param {HTMLElement} slideEl */
+    async function mountOrPlayLottie(slideEl) {
+      /** @type {HTMLElement | null} */
+      const box = slideEl.querySelector("[data-hero-lottie]");
+      if (!box) return;
+
+      const jsonPath = root.getAttribute("data-lottie-src");
+      if (!jsonPath) return;
+
+      try {
+        const lottie = await loadLottieScript();
+        if (!lottie) return;
+
+        if (!lottieAnim) {
+          lottieAnim = lottie.loadAnimation({
+            container: box,
+            renderer: "svg",
+            loop: false,
+            autoplay: true,
+            path: jsonPath,
+          });
+        } else {
+          // restart from 0 each time we enter final slide
+          if (typeof lottieAnim.goToAndPlay === "function") {
+            lottieAnim.goToAndPlay(0, true);
+          } else if (typeof lottieAnim.play === "function") {
+            lottieAnim.play();
+          }
+        }
+      } catch (e) {
+        console.error("Lottie load/play failed:", e);
+      }
+    }
+
+    function stopLottie() {
+      try {
+        if (lottieAnim && typeof lottieAnim.stop === "function")
+          lottieAnim.stop();
+      } catch (e) {
+        console.error("Lottie stop failed:", e);
+      }
+    }
+
+    /* ------------------------------
+     * slide control (variable duration)
+     * ------------------------------ */
+    function getCurrentDelay() {
+      const curr = slides[index];
+      return isFinalSlide(curr) ? FINAL_INTERVAL : DEFAULT_INTERVAL;
+    }
+
+    function clearTimer() {
+      if (timerId == null) return;
+      window.clearTimeout(timerId);
+      timerId = null;
+    }
+
+    function scheduleNext() {
+      clearTimer();
+      if (reduceMotion) return;
+
+      const delay = getCurrentDelay();
+      timerId = window.setTimeout(() => {
+        goNext();
+      }, delay);
+    }
+
+    /** @param {number} nextIndex */
+    function apply(nextIndex) {
+      const prev = slides[index];
+      prev.classList.remove("is-active");
+      prev.setAttribute("aria-hidden", "true");
+
+      if (isFinalSlide(prev)) stopLottie();
+
+      index = nextIndex;
+
+      const curr = slides[index];
+      curr.classList.add("is-active");
+      curr.setAttribute("aria-hidden", "false");
+
+      if (isFinalSlide(curr)) {
+        mountOrPlayLottie(curr);
+      }
+
+      scheduleNext();
+    }
+
+    function goNext() {
+      const n = (index + 1) % slides.length;
+      apply(n);
+    }
+
+    /* ------------------------------
+     * intersection observer
+     * ------------------------------ */
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.some((e) => e.isIntersecting);
+        if (visible) {
+          // resume scheduling from "now" based on current slide
+          scheduleNext();
+        } else {
+          clearTimer();
+          // optional: stop lottie while offscreen (keeps CPU quiet)
+          const curr = slides[index];
+          if (isFinalSlide(curr)) stopLottie();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    io.observe(root);
+
+    /* ------------------------------
+     * initial state
+     * ------------------------------ */
+    slides.forEach((el, i) => {
+      el.classList.toggle("is-active", i === 0);
+      el.setAttribute("aria-hidden", i === 0 ? "false" : "true");
+    });
+
+    // If first slide is lottie (unlikely), mount it.
+    if (isFinalSlide(slides[0])) mountOrPlayLottie(slides[0]);
+
+    // Start scheduling immediately if hero is in view
+    scheduleNext();
+  })();
+</script>

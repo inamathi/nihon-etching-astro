@@ -1,0 +1,75 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+
+.section-heading {
+  margin-bottom: 22px;
+
+  &--center {
+    text-align: center;
+  }
+  &--left {
+    text-align: left;
+  }
+}
+
+.section-heading__title {
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  font-size: clamp(24px, 4.5vw, 40px);
+  color: $color-text;
+}
+
+.section-heading__subtitle {
+  margin: 10px 0 0;
+  font-size: clamp(12px, 1.4vw, 16px);
+  letter-spacing: 0.18em;
+  opacity: 0.9;
+  color: $color-text;
+}
+
+.section-heading__accent {
+  display: inline-block;
+  width: 56px;
+  height: 3px;
+  border-radius: 99px;
+  margin-top: 12px;
+  background: $color-primary;
+  opacity: 0.9;
+
+  /* 初期は見えない（画面内に入ったら発火） */
+  transform-origin: left center;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+/* 表示領域に入ったら一度だけ再生 */
+.section-heading.is-inview .section-heading__accent {
+  animation: headingUnderlineIn 720ms ease-out forwards;
+}
+
+@keyframes headingUnderlineIn {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* 動きを止める設定のユーザー */
+@media (prefers-reduced-motion: reduce) {
+  .section-heading__accent {
+    animation: none !important;
+    transform: scaleX(1) !important;
+  }
+}
+
+@keyframes headingUnderlineIn {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@include bp-down(md) {
+  .section-heading {
+    margin-bottom: 18px;
+  }
+}

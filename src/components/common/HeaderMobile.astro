@@ -1,0 +1,187 @@
+---
+import { t, toLang, type Lang } from "@/locales/multilingual";
+
+const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
+const lang: Lang = toLang(rawLang);
+const basePath = `/${lang}`;
+const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en|zh)/, "");
+---
+
+<!-- header bar（ここには drawer を入れない） -->
+<header class="c-header c-header--mobile" data-site-header>
+  <div class="c-header__inner l-container">
+    <a class="c-header__logo" href={`${basePath}/`}>Nihon Etching</a>
+
+    <button
+      class="c-menuBtn"
+      type="button"
+      aria-label="Menu"
+      aria-expanded="false"
+      data-drawer-btn
+    >
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- overlay（header の外） -->
+<div class="c-drawerOverlay" data-drawer-overlay></div>
+
+<div class="c-drawerHint" aria-hidden="true"></div>
+
+<!-- drawer panel（header の外） -->
+<aside class="c-drawer" id="drawerPanel" data-drawer-panel>
+  <div class="c-drawer__inner l-container">
+    <nav class="c-drawer__nav" aria-label="Mobile navigation">
+      <a class="c-drawer__link" href={`${basePath}/`}>{t(lang, "nav.top")}</a>
+
+      <div class="c-drawer__group">
+        <span class="c-drawer__label">{t(lang, "nav.company")}</span>
+        <a
+          class="c-drawer__subLink"
+          href={`${basePath}/company/overview-access/`}
+        >
+          {t(lang, "nav.company_overview_access")}
+        </a>
+        <a class="c-drawer__subLink" href={`${basePath}/company/philosophy/`}>
+          {t(lang, "nav.company_philosophy_environment")}
+        </a>
+        <a class="c-drawer__subLink" href={`${basePath}/company/history/`}>
+          {t(lang, "nav.company_history")}
+        </a>
+      </div>
+
+      <div class="c-drawer__group">
+        <span class="c-drawer__label">{t(lang, "nav.technology")}</span>
+        <a class="c-drawer__subLink" href={`${basePath}/technology/5axis/`}>
+          {t(lang, "nav.tech_5axis")}
+        </a>
+        <a class="c-drawer__subLink" href={`${basePath}/technology/shibo/`}>
+          {t(lang, "nav.tech_shibo")}
+        </a>
+        <a class="c-drawer__subLink" href={`${basePath}/technology/peening/`}>
+          {t(lang, "nav.tech_peening")}
+        </a>
+      </div>
+
+      <a class="c-drawer__link" href={`${basePath}/group/`}
+        >{t(lang, "nav.group")}</a
+      >
+      <a class="c-drawer__link" href={`${basePath}/recruit/`}
+        >{t(lang, "nav.recruit")}</a
+      >
+      <a class="c-drawer__link" href={`${basePath}/contact/`}
+        >{t(lang, "nav.contact")}</a
+      >
+      <a class="c-drawer__link" href={`${basePath}/download/`}
+        >{t(lang, "nav.download")}</a
+      >
+    </nav>
+    <div class="c-drawer__lang" aria-label="Language">
+      <a
+        class={`c-drawer__langItem ${lang === "ja" ? "is-current" : ""}`}
+        href={`/ja${pathNoLang}`}
+        aria-current={lang === "ja" ? "true" : undefined}>JA</a
+      >
+      <span class="c-drawer__langSep">|</span>
+      <a
+        class={`c-drawer__langItem ${lang === "en" ? "is-current" : ""}`}
+        href={`/en${pathNoLang}`}
+        aria-current={lang === "en" ? "true" : undefined}>EN</a
+      >
+    </div>
+  </div>
+</aside>
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.querySelector("[data-drawer-btn]");
+    const overlay = document.querySelector("[data-drawer-overlay]");
+
+    if (!btn || !overlay) return;
+
+    const open = () => {
+      document.documentElement.classList.remove("is-drawer-open");
+      requestAnimationFrame(() => {
+        document.documentElement.classList.add("is-drawer-open");
+        btn.setAttribute("aria-expanded", "true");
+      });
+    };
+
+    const close = () => {
+      document.documentElement.classList.remove("is-drawer-open");
+      btn.setAttribute("aria-expanded", "false");
+    };
+
+    btn.addEventListener("click", () => {
+      const expanded = btn.getAttribute("aria-expanded") === "true";
+      expanded ? close() : open();
+    });
+
+    overlay.addEventListener("click", close);
+
+    window.addEventListener("resize", () => {
+      if (window.matchMedia("(min-width: 1024.01px)").matches) {
+        close();
+      }
+    });
+  });
+</script> -->
+<script>
+  (() => {
+    const wire = () => {
+      const btn = document.querySelector("[data-drawer-btn]");
+      const panel = document.querySelector("[data-drawer-panel]");
+      const overlay = document.querySelector("[data-drawer-overlay]");
+
+      if (!btn || !panel || !overlay) return;
+
+      // 二重登録防止（Astroのクライアント遷移対策）
+      if (btn.hasAttribute("data-drawer-wired")) return;
+      btn.setAttribute("data-drawer-wired", "true");
+
+      const open = () => {
+        overlay.hidden = false;
+        panel.hidden = false;
+
+        // まず閉状態を確実に作ってから次フレームで open
+        document.documentElement.classList.remove("is-drawer-open");
+        requestAnimationFrame(() => {
+          document.documentElement.classList.add("is-drawer-open");
+          btn.setAttribute("aria-expanded", "true");
+        });
+      };
+
+      const close = () => {
+        document.documentElement.classList.remove("is-drawer-open");
+        btn.setAttribute("aria-expanded", "false");
+
+        // transition があるなら閉じ終わりに合わせて隠す（無ければ即でOK）
+        // ここは即 hidden にして問題なければこのままでOK
+        overlay.hidden = true;
+        panel.hidden = true;
+      };
+
+      btn.addEventListener("click", () => {
+        const expanded = btn.getAttribute("aria-expanded") === "true";
+        expanded ? close() : open();
+      });
+
+      overlay.addEventListener("click", close);
+
+      window.addEventListener(
+        "resize",
+        () => {
+          if (window.matchMedia("(min-width: 1024.01px)").matches) close();
+        },
+        { passive: true }
+      );
+
+      // 初期状態（HTML側で hidden を付け忘れても事故らない）
+      close();
+    };
+
+    document.addEventListener("DOMContentLoaded", wire);
+    document.addEventListener("astro:page-load", wire); // Astro遷移対策
+    wire();
+  })();
+</script>

@@ -1,0 +1,373 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+
+import { t, toLang, type Lang } from "@/locales/multilingual";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
+const lang: Lang = toLang(rawLang);
+const basePath = `/${lang}`;
+
+// フォトエッチング用ギャラリー定義
+const photoEtchingGallery = [
+  {
+    src: "/images/technology/shibo/photo-etching/img-pe-geometric-01.webp",
+    captionKey: "technology.shibo.photoEtching.gallery.cap01",
+  },
+  {
+    src: "/images/technology/shibo/photo-etching/img-pe-geometric-02.webp",
+    captionKey: "technology.shibo.photoEtching.gallery.cap02",
+  },
+  {
+    src: "/images/technology/shibo/photo-etching/img-pe-geometric-03.webp",
+    captionKey: "technology.shibo.photoEtching.gallery.cap03",
+  },
+  {
+    src: "/images/technology/shibo/photo-etching/img-pe-wood-01.webp",
+    captionKey: "technology.shibo.photoEtching.gallery.cap04",
+  },
+  {
+    src: "/images/technology/shibo/photo-etching/img-pe-hairline-01.webp",
+    captionKey: "technology.shibo.photoEtching.gallery.cap05",
+  },
+  {
+    src: "/images/technology/shibo/photo-etching/img-pe-crosshairline-01.webp",
+    captionKey: "technology.shibo.photoEtching.gallery.cap06",
+  },
+];
+// 皮シボ用ギャラリー定義
+const kawashiboGallery = [
+  {
+    src: "/images/technology/shibo/kawashibo/img-kawashibo-pattern-01.webp",
+    captionKey: "technology.shibo.kawashibo.gallery.cap01",
+  },
+  {
+    src: "/images/technology/shibo/kawashibo/img-kawashibo-pattern-02.webp",
+    captionKey: "technology.shibo.kawashibo.gallery.cap02",
+  },
+  {
+    src: "/images/technology/shibo/kawashibo/img-kawashibo-pattern-03.webp",
+    captionKey: "technology.shibo.kawashibo.gallery.cap03",
+  },
+];
+// 梨地ギャラリー定義
+const nashijiGallery = [
+  {
+    src: "/images/technology/shibo/nashiji/img-nashiji-pattern-fine.webp",
+    captionKey: "technology.shibo.nashiji.gallery.cap01",
+  },
+  {
+    src: "/images/technology/shibo/nashiji/img-nashiji-pattern-std.webp",
+    captionKey: "technology.shibo.nashiji.gallery.cap02",
+  },
+  {
+    src: "/images/technology/shibo/nashiji/img-nashiji-pattern-coarse.webp",
+    captionKey: "technology.shibo.nashiji.gallery.cap03",
+  },
+];
+// Honingギャラリー定義
+const honingGallery = [
+  {
+    src: "/images/technology/shibo/honing/img-honing-pattern-fine.webp",
+    captionKey: "technology.shibo.honing.gallery.cap01",
+  },
+  {
+    src: "/images/technology/shibo/honing/img-honing-pattern-std.webp",
+    captionKey: "technology.shibo.honing.gallery.cap02",
+  },
+  {
+    src: "/images/technology/shibo/honing/img-honing-pattern-coarse.webp",
+    captionKey: "technology.shibo.honing.gallery.cap03",
+  },
+];
+// Honingギャラリー定義
+const graphicGallery = [
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-01.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap01",
+  },
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-02.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap02",
+  },
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-03.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap03",
+  },
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-04.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap04",
+  },
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-05.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap05",
+  },
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-06.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap06",
+  },
+];
+---
+
+<Base lang={lang} title={t(lang, "technology.shibo.meta.title")}>
+  <PageHeader
+    eyebrowText="TECHNOLOGY"
+    title={t(lang, "technology.shibo.page.title")}
+    lead={t(lang, "technology.shibo.page.lead")}
+    imageSrc="/images/pageHeader/pageheader-shibo.webp"
+    imageAlt=""
+  />
+
+  <Breadcrumb
+    ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      {
+        label: t(lang, "nav.technology"),
+        href: `${basePath}/technology/shibo/`,
+      },
+      { label: t(lang, "technology.shibo.page.title") },
+    ]}
+  />
+
+  <main class="l-container contents-wrapper">
+    <!-- Intro（本文ボックス） -->
+    <section class="c-techIntro l-section">
+      <div class="c-techIntro__box">
+        <p class="c-techIntro__text">
+          {t(lang, "technology.shibo.intro")}
+        </p>
+      </div>
+    </section>
+    <!-- Photo Etching -->
+    <section class="l-section photoetching">
+      <PageSectionHeading
+        text={t(lang, "technology.shibo.photoEtching.title")}
+      />
+      <div class="c-techIntro__box c-techIntro__box--compact">
+        <p class="c-techIntro__text">
+          {t(lang, "technology.shibo.photoEtching.desc")}
+        </p>
+      </div>
+      <!-- Gallery PhotoEtching-->
+      <section>
+        <div class="c-techGallery" aria-label="Shibo gallery">
+          {
+            photoEtchingGallery.map((item) => (
+              <figure class="c-techGallery__item">
+                <img
+                  class="c-techGallery__img"
+                  src={item.src}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="c-techGallery__cap">
+                  {t(lang, item.captionKey)}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+    </section>
+    <!-- KAWASHIBO -->
+    <section class="l-section">
+      <PageSectionHeading text={t(lang, "technology.shibo.kawashibo.title")} />
+      <div class="c-techIntro__box c-techIntro__box--compact">
+        <p class="c-techIntro__text">
+          {t(lang, "technology.shibo.kawashibo.desc")}
+        </p>
+      </div>
+      <!-- Gallery "KAWASHIBO" Skin Pattern Surface-->
+      <section>
+        <div class="c-techGallery" aria-label="kawashibo gallery">
+          {
+            kawashiboGallery.map((item) => (
+              <figure class="c-techGallery__item">
+                <img
+                  class="c-techGallery__img"
+                  src={item.src}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="c-techGallery__cap">
+                  {t(lang, item.captionKey)}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+    </section>
+    <!-- NASHIJI -->
+    <section class="l-section">
+      <PageSectionHeading text={t(lang, "technology.shibo.nashiji.title")} />
+      <div class="c-techIntro__box c-techIntro__box--compact">
+        <p class="c-techIntro__text">
+          {t(lang, "technology.shibo.nashiji.desc")}
+        </p>
+      </div>
+      <!-- Gallery "KAWASHIBO" Skin Pattern Surface-->
+      <section>
+        <div class="c-techGallery" aria-label="nashiji gallery">
+          {
+            nashijiGallery.map((item) => (
+              <figure class="c-techGallery__item">
+                <img
+                  class="c-techGallery__img"
+                  src={item.src}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="c-techGallery__cap">
+                  {t(lang, item.captionKey)}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </section>
+    </section>
+    <!-- Honing -->
+    <section class="l-section">
+      <PageSectionHeading text={t(lang, "technology.shibo.honing.title")} />
+      <div class="c-techIntro__box c-techIntro__box--compact">
+        <p class="c-techIntro__text">
+          {t(lang, "technology.shibo.honing.desc")}
+        </p>
+      </div>
+      <!-- Gallery Honing-->
+      <section>
+        <div class="c-techGallery" aria-label="honing gallery">
+          {
+            honingGallery.map((item) => (
+              <figure class="c-techGallery__item">
+                <img
+                  class="c-techGallery__img"
+                  src={item.src}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="c-techGallery__cap">
+                  {t(lang, item.captionKey)}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+        <p class="section__additional">
+          {t(lang, "technology.shibo.honing.additional")}
+        </p>
+      </section>
+    </section>
+    <!-- Graphic -->
+    <section class="l-section">
+      <PageSectionHeading text={t(lang, "technology.shibo.graphic.title")} />
+      <div class="c-techIntro__box c-techIntro__box--compact">
+        <p class="c-techIntro__text">
+          {t(lang, "technology.shibo.graphic.desc")}
+        </p>
+      </div>
+      <!-- Gallery Honing-->
+      <section>
+        <div class="c-techGallery graphic" aria-label="graphic gallery">
+          {
+            graphicGallery.map((item) => (
+              <figure class="c-techGallery__item">
+                <img
+                  class="c-techGallery__img"
+                  src={item.src}
+                  alt=""
+                  loading="lazy"
+                  decoding="async"
+                />
+                <figcaption class="c-techGallery__cap">
+                  {t(lang, item.captionKey)}
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+        <p class="section__additional"></p>
+      </section>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  @use "@styles/font" as *;
+  .contents-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 40px;
+    .c-techIntro {
+      .c-techIntro__box {
+        .c-techIntro__text {
+          font-size: $fs-s;
+        }
+      }
+    }
+    .l-section {
+      max-width: $container-max;
+      margin: auto;
+      .c-techIntro__text {
+        font-size: $fs-s;
+      }
+      .c-techGallery {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 20px;
+        &.graphic {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .c-techGallery__item {
+          .c-techGallery__img {
+            width: 100%;
+            object-fit: cover;
+          }
+          .c-techGallery__cap {
+            font-size: $fs-s;
+          }
+        }
+      }
+      .section__additional {
+        font-size: $fs-s;
+      }
+    }
+  }
+  @include bp-down(md) {
+    .contents-wrapper {
+      .l-section {
+        .c-techGallery {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          &.graphic {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+          }
+          .c-techGallery__item {
+            .c-techGallery__img {
+              width: 100%;
+              object-fit: cover;
+            }
+            .c-techGallery__cap {
+              font-size: $fs-xs;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

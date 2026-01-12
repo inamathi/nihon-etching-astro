@@ -1,0 +1,248 @@
+---
+/* layout / ui */
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import GroupBlockTools from "@/components/ui/GroupBlockTools.astro";
+
+/* i18n */
+import { t, toLang, getList, type Lang } from "@/locales/multilingual";
+
+/* shared data (company overview shown on this page) */
+import { companies, type CompanyData } from "@/data/companyOverview";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
+const lang: Lang = toLang(rawLang);
+const basePath = `/${lang}`;
+
+/* =========================
+ * types
+ * ========================= */
+type I18nText = { ja: string; en: string; zh?: string };
+
+type RawGroupItem = {
+  id: string;
+  location: I18nText;
+  name: I18nText;
+  phone: string;
+};
+
+type ViewGroupItem = {
+  id: string;
+  location: string;
+  name: string;
+  phone: string;
+};
+
+/* =========================
+ * data
+ * ========================= */
+
+const rawGroups = getList<RawGroupItem>("group.listpage.ne.listItems");
+
+const groupItems: ViewGroupItem[] = rawGroups.map((x) => ({
+  id: x.id,
+  location: pick(x.location, lang),
+  name: pick(x.name, lang),
+  phone: x.phone,
+}));
+
+// lang fallback helper
+const pick = (x: { ja: string; en: string; zh?: string }, lang: Lang) =>
+  x[lang] ?? x.ja;
+
+// filtered
+const neCompanies = companies.filter((c) => c.group === "ne");
+const nwnCompanies = companies.filter((c) => c.group === "nwn");
+const secCompanies = companies.filter((c) => c.group === "sec");
+---
+
+<Base lang={lang} title={t(lang, "group.listpage.title")}>
+  <PageHeader
+    eyebrowText="GROUP"
+    title={t(lang, "group.listpage.title")}
+    lead={t(lang, "group.listpage.lead")}
+    imageSrc="/images/pageHeader/pageheader-group.webp"
+    imageAlt={t(lang, "group.listpage.title")}
+  />
+
+  <Breadcrumb
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.group"), href: `${basePath}/group/` },
+    ]}
+  />
+  <div class="l-container">
+    <!-- =========================
+       NE
+       ========================= -->
+    <section
+      class="l-section c-companyList"
+      data-group-block
+      data-group-state="open"
+    >
+      <div class="c-groupBlock__header">
+        <PageSectionHeading text={t(lang, "common.groupName.ne")} />
+        <GroupBlockTools
+          lang={lang}
+          basePath={basePath}
+          detailsPath="/group/ne/"
+        />
+      </div>
+      <div class="c-companyCards c-groupBlock__body" data-group-body>
+        {
+          neCompanies.map((company) => (
+            <article class="c-companyCard" data-id={company.id}>
+              <dl class="c-companyCard__dl">
+                <div>
+                  <dt>{t(lang, "common.labels.location")}</dt>
+                  <dd>{pick(company.location, lang)}</dd>
+                </div>
+                <div>
+                  <dt>{t(lang, "common.labels.companyName")}</dt>
+                  <dd>{pick(company.companyName, lang)}</dd>
+                </div>
+
+                {company.phone && (
+                  <div>
+                    <dt>{t(lang, "common.labels.phone")}</dt>
+                    <dd>{pick(company.phone, lang)}</dd>
+                  </div>
+                )}
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+    <!-- =========================
+       NWN
+       ========================= -->
+    <section
+      class="l-section c-companyList"
+      data-group-block
+      data-group-state="open"
+    >
+      <div class="c-groupBlock__header">
+        <PageSectionHeading text={t(lang, "common.groupName.nwn")} />
+        <GroupBlockTools
+          lang={lang}
+          basePath={basePath}
+          detailsPath="/group/nwn/"
+        />
+      </div>
+      <div class="c-companyCards c-groupBlock__body" data-group-body>
+        {
+          nwnCompanies.map((company) => (
+            <article class="c-companyCard" data-id={company.id}>
+              <dl class="c-companyCard__dl">
+                <div>
+                  <dt>{t(lang, "common.labels.location")}</dt>
+                  <dd>{pick(company.location, lang)}</dd>
+                </div>
+                <div>
+                  <dt>{t(lang, "common.labels.companyName")}</dt>
+                  <dd>{pick(company.companyName, lang)}</dd>
+                </div>
+
+                {company.phone && (
+                  <div>
+                    <dt>{t(lang, "common.labels.phone")}</dt>
+                    <dd>{pick(company.phone, lang)}</dd>
+                  </div>
+                )}
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+    <!-- =========================
+       SEC
+       ========================= -->
+    <section
+      class="l-section c-companyList"
+      data-group-block
+      data-group-state="open"
+    >
+      <div class="c-groupBlock__header">
+        <PageSectionHeading text={t(lang, "common.groupName.nwn")} />
+        <GroupBlockTools
+          lang={lang}
+          basePath={basePath}
+          detailsPath="/group/sec/"
+        />
+      </div>
+      <div class="c-companyCards c-groupBlock__body" data-group-body>
+        {
+          secCompanies.map((company) => (
+            <article class="c-companyCard" data-id={company.id}>
+              <dl class="c-companyCard__dl">
+                <div>
+                  <dt>{t(lang, "common.labels.location")}</dt>
+                  <dd>{pick(company.location, lang)}</dd>
+                </div>
+                <div>
+                  <dt>{t(lang, "common.labels.companyName")}</dt>
+                  <dd>{pick(company.companyName, lang)}</dd>
+                </div>
+
+                {company.phone && (
+                  <div>
+                    <dt>{t(lang, "common.labels.phone")}</dt>
+                    <dd>{pick(company.phone, lang)}</dd>
+                  </div>
+                )}
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</Base>
+
+<script>
+  (() => {
+    const wire = () => {
+      document.querySelectorAll("[data-group-toggle]").forEach((btn) => {
+        if (btn.hasAttribute("data-group-wired")) return;
+        btn.setAttribute("data-group-wired", "true");
+
+        const root = btn.closest(".c-companyList");
+        if (!root) return;
+
+        const body = root.querySelector("[data-group-body]");
+        if (!body) return;
+
+        const labelOpen = btn.getAttribute("data-label-open") || "Collapse";
+        const labelClosed = btn.getAttribute("data-label-closed") || "Expand";
+
+        const apply = (isOpen) => {
+          root.setAttribute("data-group-state", isOpen ? "open" : "closed");
+          btn.setAttribute("aria-expanded", String(isOpen));
+          btn.textContent = isOpen ? labelOpen : labelClosed;
+        };
+
+        // 初期：aria-expanded を信頼（無ければ open 扱い）
+        const initialOpen = btn.getAttribute("aria-expanded") !== "false";
+        apply(initialOpen);
+
+        btn.addEventListener("click", () => {
+          const isOpen = btn.getAttribute("aria-expanded") === "true";
+          apply(!isOpen);
+        });
+      });
+    };
+
+    document.addEventListener("DOMContentLoaded", wire);
+    document.addEventListener("astro:page-load", wire);
+    wire();
+  })();
+</script>

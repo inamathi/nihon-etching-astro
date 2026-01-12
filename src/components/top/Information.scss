@@ -1,0 +1,39 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+.c-info {
+  max-width: 1100px;
+  margin: auto;
+  padding: 40px 0;
+  .c-info__list {
+    .c-info__item {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      align-items: center;
+      border-bottom: dotted 1px $color-secondary;
+      .c-info__date {
+        font-size: $fs-info-date;
+        color: $color-gray-500;
+      }
+      .c-info__text {
+        font-size: $fs-info-text;
+      }
+    }
+  }
+}
+@include bp-down(md) {
+  .c-info {
+    padding: 20px;
+    .c-info__list {
+      .c-info__item {
+        gap: 20px;
+        .c-info__date {
+          font-size: $fs-info-date-sp;
+        }
+        .c-info__text {
+          font-size: $fs-info-text-sp;
+        }
+      }
+    }
+  }
+}

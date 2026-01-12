@@ -1,0 +1,30 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+
+/* ui */
+@use "@/components/ui/PageHeader.scss";
+@use "@/components/ui/PageSectionHeading.scss";
+@use "@/components/ui/SectionHeading.scss";
+@use "@/components/ui/GroupBlockTools.scss";
+
+/* common */
+@use "@/components/common/HeaderDesktop.scss";
+@use "@/components/common/HeaderMobile.scss";
+@use "@/components/common/Footer.scss";
+@use "@/components/common/Pdfviewer.scss";
+@use "@/components/common/ScrollToTop.scss";
+@use "@/components/common/BreadCrumb.scss";
+
+/* top */
+@use "@/components/top/DomesticLink.scss";
+@use "@/components/top/Information.scss";
+@use "@/components/top/TopAbout.scss";
+
+/* hero */
+@use "@/components/hero/HeroSlider.scss";
+
+/* gallery */
+@use "@/components/gallery/ImageGallery.scss";
+
+/* group */
+@use "@/components/group/CompanyMediaCard.scss";

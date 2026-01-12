@@ -1,0 +1,43 @@
+---
+type Crumb = {
+  label: string;
+  href?: string; // 最後の要素はリンク無しにする想定
+};
+
+type Props = {
+  items: Crumb[];
+  ariaLabel?: string;
+};
+
+const { items, ariaLabel = "Breadcrumb" } = Astro.props;
+
+// 最低2階層以上を想定するが、1つでも表示は崩れない
+const lastIndex = Math.max(0, items.length - 1);
+---
+
+<nav class="c-breadcrumb container-l" aria-label={ariaLabel}>
+  <ol class="c-breadcrumb__list">
+    {
+      items.map((item, i) => {
+        const isLast = i === lastIndex;
+
+        return (
+          <li class="c-breadcrumb__item">
+            {item.href && !isLast ? (
+              <a class="c-breadcrumb__link" href={item.href}>
+                {item.label}
+              </a>
+            ) : (
+              <span
+                class="c-breadcrumb__current"
+                aria-current={isLast ? "page" : undefined}
+              >
+                {item.label}
+              </span>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

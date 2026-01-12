@@ -1,0 +1,66 @@
+---
+import { t, type Lang } from "@/locales/multilingual";
+
+type Props = {
+  lang: Lang;
+  basePath: string;
+
+  /**
+   * 例: "/group/ne/" （basePath は内部で付与する）
+   * 既に basePath を含めたい場合は fullPath を使う
+   */
+  detailsPath: string;
+
+  /**
+   * data-group-toggle を付与するか（通常 true）
+   */
+  enableToggle?: boolean;
+
+  /**
+   * 初期 aria-expanded（JSで上書きされる想定）
+   */
+  expanded?: boolean;
+
+  /**
+   * ボタン文言を data 属性にも持たせる（JSで翻訳対応させるため）
+   */
+  dataLabels?: boolean;
+};
+
+const {
+  lang,
+  basePath,
+  detailsPath,
+  enableToggle = true,
+  expanded = true,
+  dataLabels = true,
+} = Astro.props;
+
+const labelCollapse = t(lang, "common.ui.collapse");
+const labelExpand = t(lang, "common.ui.expand");
+const labelDetails = t(lang, "common.ui.details");
+
+// detailsPath が "/group/ne/" のように先頭 "/" 前提
+const href = `${basePath}${detailsPath}`;
+---
+
+<div class="c-groupBlock__tools">
+  <button
+    class="c-groupBlock__btn"
+    type="button"
+    {...enableToggle ? { "data-group-toggle": "" } : {}}
+    aria-expanded={expanded}
+    {...dataLabels
+      ? {
+          "data-label-open": labelCollapse,
+          "data-label-closed": labelExpand,
+        }
+      : {}}
+  >
+    {labelCollapse}
+  </button>
+
+  <a class="c-groupBlock__btn is-link" href={href}>
+    {labelDetails}
+  </a>
+</div>

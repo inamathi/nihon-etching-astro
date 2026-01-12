@@ -1,0 +1,509 @@
+---
+import { t, type Lang } from "@/locales/multilingual";
+
+type GroupKey = "ne" | "nwn" | "sec";
+
+type Item = {
+  group: GroupKey;
+  groupHeadingKey: string;
+  regions: Array<{
+    key: string; // "japan" | "asia" | ...（表示用途と #id に使う）
+    headingKey: string; // multilingual.ts のキー
+    href: string; // basePath + "/group/xx/#region"
+  }>;
+};
+
+type Props = {
+  lang: Lang;
+  basePath: string;
+
+  // 任意：現在のページ（強調表示用）
+  currentGroup?: GroupKey;
+  currentRegion?: string;
+
+  // 任意：右カラム以外でも使えるよう、上書き可能にしておく
+  items?: Item[];
+};
+
+const { lang, basePath, currentGroup, currentRegion, items } =
+  Astro.props as Props;
+
+// デフォルト定義（あなたの multilingual.ts の groupName 定義に合わせている）
+const defaultItems: Item[] = [
+  {
+    group: "ne",
+    groupHeadingKey: "common.groupName.ne",
+    regions: [
+      {
+        key: "japan",
+        headingKey: "common.groupName.neJapan",
+        href: `${basePath}/group/ne/#japan`,
+      },
+      {
+        key: "asia",
+        headingKey: "common.groupName.neAsia",
+        href: `${basePath}/group/ne/#asia`,
+      },
+      {
+        key: "east-asia",
+        headingKey: "common.groupName.neEastAsia",
+        href: `${basePath}/group/ne/#east-asia`,
+      },
+    ],
+  },
+  {
+    group: "nwn",
+    groupHeadingKey: "common.groupName.nwn",
+    regions: [
+      {
+        key: "japan",
+        headingKey: "common.groupName.nwnJapan",
+        href: `${basePath}/group/nwn/#japan`,
+      },
+      {
+        key: "overseas",
+        headingKey: "common.groupName.nwnOverseas",
+        href: `${basePath}/group/nwn/#overseas`,
+      },
+      {
+        key: "east-asia",
+        headingKey: "common.groupName.nwnEastAsia",
+        href: `${basePath}/group/nwn/#east-asia`,
+      },
+    ],
+  },
+  {
+    group: "sec",
+    groupHeadingKey: "common.groupName.sec",
+    regions: [
+      {
+        key: "europe",
+        headingKey: "common.groupName.secEurope",
+        href: `${basePath}/group/sec/#europe`,
+      },
+      {
+        key: "north-america",
+        headingKey: "common.groupName.secNorthAmerica",
+        href: `${basePath}/group/sec/#north-america`,
+      },
+      {
+        key: "south-america",
+        headingKey: "common.groupName.secSouthAmerica",
+        href: `${basePath}/group/sec/#south-america`,
+      },
+    ],
+  },
+];
+
+const navItems = items ?? defaultItems;
+
+const isCurrent = (g: GroupKey, r?: string) => {
+  if (!currentGroup) return false;
+  if (g !== currentGroup) return false;
+  if (!currentRegion) return true;
+  return (r ?? "") === currentRegion;
+};
+---
+
+<!-- Mobile: horizontal scroller -->
+<nav
+  class="c-groupTopNav"
+  aria-label="Group shortcuts (mobile)"
+  data-group-topnav
+>
+  <div class="c-groupTopNav__scroller">
+    {
+      navItems.map((g) => (
+        <div class="c-groupTopNav__group" data-group={g.group}>
+          <span class="c-groupTopNav__groupLabel">
+            {t(lang, g.groupHeadingKey)}
+          </span>
+
+          <div class="c-groupTopNav__chips">
+            {g.regions.map((r) => {
+              const key = `${g.group}-${r.key}`; // ← 一意化（重要）
+              return (
+                <a
+                  class="c-groupTopNav__chip"
+                  href={`#${key}`}
+                  data-nav-link={key}
+                >
+                  {t(lang, r.headingKey)}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</nav>
+<!-- PC Nav -->
+<nav class="c-groupSideNav" aria-label="Group shortcuts" data-group-sidenav>
+  <ul class="c-groupSideNav__groups">
+    {
+      navItems.map((g) => (
+        <li class="c-groupSideNav__group" data-group={g.group}>
+          <div
+            class={`c-groupSideNav__groupTitle ${
+              isCurrent(g.group) ? "is-current" : ""
+            }`}
+          >
+            {t(lang, g.groupHeadingKey)}
+          </div>
+
+          <ul class="c-groupSideNav__regions">
+            {g.regions.map((r) => {
+              const navKey = `${g.group}-${r.key}`;
+              return (
+                <li class="c-groupSideNav__region">
+                  <a
+                    class={`c-groupSideNav__link ${
+                      isCurrent(g.group, r.key) ? "is-current" : ""
+                    }`}
+                    href={`#${navKey}`}
+                    data-nav-link={navKey}
+                  >
+                    {t(lang, r.headingKey)}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script is:inline>
+  (() => {
+    const OFFSET = 92;
+
+    // Astro のページ遷移（View Transitions）でも効くように、何度呼ばれても安全な init にする
+    const init = () => {
+      const navs = Array.from(
+        document.querySelectorAll("[data-group-sidenav], [data-group-topnav]")
+      );
+      if (!navs.length) return;
+
+      navs.forEach((nav) => {
+        // 二重初期化ガード
+        if (nav.getAttribute("data-inited") === "1") return;
+        nav.setAttribute("data-inited", "1");
+
+        const links = Array.from(nav.querySelectorAll("a[data-nav-link]"));
+        if (!links.length) return;
+
+        const getTarget = (key) => document.getElementById(key);
+
+        const scrollToKey = (key, behavior = "smooth") => {
+          const el = getTarget(key);
+          if (!el) return;
+          const top = window.scrollY + el.getBoundingClientRect().top - OFFSET;
+          window.scrollTo({ top, behavior });
+        };
+
+        const setCurrent = (key) => {
+          links.forEach((a) => {
+            a.classList.toggle("is-current", a.dataset.navLink === key);
+          });
+        };
+
+        // click: offset scroll + hash update
+        links.forEach((a) => {
+          a.addEventListener("click", (e) => {
+            const key = a.dataset.navLink;
+            if (!key) return;
+            e.preventDefault();
+            history.pushState(null, "", `#${key}`);
+            scrollToKey(key, "smooth");
+          });
+        });
+
+        // IntersectionObserver: current sync
+        const targets = links
+          .map((a) => getTarget(a.dataset.navLink))
+          .filter(Boolean);
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((en) => en.isIntersecting)
+              .sort(
+                (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
+              );
+
+            if (!visible.length) return;
+            const id = visible[0].target.id;
+            if (id) setCurrent(id);
+          },
+          {
+            rootMargin: `-${OFFSET}px 0px -70% 0px`,
+            threshold: 0.01,
+          }
+        );
+
+        targets.forEach((el) => io.observe(el));
+
+        // hash on load / hashchange:
+        const bootHashScroll = () => {
+          const key = (location.hash || "").replace("#", "");
+          if (!key) return;
+
+          // 一度トップへ → 2フレーム後に目的地へ（レイアウト確定待ち）
+          window.scrollTo({ top: 0, behavior: "auto" });
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              scrollToKey(key, "auto");
+              setCurrent(key);
+            });
+          });
+        };
+
+        bootHashScroll();
+        window.addEventListener("hashchange", bootHashScroll);
+      });
+    };
+
+    // 初期
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+
+    // Astro のクライアント遷移にも対応（使ってないなら無害）
+    document.addEventListener("astro:page-load", init);
+  })();
+</script>
+
+<!-- MobileTopNav -->
+<script>
+  (() => {
+    const nav = document.querySelector<HTMLElement>("[data-group-topnav]");
+    if (!nav) return;
+
+    const HEADER_H = 64;
+    const PAGEHEADER_H = 210; // あなたの想定値
+    const INITIAL_TOP = HEADER_H + PAGEHEADER_H;
+
+    let lastY = window.scrollY;
+    let ticking = false;
+
+    const apply = () => {
+      const y = window.scrollY;
+      const dy = y - lastY;
+
+      // y===0 は常に初期位置
+      if (y === 0) {
+        nav.classList.remove("is-hidden");
+        nav.classList.remove("is-docked");
+        nav.style.top = `${INITIAL_TOP}px`;
+        lastY = y;
+        return;
+      }
+
+      // 下スクロール：隠す
+      if (dy > 0) {
+        nav.classList.add("is-hidden");
+        nav.classList.remove("is-docked");
+        nav.style.top = `${HEADER_H}px`; // どちらでも良いが、復帰時のちらつき防止
+      }
+      // 上スクロール：64px に表示
+      else if (dy < 0) {
+        nav.classList.remove("is-hidden");
+        nav.classList.add("is-docked");
+        nav.style.top = `${HEADER_H}px`;
+      }
+
+      lastY = y;
+    };
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        apply();
+        ticking = false;
+      });
+    };
+
+    // 初期反映
+    apply();
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+  })();
+</script>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+
+  //Mobile
+
+  .c-groupTopNav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 80;
+
+    /* 初期表示位置（header 64px + pageHeader 約210px） */
+    top: calc(64px + 190px);
+
+    /* 表示/非表示のアニメ */
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+
+    transition:
+      transform 220ms ease,
+      opacity 220ms ease,
+      top 220ms ease;
+
+    /* 重要：レイアウト崩し防止 */
+    width: 100%;
+    background: $color-bg-topnav;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(20, 23, 33, 0.65);
+
+    @include bp-up(md) {
+      display: none;
+    }
+
+    &.is-hidden {
+      transform: translateY(-16px);
+      opacity: 0;
+      pointer-events: none;
+      background-color: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    &.is-docked {
+      top: 64px;
+    }
+
+    .c-groupTopNav__scroller {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 10px 12px;
+      display: grid;
+      gap: 5px;
+
+      // スクロールバー目立たせない（任意）
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .c-groupTopNav__group {
+      display: grid;
+      gap: 5px;
+    }
+
+    .c-groupTopNav__groupLabel {
+      font-size: $fs-xs;
+      letter-spacing: 0.06em;
+      color: $color-gray-500;
+    }
+
+    .c-groupTopNav__chips {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px;
+
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .c-groupTopNav__chip {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      padding: 5px 10px;
+      font-size: $fs-xs;
+      line-height: 1.4;
+      text-decoration: none;
+      color: $color-gray-100;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+
+      &.is-current {
+        border-color: $color-primary;
+        color: $color-primary;
+        background: rgba(213, 29, 29, 0.25);
+      }
+    }
+  }
+
+  // PC
+  .c-groupSideNav {
+    position: sticky;
+    top: 16px;
+    padding: 14px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    align-self: start;
+    height: 100vh;
+
+    &__groups {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 14px;
+    }
+
+    &__groupTitle {
+      font-size: $fs-s;
+      font-weight: 700;
+      color: $color-gray-200;
+      padding: 6px 6px 8px;
+      border-bottom: 1px solid $color-gray-800;
+
+      &.is-current {
+        color: $color-text;
+        font-size: $fs-m;
+      }
+    }
+
+    &__regions {
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    &__link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      font-size: $fs-s;
+      color: $color-gray-400;
+      padding: 2px 15px;
+      border-left: solid 4px $color-gray-700;
+
+      &:hover {
+        background: rgba($color-accent, 0.2);
+        border-left: solid 4px $color-accent;
+      }
+
+      &.is-current {
+        color: $color-text;
+        border-left: solid 4px $color-text;
+      }
+    }
+  }
+  @include bp-down(md) {
+    .c-groupSideNav {
+      display: none;
+    }
+  }
+</style>

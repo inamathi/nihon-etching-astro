@@ -1,0 +1,16 @@
+---
+import { t, toLang, type Lang } from "@/locales/multilingual";
+
+export const getStaticPaths = async () => {
+  return [{ params: { lang: "ja" } }, { params: { lang: "en" } }];
+};
+
+const { lang } = Astro.params as { lang: string };
+const lang: Lang = toLang(lang);
+const basePath = `/${lang}`;
+---
+
+<main class="l-container" style="padding: 40px 0;">
+  <h1>{t(lang, "footer.company.history")}</h1>
+  <p>Path: {basePath}{Astro.url.pathname}</p>
+</main>

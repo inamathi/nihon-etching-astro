@@ -36,11 +36,15 @@ export default defineConfig({
       },
     },
     css: {
+      devSourcemap: true,
       preprocessorOptions: {
         scss: {
           importers: [scssAliasImporter()],
         },
       },
+    },
+    build: {
+      sourcemap: true,
     },
   },
   output: "static",

@@ -2,8 +2,14 @@
 const { lang = "ja", title = "" } = Astro.props;
 const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en)/, "");
 
-import HeaderDesktop from "@/components/HeaderDesktop.astro";
-import HeaderMobile from "@/components/HeaderMobile.astro";
+/* main.css */
+import "@/styles/main.scss";
+
+import SvgSprite from "@/components/svg/SvgSprite.astro";
+import Footer from "@/components/common/Footer.astro";
+import HeaderDesktop from "@/components/common/HeaderDesktop.astro";
+import HeaderMobile from "@/components/common/HeaderMobile.astro";
+import ScrollToTop from "@/components/common/ScrollToTop.astro";
 ---
 
 <html lang={lang}>
@@ -22,13 +28,15 @@ import HeaderMobile from "@/components/HeaderMobile.astro";
     />
   </head>
   <body>
+    <SvgSprite />
     <div class="l-page" data-page>
       <HeaderDesktop lang={lang} />
       <HeaderMobile lang={lang} />
       <main id="main">
         <slot />
       </main>
-      <footer><small>© Nihon Etching</small></footer>
+      <Footer lang={lang} />
+      <ScrollToTop />
     </div>
   </body>
 
@@ -179,6 +187,24 @@ import HeaderMobile from "@/components/HeaderMobile.astro";
     font-size: var(--font-size-body);
     line-height: var(--line-height-body);
     letter-spacing: var(--letter-spacing-body, 0);
+  }
+
+  ul,
+  ol,
+  dl,
+  dt,
+  dd {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    li {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  figure {
+    margin: 0;
+    padding: 0;
   }
 
   a {

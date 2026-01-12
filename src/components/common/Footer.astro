@@ -1,0 +1,336 @@
+---
+import { t, toLang, type Lang } from "@/locales/multilingual";
+
+const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
+const lang: Lang = toLang(rawLang);
+const basePath = `/${lang}`;
+---
+
+<footer class="c-footer" data-site-footer>
+  <div class="c-footer__inner l-container">
+    <nav class="c-footerSitemap" aria-label="Footer sitemap">
+      <div class="c-footerSitemap__grid">
+        <!-- TOP -->
+        <section class="c-footerSitemap__block" data-footer-col="top">
+          <h2 class="c-footerSitemap__title">
+            <a
+              class="c-footerSitemap__titleLink"
+              href={`${basePath}/company/overview-access/`}
+            >
+              {t(lang, "footer.top.title")}
+            </a>
+          </h2>
+        </section>
+
+        <!-- Company -->
+        <section
+          class="c-footerSitemap__block"
+          data-footer-col="company"
+          data-acc-item
+        >
+          <h2 class="c-footerSitemap__title">
+            <a
+              class="c-footerSitemap__titleLink"
+              href={`${basePath}/company/overview-access/`}
+              data-acc-trigger
+            >
+              {t(lang, "footer.company.title")}
+            </a>
+          </h2>
+          <div class="c-footerSitemap__panel" data-acc-panel>
+            <ul class="c-footerSitemap__list">
+              <li>
+                <a
+                  class="c-footerSitemap__link"
+                  href={`${basePath}/company/overview-access/`}
+                >
+                  {t(lang, "footer.company.overview")}
+                </a>
+              </li>
+              <li>
+                <a
+                  class="c-footerSitemap__link"
+                  href={`${basePath}/company/philosophy/`}
+                >
+                  {t(lang, "footer.company.philosophy")}
+                </a>
+              </li>
+              <li>
+                <a
+                  class="c-footerSitemap__link"
+                  href={`${basePath}/company/history/`}
+                >
+                  {t(lang, "footer.company.history")}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Technology -->
+        <section
+          class="c-footerSitemap__block"
+          data-footer-col="tech"
+          data-acc-item
+        >
+          <h2 class="c-footerSitemap__title">
+            <a
+              class="c-footerSitemap__titleLink"
+              href={`${basePath}/technology/shibo/`}
+              data-acc-trigger
+            >
+              {t(lang, "footer.technology.title")}
+            </a>
+          </h2>
+          <div class="c-footerSitemap__panel" data-acc-panel>
+            <ul class="c-footerSitemap__list">
+              <li>
+                <a
+                  class="c-footerSitemap__link"
+                  href={`${basePath}/technology/5axis/`}
+                >
+                  {t(lang, "footer.technology.axis5")}
+                </a>
+              </li>
+              <li>
+                <a
+                  class="c-footerSitemap__link"
+                  href={`${basePath}/technology/shibo/`}
+                >
+                  {t(lang, "footer.technology.shibo")}
+                </a>
+              </li>
+              <li>
+                <a
+                  class="c-footerSitemap__link"
+                  href={`${basePath}/technology/peening/`}
+                >
+                  {t(lang, "footer.technology.peening")}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Group -->
+        <section
+          class="c-footerSitemap__block"
+          data-footer-col="group"
+          data-acc-item
+        >
+          <h2 class="c-footerSitemap__title">
+            <a
+              class="c-footerSitemap__titleLink no-acc"
+              href={`${basePath}/group/`}
+            >
+              {t(lang, "footer.group.title")}
+            </a>
+          </h2>
+
+          <div class="c-group-wrapper">
+            <!-- NE -->
+            <section class="c-footerSitemap__subBlock" data-acc-item>
+              <h3 class="c-footerSitemap__title c-footerSitemap__title--sub">
+                <a
+                  class="c-footerSitemap__titleLink c-footerSitemap__titleLink--sub"
+                  href={`${basePath}/group/`}
+                  data-acc-trigger
+                >
+                  {t(lang, "footer.group.ne")}
+                </a>
+              </h3>
+
+              <div class="c-footerSitemap__panel" data-acc-panel>
+                <ul class="c-footerSitemap__list">
+                  <li>
+                    <a
+                      class="c-footerSitemap__link"
+                      href={`${basePath}/group/ne/`}
+                    >
+                      {t(lang, "footer.group.ne01")}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="c-footerSitemap__link"
+                      href={`${basePath}/group/nwn/`}
+                    >
+                      {t(lang, "footer.group.ne02")}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="c-footerSitemap__link"
+                      href={`${basePath}/group/sec/`}
+                    >
+                      {t(lang, "footer.group.ne03")}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- NWN -->
+            <section class="c-footerSitemap__subBlock" data-acc-item>
+              <h3 class="c-footerSitemap__title c-footerSitemap__title--sub">
+                <a
+                  class="c-footerSitemap__titleLink c-footerSitemap__titleLink--sub"
+                  href={`${basePath}/group/`}
+                  data-acc-trigger
+                >
+                  {t(lang, "footer.group.nwn")}
+                </a>
+              </h3>
+
+              <div class="c-footerSitemap__panel" data-acc-panel>
+                <ul class="c-footerSitemap__list">
+                  <li>
+                    <a
+                      class="c-footerSitemap__link"
+                      href={`${basePath}/group/ne/`}
+                    >
+                      {t(lang, "footer.group.nwn01")}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="c-footerSitemap__link"
+                      href={`${basePath}/group/nwn/`}
+                    >
+                      {t(lang, "footer.group.nwn02")}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="c-footerSitemap__link"
+                      href={`${basePath}/group/sec/`}
+                    >
+                      {t(lang, "footer.group.nwn03")}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- SEC -->
+            <section class="c-footerSitemap__subBlock" data-acc-item>
+              <h3 class="c-footerSitemap__title c-footerSitemap__title--sub">
+                <a
+                  class="c-footerSitemap__titleLink c-footerSitemap__titleLink--sub"
+                  href={`${basePath}/group/`}
+                  data-acc-trigger
+                >
+                  {t(lang, "footer.group.sec")}
+                </a>
+              </h3>
+
+              <div class="c-footerSitemap__panel" data-acc-panel>
+                <ul class="c-footerSitemap__list">
+                  <li>
+                    <a
+                      class="c-footerSitemap__link"
+                      href={`${basePath}/group/ne/`}
+                    >
+                      {t(lang, "footer.group.sec01")}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="c-footerSitemap__link"
+                      href={`${basePath}/group/nwn/`}
+                    >
+                      {t(lang, "footer.group.sec02")}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      class="c-footerSitemap__link"
+                      href={`${basePath}/group/sec/`}
+                    >
+                      {t(lang, "footer.group.sec03")}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </section>
+          </div>
+        </section>
+      </div>
+    </nav>
+  </div>
+  <section class="c-footer__corp">
+    <figure class="c-footer__logo">
+      <a href={`${basePath}${t(lang, "domesticLink.company.href")}`}>
+        <img src="/assets/svg/logo-footer.svg" alt="" class="no-rotate" />
+      </a>
+    </figure>
+    <dl class="c-footer__address">
+      <dt>{t(lang, "common.corpName")}</dt>
+      <dd>
+        {t(lang, "common.address")}<br />
+        {t(lang, "common.phone")}
+      </dd>
+    </dl>
+  </section>
+  <section class="c-footerService">
+    <ul class="c-footerService__list">
+      <li class="list-item">
+        <a href="">{t(lang, "footer.service.recruit")}</a>
+      </li>
+      <li class="list-item">
+        <a href="">{t(lang, "footer.service.contact")}</a>
+      </li>
+      <li class="list-item">
+        <a href="">{t(lang, "footer.service.download")}</a>
+      </li>
+      <li class="list-item">
+        <a href="">{t(lang, "footer.service.privacy")}</a>
+      </li>
+    </ul>
+  </section>
+  <div class="c-footerBottom">
+    <p class="c-footerBottom__copy">
+      {t(lang, "footer.copyright")}
+    </p>
+  </div>
+</footer>
+
+<script>
+  (() => {
+    const root = document.querySelector("[data-site-footer]");
+    if (!root) return;
+
+    const isSP = () => window.matchMedia("(max-width: 768px)").matches;
+
+    const applyInitial = () => {
+      root.querySelectorAll("[data-acc-item]").forEach((item) => {
+        item.setAttribute("data-acc-state", isSP() ? "closed" : "open");
+      });
+    };
+
+    applyInitial();
+    window.addEventListener("resize", applyInitial, { passive: true });
+
+    root.addEventListener("click", (e) => {
+      if (!isSP()) return;
+
+      // e.target can be null in some environments; ensure it's an Element before calling closest
+      const target = e.target;
+      if (!target || !(target instanceof Element)) return;
+
+      const trigger = target.closest("[data-acc-trigger]");
+      if (!trigger) return;
+
+      const item = trigger.closest("[data-acc-item]");
+      if (!item) return;
+
+      // panelが無ければトグルしない（誤爆防止）
+      if (!item.querySelector("[data-acc-panel]")) return;
+
+      e.preventDefault();
+
+      const isOpen = item.getAttribute("data-acc-state") === "open";
+      item.setAttribute("data-acc-state", isOpen ? "closed" : "open");
+    });
+  })();
+</script>

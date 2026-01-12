@@ -1,0 +1,29 @@
+<button
+  class="c-scrollTop"
+  type="button"
+  aria-label="Back to top"
+  hidden
+  data-scroll-top
+>
+  <svg class="c-scrollTop__icon" viewBox="0 0 24 24" aria-hidden="true">
+    <use href="#icon-scrolltotop"></use>
+  </svg>
+</button>
+
+<script>
+  (() => {
+    const btn = document.querySelector<HTMLButtonElement>("[data-scroll-top]");
+    if (!btn) return;
+
+    const toggle = () => {
+      btn.hidden = window.scrollY < 300;
+    };
+
+    window.addEventListener("scroll", toggle, { passive: true });
+    toggle();
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  })();
+</script>

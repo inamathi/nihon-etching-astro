@@ -91,22 +91,34 @@ export function mountPdfViewer(root: HTMLElement, opts: Opts = {}) {
     }
   };
 
-  const calcFitScale = async (): Promise<number> => {
+  const calcInitWidth = () => {
     const stage = getStage();
-    if (!stage || !pdfDoc) return clamp(scale, MIN_SCALE, MAX_SCALE);
+    if (!stage) return 800;
 
-    // scale=1 でのページ論理サイズ
-    const page = await pdfDoc.getPage(pageNum);
-    const base = page.getViewport({ scale: 1 });
-
-    // stage の内側幅（paddingを差し引き）
     const cs = getComputedStyle(stage);
     const padX =
       (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
-    const innerW = Math.max(1, stage.clientWidth - padX);
 
-    return clamp(innerW / base.width, MIN_SCALE, MAX_SCALE);
+    const innerW = Math.max(1, stage.clientWidth - padX);
+    return Math.min(1100, Math.min(800, innerW));
   };
+
+  //   const calcFitScale = async (): Promise<number> => {
+  //     const stage = getStage();
+  //     if (!stage || !pdfDoc) return clamp(scale, MIN_SCALE, MAX_SCALE);
+
+  //     // scale=1 でのページ論理サイズ
+  //     const page = await pdfDoc.getPage(pageNum);
+  //     const base = page.getViewport({ scale: 1 });
+
+  //     // stage の内側幅（paddingを差し引き）
+  //     const cs = getComputedStyle(stage);
+  //     const padX =
+  //       (parseFloat(cs.paddingLeft) || 0) + (parseFloat(cs.paddingRight) || 0);
+  //     const innerW = Math.max(1, stage.clientWidth - padX);
+
+  //     return clamp(innerW / base.width, MIN_SCALE, MAX_SCALE);
+  //   };
 
   const renderCurrent = async () => {
     if (!pdfDoc) return;
@@ -152,6 +164,15 @@ export function mountPdfViewer(root: HTMLElement, opts: Opts = {}) {
         renderCurrent();
       }
     }
+
+    if (!canvas.dataset.baseW || !canvas.dataset.baseH) {
+      const r = canvas.getBoundingClientRect();
+      canvas.dataset.baseW = String(Math.ceil(r.width));
+      canvas.dataset.baseH = String(Math.ceil(r.height));
+
+      canvas.style.width = `${Math.ceil(r.width)}px`;
+      canvas.style.height = `${Math.ceil(r.height)}px`;
+    }
   };
 
   const goTo = (n: number) => {
@@ -193,6 +214,17 @@ export function mountPdfViewer(root: HTMLElement, opts: Opts = {}) {
     root.classList.remove("is-zoomed");
     updateUi();
     await renderCurrent();
+    const w0 = calcInitWidth();
+    canvas.style.width = `${Math.round(w0)}px`;
+    canvas.style.height = "auto";
+
+    const r0 = canvas.getBoundingClientRect();
+    canvas.dataset.baseW = String(Math.ceil(r0.width));
+    canvas.dataset.baseH = String(Math.ceil(r0.height));
+
+    scale = 1;
+    canvas.style.transform = `scale(${scale})`;
+    updateUi();
   };
 
   // events

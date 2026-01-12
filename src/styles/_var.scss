@@ -6,6 +6,7 @@
 
 /* Brand */
 $color-primary: #d51d1d;
+$color-secondary: #2972a6;
 
 /* primary の派生（既に作った方針に合わせて、使いやすい2段階） */
 $color-primary-light: #e24a4a;
@@ -36,6 +37,11 @@ $color-border: $color-gray-200;
 $color-link: $color-primary;
 $color-focus: rgba(213, 29, 29, 0.35);
 
+/* group */
+$color-country-japan: rgb(214, 127, 154);
+$color-country-global: rgb(91, 180, 171);
+$color-bg-topnav: rgba(20, 23, 33, 0.95);
+
 /* =========================
    Typography
    ========================= */
@@ -63,3 +69,39 @@ $z-modal: 300;
 :root {
   --header-h: 64px;
 }
+
+// =========================
+// Typography
+// =========================
+$fs-base: 16px;
+
+$fs-xs: 12px;
+$fs-s: 13px;
+$fs-sm: 14px;
+$fs-m: 15px;
+$fs-ml: 16px;
+$fs-l: 17px;
+$fs-xl: 18px;
+
+// Information
+$fs-info-date: 14px;
+$fs-info-text: 15px;
+
+$lh-info: 1.6;
+
+// SP 微調整用
+$fs-info-date-sp: 12px;
+$fs-info-text-sp: 13px;
+
+// Footer
+$fs-footer-title: 14px;
+$fs-footer-link: 13px;
+
+$fs-footer-title-sp: 13px;
+$fs-footer-link-sp: 12px;
+
+// page-header
+$fs-eyebrow: clamp(16px, 2vw, 22px);
+
+// page-section-title
+$fs-section-title: clamp(14px, 1vw, 18px);

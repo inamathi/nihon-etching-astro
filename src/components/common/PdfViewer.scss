@@ -1,0 +1,266 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+
+/* PDF　キャンバス周り */
+.c-pdf {
+  overflow: hidden;
+  margin: auto;
+
+  .c-pdf__stage {
+    display: grid;
+    place-items: center;
+
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.2);
+    max-width: $max-contents;
+    margin: auto;
+
+    contain: layout paint;
+    overscroll-behavior: contain;
+
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
+
+    -ms-overflow-style: none;
+
+    width: 100%;
+
+    &::-webkit-scrollbar {
+      width: 0;
+      height: 0;
+    }
+
+    .c-pdf__canvas {
+      display: block;
+      height: auto;
+      width: auto;
+      max-width: none;
+      margin: 0;
+      transform-origin: 0 0;
+    }
+  }
+
+  &.is-zoomed {
+    .c-pdf__canvas {
+      width: 100%;
+      max-width: none;
+    }
+  }
+
+  @include bp-down(md) {
+    .c-pdf__stage {
+      width: 100%;
+      padding: 0;
+      max-height: none;
+      padding: 20px;
+    }
+
+    .c-pdf__canvas {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+    }
+
+    &.is-zoomed {
+      .c-pdf__canvas {
+        width: auto;
+        max-width: none;
+      }
+    }
+  }
+
+  @include bp-up(md) {
+    .c-pdf__stage {
+      width: 100%;
+      max-height: auto;
+      padding: 20px;
+    }
+
+    .c-pdf__canvas {
+      max-width: 600px;
+      width: 100%;
+      height: auto;
+    }
+
+    &.is-zoomed {
+      .c-pdf__canvas {
+        width: auto;
+        max-width: none;
+      }
+    }
+  }
+}
+
+/* PDF コントローラUIのみ */
+.c-pdf__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0 14px;
+  margin-bottom: 20px;
+}
+
+.c-pdf__pagecontrol {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+
+  .c-pdf__btn {
+    border: none;
+    border-radius: 0;
+  }
+
+  .c-pdf__jump {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+
+    input {
+      border: none;
+      border-radius: 0;
+    }
+  }
+}
+
+.c-pdf__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 8px 10px;
+  border-radius: 4px;
+  text-decoration: none;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: $color-text;
+
+  &:hover {
+    background: rgba($color-accent, 0.2);
+    cursor: pointer;
+  }
+}
+
+.c-pdf__page {
+  min-width: 50px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+.c-pdf__label {
+  opacity: 0.85;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+
+.c-pdf__input {
+  width: 84px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: $color-text;
+}
+
+.c-pdf__zoom {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 4px;
+  border-radius: 4px;
+
+  .c-pdf__btn {
+    border: none;
+    border-radius: 0;
+  }
+}
+
+.pdf-viewer__controls-sp {
+  display: none;
+}
+
+.c-pdf__dl {
+  color: $color-text;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: none;
+  border-radius: 4px;
+  width: 42px;
+  height: 42px;
+  padding: 4px;
+
+  .c-pdf__icon {
+    width: 34px;
+    height: 34px;
+    padding: 5px;
+    display: block;
+    fill: currentColor;
+    background: rgba(255, 255, 255, 0.06);
+
+    use {
+      fill: currentColor;
+      transition: fill 160ms ease;
+    }
+
+    &:hover {
+      background: rgba($color-accent, 0.2);
+    }
+  }
+}
+@include bp-down(md) {
+  .pdf-viewer__controls-sp {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(6px);
+
+    color: #fff;
+    z-index: 5;
+
+    button,
+    a {
+      appearance: none;
+      border: none;
+      background: none;
+      color: inherit;
+
+      font-size: 16px;
+      line-height: 1;
+      padding: 6px 8px;
+      min-width: 32px;
+      text-align: center;
+    }
+  }
+
+  .pdf-viewer__page {
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+    white-space: nowrap;
+  }
+
+  .pdf-viewer__controls {
+    display: none;
+  }
+
+  .c-pdf__pagecontrol {
+    .c-pdf__jump {
+      display: none !important;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+---
+import {
+  t,
+  toLang,
+  type Lang,
+  getInformationItems,
+} from "@/locales/multilingual";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+
+const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
+const lang: Lang = toLang(rawLang);
+const basePath = `/${lang}`;
+
+const items = getInformationItems(10);
+---
+
+<section class="c-info" aria-label={t(lang, "information.title")}>
+  <SectionHeading
+    title={t(lang, "information.title")}
+    subtitle={t(lang, "information.subtitle")}
+    id="top-about-title"
+    as="h2"
+    align="center"
+    accent="line"
+  />
+
+  <ul class="c-info__list">
+    {
+      items.map((it) => {
+        const text = (it.text as any)[lang] ?? it.text.ja;
+        return (
+          <li class="c-info__item">
+            <time
+              class="c-info__date"
+              datetime={`${it.ym.replace(".", "-")}-01`}
+            >
+              {it.ym}
+            </time>
+            <p class="c-info__text">{text}</p>
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>

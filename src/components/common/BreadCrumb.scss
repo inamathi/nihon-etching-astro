@@ -1,0 +1,54 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+@use "@styles/font" as *;
+
+.c-breadcrumb {
+  max-width: $container-max;
+  padding-inline: 10px;
+  margin: auto;
+  &__list {
+    margin: 0 0 14px 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+    align-items: center;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+
+    &:not(:last-child)::after {
+      content: "/";
+      margin-left: 10px;
+      color: $color-gray-600;
+      font-size: $fs-xs;
+    }
+  }
+
+  &__link,
+  &__current {
+    font-size: $fs-xs;
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+
+  &__link {
+    text-decoration: none;
+
+    &:link,
+    &:visited {
+      color: $color-gray-400;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__current {
+    color: $color-gray-200;
+  }
+}

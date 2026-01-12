@@ -1,0 +1,123 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import GroupRegionList from "@/components/group/GroupRegionList.astro";
+
+import { t, toLang, type Lang } from "@/locales/multilingual";
+import { companies } from "@/data/companyOverview";
+import { makeFields } from "@/lib/companyCards";
+import { FIELD_PRESET } from "@/lib/companyFieldPresets";
+import type { NeRegionKey } from "@/types/group";
+
+import GroupSideNav from "@/components/group/GroupSideNav.astro";
+
+// import type { NeRegionKey } from "@/types/group";
+import CompanyMediaCard from "@/components/group/CompanyMediaCard.astro";
+import { buildRegionBlocks, regionHeadingTextKey } from "@/lib/groupRegion";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+const basePath = `/${lang}`;
+
+// NE抽出
+const neCompanies = companies.filter((c) => c.group === "ne");
+const fields = makeFields(FIELD_PRESET.ne);
+
+const regionOrder: NeRegionKey[] = [
+  "japan",
+  "asia",
+  "east-asia",
+] as const satisfies readonly NeRegionKey[];
+
+const headingKeyMap: Record<NeRegionKey, string> = {
+  japan: "common.groupName.neJapan",
+  asia: "common.groupName.neAsia",
+  "east-asia": "common.groupName.neEastAsia",
+};
+---
+
+<Base lang={lang} title={t(lang, "group.ne.pageTitle")}>
+  <PageHeader
+    eyebrowText="Group"
+    title={t(lang, "common.groupName.ne")}
+    lead={t(lang, "group.ne.lead")}
+    imageSrc="/images/pageHeader/pageHeader-group-ne.webp"
+    imageAlt={t(lang, "common.groupName.ne")}
+  />
+  <Breadcrumb
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.group"), href: `${basePath}/group/` },
+      { label: t(lang, "nav.group_ne"), href: `${basePath}/group/ne/` },
+    ]}
+  />
+
+  <main class="l-main">
+    <!-- Loop -->
+    <section class="l-wrapper">
+      <GroupRegionList
+        lang={lang}
+        companies={neCompanies}
+        fields={fields}
+        regionOrder={regionOrder}
+        headingKeyMap={headingKeyMap}
+      />
+      <GroupSideNav lang={lang} basePath={basePath} currentGroup="ne" />
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  @use "@styles/font" as *;
+
+  // html.is-groupNav-visible {
+  //   .l-main {
+  //     padding-top: calc(64px + 96px);
+  //   }
+  // }
+  .l-main {
+    @include bp-down(md) {
+      padding-top: calc(64px + 100px);
+    }
+  }
+  .l-wrapper {
+    position: relative;
+    width: $container-max;
+    margin: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    padding-bottom: 40px;
+    gap: 40px;
+  }
+  .l-section {
+    padding: 20px 0 40px;
+  }
+  .c-companyCards {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  @include bp-down(md) {
+    .l-wrapper {
+      position: relative;
+      width: 100%;
+      margin: auto;
+      display: flex;
+      flex-direction: column-reverse;
+      padding-bottom: 40px;
+      gap: 40px;
+    }
+    .l-section {
+      padding: 0 20px;
+    }
+  }
+</style>
