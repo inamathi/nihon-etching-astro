@@ -16,6 +16,8 @@ import GroupSideNav from "@/components/group/GroupSideNav.astro";
 import CompanyMediaCard from "@/components/group/CompanyMediaCard.astro";
 import { buildRegionBlocks, regionHeadingTextKey } from "@/lib/groupRegion";
 import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import HashSmoothScroll from "@/components/group/HashSmoothScroll.astro";
+import HashJumpGuard from "@/components/group/HashJumpGuard.astro";
 
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },
@@ -23,7 +25,8 @@ export const getStaticPaths = () => [
 ];
 
 const lang: Lang = toLang(Astro.params.lang);
-const basePath = `/${lang}`;
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
 
 // NE抽出
 const neCompanies = companies.filter((c) => c.group === "ne");
@@ -47,7 +50,7 @@ const headingKeyMap: Record<NeRegionKey, string> = {
     eyebrowText="Group"
     title={t(lang, "common.groupName.ne")}
     lead={t(lang, "group.ne.lead")}
-    imageSrc="/images/pageHeader/pageHeader-group-ne.webp"
+    imageSrc="/images/pageHeader/pageheader-group.webp"
     imageAlt={t(lang, "common.groupName.ne")}
   />
   <Breadcrumb
@@ -62,6 +65,7 @@ const headingKeyMap: Record<NeRegionKey, string> = {
     <!-- Loop -->
     <section class="l-wrapper">
       <GroupRegionList
+        group="ne"
         lang={lang}
         companies={neCompanies}
         fields={fields}
@@ -70,6 +74,8 @@ const headingKeyMap: Record<NeRegionKey, string> = {
       />
       <GroupSideNav lang={lang} basePath={basePath} currentGroup="ne" />
     </section>
+    <!-- 遷移してきたときにhashを持っていたらSmoothScroll -->
+    <HashSmoothScroll offset={92} />
   </main>
 </Base>
 

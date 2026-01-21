@@ -1,0 +1,293 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import Introduction from "@/components/common/Introduction.astro";
+
+import { t, toLang, type Lang } from "@/locales/multilingual";
+import LinkButton from "@/components/ui/LinkButton.astro";
+import BlockHeading from "@/components/ui/BlockHeading.astro";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+
+/* =========================
+ * Link Buttons（実体）
+ * ========================= */
+type LinkItem = {
+  href: string;
+  labelKeyIndex: number; // multilingual.ts の buttons 配列 index
+  target?: "_self" | "_blank";
+};
+
+const linkButtons: LinkItem[] = [
+  {
+    href: "https://plastron.co.jp/",
+    labelKeyIndex: 0,
+    target: "_blank",
+  },
+];
+---
+
+<Base lang={lang} title={t(lang, "recruit.page.title")}>
+  <PageHeader
+    eyebrowText="RECRUIT"
+    title={t(lang, "recruit.page.title")}
+    lead={t(lang, "recruit.page.lead")}
+    imageSrc="/images/pageHeader/pageheader-recruit.webp"
+    imageAlt={t(lang, "recruit.page.imageAlt")}
+  />
+
+  <Breadcrumb
+    lang={lang}
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.recruit"), href: `${basePath}/recruit/` },
+    ]}
+  />
+
+  <main class="l-container">
+    <section class="l-section">
+      <div class="c-recruit">
+        <!-- Introduction -->
+        <Introduction lang={lang} arrayKey="recruit.body.intro.paragraphs" />
+        <!-- Guidelines -->
+        <PageSectionHeading text={t(lang, "recruit.body.guidelinesTitle")} />
+
+        <dl class="c-recruit__dl">
+          <div class="c-recruit__row">
+            <dt class="c-recruit__dt">{t(lang, "recruit.body.labels.jobs")}</dt>
+            <dd class="c-recruit__dd">{t(lang, "recruit.body.values.jobs")}</dd>
+          </div>
+
+          <div class="c-recruit__row">
+            <dt class="c-recruit__dt">
+              {t(lang, "recruit.body.labels.employment")}
+            </dt>
+            <dd class="c-recruit__dd">
+              {t(lang, "recruit.body.values.employment")}
+            </dd>
+          </div>
+
+          <div class="c-recruit__row">
+            <dt class="c-recruit__dt">
+              {t(lang, "recruit.body.labels.description")}
+            </dt>
+            <dd class="c-recruit__dd">
+              <div class="c-recruit__jobs">
+                <section class="c-recruit__job">
+                  <h3 class="c-recruit__h3">
+                    {t(lang, "recruit.body.roles.sales.title")}
+                  </h3>
+                  <p class="c-recruit__p">
+                    {t(lang, "recruit.body.roles.sales.desc")}
+                  </p>
+                </section>
+
+                <section class="c-recruit__job">
+                  <h3 class="c-recruit__h3">
+                    {t(lang, "recruit.body.roles.etching.title")}
+                  </h3>
+                  <p class="c-recruit__p">
+                    {t(lang, "recruit.body.roles.etching.desc")}
+                  </p>
+                </section>
+
+                <section class="c-recruit__job">
+                  <h3 class="c-recruit__h3">
+                    {t(lang, "recruit.body.roles.dev.title")}
+                  </h3>
+                  <p class="c-recruit__p">
+                    {t(lang, "recruit.body.roles.dev.desc")}
+                  </p>
+                </section>
+
+                <section class="c-recruit__job">
+                  <h3 class="c-recruit__h3">
+                    {t(lang, "recruit.body.roles.admin.title")}
+                  </h3>
+                  <p class="c-recruit__p">
+                    {t(lang, "recruit.body.roles.admin.desc")}
+                  </p>
+                </section>
+              </div>
+            </dd>
+          </div>
+
+          <div class="c-recruit__row">
+            <dt class="c-recruit__dt">
+              {t(lang, "recruit.body.labels.qualification")}
+            </dt>
+            <dd class="c-recruit__dd">
+              {t(lang, "recruit.body.values.qualification")}
+            </dd>
+          </div>
+
+          <div class="c-recruit__row">
+            <dt class="c-recruit__dt">
+              {t(lang, "recruit.body.labels.location")}
+            </dt>
+            <dd class="c-recruit__dd">
+              {t(lang, "recruit.body.values.location")}
+            </dd>
+          </div>
+
+          <div class="c-recruit__row">
+            <dt class="c-recruit__dt">
+              {t(lang, "recruit.body.labels.period")}
+            </dt>
+            <dd class="c-recruit__dd">
+              {t(lang, "recruit.body.values.period")}
+              <!-- <div class="c-recruit__cta">
+                <a class="c-recruit__link" href={`${basePath}/contact/`}>
+                  {t(lang, "recruit.body.values.mailLink")}
+                </a>
+              </div> -->
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+    <section class="l-section">
+      <BlockHeading text={t(lang, "technology.peening.body.link.heading")} />
+      <div class="p-peening__linkList">
+        {
+          linkButtons.map((item) => (
+            <LinkButton
+              href={item.href}
+              target={item.target}
+              label={t(lang, `recruit.body.values.mailLink`)}
+              variant="secondary"
+            />
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  .c-introduction {
+    border: solid 1px $color-gray-600;
+    padding: 20px;
+    margin: 40px auto 40px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    p {
+      color: $color-text;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .c-recruit {
+    &__lead {
+      p {
+        margin: 0 0 18px;
+        color: $color-gray-200;
+        line-height: 1.9;
+      }
+    }
+
+    &__h2 {
+      margin: 22px 0 12px;
+      font-size: $fs-l;
+      color: $color-text;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    &__h2En {
+      font-size: $fs-s;
+      color: $color-gray-500;
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
+
+    &__dl {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 2px;
+    }
+
+    &__row {
+      display: grid;
+      gap: 2px;
+      padding: 12px;
+      background: rgba(255, 255, 255, 0.05);
+
+      @include bp-up(md) {
+        grid-template-columns: 180px 1fr;
+        align-items: start;
+        gap: 12px 18px;
+      }
+    }
+
+    &__dt {
+      margin: 0;
+      color: $color-gray-300;
+      font-size: $fs-s;
+      font-weight: 700;
+      border-right: solid 2px $color-gray-600;
+    }
+
+    &__dd {
+      margin: 0;
+      color: $color-gray-200;
+      line-height: 1.85;
+    }
+
+    &__jobs {
+      display: grid;
+      gap: 12px;
+    }
+
+    &__job {
+    }
+
+    &__h3 {
+      margin: 0 0 6px;
+      font-size: $fs-m;
+      color: $color-text;
+    }
+
+    &__p {
+      margin: 0;
+      color: $color-gray-200;
+      line-height: 1.85;
+    }
+
+    &__cta {
+      margin-top: 10px;
+    }
+
+    &__link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      color: $color-text;
+      padding: 5px 15px;
+      border-radius: 4px;
+      border: 1px solid $color-gray-700;
+      background: rgba(255, 255, 255, 0.06);
+
+      &:hover {
+        background: rgba($color-accent, 0.3);
+        border: solid 1px $color-accent;
+      }
+    }
+  }
+</style>

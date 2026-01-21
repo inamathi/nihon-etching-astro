@@ -1,0 +1,98 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import { t, toLang, type Lang } from "@/locales/multilingual";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+---
+
+<Base lang={lang} title={t(lang, "contact.thanks.title")}>
+  <PageHeader
+    eyebrowText="CONTACT"
+    title={t(lang, "contact.page.title")}
+    lead={t(lang, "contact.page.lead")}
+    imageSrc="/images/pageHeader/pageheader-contact.webp"
+    imageAlt={t(lang, "group.listpage.title")}
+  />
+  <Breadcrumb
+    lang={lang}
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.contact"), href: `${basePath}/contact/` },
+      {
+        label: t(lang, "contact.thanks.title"),
+        href: `${basePath}/contact/thanks/`,
+      },
+    ]}
+  />
+  <main class="l-container">
+    <PageSectionHeading text={t(lang, "contact.thanks.title")} />
+
+    <section class="l-section">
+      <p>{t(lang, "contact.thanks.lead.p1")}</p>
+      <p>{t(lang, "contact.thanks.lead.p2")}</p>
+
+      <div class="c-btnrow">
+        <a class="c-btn" href={`${basePath}/`}>
+          {t(lang, "contact.thanks.backToHome")}
+        </a>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+
+  .l-container {
+    margin-top: 40px;
+  }
+  .l-section {
+    padding: 16px 0 40px;
+    p {
+      color: $color-gray-200;
+      line-height: 1.8;
+    }
+  }
+
+  .c-btnrow {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+
+    @include bp-up(md) {
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .c-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px 15px;
+      border-radius: 8px;
+      border: 1px solid $color-gray-700;
+      text-decoration: none;
+      color: $color-text;
+      background: rgba(255, 255, 255, 0.06);
+      margin-top: 100px;
+
+      &:hover {
+        border: $color-accent solid 1px;
+        background: rgba($color-accent, 0.3);
+      }
+    }
+  }
+</style>

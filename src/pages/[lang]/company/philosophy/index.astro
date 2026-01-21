@@ -1,16 +1,462 @@
 ---
-import { t, toLang, type Lang } from "@/locales/multilingual";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import Introduction from "@/components/common/Introduction.astro";
 
-export const getStaticPaths = async () => {
-  return [{ params: { lang: "ja" } }, { params: { lang: "en" } }];
-};
+import { t, toLang, type Lang, getArray } from "@/locales/multilingual";
 
-const { lang } = Astro.params as { lang: string };
-const lang: Lang = toLang(lang);
-const basePath = `/${lang}`;
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+
+const managementItems = getArray(lang, "company.philosophy.management.items");
+
+const imgPortrait = "/images/company/philosophy/img-company__president.png";
+
+const qualityItems = getArray(lang, "company.philosophy.quality.items");
+const qualityIcons = [
+  "icon-quality-01",
+  "icon-quality-02",
+  "icon-quality-03",
+  "icon-quality-04",
+];
+const envItems = getArray(lang, "company.philosophy.environment.items");
+
+const envIcons = [
+  "icon-env-01",
+  "icon-env-02",
+  "icon-env-03",
+  "icon-env-04",
+  "icon-env-05",
+];
+
+// SVG sprite の絶対パスを BASE_URL から安全に生成
+const spritePath = `${import.meta.env.BASE_URL}assets/svg/icon-sprite.svg`;
+
+const envBg = `${import.meta.env.BASE_URL}images/company/philosophy/img-company__envbg-vector.webp`;
 ---
 
-<main class="l-container" style="padding: 40px 0;">
-  <h1>{t(lang, "footer.company.philosophy")}</h1>
-  <p>Path: {basePath}{Astro.url.pathname}</p>
-</main>
+<Base lang={lang} title={t(lang, "company.philosophy.page.title")}>
+  <PageHeader
+    eyebrowText="company.philosophy"
+    title={t(lang, "company.philosophy.page.title")}
+    lead={t(lang, "company.philosophy.page.lead")}
+    imageSrc="/images/pageHeader/pageheader-philosophy.webp"
+    imageAlt=""
+  />
+
+  <Breadcrumb
+    lang={lang}
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.company"), href: `${basePath}/company/` },
+      { label: t(lang, "company.philosophy.page.title") },
+    ]}
+  />
+
+  <main>
+    <!-- Intro -->
+    <section class="l-section">
+      <!-- Introduction -->
+      <Introduction
+        lang={lang}
+        arrayKey="company.philosophy.body.intro.paragraphs"
+      />
+    </section>
+
+    <!-- Philosophy -->
+    <section class="full-container">
+      <div class="c-company-philosophy">
+        <PageSectionHeading
+          text={t(lang, "company.philosophy.principles.title")}
+        />
+        <div class="c-company-philosophy__column">
+          <figure>
+            <img src={"/images/company/philosophy/img-company__portrait.png"} />
+          </figure>
+          <div>
+            <p
+              class="philosophy-lead"
+              set:html={t(lang, "company.philosophy.principles.desc")}
+            />
+            <ul class="philosophy-list">
+              {
+                managementItems.map((item) => (
+                  <li class="philosophy-list__item">
+                    <svg
+                      class="philosophy-list__bullet"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <use href={`${spritePath}#icon-bullet-philosophy`} />
+                    </svg>
+                    <span class="philosophy-list__text" set:html={item} />
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quality -->
+    <section class="full-container">
+      <div class="c-company-quality">
+        <PageSectionHeading
+          text={t(lang, "company.philosophy.quality.title")}
+        />
+        <ul class="quality-list js-quality-stagger">
+          {
+            qualityItems.map((text, index) => (
+              <li class="quality-list__item">
+                <svg class="quality-list__icon" aria-hidden="true">
+                  <use
+                    href={`/assets/svg/icon-sprite.svg#${qualityIcons[index]}`}
+                  />
+                </svg>
+                <span class="quality-list__text" set:html={text} />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <!-- Environmental -->
+    <section class="full-container envbg" style={`--env-bg: url('${envBg}')`}>
+      <PageSectionHeading
+        text={t(lang, "company.philosophy.environment.title")}
+      />
+      <div class="c-company-env">
+        <ul class="env-list">
+          {
+            envItems.map((text, index) => (
+              <li class="env-list__item">
+                <svg class="env-list__icon" aria-hidden="true">
+                  <use
+                    href={`${import.meta.env.BASE_URL}assets/svg/icon-sprite.svg#${envIcons[index]}`}
+                  />
+                </svg>
+
+                <p class="env-list__text" set:html={text} />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+</Base>
+<!-- 品質理念アニメ -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const list = document.querySelector(".js-quality-stagger");
+    if (!list) return;
+
+    const items = Array.from(list.querySelectorAll(".quality-list__item"));
+    if (!items.length) return;
+
+    // delay を li ごとに仕込む（左→右の順）
+    items.forEach((el, i) => {
+      el.style.setProperty("--delay", `${i * 0.15}s`);
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          // 発火したら全項目を順に開始（ディレイはCSS変数）
+          items.forEach((el) => el.classList.add("is-inview"));
+
+          // 1回だけで良いなら監視解除
+          io.disconnect();
+        });
+      },
+      {
+        root: null,
+        threshold: 0.2, // 20%見えたら開始
+      },
+    );
+
+    io.observe(list);
+  });
+</script>
+<!-- 環境理念アニメ -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const upperItems = document.querySelectorAll(".quality-list__item");
+    const envItems = document.querySelectorAll(".env-list__item");
+
+    if (!envItems.length) return;
+
+    // upper の総時間（あなたの upper 側の stagger と duration に合わせて調整）
+    const upperStagger = 140;
+    const upperDuration = 800;
+    const extraWait = 200;
+
+    const totalDelay =
+      upperItems.length > 0
+        ? upperItems.length * upperStagger + upperDuration + extraWait
+        : 0;
+
+    const envStagger = 140;
+
+    const runEnv = () => {
+      envItems.forEach((el, i) => {
+        setTimeout(() => el.classList.add("is-visible"), i * envStagger);
+      });
+    };
+
+    // 監視起点：quality があるなら quality の先頭。なければ env の先頭。
+    const anchor = upperItems[0] ?? envItems[0];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+
+        setTimeout(runEnv, totalDelay);
+        observer.disconnect();
+      },
+      {
+        threshold: 0,
+        rootMargin: "0px 0px -10% 0px",
+      },
+    );
+
+    observer.observe(anchor);
+  });
+</script>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  .l-section {
+    max-width: $container-max;
+    margin: 40px auto;
+  }
+  .full-container {
+    width: 100%;
+    margin: 40px auto;
+    background-size: cover;
+    .c-company-philosophy {
+      max-width: $container-max;
+      margin: auto;
+      &__column {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 40px;
+        figure {
+          img {
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 40px;
+          .philosophy-lead {
+            font-size: $fs-m;
+            text-align: center;
+            margin: 0;
+          }
+          .philosophy-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            .philosophy-list__item {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 10px;
+              font-size: $fs-xl;
+              padding-bottom: 5px;
+              border-bottom: dotted 2px $color-gray-700;
+              .philosophy-list__bullet {
+                width: 24px;
+                height: 24px;
+                fill: none;
+                color: rgb(61, 177, 139);
+              }
+            }
+          }
+        }
+      }
+    }
+    .c-company-quality {
+      max-width: $container-max;
+      margin: 80px auto;
+      .quality-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        overflow: hidden;
+        .quality-list__item {
+          position: relative;
+          display: grid;
+          place-items: center;
+          text-align: center;
+          background: rgba(0, 0, 0, 0.25);
+          border: solid 1px $color-gray-600;
+          color: $color-text;
+          padding: 20px 15px;
+          border-radius: 8px;
+          font-size: $fs-m;
+          min-height: 220px;
+
+          opacity: 0;
+          transform: translateX(-24px);
+          will-change: opacity, transform;
+
+          background: linear-gradient(
+            135deg,
+            rgba(220, 220, 220, 0.2) 0%,
+            rgba(220, 220, 220, 0.3) 35%,
+            rgba(220, 220, 220, 0.2) 65%,
+            rgba(220, 220, 220, 0) 100%
+          );
+          backdrop-filter: blur(2px);
+
+          // 金属感のための微弱なハイライト
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+
+          &.is-inview {
+            animation: quality-slide-in 0.6s ease-out forwards;
+            animation-delay: var(--delay, 0s);
+          }
+
+          @keyframes quality-slide-in {
+            to {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+          .quality-list__icon {
+            width: 80px;
+            height: 80px;
+            color: $color-text;
+          }
+          &::after {
+            content: "";
+            position: absolute;
+            width: 50px;
+            height: 6px;
+            background-color: $color-primary;
+            top: 20px;
+            left: 0;
+
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: underline-slide 0.8s ease-out forwards;
+          }
+          @keyframes underline-slide {
+            to {
+              transform: scaleX(1);
+            }
+          }
+        }
+      }
+    }
+    .c-company-env {
+      // max-width: $container-max;
+      background-image: var(--env-bg);
+      margin: auto;
+      min-height: 300px;
+      .env-list {
+        max-width: $container-max;
+        margin: auto;
+
+        display: grid;
+        grid-template-columns: repeat(5, minmax(240px, fit-content(280px)));
+        grid-template-rows: repeat(6, 1fr);
+        gap: 16px 24px;
+        align-items: stretch;
+
+        .env-list__item {
+          position: relative;
+          display: grid;
+          gap: 20px;
+          place-items: center;
+          text-align: center;
+          color: $color-text;
+          padding: 20px 10px;
+          border-radius: 8px;
+          font-size: $fs-m;
+          min-height: 100px;
+          background: rgba(255, 255, 255, 0.05);
+          backdrop-filter: blur(4px);
+          -webkit-backdrop-filter: blur(10px);
+
+          border: 1px solid rgba(255, 255, 255, 0.1);
+
+          // 金属感
+          box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.35),
+            0 8px 24px rgba(0, 0, 0, 0.08);
+          filter: blur(2px);
+          transition:
+            opacity 0.8s ease-out,
+            transform 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+            filter 0.8s ease-out;
+
+          opacity: 0;
+          transform: translateY(24px);
+          will-change: opacity, transform, filter;
+
+          &:nth-child(1) {
+            grid-column: 1;
+            grid-row: 1 / span 4;
+          }
+
+          &:nth-child(2) {
+            grid-column: 3;
+            grid-row: 1 / span 4;
+          }
+
+          &:nth-child(3) {
+            grid-column: 5;
+            grid-row: 1 / span 4;
+          }
+
+          &:nth-child(4) {
+            grid-column: 2;
+            grid-row: 2 / span 4;
+          }
+
+          &:nth-child(5) {
+            grid-column: 4;
+            grid-row: 2 / span 4;
+          }
+
+          &.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+            filter: blur(0);
+          }
+          .env-list__icon {
+            width: 80px;
+            height: 80px;
+            color: $color-gray-100;
+          }
+          .env-list__text {
+            margin: 0;
+            line-height: 1.6;
+            text-align: center;
+            text-wrap: balance;
+          }
+        }
+      }
+    }
+  }
+</style>

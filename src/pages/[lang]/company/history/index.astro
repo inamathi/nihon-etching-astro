@@ -1,16 +1,85 @@
 ---
-import { t, toLang, type Lang } from "@/locales/multilingual";
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
 
-export const getStaticPaths = async () => {
-  return [{ params: { lang: "ja" } }, { params: { lang: "en" } }];
+import { t, toLang, type Lang, getList } from "@/locales/multilingual";
+import { pick } from "@/lib/companyView";
+
+// ✅ [lang] 動的ルートなので必須
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+
+// multilingual.ts 側の items は「各要素が ja/en を持つ」前提
+type HistoryItem = {
+  date: { ja: string; en: string };
+  text: { ja: string; en: string };
 };
 
-const { lang } = Astro.params as { lang: string };
-const lang: Lang = toLang(lang);
-const basePath = `/${lang}`;
+const items = getList<HistoryItem>("company.history.items");
 ---
 
-<main class="l-container" style="padding: 40px 0;">
-  <h1>{t(lang, "footer.company.history")}</h1>
-  <p>Path: {basePath}{Astro.url.pathname}</p>
-</main>
+<Base lang={lang} title={t(lang, "company.history.meta.title")}>
+  <PageHeader
+    eyebrowText="COMPANY"
+    title={t(lang, "company.history.title")}
+    lead={t(lang, "company.history.lead")}
+    imageSrc="/images/pageHeader/pageheader-company.webp"
+    imageAlt=""
+  />
+
+  <Breadcrumb
+    ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.company"), href: `${basePath}/company/` },
+      { label: t(lang, "company.history.title") },
+    ]}
+  />
+
+  <main class="l-container">
+    <section class="l-section">
+      <div class="c-history">
+        <PageSectionHeading text={t(lang, "company.history.title")} />
+
+        <dl class="c-history__dl">
+          {
+            items.map((it) => (
+              <div class="c-history__row">
+                <dt class="c-history__dt">{pick(it.date, lang)}</dt>
+                <dd class="c-history__dd">{pick(it.text, lang)}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+
+  .c-history {
+    padding: 40px 0;
+    .c-history__dl {
+      .c-history__row {
+        display: flex;
+        gap: 20px;
+        padding: 10px 0;
+        border-bottom: dotted 1px $color-gray-600;
+        .c-history__dt {
+          min-width: 150px;
+        }
+      }
+    }
+  }
+</style>

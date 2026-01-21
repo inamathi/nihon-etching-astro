@@ -1,0 +1,139 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import Introduction from "@/components/common/Introduction.astro";
+
+import { t, toLang, type Lang, getArray } from "@/locales/multilingual";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+
+const managementItems = getArray(lang, "company.philosophy.management.items");
+const qualityItems = getArray(lang, "company.philosophy.quality.items");
+const envItems = getArray(lang, "company.philosophy.environment.items");
+const histItems = getArray(lang, "company.philosophy.history.items");
+---
+
+<Base lang={lang} title={t(lang, "company.philosophy.page.title")}>
+  <PageHeader
+    eyebrowText="company.philosophy"
+    title={t(lang, "company.philosophy.page.title")}
+    lead={t(lang, "company.philosophy.page.lead")}
+    imageSrc="/images/pageHeader/pageheader-philosophy.webp"
+    imageAlt=""
+  />
+
+  <Breadcrumb
+    lang={lang}
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.company"), href: `${basePath}/company/` },
+      { label: t(lang, "company.philosophy.page.title") },
+    ]}
+  />
+
+  <main>
+    <!-- Intro -->
+    <section class="l-section">
+      <!-- Introduction -->
+      <Introduction
+        lang={lang}
+        arrayKey="company.philosophy.body.intro.paragraphs"
+      />
+    </section>
+
+    <!-- Philosophy -->
+    <section class="full-container">
+      <div class="c-company-cardlist">
+        <PageSectionHeading
+          text={t(lang, "company.philosophy.principles.title")}
+        />
+        <p>{t(lang, "company.philosophy.principles.desc")}</p>
+        <ul class="c-company-cardlist">
+          {managementItems.map((item) => <li set:html={item} />)}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Quality -->
+    <section class="full-container">
+      <div class="c-company-cardlist">
+        <PageSectionHeading
+          text={t(lang, "company.philosophy.quality.title")}
+        />
+        <ul>
+          {qualityItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Environmental -->
+    <section class="full-container">
+      <div class="c-company-cardlist">
+        <PageSectionHeading
+          text={t(lang, "company.philosophy.environment.title")}
+        />
+        <ul class="column">
+          {envItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  .l-section {
+    max-width: $container-max;
+    margin: auto;
+  }
+  .full-container {
+    width: 100%;
+    margin: 40px auto;
+    .c-company-cardlist {
+      max-width: $container-max;
+      margin: auto;
+      ul {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1px;
+        border-radius: 12px;
+        overflow: hidden;
+        li {
+          display: grid;
+          place-items: center;
+          text-align: center;
+          background: rgba($color-card-bg, 1);
+          color: $color-text-opp;
+          padding: 20px 15px;
+          // border-radius: 8px;
+          font-size: $fs-l;
+          min-height: 100px;
+        }
+        &.column {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          border-radius: 0;
+          li {
+            background: rgba(0, 0, 0, 0.25);
+            border: solid 1px $color-gray-800;
+            padding: 20px;
+            min-height: max-content;
+            border-radius: 8px;
+            color: $color-text;
+          }
+        }
+      }
+    }
+  }
+</style>

@@ -5,15 +5,16 @@ import Breadcrumb from "@/components/common/BreadCrumb.astro";
 import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
 
 import { t, toLang, type Lang } from "@/locales/multilingual";
+import Introduction from "@/components/common/Introduction.astro";
 
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },
   { params: { lang: "en" } },
 ];
 
-const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
-const lang: Lang = toLang(rawLang);
-const basePath = `/${lang}`;
+const lang: Lang = toLang(Astro.params.lang);
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
 
 // フォトエッチング用ギャラリー定義
 const photoEtchingGallery = [
@@ -139,13 +140,11 @@ const graphicGallery = [
 
   <main class="l-container contents-wrapper">
     <!-- Intro（本文ボックス） -->
-    <section class="c-techIntro l-section">
-      <div class="c-techIntro__box">
-        <p class="c-techIntro__text">
-          {t(lang, "technology.shibo.intro")}
-        </p>
-      </div>
-    </section>
+    <!-- Introduction -->
+    <Introduction
+      lang={lang}
+      arrayKey="technology.shibo.body.intro.paragraphs"
+    />
     <!-- Photo Etching -->
     <section class="l-section photoetching">
       <PageSectionHeading

@@ -1,0 +1,117 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import GroupRegionList from "@/components/group/GroupRegionList.astro";
+import { t, toLang, type Lang } from "@/locales/multilingual";
+import { companies } from "@/data/companyOverview";
+import { makeFields } from "@/lib/companyCards";
+import { FIELD_PRESET } from "@/lib/companyFieldPresets";
+import type { SecRegionKey } from "@/types/group";
+import GroupSideNav from "@/components/group/GroupSideNav.astro";
+import HashSmoothScroll from "@/components/group/HashSmoothScroll.astro";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+
+// SEC抽出
+const secCompanies = companies.filter((c) => c.group === "sec");
+const fields = makeFields(FIELD_PRESET.sec);
+
+const regionOrder: SecRegionKey[] = [
+  "europe",
+  "north-america",
+  "south-america",
+] as const satisfies readonly SecRegionKey[];
+
+const headingKeyMap: Record<SecRegionKey, string> = {
+  europe: "common.groupName.secEurope",
+  "north-america": "common.groupName.secNorthAmerica",
+  "south-america": "common.groupName.secSouthAmerica",
+};
+---
+
+<Base lang={lang} title={t(lang, "group.sec.pageTitle")}>
+  <PageHeader
+    eyebrowText="Group"
+    title={t(lang, "common.groupName.sec")}
+    lead={t(lang, "group.sec.lead")}
+    imageSrc="/images/pageHeader/pageHeader-group-nwn.webp"
+    imageAlt={t(lang, "common.groupName.sec")}
+  />
+
+  <Breadcrumb
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.group"), href: `${basePath}/group/` },
+      { label: t(lang, "nav.group_sec"), href: `${basePath}/group/sec/` },
+    ]}
+  />
+
+  <main class="l-main">
+    <section class="l-wrapper">
+      <GroupRegionList
+        group="sec"
+        lang={lang}
+        companies={secCompanies}
+        fields={fields}
+        regionOrder={regionOrder}
+        headingKeyMap={headingKeyMap}
+      />
+      <GroupSideNav lang={lang} basePath={basePath} currentGroup="sec" />
+    </section>
+    <!-- 遷移してきたときにhashを持っていたらSmoothScroll -->
+    <HashSmoothScroll offset={92} />
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  @use "@styles/font" as *;
+
+  .l-main {
+    @include bp-down(md) {
+      padding-top: calc(64px + 100px);
+    }
+  }
+
+  .l-wrapper {
+    position: relative;
+    width: $container-max;
+    margin: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    padding-bottom: 40px;
+    gap: 40px;
+  }
+
+  .l-section {
+    padding: 20px 0 40px;
+  }
+
+  .c-companyCards {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  @include bp-down(md) {
+    .l-wrapper {
+      width: 100%;
+      display: flex;
+      flex-direction: column-reverse;
+      padding-bottom: 40px;
+      gap: 40px;
+    }
+    .l-section {
+      padding: 0 20px;
+    }
+  }
+</style>

@@ -19,7 +19,8 @@ export const getStaticPaths = () => [
 
 const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
 const lang: Lang = toLang(rawLang);
-const basePath = `/${lang}`;
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
 
 /* =========================
  * types
@@ -172,7 +173,7 @@ const secCompanies = companies.filter((c) => c.group === "sec");
       data-group-state="open"
     >
       <div class="c-groupBlock__header">
-        <PageSectionHeading text={t(lang, "common.groupName.nwn")} />
+        <PageSectionHeading text={t(lang, "common.groupName.sec")} />
         <GroupBlockTools
           lang={lang}
           basePath={basePath}

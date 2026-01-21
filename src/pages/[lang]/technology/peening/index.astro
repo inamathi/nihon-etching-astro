@@ -1,0 +1,250 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import Introduction from "@/components/common/Introduction.astro";
+import BlockHeading from "@/components/ui/BlockHeading.astro";
+
+import { t, toLang, type Lang } from "@/locales/multilingual";
+import LinkButton from "@/components/ui/LinkButton.astro";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+
+/* =====================================================
+ * Assets（言語非依存：FrontMatterに値を書く）
+ * ===================================================== */
+// 画像（本文内の画像）
+const imageSrc01 = "/images/technology/peening/img-peening-image01.webp";
+const imageSrc02 = "/images/technology/peening/img-peening-image02.webp";
+
+// PageHeader 用の画像
+const heroImage = "/images/pageHeader/pageheader-peening.webp";
+
+/* =====================================================
+ * Gallery（shibo からそのまま移植）
+ * ===================================================== */
+type GalleryItem = {
+  src: string;
+  captionKey: string;
+};
+
+const peeningGallery: GalleryItem[] = [
+  {
+    src: "/images/technology/peening/img-peening-pattern-01.webp",
+    captionKey: "technology.peening.body.gallery.cap01",
+  },
+  {
+    src: "/images/technology/peening/img-peening-pattern-02.webp",
+    captionKey: "technology.peening.body.gallery.cap02",
+  },
+];
+
+/* =========================
+ * Link Buttons（実体）
+ * ========================= */
+type LinkItem = {
+  href: string;
+  labelKeyIndex: number; // multilingual.ts の buttons 配列 index
+  target?: "_self" | "_blank";
+};
+
+const linkButtons: LinkItem[] = [
+  {
+    href: "https://plastron.co.jp/",
+    labelKeyIndex: 0,
+    target: "_blank",
+  },
+];
+---
+
+<Base lang={lang} title={t(lang, "technology.peening.page.title")}>
+  <PageHeader
+    eyebrowText="TECHNOLOGY"
+    title={t(lang, "technology.peening.page.title")}
+    lead={t(lang, "technology.peening.page.lead")}
+    imageSrc={heroImage}
+    imageAlt={t(lang, "technology.peening.assets.imageAlt")}
+  />
+
+  <Breadcrumb
+    ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.technology"), href: `${basePath}/technology/` },
+      { label: t(lang, "technology.peening.page.title") },
+    ]}
+  />
+
+  <main class="l-container contents-wrapper">
+    <!-- Intro -->
+    <Introduction
+      lang={lang}
+      arrayKey="technology.peening.body.intro.paragraphs"
+    />
+
+    <!-- Image -->
+    <section class="l-section">
+      <PageSectionHeading
+        text={t(lang, "technology.peening.body.imageTitle")}
+      />
+      <div class="p-peening__media">
+        <figure class="p-peening__figure">
+          <img
+            class="p-peening__img"
+            src={imageSrc01}
+            alt={t(lang, "technology.peening.assets.imageAlt")}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <figure class="p-peening__figure">
+          <img
+            class="p-peening__img"
+            src={imageSrc02}
+            alt={t(lang, "technology.peening.assets.imageAlt")}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+      </div>
+      <BlockHeading text={t(lang, "technology.peening.body.featuresTitle")} />
+      <ul class="p-peening__features">
+        {
+          (t(lang, "technology.peening.body.features") as string[]).map(
+            (txt) => <li class="p-peening__featureItem" set:html={txt} />,
+          )
+        }
+      </ul>
+    </section>
+    <section class="l-section">
+      <BlockHeading text={t(lang, "technology.peening.body.link.heading")} />
+      <div class="p-peening__linkList">
+        {
+          linkButtons.map((item) => (
+            <LinkButton
+              href={item.href}
+              target={item.target}
+              label={t(
+                lang,
+                `technology.peening.body.link.buttons.${item.labelKeyIndex}.label`,
+              )}
+              variant="secondary"
+            />
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  @use "@styles/font" as *;
+
+  .contents-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 0;
+    max-width: $container-max;
+    .l-section {
+      width: 100%;
+    }
+  }
+
+  .p-peening {
+    &__media {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 40px auto;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 20px;
+    }
+
+    &__figure {
+    }
+    &__description {
+      margin: auto;
+      max-width: 800px;
+    }
+
+    &__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    &__features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      li {
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font-size: $fs-l;
+        min-height: 100px;
+        background: $color-card-bg;
+        border-radius: 8px;
+        color: $color-text-opp;
+        padding: 20px;
+      }
+    }
+    &__youtube {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+
+    &__youtubeFrame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    &__pdf {
+      display: grid;
+      gap: 18px;
+    }
+
+    &__pdfItem {
+      display: grid;
+      gap: 10px;
+    }
+
+    &__pdfLabel {
+      font-size: $fs-s;
+      font-weight: 600;
+      margin: 0;
+    }
+    &__linkList {
+      display: flex;
+      gap: 20px;
+    }
+  }
+
+  @include bp-down(md) {
+    .l-section {
+      .c-techGallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        .c-techGallery__item {
+          .c-techGallery__cap {
+            font-size: $fs-xs;
+          }
+        }
+      }
+    }
+  }
+</style>

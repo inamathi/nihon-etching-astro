@@ -1,0 +1,318 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import Introduction from "@/components/common/Introduction.astro";
+import PdfViewer from "@/components/common/PdfViewer.astro";
+import BlockHeading from "@/components/ui/BlockHeading.astro";
+
+import { t, toLang, type Lang } from "@/locales/multilingual";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+
+/* =====================================================
+ * Assets（言語非依存：FrontMatterに値を書く）
+ * ===================================================== */
+// 画像（本文内の画像）
+const imageSrc = "/images/technology/laser/img-laser__gfms-ls2500.webp";
+console.log("imageSrc", imageSrc);
+
+// PageHeader 用の画像
+const heroImage = "/images/pageHeader/pageheader-laser.webp";
+
+// YouTube
+const youtubeId = "1LDWVKO9Ztw";
+const youtubeSrc = `https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0&modestbranding=1`;
+
+// PDF（タイトルだけ多言語にしたい場合は multilingual.ts にキーを用意して t() で読む）
+type PdfItem = {
+  titleKey: string; // multilingual.ts のキー
+  src: string;
+};
+
+const pdfs: PdfItem[] = [
+  {
+    titleKey: "technology.laser.assets.pdf01",
+    src: "/pdf/5axis_laser-2511.pdf",
+  },
+];
+
+/* =====================================================
+ * Gallery（shibo からそのまま移植）
+ * ===================================================== */
+type GalleryItem = {
+  src: string;
+  captionKey: string;
+};
+
+const laserGallery: GalleryItem[] = [
+  {
+    src: "/images/technology/laser/img-laser-pattern-01.webp",
+    captionKey: "technology.laser.body.gallery.cap01",
+  },
+  {
+    src: "/images/technology/laser/img-laser-pattern-02.webp",
+    captionKey: "technology.laser.body.gallery.cap02",
+  },
+  {
+    src: "/images/technology/laser/img-laser-pattern-03.webp",
+    captionKey: "technology.laser.body.gallery.cap03",
+  },
+  {
+    src: "/images/technology/laser/img-laser-pattern-04.webp",
+    captionKey: "technology.laser.body.gallery.cap04",
+  },
+  {
+    src: "/images/technology/laser/img-laser-pattern-05.webp",
+    captionKey: "technology.laser.body.gallery.cap05",
+  },
+  {
+    src: "/images/technology/laser/img-laser-pattern-06.webp",
+    captionKey: "technology.laser.body.gallery.cap06",
+  },
+];
+---
+
+<Base lang={lang} title={t(lang, "technology.laser.page.title")}>
+  <PageHeader
+    eyebrowText="TECHNOLOGY"
+    title={t(lang, "technology.laser.page.title")}
+    lead={t(lang, "technology.laser.page.lead")}
+    imageSrc={heroImage}
+    imageAlt={t(lang, "technology.laser.assets.imageAlt")}
+  />
+
+  <Breadcrumb
+    ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+    items={[
+      { label: t(lang, "nav.top"), href: `${basePath}/` },
+      { label: t(lang, "nav.technology"), href: `${basePath}/technology/` },
+      { label: t(lang, "technology.laser.page.title") },
+    ]}
+  />
+
+  <main class="l-container contents-wrapper">
+    <!-- Intro -->
+    <Introduction
+      lang={lang}
+      arrayKey="technology.laser.body.intro.paragraphs"
+    />
+
+    <!-- Image -->
+    <section class="l-section">
+      <PageSectionHeading text={t(lang, "technology.laser.body.imageTitle")} />
+      <div class="p-laser__media">
+        <figure class="p-laser__figure">
+          <img
+            class="p-laser__img"
+            src={imageSrc}
+            alt={t(lang, "technology.laser.assets.imageAlt")}
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <div class="c-techIntro__box c-techIntro__box--compact">
+          {
+            (t(lang, "technology.laser.body.description") as string[]).map(
+              (p) => <p class="c-techIntro__text">{p}</p>,
+            )
+          }
+        </div>
+      </div>
+      <BlockHeading text={t(lang, "technology.laser.body.featuresTitle")} />
+      <ul class="p-laser__features">
+        {
+          (t(lang, "technology.laser.body.features") as string[]).map((txt) => (
+            <li class="p-laser__featureItem" set:html={txt} />
+          ))
+        }
+      </ul>
+    </section>
+
+    <!-- YouTube -->
+    <section class="l-section">
+      <BlockHeading text={t(lang, "technology.laser.body.youtubeTitle")} />
+      <section class="p-laser__media">
+        <div class="p-laser__youtube" aria-label="youtube">
+          <iframe
+            class="p-laser__youtubeFrame"
+            src={youtubeSrc}
+            title={t(lang, "technology.laser.page.title")}
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen></iframe>
+        </div>
+      </section>
+    </section>
+
+    <!-- PDF -->
+    <section class="l-section">
+      <BlockHeading text={t(lang, "technology.laser.body.pdfTitle")} />
+      <section class="p-laser__pdf">
+        {
+          pdfs.map((item) => (
+            <div class="p-laser__pdfItem">
+              <p class="p-laser__pdfLabel">{t(lang, item.titleKey)}</p>
+              <PdfViewer src={item.src} />
+            </div>
+          ))
+        }
+      </section>
+    </section>
+
+    <!-- Gallery -->
+    <section class="l-section">
+      <BlockHeading text={t(lang, "technology.laser.body.galleryTitle")} />
+      <div class="c-techGallery" aria-label="laser gallery">
+        {
+          laserGallery.map((item) => (
+            <figure class="c-techGallery__item">
+              <img
+                class="c-techGallery__img"
+                src={item.src}
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+              <figcaption class="c-techGallery__cap">
+                {t(lang, item.captionKey)}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  @use "@styles/font" as *;
+
+  .contents-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 40px 0;
+    max-width: $container-max;
+    .l-section {
+      width: 100%;
+    }
+  }
+
+  .p-laser {
+    &__media {
+      display: grid;
+      gap: 16px;
+      margin: 40px auto;
+      max-width: 840px;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 20px;
+    }
+
+    &__figure {
+    }
+    &__description {
+      margin: auto;
+      max-width: 800px;
+    }
+
+    &__img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    &__features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      li {
+        display: grid;
+        place-items: center;
+        text-align: center;
+        font-size: $fs-l;
+        min-height: 100px;
+        background: $color-card-bg;
+        border-radius: 8px;
+        color: $color-text-opp;
+        padding: 20px;
+      }
+    }
+    &__youtube {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+
+    &__youtubeFrame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    &__pdf {
+      display: grid;
+      gap: 18px;
+    }
+
+    &__pdfItem {
+      display: grid;
+      gap: 10px;
+    }
+
+    &__pdfLabel {
+      font-size: $fs-s;
+      font-weight: 600;
+      margin: 0;
+    }
+  }
+
+  // Gallery は shibo と同じクラスを踏襲
+  .l-section {
+    max-width: $container-max;
+    margin: auto;
+
+    .c-techGallery {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 20px;
+
+      .c-techGallery__item {
+        .c-techGallery__img {
+          width: 100%;
+          object-fit: cover;
+        }
+
+        .c-techGallery__cap {
+          font-size: $fs-s;
+        }
+      }
+    }
+  }
+
+  @include bp-down(md) {
+    .l-section {
+      .c-techGallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+
+        .c-techGallery__item {
+          .c-techGallery__cap {
+            font-size: $fs-xs;
+          }
+        }
+      }
+    }
+  }
+</style>
