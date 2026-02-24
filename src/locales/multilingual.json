@@ -8,7 +8,7 @@ nav: {
   company_history: { ja: "沿革", en: "History", zh: "沿革" },
 
   technology: { ja: "技術情報", en: "Technology", zh: "技术信息" },
-  tech_5axis: { ja: "5軸レーザー彫刻", en: "5-Axis Laser Engraving", zh: "五轴激光雕刻" },
+  tech_laser: { ja: "5軸レーザー彫刻", en: "5-Axis Laser Engraving", zh: "五轴激光雕刻" },
   tech_shibo: { ja: "シボ加工", en: "Texture (Shibo)", zh: "纹理加工（梨地）" },
   tech_peening: { ja: "ピーニング加工", en: "Peening", zh: "喷丸加工" },
 

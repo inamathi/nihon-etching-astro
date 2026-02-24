@@ -6,9 +6,6 @@
   padding: 40px 0 0;
   border-top: solid 1px $color-primary;
   margin-top: 40px;
-  &__inner {
-    // l-container 側で width 管理している想定
-  }
 }
 
 .c-footerSitemap {
@@ -16,6 +13,11 @@
     display: flex;
     gap: 40px;
     justify-content: space-between;
+  }
+  @include bp-between(md, xlg) {
+    &__grid {
+      gap: 20px;
+    }
   }
 
   &__block {
@@ -113,19 +115,28 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  align-items: center;
   gap: 40px;
   padding: 40px 0 0;
   color: $color-gray-300;
-  .c-footer__logo {
-    width: 128px;
-  }
-  .c-footer__address {
-    height: max-content;
-    dt {
-      font-size: $fs-m;
+  width: $container-max;
+  margin: auto;
+  .c-footer__corp-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    .c-footer__logo {
+      width: 128px;
+      height: 66.3px;
     }
-    dd {
-      font-size: $fs-xs;
+    .c-footer__address {
+      height: max-content;
+      dt {
+        font-size: $fs-m;
+      }
+      dd {
+        font-size: $fs-xs;
+      }
     }
   }
 }
@@ -205,10 +216,6 @@
     .c-group-wrapper {
       display: grid;
       gap: 10px;
-
-      section {
-        // SPは縦積みなので不要なflexは外す
-      }
     }
     .c-footerSitemap__title--sub {
       padding-left: 24px;
@@ -268,10 +275,14 @@
     }
   }
   .c-footer__corp {
+    width: 100%;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     padding: 20px;
-    gap: 0;
+    gap: 20px;
+    .c-footer__corp-wrapper {
+      align-items: center;
+    }
   }
 }

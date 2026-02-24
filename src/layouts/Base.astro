@@ -2,6 +2,28 @@
 const { lang = "ja", title = "" } = Astro.props;
 const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en)/, "");
 
+/* JSON-LD */
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "株式会社日本エッチング",
+  alternateName: "Nihon Etching Ltd.",
+  url: "https://nihon-etching.co.jp/",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "本羽田2-8-19",
+    addressLocality: "大田区",
+    addressRegion: "東京都",
+    postalCode: "144-0044",
+    addressCountry: "JP",
+  },
+  telephone: "+81-3-3744-5502",
+  sameAs: [
+    "https://www.facebook.com/nihonetchingJPN",
+    "https://x.com/EtchingNihon",
+  ],
+};
+
 /* main.css */
 import "@/styles/main.scss";
 
@@ -19,6 +41,13 @@ import ScrollToTop from "@/components/common/ScrollToTop.astro";
     <link rel="alternate" hreflang="ja" href={`/ja${pathNoLang}`} />
     <link rel="alternate" hreflang="en" href={`/en${pathNoLang}`} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- JSON-LD -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(organizationSchema)}
+    />
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,13 +55,15 @@ import ScrollToTop from "@/components/common/ScrollToTop.astro";
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- JSON-LD 差し込み -->
+    <slot name="head" />
   </head>
   <body>
     <SvgSprite />
     <div class="l-page" data-page>
       <HeaderDesktop lang={lang} />
       <HeaderMobile lang={lang} />
-      <main id="main">
+      <main id="main" class="main-container">
         <slot />
       </main>
       <Footer lang={lang} />
@@ -51,7 +82,7 @@ import ScrollToTop from "@/components/common/ScrollToTop.astro";
       if (!targets.length) return;
 
       const reduceMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
+        "(prefers-reduced-motion: reduce)",
       ).matches;
 
       // 動きOFFの人は即表示（アニメなし）
@@ -75,7 +106,7 @@ import ScrollToTop from "@/components/common/ScrollToTop.astro";
         {
           // 20%見えたら発火（好みで 0.1〜0.4 程度）
           threshold: 0.2,
-        }
+        },
       );
 
       targets.forEach((el) => io.observe(el));
@@ -88,7 +119,7 @@ import ScrollToTop from "@/components/common/ScrollToTop.astro";
       window.__headerAutoHideInitialized = true;
 
       const headers = Array.from(
-        document.querySelectorAll("[data-site-header]")
+        document.querySelectorAll("[data-site-header]"),
       );
       if (!headers.length) return;
 
@@ -150,7 +181,7 @@ import ScrollToTop from "@/components/common/ScrollToTop.astro";
           ticking = true;
           requestAnimationFrame(update);
         },
-        { passive: true }
+        { passive: true },
       );
     })();
   </script>
@@ -252,7 +283,7 @@ import ScrollToTop from "@/components/common/ScrollToTop.astro";
       }
     }
   }
-  @include bp-down(md) {
+  @include bp-down(lg) {
     .l-container {
       padding-inline: 10px;
     }

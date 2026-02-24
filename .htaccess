@@ -1,0 +1,15 @@
+AddType text/javascript .mjs
+
+RewriteEngine On
+
+# http → https
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# www → non-www
+RewriteCond %{HTTP_HOST} ^www\.nihon-etching\.co\.jp$ [NC]
+RewriteRule ^ https://nihon-etching.co.jp%{REQUEST_URI} [R=301,L]
+
+# ルートだけ → /ja/（絶対URL）
+RewriteRule ^$ https://nihon-etching.co.jp/ja/ [R=301,L]
+RewriteRule ^index\.html$ https://nihon-etching.co.jp/ja/ [R=301,L]

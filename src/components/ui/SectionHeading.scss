@@ -40,7 +40,7 @@
   /* 初期は見えない（画面内に入ったら発火） */
   transform-origin: left center;
   transform: scaleX(0);
-  will-change: transform;
+  // will-change: transform;
 }
 
 /* 表示領域に入ったら一度だけ再生 */

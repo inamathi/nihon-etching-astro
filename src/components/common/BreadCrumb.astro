@@ -1,4 +1,6 @@
 ---
+import { t, type Lang } from "@/locales/multilingual";
+
 type Crumb = {
   label: string;
   href?: string; // 最後の要素はリンク無しにする想定
@@ -13,6 +15,17 @@ const { items, ariaLabel = "Breadcrumb" } = Astro.props;
 
 // 最低2階層以上を想定するが、1つでも表示は崩れない
 const lastIndex = Math.max(0, items.length - 1);
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: items.map((item, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: item.label,
+    ...(item.href ? { item: `https://nihon-etching.co.jp${item.href}` } : {}),
+  })),
+};
 ---
 
 <nav class="c-breadcrumb container-l" aria-label={ariaLabel}>
@@ -41,3 +54,9 @@ const lastIndex = Math.max(0, items.length - 1);
     }
   </ol>
 </nav>
+
+<!-- JSON-LD -->
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(breadcrumbSchema)}
+/>

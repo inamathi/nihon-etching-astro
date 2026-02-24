@@ -6,6 +6,7 @@
 @use "@/components/ui/PageSectionHeading.scss";
 @use "@/components/ui/SectionHeading.scss";
 @use "@/components/ui/GroupBlockTools.scss";
+@use "@/components/ui/BlockHeading.scss";
 
 /* common */
 @use "@/components/common/HeaderDesktop.scss";
@@ -28,3 +29,6 @@
 
 /* group */
 @use "@/components/group/CompanyMediaCard.scss";
+
+/* contact */
+@use "@/components/form/ContactForm.scss";

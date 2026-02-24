@@ -1,0 +1,29 @@
+---
+type Props = { offset?: number };
+const { offset = 92 } = Astro.props;
+---
+
+<script is:inline>
+  (() => {
+    const OFFSET = Number({ offset });
+
+    const run = () => {
+      const id = (location.hash || "").slice(1);
+      if (!id) return;
+
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const top = el.getBoundingClientRect().top + window.scrollY - OFFSET;
+      window.scrollTo({ top, behavior: "smooth" });
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", run);
+    } else {
+      run();
+    }
+
+    document.addEventListener("astro:page-load", run);
+  })();
+</script>

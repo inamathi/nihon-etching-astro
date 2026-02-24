@@ -9,11 +9,13 @@
   gap: 40px;
   width: 100%;
   padding: 40px 0 100px;
+  margin: auto;
+  max-width: 100vw;
 
   .domestic-link-list {
     flex: 3;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     justify-content: flex-start;
     gap: 40px;
     width: 100%;
@@ -37,7 +39,7 @@
           }
         }
         .rotate-container {
-          transform: rotateZ(360);
+          transform: rotateZ(360deg);
           transition-duration: 0.5s;
           transition-timing-function: ease-in-out;
           width: 100%;
@@ -62,6 +64,11 @@
         color: $color-text;
         margin: auto;
         text-align: center;
+      }
+      @include bp-down(md) {
+        figcaption {
+          font-size: $fs-xs;
+        }
       }
     }
   }
@@ -97,11 +104,16 @@
     }
   }
 }
+@include bp-only(md) {
+  .wrapper {
+    max-width: 768px;
+    margin: auto;
+  }
+}
 @include bp-down(md) {
   .wrapper {
     flex-direction: column;
     .domestic-link-list {
-      padding: 0 10px;
       gap: 20px;
     }
   }

@@ -2,10 +2,10 @@
 import type { Lang } from "@/locales/multilingual";
 import { tHero } from "@/locales/heroSlides.i18n";
 import { heroSlides } from "@/components/hero/heroSlides";
+import { heroBgImages } from "@/components/hero/heroSlides";
 
 const { lang } = Astro.props as { lang: Lang };
 
-// 既存設計に合わせて維持
 const scrollTargetId = "home-content";
 const SLIDE_MS = 6000;
 
@@ -13,6 +13,8 @@ const slides = heroSlides.map((s) => ({
   ...s,
   html: tHero(lang, s.key) as string,
 }));
+
+const bgImages = heroBgImages;
 ---
 
 <section
@@ -23,11 +25,25 @@ const slides = heroSlides.map((s) => ({
   data-stop-at-end="true"
   data-lottie-freeze-last="true"
 >
+  <div class="hero__bg-images" aria-hidden="true">
+    {
+      bgImages.map((src) => (
+        <div class="hero__bg-image" data-hero-bgimage>
+          <div
+            class="hero__bg-image__a"
+            style={`background-image: url('${src}')`}
+          />
+          <div
+            class="hero__bg-image__b"
+            style={`background-image: url('${src}')`}
+          />
+        </div>
+      ))
+    }
+  </div>
   <div class="hero__bg" aria-hidden="true"></div>
-  <!-- SVGによる背景グラデーション -->
   <svg class="hero__filters" aria-hidden="true" focusable="false">
     <filter id="heroWobble" x="-20%" y="-20%" width="140%" height="140%">
-      <!-- ノイズ生成 -->
       <feTurbulence
         type="fractalNoise"
         baseFrequency="0.010 0.020"
@@ -35,7 +51,6 @@ const slides = heroSlides.map((s) => ({
         seed="2"
         result="noise"
       >
-        <!-- うねり速度：dur を変えると速さが変わる -->
         <animate
           attributeName="baseFrequency"
           dur="12s"
@@ -47,8 +62,6 @@ const slides = heroSlides.map((s) => ({
           values="2;8;2"
           repeatCount="indefinite"></animate>
       </feTurbulence>
-
-      <!-- 境界の歪み（scale が大きいほど“うねり”が強い） -->
       <feDisplacementMap
         in="SourceGraphic"
         in2="noise"
@@ -70,7 +83,6 @@ const slides = heroSlides.map((s) => ({
             aria-hidden={i === 0 ? "false" : "true"}
           >
             <p class={`hero__line ${s.className ?? ""}`} set:html={s.html} />
-
             {s.type === "lottie" && (
               <div class="hero__lottie" data-hero-lottie aria-hidden="true" />
             )}
@@ -81,109 +93,98 @@ const slides = heroSlides.map((s) => ({
   </div>
   <a class="hero__scroll" href={`#${scrollTargetId}`} data-hero-scroll>
     <span class="hero__scroll-label">SCROLL</span>
-    <!-- <span class="hero__scroll-bar" aria-hidden="true"></span> -->
   </a>
 </section>
 
 <script>
-  /**
-   * Hero slider (6s default, 12s on final lottie slide)
-   * - Full replacement version
-   * - Uses setTimeout for per-slide duration
-   * - Avoids implicit-any warnings via JSDoc types + explicit casts
-   */
   (() => {
     /** @type {HTMLElement | null} */
-    const root = document.querySelector(".hero");
+    const root: HTMLElement | null = document.querySelector(".hero");
     if (!root) return;
 
-    /* ------------------------------
-     * smooth scroll
-     * ------------------------------ */
+    /* smooth scroll */
     /** @type {HTMLAnchorElement | null} */
-    const link = root.querySelector("[data-hero-scroll]");
+    const link: HTMLAnchorElement | null =
+      root.querySelector("[data-hero-scroll]");
     link?.addEventListener("click", (e) => {
       const href = link.getAttribute("href") || "";
       if (!href.startsWith("#")) return;
-
       const target = document.getElementById(href.slice(1));
       if (!target) return;
-
       e.preventDefault();
       target.scrollIntoView({ behavior: "smooth", block: "start" });
     });
 
-    /* ------------------------------
-     * slides
-     * ------------------------------ */
+    /* slides */
     /** @type {HTMLElement[]} */
-    const slides = Array.from(root.querySelectorAll("[data-hero-slidecopy]"));
+    const slides: HTMLElement[] = Array.from(
+      root.querySelectorAll("[data-hero-slidecopy]"),
+    );
     if (!slides.length) return;
 
-    const DEFAULT_INTERVAL = Number(root.getAttribute("data-interval")) || 6000;
-    const FINAL_INTERVAL = DEFAULT_INTERVAL * 2; // 12s when default is 6s
+    /** @type {HTMLElement[]} */
+    const bgImageEls: HTMLElement[] = Array.from(
+      root.querySelectorAll("[data-hero-bgimage]"),
+    );
 
-    let index = 0;
+    const DEFAULT_INTERVAL = Number(root.getAttribute("data-interval")) || 6000;
+    const FINAL_INTERVAL = DEFAULT_INTERVAL * 2;
+    const BG_INTERVAL = 4000;
+
+    let textIndex = 0;
+    let bgIndex = 0;
 
     /** @type {number | null} */
-    let timerId = null;
+    let textTimerId: number | null = null;
+    /** @type {number | null} */
+    let bgTimerId: number | null = null;
 
     const reduceMotion =
       window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ------------------------------
-     * lottie
-     * ------------------------------ */
-
+    /* lottie */
     /** @type {any | null} */
-    let lottieAnim = null;
-
+    let lottieAnim: any | null = null;
     /** @type {Promise<any> | null} */
-    let lottieScriptPromise = null;
+    let lottieScriptPromise: Promise<any> | null = null;
 
     /** @param {HTMLElement} el */
-    function isFinalSlide(el) {
-      // final slide is the lottie slide in your markup
+    function isFinalSlide(el: HTMLElement) {
       return el.getAttribute("data-slide") === "lottie";
     }
 
     function loadLottieScript() {
       if (lottieScriptPromise) return lottieScriptPromise;
-
       /** @type {any} */
-      const w = window;
-
+      const w: any = window;
       if (w.lottie) {
         lottieScriptPromise = Promise.resolve(w.lottie);
         return lottieScriptPromise;
       }
-
       lottieScriptPromise = new Promise((resolve, reject) => {
         const s = document.createElement("script");
         s.src =
           "https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js";
         s.onload = () => resolve(w.lottie);
-        s.onerror = (/** @type {Event} */ err) => reject(err);
+        s.onerror = (err: string | Event) => reject(err);
         document.head.appendChild(s);
       });
-
       return lottieScriptPromise;
     }
 
     /** @param {HTMLElement} slideEl */
-    async function mountOrPlayLottie(slideEl) {
+    async function mountOrPlayLottie(slideEl: HTMLElement) {
       /** @type {HTMLElement | null} */
-      const box = slideEl.querySelector("[data-hero-lottie]");
+      const box: HTMLElement | null =
+        slideEl.querySelector("[data-hero-lottie]");
       if (!box) return;
-
+      if (!root) return;
       const jsonPath = root.getAttribute("data-lottie-src");
       if (!jsonPath) return;
-
       try {
         const lottie = await loadLottieScript();
         if (!lottie) return;
-
         if (!lottieAnim) {
           lottieAnim = lottie.loadAnimation({
             container: box,
@@ -193,7 +194,6 @@ const slides = heroSlides.map((s) => ({
             path: jsonPath,
           });
         } else {
-          // restart from 0 each time we enter final slide
           if (typeof lottieAnim.goToAndPlay === "function") {
             lottieAnim.goToAndPlay(0, true);
           } else if (typeof lottieAnim.play === "function") {
@@ -214,89 +214,198 @@ const slides = heroSlides.map((s) => ({
       }
     }
 
-    /* ------------------------------
-     * slide control (variable duration)
-     * ------------------------------ */
-    function getCurrentDelay() {
-      const curr = slides[index];
-      return isFinalSlide(curr) ? FINAL_INTERVAL : DEFAULT_INTERVAL;
+    /* テキストスライド制御 */
+    function getTextDelay() {
+      return isFinalSlide(slides[textIndex])
+        ? FINAL_INTERVAL
+        : DEFAULT_INTERVAL;
     }
 
-    function clearTimer() {
-      if (timerId == null) return;
-      window.clearTimeout(timerId);
-      timerId = null;
+    function clearTextTimer() {
+      if (textTimerId == null) return;
+      window.clearTimeout(textTimerId);
+      textTimerId = null;
     }
 
-    function scheduleNext() {
-      clearTimer();
+    function scheduleTextNext() {
+      clearTextTimer();
       if (reduceMotion) return;
-
-      const delay = getCurrentDelay();
-      timerId = window.setTimeout(() => {
-        goNext();
-      }, delay);
+      textTimerId = window.setTimeout(
+        () => applyText((textIndex + 1) % slides.length),
+        getTextDelay(),
+      );
     }
 
     /** @param {number} nextIndex */
-    function apply(nextIndex) {
-      const prev = slides[index];
+    function applyText(nextIndex: number) {
+      const prev = slides[textIndex];
       prev.classList.remove("is-active");
       prev.setAttribute("aria-hidden", "true");
-
       if (isFinalSlide(prev)) stopLottie();
 
-      index = nextIndex;
-
-      const curr = slides[index];
+      textIndex = nextIndex;
+      const curr = slides[textIndex];
       curr.classList.add("is-active");
       curr.setAttribute("aria-hidden", "false");
+      if (isFinalSlide(curr)) mountOrPlayLottie(curr);
 
-      if (isFinalSlide(curr)) {
-        mountOrPlayLottie(curr);
-      }
-
-      scheduleNext();
-    }
-
-    function goNext() {
-      const n = (index + 1) % slides.length;
-      apply(n);
+      scheduleTextNext();
     }
 
     /* ------------------------------
-     * intersection observer
+     * 背景画像：ワイプ → 表示 → フェードアウト
+     * Web Animations API で clip-path を直接制御
      * ------------------------------ */
+
+    const WIPE_MS = 1200; // ワイプ1回の時間
+    const HOLD_MS = 2400; // 全面表示後の保持時間
+    const FADE_MS = 800; // フェードアウト時間
+
+    /**
+     * @param {HTMLElement} el
+     * @param {string} from
+     * @param {string} to
+     * @returns {Promise<void>}
+     */
+    function wipe(el: HTMLElement, from: string, to: string): Promise<void> {
+      return new Promise((resolve) => {
+        const anim = el.animate([{ clipPath: from }, { clipPath: to }], {
+          duration: WIPE_MS,
+          easing: "cubic-bezier(0.77, 0, 0.18, 1)",
+          fill: "forwards",
+        });
+        anim.onfinish = () => resolve(undefined);
+      });
+    }
+
+    /**
+     * @param {HTMLElement} el
+     * @param {number} from
+     * @param {number} to
+     * @returns {Promise<void>}
+     */
+    function fade(el: HTMLElement, from: number, to: number): Promise<void> {
+      return new Promise((resolve) => {
+        const anim = el.animate([{ opacity: from }, { opacity: to }], {
+          duration: FADE_MS,
+          easing: "ease",
+          fill: "forwards",
+        });
+        anim.onfinish = () => resolve(undefined);
+      });
+    }
+
+    /** @param {HTMLElement} el */
+    function resetBgEl(el: HTMLElement) {
+      el.getAnimations().forEach((a) => a.cancel());
+      el.style.opacity = "0";
+      const elA = el.querySelector<HTMLElement>(".hero__bg-image__a");
+      const elB = el.querySelector<HTMLElement>(".hero__bg-image__b");
+      if (elA) elA.style.clipPath = "polygon(100% 100%, 100% 100%, 100% 100%)";
+      if (elB) elB.style.clipPath = "polygon(0% 0%, 0% 0%, 0% 0%)";
+    }
+
+    function clearBgTimer() {
+      if (bgTimerId == null) return;
+      window.clearTimeout(bgTimerId);
+      bgTimerId = null;
+    }
+
+    function scheduleBgNext() {
+      clearBgTimer();
+      if (reduceMotion || !bgImageEls.length) return;
+      bgTimerId = window.setTimeout(
+        () => applyBg((bgIndex + 1) % bgImageEls.length),
+        BG_INTERVAL,
+      );
+    }
+
+    /** @param {number} nextIndex */
+    async function applyBg(nextIndex: number) {
+      if (!bgImageEls.length) return;
+
+      bgIndex = nextIndex;
+      scheduleBgNext();
+
+      const el = bgImageEls[bgIndex];
+      const elA = el.querySelector<HTMLElement>(".hero__bg-image__a");
+      const elB = el.querySelector<HTMLElement>(".hero__bg-image__b");
+
+      if (!elA || !elB) return;
+
+      // リセット
+      el.getAnimations().forEach((a) => a.cancel());
+      elA.getAnimations().forEach((a) => a.cancel());
+      elB.getAnimations().forEach((a) => a.cancel());
+      elA.style.clipPath = "polygon(100% 100%, 100% 100%, 100% 100%)";
+      elB.style.clipPath = "polygon(0% 0%, 0% 0%, 0% 0%)";
+      elA.style.transform = "";
+      elB.style.transform = "";
+      el.style.opacity = "1";
+
+      // A：ワイプ
+      const wipeA = wipe(
+        elA,
+        "polygon(100% 100%, 100% 100%, 100% 100%)",
+        "polygon(0% 0%, 100% 0%, 100% 100%)",
+      );
+
+      const OVERLAP_MS = 200;
+      await new Promise((r) => setTimeout(r, WIPE_MS - OVERLAP_MS));
+
+      // B：ワイプ
+      const wipeB = wipe(
+        elB,
+        "polygon(0% 0%, 0% 0%, 0% 0%)",
+        "polygon(0% 0%, 100% 100%, 0% 100%)",
+      );
+
+      await Promise.all([wipeA, wipeB]);
+
+      // 全面表示を確定
+      elA.style.clipPath = "none";
+      elB.style.clipPath = "none";
+      el.style.opacity = "1";
+
+      await new Promise((r) => setTimeout(r, HOLD_MS));
+
+      await fade(el, 1, 0);
+
+      resetBgEl(el);
+    }
+
+    /* intersection observer */
     const io = new IntersectionObserver(
       (entries) => {
         const visible = entries.some((e) => e.isIntersecting);
         if (visible) {
-          // resume scheduling from "now" based on current slide
-          scheduleNext();
+          scheduleTextNext();
+          scheduleBgNext();
         } else {
-          clearTimer();
-          // optional: stop lottie while offscreen (keeps CPU quiet)
-          const curr = slides[index];
-          if (isFinalSlide(curr)) stopLottie();
+          clearTextTimer();
+          clearBgTimer();
+          if (isFinalSlide(slides[textIndex])) stopLottie();
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     io.observe(root);
 
-    /* ------------------------------
-     * initial state
-     * ------------------------------ */
+    /* 初期化 */
     slides.forEach((el, i) => {
       el.classList.toggle("is-active", i === 0);
       el.setAttribute("aria-hidden", i === 0 ? "false" : "true");
     });
 
-    // If first slide is lottie (unlikely), mount it.
     if (isFinalSlide(slides[0])) mountOrPlayLottie(slides[0]);
 
-    // Start scheduling immediately if hero is in view
-    scheduleNext();
+    // 背景画像を全リセット
+    bgImageEls.forEach((el) => resetBgEl(el));
+
+    scheduleTextNext();
+
+    // 背景は少し遅らせてスタート
+    bgTimerId = window.setTimeout(() => applyBg(0), 500);
   })();
 </script>

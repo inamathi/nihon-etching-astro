@@ -1,0 +1,13 @@
+---
+type Props = {
+  text: string;
+  as?: "h2" | "h3";
+};
+
+const { text, as = "h3" } = Astro.props;
+const Tag = as;
+---
+
+<Tag class="c-block__title">
+  <span class="c-block__titleText">{text}</span>
+</Tag>

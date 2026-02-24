@@ -88,7 +88,7 @@ const honingGallery = [
     captionKey: "technology.shibo.honing.gallery.cap03",
   },
 ];
-// Honingギャラリー定義
+// graphicギャラリー定義
 const graphicGallery = [
   {
     src: "/images/technology/shibo/graphic/img-graphic-pattern-01.webp",
@@ -114,259 +114,238 @@ const graphicGallery = [
     src: "/images/technology/shibo/graphic/img-graphic-pattern-06.webp",
     captionKey: "technology.shibo.graphic.gallery.cap06",
   },
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-07.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap07",
+  },
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-08.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap08",
+  },
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-09.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap09",
+  },
+  {
+    src: "/images/technology/shibo/graphic/img-graphic-pattern-10.webp",
+    captionKey: "technology.shibo.graphic.gallery.cap10",
+  },
 ];
+
+const title = t(lang, "pageTitle.technology.shibo");
+
+const shiboSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `https://nihon-etching.co.jp/${lang}/technology/shibo/`,
+  name: t(lang, "technology.shibo.page.title"),
+  description: t(lang, "technology.shibo.page.lead"),
+  url: `https://nihon-etching.co.jp/${lang}/technology/shibo/`,
+  inLanguage: lang,
+  provider: {
+    "@type": "Organization",
+    "@id": "https://nihon-etching.co.jp/#localbusiness",
+    name: "株式会社日本エッチング",
+  },
+  serviceType: "シボ加工",
+  areaServed: {
+    "@type": "Country",
+    name: "Japan",
+  },
+};
 ---
 
-<Base lang={lang} title={t(lang, "technology.shibo.meta.title")}>
-  <PageHeader
-    eyebrowText="TECHNOLOGY"
-    title={t(lang, "technology.shibo.page.title")}
-    lead={t(lang, "technology.shibo.page.lead")}
-    imageSrc="/images/pageHeader/pageheader-shibo.webp"
-    imageAlt=""
-  />
-
-  <Breadcrumb
-    ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
-    items={[
-      { label: t(lang, "nav.top"), href: `${basePath}/` },
-      {
-        label: t(lang, "nav.technology"),
-        href: `${basePath}/technology/shibo/`,
-      },
-      { label: t(lang, "technology.shibo.page.title") },
-    ]}
-  />
-
-  <main class="l-container contents-wrapper">
-    <!-- Intro（本文ボックス） -->
-    <!-- Introduction -->
-    <Introduction
-      lang={lang}
-      arrayKey="technology.shibo.body.intro.paragraphs"
+<Base lang={lang} title={title}>
+  <Base lang={lang} title={title}>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify(shiboSchema)}
+      slot="head"
     />
-    <!-- Photo Etching -->
-    <section class="l-section photoetching">
-      <PageSectionHeading
-        text={t(lang, "technology.shibo.photoEtching.title")}
-      />
-      <div class="c-techIntro__box c-techIntro__box--compact">
-        <p class="c-techIntro__text">
-          {t(lang, "technology.shibo.photoEtching.desc")}
-        </p>
-      </div>
-      <!-- Gallery PhotoEtching-->
-      <section>
-        <div class="c-techGallery" aria-label="Shibo gallery">
-          {
-            photoEtchingGallery.map((item) => (
-              <figure class="c-techGallery__item">
-                <img
-                  class="c-techGallery__img"
-                  src={item.src}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption class="c-techGallery__cap">
-                  {t(lang, item.captionKey)}
-                </figcaption>
-              </figure>
-            ))
-          }
-        </div>
-      </section>
-    </section>
-    <!-- KAWASHIBO -->
-    <section class="l-section">
-      <PageSectionHeading text={t(lang, "technology.shibo.kawashibo.title")} />
-      <div class="c-techIntro__box c-techIntro__box--compact">
-        <p class="c-techIntro__text">
-          {t(lang, "technology.shibo.kawashibo.desc")}
-        </p>
-      </div>
-      <!-- Gallery "KAWASHIBO" Skin Pattern Surface-->
-      <section>
-        <div class="c-techGallery" aria-label="kawashibo gallery">
-          {
-            kawashiboGallery.map((item) => (
-              <figure class="c-techGallery__item">
-                <img
-                  class="c-techGallery__img"
-                  src={item.src}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption class="c-techGallery__cap">
-                  {t(lang, item.captionKey)}
-                </figcaption>
-              </figure>
-            ))
-          }
-        </div>
-      </section>
-    </section>
-    <!-- NASHIJI -->
-    <section class="l-section">
-      <PageSectionHeading text={t(lang, "technology.shibo.nashiji.title")} />
-      <div class="c-techIntro__box c-techIntro__box--compact">
-        <p class="c-techIntro__text">
-          {t(lang, "technology.shibo.nashiji.desc")}
-        </p>
-      </div>
-      <!-- Gallery "KAWASHIBO" Skin Pattern Surface-->
-      <section>
-        <div class="c-techGallery" aria-label="nashiji gallery">
-          {
-            nashijiGallery.map((item) => (
-              <figure class="c-techGallery__item">
-                <img
-                  class="c-techGallery__img"
-                  src={item.src}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption class="c-techGallery__cap">
-                  {t(lang, item.captionKey)}
-                </figcaption>
-              </figure>
-            ))
-          }
-        </div>
-      </section>
-    </section>
-    <!-- Honing -->
-    <section class="l-section">
-      <PageSectionHeading text={t(lang, "technology.shibo.honing.title")} />
-      <div class="c-techIntro__box c-techIntro__box--compact">
-        <p class="c-techIntro__text">
-          {t(lang, "technology.shibo.honing.desc")}
-        </p>
-      </div>
-      <!-- Gallery Honing-->
-      <section>
-        <div class="c-techGallery" aria-label="honing gallery">
-          {
-            honingGallery.map((item) => (
-              <figure class="c-techGallery__item">
-                <img
-                  class="c-techGallery__img"
-                  src={item.src}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption class="c-techGallery__cap">
-                  {t(lang, item.captionKey)}
-                </figcaption>
-              </figure>
-            ))
-          }
-        </div>
-        <p class="section__additional">
-          {t(lang, "technology.shibo.honing.additional")}
-        </p>
-      </section>
-    </section>
-    <!-- Graphic -->
-    <section class="l-section">
-      <PageSectionHeading text={t(lang, "technology.shibo.graphic.title")} />
-      <div class="c-techIntro__box c-techIntro__box--compact">
-        <p class="c-techIntro__text">
-          {t(lang, "technology.shibo.graphic.desc")}
-        </p>
-      </div>
-      <!-- Gallery Honing-->
-      <section>
-        <div class="c-techGallery graphic" aria-label="graphic gallery">
-          {
-            graphicGallery.map((item) => (
-              <figure class="c-techGallery__item">
-                <img
-                  class="c-techGallery__img"
-                  src={item.src}
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                />
-                <figcaption class="c-techGallery__cap">
-                  {t(lang, item.captionKey)}
-                </figcaption>
-              </figure>
-            ))
-          }
-        </div>
-        <p class="section__additional"></p>
-      </section>
-    </section>
-  </main>
-</Base>
+    <PageHeader
+      eyebrowText="TECHNOLOGY"
+      title={t(lang, "technology.shibo.page.title")}
+      lead={t(lang, "technology.shibo.page.lead")}
+      imageSrc="/images/pageHeader/pageheader-shibo.webp"
+      imageAlt=""
+    />
 
-<style lang="scss">
-  @use "@styles/var" as *;
-  @use "@styles/mixin" as *;
-  @use "@styles/font" as *;
-  .contents-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    padding-bottom: 40px;
-    .c-techIntro {
-      .c-techIntro__box {
-        .c-techIntro__text {
-          font-size: $fs-s;
-        }
-      }
-    }
-    .l-section {
-      max-width: $container-max;
-      margin: auto;
-      .c-techIntro__text {
-        font-size: $fs-s;
-      }
-      .c-techGallery {
-        display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        gap: 20px;
-        &.graphic {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-        .c-techGallery__item {
-          .c-techGallery__img {
-            width: 100%;
-            object-fit: cover;
-          }
-          .c-techGallery__cap {
-            font-size: $fs-s;
-          }
-        }
-      }
-      .section__additional {
-        font-size: $fs-s;
-      }
-    }
-  }
-  @include bp-down(md) {
-    .contents-wrapper {
-      .l-section {
-        .c-techGallery {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          &.graphic {
-            grid-template-columns: repeat(1, minmax(0, 1fr));
-          }
-          .c-techGallery__item {
-            .c-techGallery__img {
-              width: 100%;
-              object-fit: cover;
+    <div class="l-container p-technology">
+      <Breadcrumb
+        ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+        items={[
+          { label: t(lang, "nav.top"), href: `${basePath}/` },
+          {
+            label: t(lang, "nav.technology"),
+            href: `${basePath}/technology/shibo/`,
+          },
+          { label: t(lang, "technology.shibo.page.title") },
+        ]}
+      />
+      <!-- Intro（本文ボックス） -->
+      <!-- Introduction -->
+      <Introduction
+        lang={lang}
+        arrayKey="technology.shibo.body.intro.paragraphs"
+      />
+      <!-- Photo Etching -->
+      <section class="l-section photoetching">
+        <PageSectionHeading
+          text={t(lang, "technology.shibo.photoEtching.title")}
+        />
+        <div class="c-techIntro__box c-techIntro__box--compact">
+          <p class="c-techIntro__text">
+            {t(lang, "technology.shibo.photoEtching.desc")}
+          </p>
+        </div>
+        <!-- Gallery PhotoEtching-->
+        <section>
+          <div class="c-techGallery" aria-label="Shibo gallery">
+            {
+              photoEtchingGallery.map((item) => (
+                <figure class="c-techGallery__item">
+                  <img
+                    class="c-techGallery__img"
+                    src={item.src}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption class="c-techGallery__cap">
+                    {t(lang, item.captionKey)}
+                  </figcaption>
+                </figure>
+              ))
             }
-            .c-techGallery__cap {
-              font-size: $fs-xs;
+          </div>
+        </section>
+      </section>
+      <!-- KAWASHIBO -->
+      <section class="l-section">
+        <PageSectionHeading
+          text={t(lang, "technology.shibo.kawashibo.title")}
+        />
+        <div class="c-techIntro__box c-techIntro__box--compact">
+          <p class="c-techIntro__text">
+            {t(lang, "technology.shibo.kawashibo.desc")}
+          </p>
+        </div>
+        <!-- Gallery "KAWASHIBO" Skin Pattern Surface-->
+        <section>
+          <div class="c-techGallery" aria-label="kawashibo gallery">
+            {
+              kawashiboGallery.map((item) => (
+                <figure class="c-techGallery__item">
+                  <img
+                    class="c-techGallery__img"
+                    src={item.src}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption class="c-techGallery__cap">
+                    {t(lang, item.captionKey)}
+                  </figcaption>
+                </figure>
+              ))
             }
-          }
-        }
-      }
-    }
-  }
-</style>
+          </div>
+        </section>
+      </section>
+      <!-- NASHIJI -->
+      <section class="l-section">
+        <PageSectionHeading text={t(lang, "technology.shibo.nashiji.title")} />
+        <div class="c-techIntro__box c-techIntro__box--compact">
+          <p class="c-techIntro__text">
+            {t(lang, "technology.shibo.nashiji.desc")}
+          </p>
+        </div>
+        <!-- Gallery "KAWASHIBO" Skin Pattern Surface-->
+        <section>
+          <div class="c-techGallery" aria-label="nashiji gallery">
+            {
+              nashijiGallery.map((item) => (
+                <figure class="c-techGallery__item">
+                  <img
+                    class="c-techGallery__img"
+                    src={item.src}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption class="c-techGallery__cap">
+                    {t(lang, item.captionKey)}
+                  </figcaption>
+                </figure>
+              ))
+            }
+          </div>
+        </section>
+      </section>
+      <!-- Honing -->
+      <section class="l-section">
+        <PageSectionHeading text={t(lang, "technology.shibo.honing.title")} />
+        <div class="c-techIntro__box c-techIntro__box--compact">
+          <p class="c-techIntro__text">
+            {t(lang, "technology.shibo.honing.desc")}
+          </p>
+        </div>
+        <!-- Gallery Honing-->
+        <section>
+          <div class="c-techGallery" aria-label="honing gallery">
+            {
+              honingGallery.map((item) => (
+                <figure class="c-techGallery__item">
+                  <img
+                    class="c-techGallery__img"
+                    src={item.src}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption class="c-techGallery__cap">
+                    {t(lang, item.captionKey)}
+                  </figcaption>
+                </figure>
+              ))
+            }
+          </div>
+          <p class="section__additional">
+            {t(lang, "technology.shibo.honing.additional")}
+          </p>
+        </section>
+      </section>
+      <!-- Graphic -->
+      <section class="l-section">
+        <PageSectionHeading text={t(lang, "technology.shibo.graphic.title")} />
+        <div class="c-techIntro__box c-techIntro__box--compact">
+          <p class="c-techIntro__text">
+            {t(lang, "technology.shibo.graphic.desc")}
+          </p>
+        </div>
+        <!-- Gallery Honing-->
+        <section>
+          <div class="c-techGallery graphic" aria-label="graphic gallery">
+            {
+              graphicGallery.map((item) => (
+                <figure class="c-techGallery__item">
+                  <img
+                    class="c-techGallery__img"
+                    src={item.src}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <figcaption class="c-techGallery__cap">
+                    {t(lang, item.captionKey)}
+                  </figcaption>
+                </figure>
+              ))
+            }
+          </div>
+          <p class="section__additional"></p>
+        </section>
+      </section>
+    </div>
+  </Base>
+</Base>

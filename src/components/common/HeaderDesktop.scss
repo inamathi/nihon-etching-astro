@@ -26,6 +26,7 @@
     transform: translateY(-100%);
   }
 }
+
 /* 敬遠のユーザーに対しては止める */
 @media (prefers-reduced-motion: reduce) {
   .c-header,
@@ -41,6 +42,18 @@
     justify-content: space-between;
     min-height: 72px;
     gap: 24px;
+    width: min(1100px, 100%);
+    margin-inline: auto;
+  }
+  @include bp-only(lg) {
+    .c-header__inner {
+      padding: 0 20px;
+    }
+  }
+  @include bp-only(md) {
+    .c-header__inner {
+      width: 100%;
+    }
   }
 
   .c-header__logo {
@@ -52,8 +65,10 @@
 
   .c-gnav {
     display: flex;
+    justify-content: flex-end;
     align-items: center;
     gap: 22px;
+    width: 100%;
 
     &__link {
       color: $color-text;
@@ -124,7 +139,13 @@
       }
     }
   }
+  @include bp-between(md, lg) {
+    .c-gnav {
+      width: 100%;
+    }
+  }
 }
+
 /* 言語切り替えボタン */
 .c-lang {
   display: flex;

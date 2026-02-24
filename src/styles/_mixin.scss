@@ -21,7 +21,7 @@ $bp-order: (sm, md, lg, xl, 2xl);
 $bp-epsilon: 0.02px;
 
 /* コンテンツ幅 */
-$max-contents: 1100px;
+$max-contents: 1023.98px;
 
 /* ---- internal helpers ---- */
 @function _bp-min($name) {

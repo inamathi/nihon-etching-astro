@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# /images /assets /pdf を staging 側にフォールバック
+RewriteCond %{REQUEST_URI} ^/(images|assets|pdf)/ [NC]
+
+# ドキュメントルート直下に実体が無いときだけ
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} !-f
+
+# staging 側に実体があるならそっちへ
+RewriteCond %{DOCUMENT_ROOT}/ne-staging%{REQUEST_URI} -f
+RewriteRule ^(images|assets|pdf)/(.*)$ ne-staging/$1/$2 [L]

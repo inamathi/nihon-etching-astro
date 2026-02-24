@@ -51,8 +51,8 @@
     .c-pdf__stage {
       width: 100%;
       padding: 0;
-      max-height: none;
-      padding: 20px;
+      max-height: unset;
+      padding: 10px;
     }
 
     .c-pdf__canvas {
@@ -72,7 +72,7 @@
   @include bp-up(md) {
     .c-pdf__stage {
       width: 100%;
-      max-height: auto;
+      max-height: unset;
       padding: 20px;
     }
 
@@ -101,6 +101,12 @@
   padding: 10px 0 14px;
   margin-bottom: 20px;
 }
+@include bp-down(md) {
+  .c-pdf__toolbar {
+    width: 100%;
+    padding: 10px 0;
+  }
+}
 
 .c-pdf__pagecontrol {
   display: flex;
@@ -126,6 +132,11 @@
     }
   }
 }
+@include bp-down(md) {
+  .c-pdf__pagecontrol {
+    font-size: $fs-s;
+  }
+}
 
 .c-pdf__btn {
   display: inline-flex;
@@ -144,6 +155,12 @@
   &:hover {
     background: rgba($color-accent, 0.2);
     cursor: pointer;
+  }
+}
+@include bp-down(md) {
+  .c-pdf__btn {
+    padding: 8px 5px;
+    font-size: $fs-s;
   }
 }
 

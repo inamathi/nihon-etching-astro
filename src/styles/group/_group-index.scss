@@ -1,0 +1,38 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+@use "@styles/font" as *;
+
+.p-group {
+  @include bp-between(md, xl) {
+    padding: 0 10px;
+  }
+  @include bp-down(md) {
+    padding: 0 10px;
+  }
+}
+
+.l-wrapper {
+  position: relative;
+  margin: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  padding-bottom: 40px;
+  gap: 40px;
+}
+.c-companyCards {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+@include bp-down(md) {
+  .l-wrapper {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: 40px;
+    gap: 40px;
+  }
+}

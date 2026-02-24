@@ -80,9 +80,36 @@ const laserGallery: GalleryItem[] = [
     captionKey: "technology.laser.body.gallery.cap06",
   },
 ];
+
+const title = t(lang, "pageTitle.technology.laser");
+
+const laserSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `https://nihon-etching.co.jp/${lang}/technology/laser/`,
+  name: t(lang, "technology.laser.page.title"),
+  description: t(lang, "technology.laser.page.lead"),
+  url: `https://nihon-etching.co.jp/${lang}/technology/laser/`,
+  inLanguage: lang,
+  provider: {
+    "@type": "Organization",
+    "@id": "https://nihon-etching.co.jp/#localbusiness",
+    name: "株式会社日本エッチング",
+  },
+  serviceType: "5軸レーザー加工",
+  areaServed: {
+    "@type": "Country",
+    name: "Japan",
+  },
+};
 ---
 
-<Base lang={lang} title={t(lang, "technology.laser.page.title")}>
+<Base lang={lang} title={title}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(laserSchema)}
+    slot="head"
+  />
   <PageHeader
     eyebrowText="TECHNOLOGY"
     title={t(lang, "technology.laser.page.title")}
@@ -91,16 +118,15 @@ const laserGallery: GalleryItem[] = [
     imageAlt={t(lang, "technology.laser.assets.imageAlt")}
   />
 
-  <Breadcrumb
-    ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
-    items={[
-      { label: t(lang, "nav.top"), href: `${basePath}/` },
-      { label: t(lang, "nav.technology"), href: `${basePath}/technology/` },
-      { label: t(lang, "technology.laser.page.title") },
-    ]}
-  />
-
-  <main class="l-container contents-wrapper">
+  <div class="l-container p-technology">
+    <Breadcrumb
+      ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+      items={[
+        { label: t(lang, "nav.top"), href: `${basePath}/` },
+        { label: t(lang, "nav.technology"), href: `${basePath}/technology/` },
+        { label: t(lang, "technology.laser.page.title") },
+      ]}
+    />
     <!-- Intro -->
     <Introduction
       lang={lang}
@@ -162,7 +188,6 @@ const laserGallery: GalleryItem[] = [
         {
           pdfs.map((item) => (
             <div class="p-laser__pdfItem">
-              <p class="p-laser__pdfLabel">{t(lang, item.titleKey)}</p>
               <PdfViewer src={item.src} />
             </div>
           ))
@@ -192,127 +217,5 @@ const laserGallery: GalleryItem[] = [
         }
       </div>
     </section>
-  </main>
+  </div>
 </Base>
-
-<style lang="scss">
-  @use "@styles/var" as *;
-  @use "@styles/mixin" as *;
-  @use "@styles/font" as *;
-
-  .contents-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    padding: 40px 0;
-    max-width: $container-max;
-    .l-section {
-      width: 100%;
-    }
-  }
-
-  .p-laser {
-    &__media {
-      display: grid;
-      gap: 16px;
-      margin: 40px auto;
-      max-width: 840px;
-      background: rgba(0, 0, 0, 0.2);
-      padding: 20px;
-    }
-
-    &__figure {
-    }
-    &__description {
-      margin: auto;
-      max-width: 800px;
-    }
-
-    &__img {
-      display: block;
-      width: 100%;
-      height: auto;
-      object-fit: cover;
-    }
-    &__features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      li {
-        display: grid;
-        place-items: center;
-        text-align: center;
-        font-size: $fs-l;
-        min-height: 100px;
-        background: $color-card-bg;
-        border-radius: 8px;
-        color: $color-text-opp;
-        padding: 20px;
-      }
-    }
-    &__youtube {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-    }
-
-    &__youtubeFrame {
-      width: 100%;
-      height: 100%;
-      border: 0;
-      display: block;
-    }
-
-    &__pdf {
-      display: grid;
-      gap: 18px;
-    }
-
-    &__pdfItem {
-      display: grid;
-      gap: 10px;
-    }
-
-    &__pdfLabel {
-      font-size: $fs-s;
-      font-weight: 600;
-      margin: 0;
-    }
-  }
-
-  // Gallery は shibo と同じクラスを踏襲
-  .l-section {
-    max-width: $container-max;
-    margin: auto;
-
-    .c-techGallery {
-      display: grid;
-      grid-template-columns: repeat(6, minmax(0, 1fr));
-      gap: 20px;
-
-      .c-techGallery__item {
-        .c-techGallery__img {
-          width: 100%;
-          object-fit: cover;
-        }
-
-        .c-techGallery__cap {
-          font-size: $fs-s;
-        }
-      }
-    }
-  }
-
-  @include bp-down(md) {
-    .l-section {
-      .c-techGallery {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-
-        .c-techGallery__item {
-          .c-techGallery__cap {
-            font-size: $fs-xs;
-          }
-        }
-      }
-    }
-  }
-</style>

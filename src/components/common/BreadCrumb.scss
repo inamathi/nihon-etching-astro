@@ -3,9 +3,10 @@
 @use "@styles/font" as *;
 
 .c-breadcrumb {
-  max-width: $container-max;
-  padding-inline: 10px;
+  // max-width: $container-max;
+  // padding-inline: 10px;
   margin: auto;
+  width: 100%;
   &__list {
     margin: 0 0 14px 0;
     padding: 0;

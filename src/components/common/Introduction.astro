@@ -1,0 +1,45 @@
+---
+import { type Lang, getArray } from "@/locales/multilingual";
+
+type Props = {
+  lang: Lang;
+  arrayKey: string; // "recruit.body.intro.paragraphs" 等
+  className?: string;
+};
+
+const { lang, arrayKey, className } = Astro.props as Props;
+const rootClass = className ?? "c-introduction";
+const paragraphs = getArray<string>(lang, arrayKey);
+---
+
+<div class={rootClass}>
+  {
+    paragraphs.map((text) => {
+      const hasTag = /<\/?[a-z][\s\S]*>/i.test(text);
+      return hasTag ? (
+        <p class="c-intro-paragraph" set:html={text} />
+      ) : (
+        <p class="c-intro-paragraph">{text}</p>
+      );
+    })
+  }
+</div>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  @use "@styles/font" as *;
+  .c-introduction {
+    padding: 10px 20px;
+    border: solid 1px $color-gray-800;
+    border-radius: 4px;
+    .c-intro-paragraph {
+      margin: 10px 0;
+      line-height: 1.8;
+      text-align: justify;
+      &:lang(en) {
+        text-align: left;
+      }
+    }
+  }
+</style>

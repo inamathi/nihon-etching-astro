@@ -32,10 +32,15 @@ $color-gray-900: #1a1a1a;
 $color-text: $color-gray-100;
 $color-text-muted: $color-gray-700;
 $color-border: $color-gray-200;
+$color-text-opp: $color-gray-900;
 
 /* Utility */
 $color-link: $color-primary;
 $color-focus: rgba(213, 29, 29, 0.35);
+
+/* company */
+$color-card-bg: #d1d2b8;
+$color-card-bg-blue: #2972a6;
 
 /* group */
 $color-country-japan: rgb(214, 127, 154);
@@ -53,13 +58,13 @@ $line-height-heading: 1.25;
 /* =========================
    Layout
    ========================= */
-$container-max: 1120px;
+$container-max: 1024px;
 $container-padding: 20px;
 
 /* =========================
    Layer (z-index)
    ========================= */
-$z-header: 100;
+$z-header: 3000;
 $z-drawer: 200;
 $z-modal: 300;
 

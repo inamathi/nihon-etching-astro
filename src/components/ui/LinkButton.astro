@@ -1,0 +1,91 @@
+---
+type Props = {
+  href: string;
+  label?: string;
+  target?: "_self" | "_blank";
+  variant?: "primary" | "secondary" | "ghost";
+};
+
+const { href, label, target = "_self", variant = "primary" } = Astro.props;
+---
+
+<div class="c-linkButton__container">
+  <a
+    href={href}
+    target={target}
+    rel={target === "_blank" ? "noopener noreferrer" : undefined}
+    class={`c-linkButton c-linkButton--${variant}`}
+  >
+    <span class="c-linkButton__label">
+      {Astro.slots.default ? <slot /> : label && <span set:html={label} />}
+    </span>
+  </a>
+</div>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  @use "@styles/font" as *;
+
+  .c-linkButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 24px;
+    border-radius: 8px;
+    font-size: $fs-s;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.2s ease;
+    &__label {
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    /* Primary */
+    &--primary {
+      background-color: $color-secondary;
+      color: #fff;
+
+      &:hover {
+        background-color: darken($color-primary, 6%);
+      }
+    }
+
+    /* Secondary */
+    &--secondary {
+      width: 100%;
+      background-color: transparent;
+      color: $color-text;
+      background: rgba($color-secondary, 0.25);
+      border: 1px solid $color-secondary;
+      padding: 8px;
+      span {
+        text-align: center;
+        line-height: 1.75;
+      }
+      &:hover {
+        background-color: rgba($color-secondary, 0.5);
+      }
+    }
+
+    /* Ghost */
+    &--ghost {
+      background-color: transparent;
+      color: $color-text;
+
+      &:hover {
+        background-color: rgba($color-text, 0.06);
+      }
+    }
+  }
+  @include bp-down(md) {
+    .c-linkButton__container {
+      width: 100%;
+    }
+  }
+</style>

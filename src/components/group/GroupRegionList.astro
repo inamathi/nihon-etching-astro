@@ -5,9 +5,11 @@ import { t, type Lang } from "@/locales/multilingual";
 import type { GroupKey, NeRegionKey } from "@/types/group";
 import type { CompanyData } from "@/data/companyOverview";
 import type { FieldDef } from "@/lib/companyCards";
+import { regionTargetId } from "@/lib/groupRegion";
 
 // Props
 type Props = {
+  group: GroupKey;
   lang: Lang;
   basePath: string;
   groupHeadingKey: string;
@@ -18,8 +20,15 @@ type Props = {
   detailsHref?: string;
 };
 
-const { lang, groupHeadingKey, regionOrder, headingKeyMap, companies, fields } =
-  Astro.props as Props;
+const {
+  group,
+  lang,
+  groupHeadingKey,
+  regionOrder,
+  headingKeyMap,
+  companies,
+  fields,
+} = Astro.props as Props;
 
 // region毎に絞る（region未設定は落とす）
 const byRegion = (regionKey: NeRegionKey) =>
@@ -27,7 +36,7 @@ const byRegion = (regionKey: NeRegionKey) =>
 ---
 
 <section class="l-section l-container">
-  <PageSectionHeading text={t(lang, groupHeadingKey)} />
+  <!-- <PageSectionHeading text={t(lang, groupHeadingKey)} /> -->
 
   {
     regionOrder.map((regionKey) => {
@@ -37,7 +46,7 @@ const byRegion = (regionKey: NeRegionKey) =>
       return (
         <section
           class="l-section__area"
-          id={`ne-${regionKey}`}
+          id={regionTargetId(group, regionKey)}
           data-region={regionKey}
         >
           <PageSectionHeading text={t(lang, headingKeyMap[regionKey])} />
@@ -59,9 +68,12 @@ const byRegion = (regionKey: NeRegionKey) =>
   @use "@styles/font" as *;
 
   .l-section {
-    padding: 20px 0 40px;
+    padding: 0 0 40px;
     display: grid;
-    grid-template-columns: repeat(2 1fr);
+    grid-template-columns: 1fr;
+    @include bp-down(md) {
+      padding: 120px 0 40px;
+    }
     .l-wrapper {
       padding-bottom: 40px;
     }

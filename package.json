@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:staging": "NODE_ENV=staging astro build",
+    "build:prod": "NODE_ENV=production astro build",
     "preview": "astro preview",
+    "preview:staging": "astro preview --mode staging",
     "astro": "astro"
   },
   "dependencies": {

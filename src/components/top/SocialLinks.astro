@@ -1,0 +1,95 @@
+---
+type SocialLink = {
+  name: string;
+  href: string;
+  icon: string; // SVGパスなど
+};
+
+type Props = {
+  links?: SocialLink[];
+};
+
+const defaultLinks: SocialLink[] = [
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/nihonetchingJPN",
+    icon: "facebook",
+  },
+  {
+    name: "X",
+    href: "https://x.com/EtchingNihon",
+    icon: "x",
+  },
+];
+
+const { links = defaultLinks } = Astro.props;
+---
+
+<ul class="c-socialLinks">
+  {
+    links.map((link) => (
+      <li class="c-socialLinks__item">
+        <a
+          class="c-socialLinks__link"
+          href={link.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={link.name}
+        >
+          {link.icon === "facebook" && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+            </svg>
+          )}
+          {link.icon === "x" && (
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+            </svg>
+          )}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style lang="scss">
+  .c-socialLinks {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    &__link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #333; // ← サイトのカラーに合わせて
+      color: #fff;
+      transition: opacity 0.2s ease;
+
+      &:hover {
+        opacity: 0.7;
+      }
+
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+        stroke: none;
+      }
+    }
+  }
+</style>

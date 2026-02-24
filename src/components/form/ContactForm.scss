@@ -1,0 +1,169 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+
+.c-contactForm {
+  &__hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  &__grid {
+    display: grid;
+    gap: 14px;
+
+    @include bp-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 18px;
+    }
+  }
+
+  &__field {
+    display: grid;
+    gap: 6px;
+
+    &--full {
+      @include bp-up(md) {
+        grid-column: 1 / -1;
+      }
+    }
+  }
+
+  &__label,
+  &__legend {
+    font-size: $fs-s;
+    color: $color-gray-300;
+  }
+
+  &__req {
+    margin-left: 4px;
+    color: $color-primary;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid $color-gray-800;
+    background: rgba(255, 255, 255, 0.04);
+    color: $color-text;
+
+    &:focus {
+      outline: none;
+      border-color: $color-gray-500;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 180px;
+  }
+
+  &__fieldset {
+    border: 1px solid $color-gray-800;
+    border-radius: 6px;
+    padding: 12px;
+  }
+
+  &__legend {
+    padding: 0 6px;
+  }
+
+  &__radios {
+    display: grid;
+    gap: 10px;
+
+    @include bp-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 14px;
+    }
+  }
+
+  &__radio {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    color: $color-gray-200;
+
+    input {
+      margin: 0;
+    }
+  }
+
+  &__note {
+    margin: 0;
+    color: $color-gray-400;
+    font-size: $fs-xs;
+    line-height: 1.7;
+    padding-top: 4px;
+    padding-bottom: 20px;
+  }
+
+  &__actions {
+    padding-top: 6px;
+  }
+
+  &__submit {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid $color-gray-700;
+    background: rgba(255, 255, 255, 0.06);
+    color: $color-text;
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// ─── エラーメッセージ（absolute配置）─────────────────────────
+.c-contactForm__field,
+.c-contactForm__fieldset {
+  position: relative; // absoluteの基準
+  padding-bottom: 20px; // エラー文の高さ分だけ確保
+}
+
+.c-contactForm__error {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 0.75rem;
+  color: #ff7565;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+
+  &:not(:empty) {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ─── エラー状態のフィールド ─────────────────────────────────────
+.c-contactForm__field.is-error,
+.c-contactForm__fieldset.is-error {
+  .c-contactForm__input,
+  .c-contactForm__textarea {
+    border-color: #ff7565;
+
+    &:focus {
+      border-color: #ff7565;
+      box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12);
+    }
+  }
+}
+
+// ─── input/textareaのトランジション ────────────────────────────
+.c-contactForm__input,
+.c-contactForm__textarea {
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}

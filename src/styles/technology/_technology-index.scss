@@ -1,0 +1,316 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+@use "@styles/font" as *;
+
+.p-technology {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-bottom: 40px;
+  .c-techIntro {
+    .c-techIntro__box {
+      .c-techIntro__text {
+        font-size: $fs-s;
+      }
+    }
+  }
+  .l-section {
+    .c-techIntro__text {
+      font-size: $fs-s;
+    }
+    .c-techGallery {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 20px;
+      &.graphic {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .c-techGallery__item {
+        .c-techGallery__img {
+          width: 100%;
+          object-fit: cover;
+        }
+        .c-techGallery__cap {
+          font-size: $fs-s;
+        }
+      }
+    }
+    .section__additional {
+      font-size: $fs-s;
+    }
+  }
+}
+@include bp-down(md) {
+  .l-container {
+    .l-section {
+      .c-techGallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        &.graphic {
+          grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+        .c-techGallery__item {
+          .c-techGallery__img {
+            width: 100%;
+            object-fit: cover;
+          }
+          .c-techGallery__cap {
+            font-size: $fs-xs;
+          }
+        }
+      }
+    }
+  }
+}
+@include bp-only(md) {
+  .l-container {
+    .l-section {
+      .c-techGallery {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+        &.graphic {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .c-techGallery__item {
+          .c-techGallery__img {
+            width: 100%;
+            object-fit: cover;
+          }
+          .c-techGallery__cap {
+            font-size: $fs-s;
+          }
+        }
+      }
+    }
+  }
+}
+
+.p-peening {
+  &__media {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 40px auto;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+  }
+  @include bp-down(md) {
+    &__media {
+      display: flex;
+      flex-direction: column;
+      margin: 0px auto 40px;
+    }
+  }
+  @include bp-only(md) {
+    &__media {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      margin: 0px auto 40px;
+    }
+  }
+
+  &__figure {
+  }
+  &__description {
+    margin: auto;
+    max-width: 800px;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  &__features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    li {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: $fs-l;
+      min-height: 100px;
+      background: $color-card-bg;
+      border-radius: 8px;
+      color: $color-text-opp;
+      padding: 20px;
+    }
+  }
+  @include bp-down(md) {
+    &__features {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  @include bp-only(md) {
+    &__features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      li {
+        place-items: center;
+      }
+    }
+  }
+  &__youtube {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  &__youtubeFrame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  &__pdf {
+    display: grid;
+    gap: 18px;
+  }
+
+  &__pdfItem {
+    display: grid;
+    gap: 10px;
+  }
+
+  &__pdfLabel {
+    font-size: $fs-s;
+    font-weight: 600;
+    margin: 0;
+  }
+  &__linkList {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+@include bp-down(md) {
+  .l-section {
+    .c-techGallery {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+
+      .c-techGallery__item {
+        .c-techGallery__cap {
+          font-size: $fs-xs;
+        }
+      }
+    }
+  }
+}
+
+/* 5軸レーザー */
+.contents-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px 0;
+  max-width: $container-max;
+  .l-section {
+    width: 100%;
+  }
+}
+// @include bp-between(md, xl) {
+//   .p-laser {
+//     padding: 0 10px;
+//   }
+// }
+@include bp-down(md) {
+  .contents-wrapper {
+    padding: 20px 10px;
+  }
+}
+
+.p-laser {
+  &__media {
+    display: grid;
+    gap: 16px;
+    margin: 40px auto;
+    max-width: 840px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px;
+  }
+  @include bp-down(md) {
+    &__media {
+      margin: 20px auto;
+    }
+  }
+
+  &__figure {
+  }
+  &__description {
+    margin: auto;
+    max-width: 800px;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  &__features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    li {
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: $fs-l;
+      min-height: 100px;
+      background: $color-card-bg;
+      border-radius: 8px;
+      color: $color-text-opp;
+      padding: 20px;
+      text-wrap: balance;
+      line-break: strict;
+    }
+  }
+  @include bp-down(md) {
+    &__features {
+      display: flex;
+      flex-direction: column;
+      li {
+        font-size: $fs-m;
+      }
+    }
+  }
+  @include bp-only(md) {
+    &__features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      li {
+        font-size: $fs-m;
+      }
+    }
+  }
+  &__youtube {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  &__youtubeFrame {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  &__pdf {
+    display: grid;
+    gap: 18px;
+  }
+
+  &__pdfItem {
+    display: grid;
+    gap: 10px;
+  }
+
+  &__pdfLabel {
+    font-size: $fs-s;
+    font-weight: 600;
+    margin: 0;
+  }
+}

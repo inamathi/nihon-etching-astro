@@ -1,0 +1,20 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+
+.u-br-pc {
+  display: block;
+}
+@include bp-down(md) {
+  .u-br-pc {
+    display: none;
+  }
+}
+
+.u-br-sp {
+  display: none;
+}
+@include bp-down(md) {
+  .u-br-sp {
+    display: block;
+  }
+}

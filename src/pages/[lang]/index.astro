@@ -9,6 +9,8 @@ import Information from "@/components/top/Information.astro";
 import { t, toLang, languages, type Lang } from "@/locales/multilingual";
 import { topGalleries } from "@/data/topGalleries";
 import PdfViewer from "@/components/common/PdfViewer.astro";
+import ZoomViewer from "@/components/top/ZoomViewer.astro";
+import SocialLinks from "@/components/top/SocialLinks.astro";
 
 export async function getStaticPaths() {
   // languages に zh を入れていても、将来まだ出したくないならここで絞れる
@@ -17,14 +19,66 @@ export async function getStaticPaths() {
 }
 
 const lang: Lang = toLang(Astro.params.lang);
+const title = t(lang, "pageTitle.top");
+
+const topSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://nihon-etching.co.jp/#website",
+      url: "https://nihon-etching.co.jp/",
+      name: "Nihon Etching Ltd.",
+      inLanguage: lang,
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://nihon-etching.co.jp/#localbusiness",
+      name: "株式会社日本エッチング",
+      alternateName: "Nihon Etching Ltd.",
+      url: "https://nihon-etching.co.jp/",
+      logo: "https://nihon-etching.co.jp/images/logo.png", // ← Eマークを作っていれる？検討中
+      image: "https://nihon-etching.co.jp/images/logo.png", // ← OGP画像などに変更予定
+      telephone: "+81-3-3744-5502",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "本羽田2-8-19",
+        addressLocality: "大田区",
+        addressRegion: "東京都",
+        postalCode: "144-0044",
+        addressCountry: "JP",
+      },
+      sameAs: [
+        "https://www.facebook.com/nihonetchingJPN",
+        "https://x.com/EtchingNihon",
+      ],
+    },
+  ],
+};
 ---
 
-<Base lang={lang} title={t(lang, "site.title")}>
+<Base lang={lang} title={title}>
+  <!-- JSON-LD -->
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(topSchema)}
+    slot="head"
+  />
   <!-- HeroSlider S -->
   <HeroSlider lang={lang} />
   <!-- Scroll後のコンテンツ S -->
   <section id="home-content" class="l-container">
     <TopAbout lang={lang} />
+    <!-- サンプルビューワー -->
+    <ZoomViewer
+      lang={lang}
+      images={[
+        "/assets/zoom/laser_rumdom.webp",
+        "/assets/zoom/laser_grid.webp",
+      ]}
+      alt="テクスチャ加工シート"
+      scale={3}
+    />
     <!-- ページ内リンク -->
     <DomesticLink lang={lang} />
     <!-- Gallery Technology -->
@@ -43,7 +97,7 @@ const lang: Lang = toLang(Astro.params.lang);
     }
   </section>
   <!-- PDFビューワー -->
-  <PdfViewer src="/pdf/laser_laser-2511.pdf" />
+  <PdfViewer src="/pdf/5axis_laser-2511.pdf" />
   <PdfViewer src="/pdf/technote-tfc-2508.pdf" />
   <!-- Information -->
   <Information lang={lang} />

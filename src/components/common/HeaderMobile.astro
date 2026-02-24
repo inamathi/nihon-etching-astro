@@ -1,10 +1,36 @@
 ---
 import { t, toLang, type Lang } from "@/locales/multilingual";
 
+// 親から渡される lang（なければ ja）
 const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
 const lang: Lang = toLang(rawLang);
-const basePath = `/${lang}`;
-const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en|zh)/, "");
+
+// BASE_URL（/ne-staging/ or /）
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+// 現在のパス（/ne-staging/ja/... など）
+const currentPathname = Astro.url.pathname;
+
+// baseRoot を除いた「アプリ内パス」（例: /ja/technology/shibo/）
+const appPath = currentPathname.startsWith(baseRoot)
+  ? currentPathname.slice(baseRoot.length)
+  : currentPathname;
+
+// 言語だけ差し替えた URL を生成
+function toLangPath(target: Lang) {
+  const replaced = appPath.replace(/^\/(ja|en)(\/|$)/, `/${target}$2`);
+  return `${baseRoot}${replaced || `/${target}/`}`;
+}
+
+// 言語切替リンク
+const hrefJa = toLangPath("ja");
+const hrefEn = toLangPath("en");
+
+// 通常リンク用（例：/ne-staging/ja）
+const basePath = `${baseRoot}/${lang}`;
+
+// もし「言語を除いたパス」を使う箇所があるなら、これを使う（BASE_URL考慮済み）
+const pathNoLang = appPath.replace(/^\/(ja|en)(\/|$)/, "/");
 ---
 
 <!-- header bar（ここには drawer を入れない） -->
@@ -53,8 +79,8 @@ const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en|zh)/, "");
 
       <div class="c-drawer__group">
         <span class="c-drawer__label">{t(lang, "nav.technology")}</span>
-        <a class="c-drawer__subLink" href={`${basePath}/technology/5axis/`}>
-          {t(lang, "nav.tech_5axis")}
+        <a class="c-drawer__subLink" href={`${basePath}/technology/laser/`}>
+          {t(lang, "nav.tech_laser")}
         </a>
         <a class="c-drawer__subLink" href={`${basePath}/technology/shibo/`}>
           {t(lang, "nav.tech_shibo")}
@@ -80,13 +106,13 @@ const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en|zh)/, "");
     <div class="c-drawer__lang" aria-label="Language">
       <a
         class={`c-drawer__langItem ${lang === "ja" ? "is-current" : ""}`}
-        href={`/ja${pathNoLang}`}
+        href={hrefJa}
         aria-current={lang === "ja" ? "true" : undefined}>JA</a
       >
       <span class="c-drawer__langSep">|</span>
       <a
         class={`c-drawer__langItem ${lang === "en" ? "is-current" : ""}`}
-        href={`/en${pathNoLang}`}
+        href={hrefEn}
         aria-current={lang === "en" ? "true" : undefined}>EN</a
       >
     </div>
@@ -173,7 +199,7 @@ const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en|zh)/, "");
         () => {
           if (window.matchMedia("(min-width: 1024.01px)").matches) close();
         },
-        { passive: true }
+        { passive: true },
       );
 
       // 初期状態（HTML側で hidden を付け忘れても事故らない）

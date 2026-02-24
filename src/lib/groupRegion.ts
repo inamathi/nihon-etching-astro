@@ -3,6 +3,10 @@ import type { CompanyData } from "@/data/companyOverview";
 import type { Lang } from "@/locales/multilingual";
 import { pick } from "@/lib/companyView";
 
+// region セクションの id（hash）を統一して返す
+export const regionTargetId = (group: "ne" | "nwn" | "sec", region: string) =>
+  `${group}-${region}`;
+
 // region の見出しキーを t() 用に返す
 export const regionHeadingTextKey = (
   group: "ne" | "nwn" | "sec",

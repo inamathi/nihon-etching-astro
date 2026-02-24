@@ -1,0 +1,111 @@
+---
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+import Introduction from "@/components/common/Introduction.astro";
+
+import { t, toLang, type Lang, getList } from "@/locales/multilingual";
+import LinkButton from "@/components/ui/LinkButton.astro";
+import BlockHeading from "@/components/ui/BlockHeading.astro";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const lang: Lang = toLang(Astro.params.lang);
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+
+/* =========================
+ * Link Buttons（実体）
+ * ========================= */
+type LinkItem = {
+  href: string;
+  labelKeyIndex: number; // multilingual.ts の buttons 配列 index
+  target?: "_self" | "_blank";
+};
+
+const linkButtons: LinkItem[] = [
+  {
+    href: "https://plastron.co.jp/",
+    labelKeyIndex: 0,
+    target: "_blank",
+  },
+];
+const title = t(lang, "pageTitle.download");
+
+type DownloadFile = {
+  title: Record<string, string>;
+  fileUrl: string;
+};
+
+const downloadFiles = getList("download.downloadFiles") as DownloadFile[];
+
+const downloadSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `https://nihon-etching.co.jp/${lang}/download/`,
+  name: t(lang, "pageTitle.download"),
+  description: t(lang, "download.page.lead"),
+  url: `https://nihon-etching.co.jp/${lang}/download/`,
+  inLanguage: lang,
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://nihon-etching.co.jp/",
+  },
+  about: {
+    "@type": "Organization",
+    "@id": "https://nihon-etching.co.jp/#localbusiness",
+    name: "株式会社日本エッチング",
+  },
+};
+---
+
+<Base lang={lang} title={title}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(downloadSchema)}
+    slot="head"
+  />
+  <PageHeader
+    eyebrowText="DOWNLOAD"
+    title={t(lang, "pageTitle.download")}
+    lead={t(lang, "download.page.lead")}
+    imageSrc="/images/pageHeader/pageheader-download.webp"
+    imageAlt={t(lang, "recruit.page.imageAlt")}
+  />
+
+  <main class="l-container">
+    <Breadcrumb
+      lang={lang}
+      items={[
+        { label: t(lang, "nav.top"), href: `${basePath}/` },
+        { label: t(lang, "nav.download"), href: `${basePath}/download/` },
+      ]}
+    />
+    <section class="p-download">
+      <BlockHeading text={t(lang, "download.page.title")} />
+      <ul class="fnc-btn-list">
+        {
+          downloadFiles.map((file) => (
+            <li class="list-item">
+              <a class="btn" href={file.fileUrl} download>
+                {file.title[lang]}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </main>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+  .p-download {
+    margin: 40px auto;
+  }
+</style>

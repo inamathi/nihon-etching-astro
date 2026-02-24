@@ -3,3 +3,18 @@
 
 /* ui */
 @use "@styles/components/index";
+
+/* utility */
+@use "@styles/utility/u-index";
+
+/* company */
+@use "@styles/company/company-index";
+
+/* technology */
+@use "@styles/technology/technology-index";
+
+/* group */
+@use "@styles/group/group-index";
+
+/* common */
+@use "@styles/common/common-index";

@@ -15,6 +15,11 @@ const { company, lang, fields } = Astro.props;
 
 const isJapan = (company.country ?? "").toLowerCase() === "japan";
 
+const group = company.group; // "ne" | "nwn" | "sec"
+const photoSrc = company.photoSrc
+  ? `/images/group/${company.group}/${company.photoSrc}`
+  : "";
+
 // photoAlt は I18nText 想定。なければ空文字。
 const photoAlt = company.photoAlt ? pick(company.photoAlt as any, lang) : "";
 ---
@@ -53,7 +58,7 @@ const photoAlt = company.photoAlt ? pick(company.photoAlt as any, lang) : "";
         company.photoSrc ? (
           <img
             class="c-companyMediaCard__img"
-            src={company.photoSrc}
+            src={photoSrc}
             alt={photoAlt}
             loading="lazy"
             decoding="async"

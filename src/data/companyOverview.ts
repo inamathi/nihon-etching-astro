@@ -79,12 +79,12 @@ export const companies: CompanyData[] = [
     established: "1971",
     employees: "70",
     facilities: {
-      ja: "主要巻上げ装置：7.5 t",
-      en: "Main Hoist: 7.5 t",
+      ja: "主要巻上げ装置：5 t",
+      en: "Main Hoist: 5 t",
     },
     url: "https://www.nihon-etching.co.jp",
     map: "https://maps.app.goo.gl/Mn83DVSUejaRutcN8",
-    photoSrc: "/images/group/ne/img_group_ne_ne1st.webp",
+    photoSrc: "img_group_ne_ne1st.webp",
   },
 
   {
@@ -104,7 +104,7 @@ export const companies: CompanyData[] = [
     established: "1971",
     employees: "70",
     map: "https://maps.app.goo.gl/Mn83DVSUejaRutcN8",
-    photoSrc: "/images/group/ne/img_group_ne_ne2nd.webp",
+    photoSrc: "img_group_ne_ne2nd.webp",
   },
 
   {
@@ -124,11 +124,11 @@ export const companies: CompanyData[] = [
     established: "1971",
     employees: "70",
     facilities: {
-      ja: "主要巻上げ装置：1t × 2.2t",
-      en: "Main Hoist: 1t × 2.2t",
+      ja: "主要巻上げ装置：5t × 5t",
+      en: "Main Hoist: 5t × 5t",
     },
     map: "https://maps.app.goo.gl/Mn83DVSUejaRutcN8",
-    photoSrc: "/images/group/ne/img_group_ne_ne3rd.webp",
+    photoSrc: "img_group_ne_ne3rd.webp",
   },
   /** NE Asia */
   /* philippine */
@@ -170,7 +170,7 @@ export const companies: CompanyData[] = [
       en: "Main Hoist: １t",
     },
     map: "https://goo.gl/maps/2SmheeiQprSsMbKR7",
-    photoSrc: "/images/group/ne/img_group_ne_batangas.webp",
+    photoSrc: "img_group_ne_batangas.webp",
   },
   /* singapore */
   {
@@ -201,8 +201,8 @@ export const companies: CompanyData[] = [
     },
     mobile: { ja: "", en: "" },
     contact: {
-      ja: "Mr. Kathrine Tan (Managing Director)",
-      en: "Mr. Kathrine Tan (Managing Director)",
+      ja: "蔡先生",
+      en: "CHAI SIAW YANG",
     },
     established: "1988",
     employees: "10",
@@ -211,7 +211,7 @@ export const companies: CompanyData[] = [
       en: "Main Hoist: ３t×３t",
     },
     map: "https://goo.gl/maps/GNUbMMBiTnVz5Qzh6",
-    photoSrc: "/images/group/ne/img_group_ne_ubiRoad.webp",
+    photoSrc: "img_group_ne_ubiRoad.webp",
   },
   /* vietnam */
   {
@@ -247,11 +247,11 @@ export const companies: CompanyData[] = [
     established: "2008",
     employees: "10",
     facilities: {
-      ja: "主要巻上げ装置：３t×３t",
-      en: "Main Hoist: ３t×３t",
+      ja: "主要巻上げ装置：５t×10t",
+      en: "Main Hoist: ５t×10t",
     },
     map: "https://goo.gl/maps/MM5VQKV5rZCZ2FAK9",
-    photoSrc: "/images/group/ne/img_group_ne_hanoi.webp",
+    photoSrc: "img_group_ne_hanoi.webp",
   },
   /* Malaysia JB */
   {
@@ -281,8 +281,8 @@ export const companies: CompanyData[] = [
       en: "+60-7351-7357",
     },
     contact: {
-      ja: "Mr. Kathrine Tan (Managing Director)",
-      en: "Mr. Kathrine Tan (Managing Director)",
+      ja: "蔡先生",
+      en: "CHAI SIAW YANG",
     },
     established: "2008",
     employees: "10",
@@ -291,7 +291,7 @@ export const companies: CompanyData[] = [
       en: "Main Hoist: 3 t * 3 t",
     },
     map: "https://goo.gl/maps/MM5VQKV5rZCZ2FAK9",
-    photoSrc: "/images/group/ne/img_group_ne_johorBahru.webp",
+    photoSrc: "img_group_ne_johorBahru.webp",
   },
   /* Malaysia KL */
   {
@@ -321,8 +321,8 @@ export const companies: CompanyData[] = [
       en: "+60-3-5569-1009",
     },
     contact: {
-      ja: "Mr. Koju Maie (Managing Director)",
-      en: "Mr. Koju Maie (Managing Director)",
+      ja: "田中 君雄",
+      en: "Kimio Tanaka",
     },
     established: "1995",
     employees: "20",
@@ -331,7 +331,7 @@ export const companies: CompanyData[] = [
       en: "Main Hoist: 8 t * 8 t",
     },
     map: "https://goo.gl/maps/e4dU2Zd46j6EDrQ78",
-    photoSrc: "/images/group/ne/img_group_ne_sharAlamSelangor.webp",
+    photoSrc: "img_group_ne_sharAlamSelangor.webp",
   },
   /* Indonesia */
   {
@@ -367,11 +367,11 @@ export const companies: CompanyData[] = [
     established: "2004",
     employees: "30",
     facilities: {
-      ja: "巻上げ装置耐荷重：5 t × 3 t",
-      en: "Main Hoist: 5 t * 3 t",
+      ja: "巻上げ装置耐荷重：5 t × 10 t",
+      en: "Main Hoist: 5 t * 10 t",
     },
     map: "https://goo.gl/maps/GauFZ1zUyxdsd65H7",
-    photoSrc: "/images/group/ne/img_group_ne_cikaranBekasi.webp",
+    photoSrc: "img_group_ne_cikaranBekasi.webp",
   },
   /** east-asia */
   /* kunshan */
@@ -412,7 +412,7 @@ export const companies: CompanyData[] = [
       en: "Main Hoist: 10 t * 5 t",
     },
     map: "https://maps.app.goo.gl/wfVMkqahwARsE2hBA",
-    photoSrc: "/images/group/ne/img_group_ne_kunshan.webp",
+    photoSrc: "img_group_ne_kunshan.webp",
   },
   /* Dong Guan */
   {
@@ -448,11 +448,11 @@ export const companies: CompanyData[] = [
     established: "2017",
     employees: "60",
     facilities: {
-      ja: "巻上げ装置耐荷重：3 t × 3 t",
-      en: "Main Hoist: 3 t * 3 t",
+      ja: "巻上げ装置耐荷重：10 t × 10 t",
+      en: "Main Hoist: 10 t * 10 t",
     },
     map: "https://maps.app.goo.gl/PxKSLbtDZpRwWPNw7",
-    photoSrc: "/images/group/ne/img_group_ne_dongGuan.webp",
+    photoSrc: "img_group_ne_dongGuan.webp",
   },
   /* Taipei */
   {
@@ -492,7 +492,7 @@ export const companies: CompanyData[] = [
       en: "Main Hoist: 5 t * 10 t",
     },
     map: "https://maps.app.goo.gl/YWCEQ3F8QTZyTQ4QA",
-    photoSrc: "/images/group/ne/img_group_ne_taipei.webp",
+    photoSrc: "img_group_ne_taipei.webp",
   },
   /* ====================== NWN ==============================*/
   /** Japan */
@@ -508,7 +508,7 @@ export const companies: CompanyData[] = [
       en: "World Etching Co., Ltd.",
     },
     companyNameSecondary: {
-      ja: "ワールドエッチング株式会社（愛知）",
+      ja: "株式会社ワールドエッチング（愛知）",
       en: "Aichi",
     },
     address: {
@@ -534,6 +534,608 @@ export const companies: CompanyData[] = [
       en: "Main Hoist: 15 t * 7.5 t",
     },
     map: "https://goo.gl/maps/jxUQRALGb73VTMDz7",
-    photoSrc: "/images/group/nwn/img_group_nwn_aichi.webp",
+    photoSrc: "img_group_nwn_we-aichi.webp",
+  },
+  /* 八尾 */
+  {
+    id: "nwn-jp-yao",
+    group: "nwn",
+    region: "japan",
+    country: "Japan",
+    location: { ja: "日本", en: "Japan" },
+    companyName: {
+      ja: "New Tex Co., Ltd.",
+      en: "New Tex Co., Ltd.",
+    },
+    companyNameSecondary: {
+      ja: "株式会社ニューテックス（大阪）",
+      en: "Osaka",
+    },
+    address: {
+      ja: "大阪府八尾市中田1-46",
+      en: "1-46 Nakata, Yao-Shi, Osaka 581-0014 Japan",
+    },
+    phone: {
+      ja: "+81(0)-729-95-2545",
+      en: "+81-729-95-2545",
+    },
+    fax: {
+      ja: "+81(0)-729-95-5752",
+      en: "+81-729-95-5752",
+    },
+    contact: {
+      ja: "",
+      en: "",
+    },
+    established: "1993",
+    employees: "40",
+    facilities: {
+      ja: "巻上げ装置耐荷重：10 t × 5 t",
+      en: "Main Hoist: 10 t * 5 t",
+    },
+    map: "https://goo.gl/maps/jxUQRALGb73VTMDz7",
+    photoSrc: "img_group_nwn_newtex-osaka.webp",
+  },
+  /* India */
+  {
+    id: "nwn-oversea-india",
+    group: "nwn",
+    region: "overseas",
+    country: "India Dharuhera",
+    location: { ja: "インド", en: "India" },
+    companyName: {
+      ja: "World Etching Overseas Premium Mouldings & Pressings Pvt. Ltd.",
+      en: "World Etching Overseas Premium Mouldings & Pressings Pvt. Ltd.",
+    },
+    companyNameSecondary: {
+      ja: "Haryana",
+      en: "Haryana",
+    },
+    address: {
+      ja: "185-Udyog vihar, Phase-1, Gurgaon, Haryana, India",
+      en: "185-Udyog vihar, Phase-1, Gurgaon, Haryana, India",
+    },
+    phone: {
+      ja: "+91(0)-127-426-7151 ~3",
+      en: "+91-127-426-7151 ~3",
+    },
+    fax: {
+      ja: "+91(0)-127-426-7150",
+      en: "+91-127-426-7150",
+    },
+    contact: {
+      ja: "",
+      en: "",
+    },
+    established: "2010",
+    employees: "10",
+    facilities: {
+      ja: "巻上げ装置耐荷重：10 t × 10 t",
+      en: "Main Hoist: 10 t * 10 t",
+    },
+    map: "https://goo.gl/maps/uEXfAoyTCALsenz46",
+    photoSrc: "img_group_nwn_haryana.webp",
+  },
+  /* Thai */
+  {
+    id: "nwn-oversea-india",
+    group: "nwn",
+    region: "overseas",
+    country: "India Dharuhera",
+    location: { ja: "タイ", en: "Thailand" },
+    companyName: {
+      ja: "World Sibo-Tech Co., Ltd.",
+      en: "World Sibo-Tech Co., Ltd.",
+    },
+    companyNameSecondary: {
+      ja: "A.PhanThong Chonburi",
+      en: "A.PhanThong Chonburi",
+    },
+    address: {
+      ja: "700/185, Moo 1 Amata Nakorn Industrial Estate, T.Bankao, A.PhanThong Chonburi, 20160, Thailand",
+      en: "700/185, Moo 1 Amata Nakorn Industrial Estate, T.Bankao, A.PhanThong Chonburi, 20160, Thailand",
+    },
+    phone: {
+      ja: "+66(0)-38-457-051",
+      en: "+66-38-457-051",
+    },
+    fax: {
+      ja: "+66(0)-38-457-051",
+      en: "+66-38-457-051",
+    },
+    contact: {
+      ja: "Mr. Wataru Ito (Sales Department)",
+      en: "Mr. Wataru Ito (Sales Department)",
+    },
+    established: "1996",
+    employees: "20",
+    facilities: {
+      ja: "巻上げ装置耐荷重：15 t × 10 t",
+      en: "Main Hoist: 15 t * 10 t",
+    },
+    map: "https://goo.gl/maps/MUHdNKGaFJvWXQUY8",
+    photoSrc: "img_group_nwn_chonburi.webp",
+  },
+  /* North America */
+  {
+    id: "nwn-oversea-namerica",
+    group: "nwn",
+    region: "overseas",
+    country: "North America (VE)",
+    location: { ja: "北アメリカ", en: "North America" },
+    companyName: {
+      ja: "New World Etching",
+      en: "New World Etching",
+    },
+    companyNameSecondary: {
+      ja: "Riviera Drive Fraser",
+      en: "Riviera Drive Fraser",
+    },
+    address: {
+      ja: "33870 Riviera Drive Fraser, MI 48026, U.S.A",
+      en: "33870 Riviera Drive Fraser, MI 48026, U.S.A",
+    },
+    phone: {
+      ja: "+1(0)-586-296-8082(ext.17)",
+      en: "+1-586-296-8082",
+    },
+    fax: {
+      ja: "+1(0)-586-296-8014",
+      en: "+1-586-296-8014",
+    },
+    contact: {
+      ja: "Mr. Vic Barbu",
+      en: "Mr. Vic Barbu",
+    },
+    established: "1996",
+    employees: "20",
+    facilities: {
+      ja: "巻上げ装置耐荷重：20 t × 10 t",
+      en: "Main Hoist: 20 t * 10 t",
+    },
+    map: "https://goo.gl/maps/kHZXYatS6LVjjJF56",
+    photoSrc: "img_group_nwn_riviera.webp",
+  },
+  /* China・Korea */
+  {
+    id: "nwn-eastasia-zhejiang",
+    group: "nwn",
+    region: "east-asia",
+    country: "China",
+    location: { ja: "中国", en: "China" },
+    companyName: {
+      ja: "NINGBO JINGCHAO MOULD ETCHING CO.,LTD",
+      en: "NINGBO JINGCHAO MOULD ETCHING CO.,LTD",
+    },
+    companyNameSecondary: {
+      ja: "Zhejiang Province",
+      en: "Zhejiang Province",
+    },
+    address: {
+      ja: "370 North Beidou Road, Xinxing Industrial Park, Ninghai, Ningbo, Zhejiang Province, China",
+      en: "370 North Beidou Road, Xinxing Industrial Park, Ninghai, Ningbo, Zhejiang Province, China",
+    },
+    phone: {
+      ja: "+86(0)-574-6553-0857",
+      en: "+86-574-6553-0857",
+    },
+    fax: {
+      ja: "+86(0)-574-6553-0866",
+      en: "+86-574-6553-0866",
+    },
+    contact: {
+      ja: "Mr.Cheng",
+      en: "Mr.Cheng",
+    },
+    established: "1986",
+    employees: "",
+    facilities: {
+      ja: "",
+      en: "",
+    },
+    map: "https://maps.app.goo.gl/H3pjCy6ziUPbYQds7",
+    photoSrc: "img_group_nwn_zhejiang.webp",
+  },
+  /* Korea */
+  {
+    id: "nwn-eastasia-seong",
+    group: "nwn",
+    region: "east-asia",
+    country: "Korea",
+    location: { ja: "韓国", en: "Korea" },
+    companyName: {
+      ja: "TEXONE",
+      en: "TEXONE",
+    },
+    companyNameSecondary: {
+      ja: "HWA SEONG",
+      en: "HWA SEONG",
+    },
+    address: {
+      ja: "98-11, Barangongdan-ro 4-gil, Hyangnam-eup, Hwaseong-si, Gyeonggi-do, 18623, Korea",
+      en: "98-11, Barangongdan-ro 4-gil, Hyangnam-eup, Hwaseong-si, Gyeonggi-do, 18623, Korea",
+    },
+    phone: {
+      ja: "+82(0)-31-8047-0222",
+      en: "+82-31-8047-0222",
+    },
+    fax: {
+      ja: "+82(0)-31-8047-4957",
+      en: "+82-31-8047-4957",
+    },
+    contact: {
+      ja: "Mr. Han (President)",
+      en: "Mr. Han (President)",
+    },
+    established: "1986",
+    employees: "",
+    facilities: {
+      ja: "巻上げ装置耐荷重：8 t × 8 t",
+      en: "Main Hoist: 8 t * 8 t",
+    },
+    map: "https://goo.gl/maps/s2So5EkHJe3w18UbA",
+    photoSrc: "img_group_nwn_hwa.webp",
+  },
+  /* ====================== SEC ==============================*/
+  /** Europe */
+  /* germany */
+  {
+    id: "sec-europe-germany",
+    group: "sec",
+    region: "europe",
+    country: "Germany",
+    location: { ja: "ドイツ", en: "Germany" },
+    companyName: {
+      ja: "J & F KRUTH GMBH",
+      en: "J & F KRUTH GMBH",
+    },
+    companyNameSecondary: {
+      ja: "GERMANY",
+      en: "GERMANY",
+    },
+    address: {
+      ja: "Stubbenerstr 96-100 42719, Solingen(Wald) Germany",
+      en: "Stubbenerstr 96-100 42719, Solingen(Wald) Germany",
+    },
+    phone: {
+      ja: "+49(0)-212-311061",
+      en: "+49-212-311061",
+    },
+    fax: {
+      ja: "+49(0)-212-313741",
+      en: "+49-212-313741",
+    },
+    contact: {
+      ja: "Mr. Stefan Kruth (President)",
+      en: "Mr. Stefan Kruth (President)",
+    },
+    established: "1996",
+    employees: "20",
+    facilities: {
+      ja: "巻上げ装置耐荷重：20 t × 10 t",
+      en: "Main Hoist: 20 t * 10 t",
+    },
+    map: "https://goo.gl/maps/nNZgTKPzEmCSHuRg6",
+    photoSrc: "img_group_sec_germany.webp",
+  },
+  /* portugal */
+  {
+    id: "sec-europe-portugal",
+    group: "sec",
+    region: "europe",
+    country: "Portugal",
+    location: { ja: "ポルトガル", en: "Portgual" },
+    companyName: {
+      ja: "J & F KRUTH PORTUGAL, LDA",
+      en: "J & F KRUTH PORTUGAL, LDA",
+    },
+    companyNameSecondary: {
+      ja: "Portugal",
+      en: "Portugal",
+    },
+    address: {
+      ja: "ZI de Adães, Lote 4, 3720-581 UL OAZ, Portugal",
+      en: "ZI de Adães, Lote 4, 3720-581 UL OAZ, Portugal",
+    },
+    phone: {
+      ja: "+351(0)-2566-09243",
+      en: "+351-2566-09243",
+    },
+    fax: {
+      ja: "+351(0)-2566-09244",
+      en: "+351-2566-09244",
+    },
+    contact: {
+      ja: "",
+      en: "",
+    },
+    established: "1996",
+    employees: "20",
+    facilities: {
+      ja: "巻上げ装置耐荷重：20 t × 10 t",
+      en: "Main Hoist: 20 t * 10 t",
+    },
+    map: "https://maps.app.goo.gl/SWLyWF1YsKu5uNTP7",
+    photoSrc: "img_group_sec_portgual.webp",
+  },
+  /* Austria */
+  {
+    id: "sec-europe-austria",
+    group: "sec",
+    region: "europe",
+    country: "Austria",
+    location: { ja: "オーストリア", en: "Austria" },
+    companyName: {
+      ja: "SET FORM-ATZ TECHNIK GMBH",
+      en: "SET FORM-ATZ TECHNIK GMBH",
+    },
+    companyNameSecondary: {
+      ja: "AUSTRIA",
+      en: "AUSTRIA",
+    },
+    address: {
+      ja: "Eumigstrase 6, 8753 Fohnsdorf, Judenburg, Steiermark, Austria",
+      en: "Eumigstrase 6, 8753 Fohnsdorf, Judenburg, Steiermark, Austria",
+    },
+    phone: {
+      ja: "+43(0)-3573-27543-12",
+      en: "+43-3573-27543-12",
+    },
+    fax: {
+      ja: "+43(0)-3573-27543-43",
+      en: "+43-3573-27543-43",
+    },
+    contact: {
+      ja: "Mr. Gert Bedenk (President)",
+      en: "Mr. Gert Bedenk (President)",
+    },
+    established: "2005",
+    employees: "",
+    facilities: {
+      ja: "巻上げ装置耐荷重：3 t × 3 t",
+      en: "Main Hoist: 3 t * 3 t",
+    },
+    map: "https://goo.gl/maps/8Zz2PwGCVDUZaybw5",
+    photoSrc: "img_group_sec_austria.webp",
+  },
+  /* Itary */
+  {
+    id: "sec-europe-italy",
+    group: "sec",
+    region: "europe",
+    country: "Itary",
+    location: { ja: "イタリア", en: "Itary" },
+    companyName: {
+      ja: "ML ENGRAVING srl",
+      en: "ML ENGRAVING srl",
+    },
+    companyNameSecondary: {
+      ja: "Itary",
+      en: "Itary",
+    },
+    address: {
+      ja: "Via Presolana 114, 24020 Onore (BG)",
+      en: "Via Presolana 114, 24020 Onore (BG)",
+    },
+    phone: {
+      ja: "+39(0)-346-72410",
+      en: "+39-346-72410",
+    },
+    fax: {
+      ja: "+39(0)-346-7441",
+      en: "+39-346-7441",
+    },
+    contact: {
+      ja: "+39(0)-346-72410",
+      en: "+39-346-72410",
+    },
+    established: "2005",
+    employees: "",
+    facilities: {
+      ja: "巻上げ装置耐荷重：3 t × 3 t",
+      en: "Main Hoist: 3 t * 3 t",
+    },
+    map: "https://maps.app.goo.gl/LDTe2oNsSahnE9df8",
+    photoSrc: "img_group_sec_italy.webp",
+  },
+  /* Turkey */
+  {
+    id: "sec-europe-dket",
+    group: "sec",
+    region: "europe",
+    country: "Turky",
+    location: { ja: "トルコ", en: "Turkey" },
+    companyName: {
+      ja: "DKET – Global Mold Texturing",
+      en: "DKET – Global Mold Texturing",
+    },
+    companyNameSecondary: {
+      ja: "Turkey",
+      en: "Turkey",
+    },
+    address: {
+      ja: "Akçaburgaz Mah. 1585 Sk. Tem34 Sanayi Sitesi B3/No:22, Esenyurt, İstanbul, Turkey",
+      en: "Akçaburgaz Mah. 1585 Sk. Tem34 Sanayi Sitesi B3/No:22, Esenyurt, İstanbul, Turkey",
+    },
+    phone: {
+      ja: "+90(0)-212-858-0387",
+      en: "+39-346-72410",
+    },
+    fax: {
+      ja: "",
+      en: "",
+    },
+    contact: {
+      ja: "",
+      en: "",
+    },
+    established: "",
+    employees: "",
+    facilities: {
+      ja: "",
+      en: "",
+    },
+    map: "https://maps.app.goo.gl/kWX1a2GcCnzhP4b87",
+    photoSrc: "img_group_sec_dket.webp",
+  },
+  /* North America */
+  /* North America */
+  {
+    id: "sec-north-america-wisconsin",
+    group: "sec",
+    region: "north-america",
+    country: "United States",
+    location: { ja: "アメリカ", en: "United States" },
+    companyName: {
+      ja: "WISCONSIN ENGRAVING",
+      en: "WISCONSIN ENGRAVING",
+    },
+    companyNameSecondary: {
+      ja: "United States",
+      en: "United States",
+    },
+    address: {
+      ja: "2435 South 170th Street Berlin, WI 53151 United States",
+      en: "2435 South 170th Street Berlin, WI 53151 United States",
+    },
+    phone: {
+      ja: "+1(0)-262-786-4521",
+      en: "+1-262-786-4521",
+    },
+    fax: {
+      ja: "+1(0)-262-786-8110",
+      en: "+1-262-786-8110",
+    },
+    contact: {
+      ja: "Mr. Pete Kambouris (Sales Manager)",
+      en: "Mr. Pete Kambouris (Sales Manager)",
+    },
+    established: "2005",
+    employees: "",
+    facilities: {
+      ja: "巻上げ装置耐荷重：5 t × 5 t",
+      en: "Main Hoist: 5 t * 5 t",
+    },
+    map: "https://goo.gl/maps/uwNsuvFL6dH9S3ZY6",
+    photoSrc: "img_group_sec_wisconsin.webp",
+  },
+  {
+    id: "sec-north-america-custometch",
+    group: "sec",
+    region: "north-america",
+    country: "United States",
+    location: { ja: "アメリカ", en: "United States" },
+    companyName: {
+      ja: "CUSTOM ETCH",
+      en: "CUSTOM ETCH",
+    },
+    companyNameSecondary: {
+      ja: "United States",
+      en: "United States",
+    },
+    address: {
+      ja: "1813 W State St, New Castle, PA 16101 United States",
+      en: "1813 W State St, New Castle, PA 16101 United States",
+    },
+    phone: {
+      ja: "+1(0)-724-652-7117",
+      en: "+1-724-652-7117",
+    },
+    fax: {
+      ja: "+1(0)-724-260-6804",
+      en: "+1-724-260-6804",
+    },
+    contact: {
+      ja: "",
+      en: "",
+    },
+    established: "",
+    employees: "",
+    facilities: {
+      ja: "",
+      en: "",
+    },
+    map: "https://maps.app.goo.gl/6tsM3LXbRGGveCpy5",
+    photoSrc: "img_group_sec_custometch.webp",
+  },
+  {
+    id: "sec-north-america-melco",
+    group: "sec",
+    region: "north-america",
+    country: "United States",
+    location: { ja: "アメリカ", en: "United States" },
+    companyName: {
+      ja: "MELCO ENGRAVING",
+      en: "MELCO ENGRAVING",
+    },
+    companyNameSecondary: {
+      ja: "United States",
+      en: "United States",
+    },
+    address: {
+      ja: "1809 Rochester Industrial Dr, Rochester Hills, MI 48309, United States",
+      en: "1809 Rochester Industrial Dr, Rochester Hills, MI 48309, United States",
+    },
+    phone: {
+      ja: "+1(0)-248-656-9000",
+      en: "+1-248-656-9000",
+    },
+    fax: {
+      ja: "+1(0)-248-656-9005",
+      en: "+1-248-656-9005",
+    },
+    contact: {
+      ja: "",
+      en: "",
+    },
+    established: "",
+    employees: "",
+    facilities: {
+      ja: "",
+      en: "",
+    },
+    map: "https://maps.app.goo.gl/J1WxczjBTiRRcsFeA",
+    photoSrc: "img_group_sec_melco.webp",
+  },
+  /* South America */
+  /* Brazil */
+  {
+    id: "sec-south-america",
+    group: "sec",
+    region: "south-america",
+    country: "Brazil",
+    location: { ja: "ブラジル", en: "Brazil" },
+    companyName: {
+      ja: "KRUTH DO BRAZIL LTDA",
+      en: "KRUTH DO BRAZIL LTDA",
+    },
+    companyNameSecondary: {
+      ja: "Brazil",
+      en: "Brazil",
+    },
+    address: {
+      ja: "RUA Eugenia S Vitale, 1129, CEP 09965-000 Sao Bernando do, Campo-SP",
+      en: "RUA Eugenia S Vitale, 1129, CEP 09965-000 Sao Bernando do, Campo-SP",
+    },
+    phone: {
+      ja: "+55(0)-11-4361-2000",
+      en: "+55-11-4361-2000",
+    },
+    fax: {
+      ja: "+55(0)-11-4361-2000",
+      en: "+55-11-4361-2000",
+    },
+    contact: {
+      ja: "Mr. Jairo Dias (General Manager)",
+      en: "Mr. Jairo Dias (General Manager)",
+    },
+    established: "1998",
+    employees: "",
+    facilities: {
+      ja: "巻上げ装置耐荷重：15 t × 10 t",
+      en: "Main Hoist: 15 t * 10 t",
+    },
+    map: "https://goo.gl/maps/bgS7zTVVa7jDB5yv7",
+    photoSrc: "img_group_sec_brazil.webp",
   },
 ];

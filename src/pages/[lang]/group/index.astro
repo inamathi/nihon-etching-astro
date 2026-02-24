@@ -17,7 +17,7 @@ export const getStaticPaths = () => [
   { params: { lang: "en" } },
 ];
 
-const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
+const rawLang = Astro.params.lang ?? "ja";
 const lang: Lang = toLang(rawLang);
 const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
 const basePath = `${baseRoot}/${lang}`;
@@ -47,6 +47,10 @@ type ViewGroupItem = {
 
 const rawGroups = getList<RawGroupItem>("group.listpage.ne.listItems");
 
+// lang fallback helper
+const pick = (x: { ja: string; en: string; zh?: string }, lang: Lang) =>
+  x[lang] ?? x.ja;
+
 const groupItems: ViewGroupItem[] = rawGroups.map((x) => ({
   id: x.id,
   location: pick(x.location, lang),
@@ -54,17 +58,37 @@ const groupItems: ViewGroupItem[] = rawGroups.map((x) => ({
   phone: x.phone,
 }));
 
-// lang fallback helper
-const pick = (x: { ja: string; en: string; zh?: string }, lang: Lang) =>
-  x[lang] ?? x.ja;
-
 // filtered
 const neCompanies = companies.filter((c) => c.group === "ne");
 const nwnCompanies = companies.filter((c) => c.group === "nwn");
 const secCompanies = companies.filter((c) => c.group === "sec");
+
+const groupListSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `https://nihon-etching.co.jp/${lang}/group/`,
+  name: t(lang, "group.listpage.title"),
+  description: t(lang, "group.listpage.lead"),
+  url: `https://nihon-etching.co.jp/${lang}/group/`,
+  inLanguage: lang,
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://nihon-etching.co.jp/",
+  },
+  about: {
+    "@type": "Organization",
+    "@id": "https://nihon-etching.co.jp/#localbusiness",
+    name: "株式会社日本エッチング",
+  },
+};
 ---
 
 <Base lang={lang} title={t(lang, "group.listpage.title")}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(groupListSchema)}
+    slot="head"
+  />
   <PageHeader
     eyebrowText="GROUP"
     title={t(lang, "group.listpage.title")}
@@ -72,16 +96,15 @@ const secCompanies = companies.filter((c) => c.group === "sec");
     imageSrc="/images/pageHeader/pageheader-group.webp"
     imageAlt={t(lang, "group.listpage.title")}
   />
-
-  <Breadcrumb
-    items={[
-      { label: t(lang, "nav.top"), href: `${basePath}/` },
-      { label: t(lang, "nav.group"), href: `${basePath}/group/` },
-    ]}
-  />
-  <div class="l-container">
+  <div class="l-container p-group">
+    <Breadcrumb
+      items={[
+        { label: t(lang, "nav.top"), href: `${basePath}/` },
+        { label: t(lang, "nav.group"), href: `${basePath}/group/` },
+      ]}
+    />
     <!-- =========================
-       NE
+       SEC
        ========================= -->
     <section
       class="l-section c-companyList"

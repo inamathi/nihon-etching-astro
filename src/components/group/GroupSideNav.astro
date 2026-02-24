@@ -1,5 +1,6 @@
 ---
 import { t, type Lang } from "@/locales/multilingual";
+import { regionTargetId } from "@/lib/groupRegion";
 
 type GroupKey = "ne" | "nwn" | "sec";
 
@@ -9,7 +10,7 @@ type Item = {
   regions: Array<{
     key: string; // "japan" | "asia" | ...（表示用途と #id に使う）
     headingKey: string; // multilingual.ts のキー
-    href: string; // basePath + "/group/xx/#region"
+    // href: string; // basePath + "/group/xx/#region"
   }>;
 };
 
@@ -28,6 +29,9 @@ type Props = {
 const { lang, basePath, currentGroup, currentRegion, items } =
   Astro.props as Props;
 
+const toHref = (g: GroupKey, regionKey: string) =>
+  `${basePath}/group/${g}/#${regionTargetId(g, regionKey)}`;
+
 // デフォルト定義（あなたの multilingual.ts の groupName 定義に合わせている）
 const defaultItems: Item[] = [
   {
@@ -36,18 +40,18 @@ const defaultItems: Item[] = [
     regions: [
       {
         key: "japan",
-        headingKey: "common.groupName.neJapan",
-        href: `${basePath}/group/ne/#japan`,
+        headingKey: "common.groupName.neJapanShort",
+        // href: `${basePath}/group/ne/#japan`,
       },
       {
         key: "asia",
-        headingKey: "common.groupName.neAsia",
-        href: `${basePath}/group/ne/#asia`,
+        headingKey: "common.groupName.neAsiaShort",
+        // href: `${basePath}/group/ne/#asia`,
       },
       {
         key: "east-asia",
-        headingKey: "common.groupName.neEastAsia",
-        href: `${basePath}/group/ne/#east-asia`,
+        headingKey: "common.groupName.neEastAsiaShort",
+        // href: `${basePath}/group/ne/#east-asia`,
       },
     ],
   },
@@ -57,18 +61,18 @@ const defaultItems: Item[] = [
     regions: [
       {
         key: "japan",
-        headingKey: "common.groupName.nwnJapan",
-        href: `${basePath}/group/nwn/#japan`,
+        headingKey: "common.groupName.nwnJapanShort",
+        // href: `${basePath}/group/nwn/#japan`,
       },
       {
         key: "overseas",
-        headingKey: "common.groupName.nwnOverseas",
-        href: `${basePath}/group/nwn/#overseas`,
+        headingKey: "common.groupName.nwnOverseasShort",
+        // href: `${basePath}/group/nwn/#overseas`,
       },
       {
         key: "east-asia",
-        headingKey: "common.groupName.nwnEastAsia",
-        href: `${basePath}/group/nwn/#east-asia`,
+        headingKey: "common.groupName.nwnEastAsiaShort",
+        // href: `${basePath}/group/nwn/#east-asia`,
       },
     ],
   },
@@ -78,18 +82,18 @@ const defaultItems: Item[] = [
     regions: [
       {
         key: "europe",
-        headingKey: "common.groupName.secEurope",
-        href: `${basePath}/group/sec/#europe`,
+        headingKey: "common.groupName.secEuropeShort",
+        // href: `${basePath}/group/sec/#europe`,
       },
       {
         key: "north-america",
-        headingKey: "common.groupName.secNorthAmerica",
-        href: `${basePath}/group/sec/#north-america`,
+        headingKey: "common.groupName.secNorthAmericaShort",
+        // href: `${basePath}/group/sec/#north-america`,
       },
       {
         key: "south-america",
-        headingKey: "common.groupName.secSouthAmerica",
-        href: `${basePath}/group/sec/#south-america`,
+        headingKey: "common.groupName.secSouthAmericaShort",
+        // href: `${basePath}/group/sec/#south-america`,
       },
     ],
   },
@@ -125,7 +129,7 @@ const isCurrent = (g: GroupKey, r?: string) => {
               return (
                 <a
                   class="c-groupTopNav__chip"
-                  href={`#${key}`}
+                  href={toHref(g.group, r.key)}
                   data-nav-link={key}
                 >
                   {t(lang, r.headingKey)}
@@ -161,7 +165,7 @@ const isCurrent = (g: GroupKey, r?: string) => {
                     class={`c-groupSideNav__link ${
                       isCurrent(g.group, r.key) ? "is-current" : ""
                     }`}
-                    href={`#${navKey}`}
+                    href={toHref(g.group, r.key)}
                     data-nav-link={navKey}
                   >
                     {t(lang, r.headingKey)}
@@ -180,48 +184,57 @@ const isCurrent = (g: GroupKey, r?: string) => {
   (() => {
     const OFFSET = 92;
 
-    // Astro のページ遷移（View Transitions）でも効くように、何度呼ばれても安全な init にする
     const init = () => {
       const navs = Array.from(
-        document.querySelectorAll("[data-group-sidenav], [data-group-topnav]")
+        document.querySelectorAll("[data-group-sidenav], [data-group-topnav]"),
       );
       if (!navs.length) return;
 
       navs.forEach((nav) => {
-        // 二重初期化ガード
         if (nav.getAttribute("data-inited") === "1") return;
         nav.setAttribute("data-inited", "1");
 
         const links = Array.from(nav.querySelectorAll("a[data-nav-link]"));
         if (!links.length) return;
 
-        const getTarget = (key) => document.getElementById(key);
+        const getTarget = (id) => document.getElementById(id);
 
-        const scrollToKey = (key, behavior = "smooth") => {
-          const el = getTarget(key);
+        const scrollToId = (id, behavior = "smooth") => {
+          const el = getTarget(id);
           if (!el) return;
           const top = window.scrollY + el.getBoundingClientRect().top - OFFSET;
           window.scrollTo({ top, behavior });
         };
 
-        const setCurrent = (key) => {
+        // ここは「class切り替え」だけ。イベントは追加しない。
+        const setCurrent = (id) => {
           links.forEach((a) => {
-            a.classList.toggle("is-current", a.dataset.navLink === key);
+            a.classList.toggle("is-current", a.dataset.navLink === id);
           });
         };
 
-        // click: offset scroll + hash update
+        // click：同一ページのみ横取りして smooth。別ページは通常遷移させる。
         links.forEach((a) => {
           a.addEventListener("click", (e) => {
-            const key = a.dataset.navLink;
-            if (!key) return;
-            e.preventDefault();
-            history.pushState(null, "", `#${key}`);
-            scrollToKey(key, "smooth");
+            const href = a.getAttribute("href");
+            if (!href) return;
+
+            const url = new URL(href, window.location.origin);
+
+            // 同一ページだけ
+            if (url.pathname === window.location.pathname) {
+              const id = (url.hash || "").slice(1);
+              if (!id) return;
+
+              e.preventDefault();
+              history.pushState(null, "", url.hash);
+              scrollToId(id, "smooth");
+              setCurrent(id);
+            }
           });
         });
 
-        // IntersectionObserver: current sync
+        // IntersectionObserver：表示中セクションに追従
         const targets = links
           .map((a) => getTarget(a.dataset.navLink))
           .filter(Boolean);
@@ -231,7 +244,7 @@ const isCurrent = (g: GroupKey, r?: string) => {
             const visible = entries
               .filter((en) => en.isIntersecting)
               .sort(
-                (a, b) => a.boundingClientRect.top - b.boundingClientRect.top
+                (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
               );
 
             if (!visible.length) return;
@@ -241,39 +254,29 @@ const isCurrent = (g: GroupKey, r?: string) => {
           {
             rootMargin: `-${OFFSET}px 0px -70% 0px`,
             threshold: 0.01,
-          }
+          },
         );
 
         targets.forEach((el) => io.observe(el));
 
-        // hash on load / hashchange:
-        const bootHashScroll = () => {
-          const key = (location.hash || "").replace("#", "");
-          if (!key) return;
-
-          // 一度トップへ → 2フレーム後に目的地へ（レイアウト確定待ち）
-          window.scrollTo({ top: 0, behavior: "auto" });
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              scrollToKey(key, "auto");
-              setCurrent(key);
-            });
-          });
+        // hash同期：スクロールはしない（※別コンポーネント/ブラウザに任せる）
+        const syncFromHash = () => {
+          const id = (location.hash || "").slice(1);
+          if (!id) return;
+          setCurrent(id);
         };
 
-        bootHashScroll();
-        window.addEventListener("hashchange", bootHashScroll);
+        syncFromHash();
+        window.addEventListener("hashchange", syncFromHash);
       });
     };
 
-    // 初期
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", init);
     } else {
       init();
     }
 
-    // Astro のクライアント遷移にも対応（使ってないなら無害）
     document.addEventListener("astro:page-load", init);
   })();
 </script>
@@ -281,43 +284,56 @@ const isCurrent = (g: GroupKey, r?: string) => {
 <!-- MobileTopNav -->
 <script>
   (() => {
-    const nav = document.querySelector<HTMLElement>("[data-group-topnav]");
+    const nav = document.querySelector("[data-group-topnav]");
     if (!nav) return;
 
     const HEADER_H = 64;
-    const PAGEHEADER_H = 210; // あなたの想定値
-    const INITIAL_TOP = HEADER_H + PAGEHEADER_H;
+    const PAGEHEADER_H = 210; // ←あなたの値
+    const INITIAL_Y = HEADER_H + PAGEHEADER_H; // 254
 
     let lastY = window.scrollY;
     let ticking = false;
+
+    const setOffset = (px) => nav.style.setProperty("--offsetY", `${px}px`);
 
     const apply = () => {
       const y = window.scrollY;
       const dy = y - lastY;
 
-      // y===0 は常に初期位置
+      // 0: 初期位置に戻す（常に 254px の位置）
       if (y === 0) {
+        nav.classList.remove("is-follow");
         nav.classList.remove("is-hidden");
-        nav.classList.remove("is-docked");
-        nav.style.top = `${INITIAL_TOP}px`;
+        setOffset(INITIAL_Y);
         lastY = y;
         return;
       }
 
-      // 下スクロール：隠す
-      if (dy > 0) {
-        nav.classList.add("is-hidden");
-        nav.classList.remove("is-docked");
-        nav.style.top = `${HEADER_H}px`; // どちらでも良いが、復帰時のちらつき防止
-      }
-      // 上スクロール：64px に表示
-      else if (dy < 0) {
+      // 上スクロール開始：top0 に“固定表示”
+      if (dy < 0) {
+        nav.classList.remove("is-follow"); // transition 有効
         nav.classList.remove("is-hidden");
-        nav.classList.add("is-docked");
-        nav.style.top = `${HEADER_H}px`;
+        setOffset(64);
+        lastY = y;
+        return;
       }
 
-      lastY = y;
+      // 下スクロール中：スクロール量に応じて上へ流して消す
+      if (dy > 0) {
+        nav.classList.add("is-follow"); // transition 切る（ふわふわ防止）
+        nav.classList.remove("is-hidden");
+
+        // y が増えるほど offset が減る → 0 を超えると負になって画面外へ
+        // 例：y=50 → 204px、y=254 → 0px、y=400 → -146px（上へ消えていく）
+        const offset = INITIAL_Y - y;
+
+        // 逃がし過ぎ防止（任意）
+        const navH = nav.getBoundingClientRect().height || 56;
+        const minOffset = -navH - 16;
+        setOffset(Math.max(offset, minOffset));
+
+        lastY = y;
+      }
     };
 
     const onScroll = () => {
@@ -329,9 +345,7 @@ const isCurrent = (g: GroupKey, r?: string) => {
       });
     };
 
-    // 初期反映
     apply();
-
     window.addEventListener("scroll", onScroll, { passive: true });
   })();
 </script>
@@ -348,18 +362,17 @@ const isCurrent = (g: GroupKey, r?: string) => {
     right: 0;
     z-index: 80;
 
-    /* 初期表示位置（header 64px + pageHeader 約210px） */
-    top: calc(64px + 190px);
+    /* ★常に top:0 固定（スクロール中に top を動かさない） */
+    top: 0px;
 
     /* 表示/非表示のアニメ */
-    transform: translateY(0);
+    transform: translateY(var(--offsetY, 274px));
     opacity: 1;
     pointer-events: auto;
 
     transition:
       transform 220ms ease,
-      opacity 220ms ease,
-      top 220ms ease;
+      opacity 220ms ease;
 
     /* 重要：レイアウト崩し防止 */
     width: 100%;
@@ -370,6 +383,11 @@ const isCurrent = (g: GroupKey, r?: string) => {
 
     @include bp-up(md) {
       display: none;
+    }
+
+    /* ★下スクロール追従中は transition を切る（ふわふわ防止の要） */
+    &.is-follow {
+      transition: none;
     }
 
     &.is-hidden {
@@ -390,9 +408,8 @@ const isCurrent = (g: GroupKey, r?: string) => {
       -webkit-overflow-scrolling: touch;
       padding: 10px 12px;
       display: grid;
-      gap: 5px;
+      gap: 8px;
 
-      // スクロールバー目立たせない（任意）
       scrollbar-width: none;
       &::-webkit-scrollbar {
         display: none;
@@ -401,21 +418,28 @@ const isCurrent = (g: GroupKey, r?: string) => {
 
     .c-groupTopNav__group {
       display: grid;
-      gap: 5px;
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: 10px;
+      min-width: 0; // 重要：右側スクロールを効かせる
     }
 
     .c-groupTopNav__groupLabel {
       font-size: $fs-xs;
       letter-spacing: 0.06em;
       color: $color-gray-500;
+      white-space: nowrap;
     }
 
     .c-groupTopNav__chips {
-      display: flex;
-      gap: 10px;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content; // 文字数で幅
+      gap: 8px;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
-      padding-bottom: 4px;
+      padding-bottom: 2px;
+      min-width: 0;
 
       scrollbar-width: none;
       &::-webkit-scrollbar {
@@ -437,8 +461,8 @@ const isCurrent = (g: GroupKey, r?: string) => {
 
       &.is-current {
         border-color: $color-primary;
-        color: $color-primary;
-        background: rgba(213, 29, 29, 0.25);
+        color: $color-surface;
+        background: rgba(255, 255, 255, 0.25);
       }
     }
   }

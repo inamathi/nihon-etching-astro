@@ -1,13 +1,37 @@
 ---
 import { t, toLang, type Lang } from "@/locales/multilingual";
 
+// 親から渡される lang（なければ ja）
 const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
 const lang: Lang = toLang(rawLang);
-const basePath = `/${lang}`;
+
+// BASE_URL（/ne-staging/ or /）
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+// 現在のパス（/ne-staging/ja/technology/shibo/ など）
+const currentPathname = Astro.url.pathname;
+
+// baseRoot を除いたアプリ内パス（/ja/technology/shibo/）
+const appPath = currentPathname.startsWith(baseRoot)
+  ? currentPathname.slice(baseRoot.length)
+  : currentPathname;
+
+// 言語だけ差し替えた URL を生成
+function toLangPath(target: Lang) {
+  const replaced = appPath.replace(/^\/(ja|en)(\/|$)/, `/${target}$2`);
+  return `${baseRoot}${replaced || `/${target}/`}`;
+}
+
+// 言語切替リンク
+const hrefJa = toLangPath("ja");
+const hrefEn = toLangPath("en");
+
+// 通常リンク用（例：/ne-staging/ja）
+const basePath = `${baseRoot}/${lang}`;
 ---
 
 <header class="c-header c-header--desktop" data-site-header>
-  <div class="c-header__inner l-container">
+  <div class="c-header__inner">
     <a class="c-header__logo" href={`${basePath}/`}>Nihon Etching</a>
 
     <nav class="c-gnav" aria-label="Global navigation">
@@ -40,8 +64,8 @@ const basePath = `/${lang}`;
           {t(lang, "nav.technology")}
         </a>
         <div class="c-gnav__sub">
-          <a class="c-gnav__subLink" href={`${basePath}/technology/5axis/`}>
-            {t(lang, "nav.tech_5axis")}
+          <a class="c-gnav__subLink" href={`${basePath}/technology/laser/`}>
+            {t(lang, "nav.tech_laser")}
           </a>
           <a class="c-gnav__subLink" href={`${basePath}/technology/shibo/`}>
             {t(lang, "nav.tech_shibo")}
@@ -82,15 +106,16 @@ const basePath = `/${lang}`;
       <div class="c-lang" aria-label="Language">
         <a
           class={`c-lang__item ${lang === "ja" ? "is-current" : ""}`}
-          href={`/ja${Astro.url.pathname.replace(/^\/(ja|en|zh)/, "")}`}
+          href={hrefJa}
           aria-current={lang === "ja" ? "true" : undefined}
         >
           JA
         </a>
+
         <span class="c-lang__sep">|</span>
         <a
           class={`c-lang__item ${lang === "en" ? "is-current" : ""}`}
-          href={`/en${Astro.url.pathname.replace(/^\/(ja|en|zh)/, "")}`}
+          href={hrefEn}
           aria-current={lang === "en" ? "true" : undefined}
         >
           EN

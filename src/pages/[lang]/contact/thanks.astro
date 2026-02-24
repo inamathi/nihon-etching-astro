@@ -15,35 +15,33 @@ const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
 const basePath = `${baseRoot}/${lang}`;
 ---
 
-<Base lang={lang} title={t(lang, "contact.thanks.title")}>
+<Base lang={lang} title={t(lang, "thanks.page.titleShort")}>
   <PageHeader
-    eyebrowText="CONTACT"
-    title={t(lang, "contact.page.title")}
-    lead={t(lang, "contact.page.lead")}
-    imageSrc="/images/pageHeader/pageheader-contact.webp"
+    eyebrowText="Submission Complete"
+    title={t(lang, "thanks.page.title")}
+    lead={t(lang, "thanks.page.lead")}
+    imageSrc="/images/pageHeader/pageheader-thanks.webp"
     imageAlt={t(lang, "group.listpage.title")}
   />
-  <Breadcrumb
-    lang={lang}
-    items={[
-      { label: t(lang, "nav.top"), href: `${basePath}/` },
-      { label: t(lang, "nav.contact"), href: `${basePath}/contact/` },
-      {
-        label: t(lang, "contact.thanks.title"),
-        href: `${basePath}/contact/thanks/`,
-      },
-    ]}
-  />
   <main class="l-container">
-    <PageSectionHeading text={t(lang, "contact.thanks.title")} />
+    <Breadcrumb
+      items={[
+        { label: t(lang, "nav.top"), href: `${basePath}/` },
+        { label: t(lang, "nav.contact"), href: `${basePath}/contact/` },
+        {
+          label: t(lang, "thanks.page.titleShort"),
+          href: `${basePath}/contact/thanks/`,
+        },
+      ]}
+    />
 
     <section class="l-section">
-      <p>{t(lang, "contact.thanks.lead.p1")}</p>
-      <p>{t(lang, "contact.thanks.lead.p2")}</p>
+      <p>{t(lang, "thanks.page.lead.p1")}</p>
+      <p>{t(lang, "thanks.page.lead.p2")}</p>
 
       <div class="c-btnrow">
         <a class="c-btn" href={`${basePath}/`}>
-          {t(lang, "contact.thanks.backToHome")}
+          {t(lang, "thanks.page.backToHome")}
         </a>
       </div>
     </section>
@@ -59,6 +57,8 @@ const basePath = `${baseRoot}/${lang}`;
   }
   .l-section {
     padding: 16px 0 40px;
+    max-width: $container-max;
+    margin: auto;
     p {
       color: $color-gray-200;
       line-height: 1.8;

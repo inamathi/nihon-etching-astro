@@ -3,6 +3,11 @@ import { defineConfig } from "astro/config";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
 
+console.log("MODE =", process.env.NODE_ENV);
+console.log("ASTRO_BASE =", process.env.ASTRO_BASE);
+
+const isStaging = process.env.NODE_ENV === "staging";
+
 // SCSS alias 用 importer
 function scssAliasImporter() {
   const aliases = {
@@ -26,6 +31,10 @@ function scssAliasImporter() {
 
 // https://astro.build/config
 export default defineConfig({
+  site: isStaging ? "https://xs313918.xsrv.jp" : "https://nihon-etching.co.jp",
+
+  base: isStaging ? "/ne-staging/" : "/",
+
   devToolbar: {
     enabled: false,
   },

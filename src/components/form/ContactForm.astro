@@ -1,0 +1,419 @@
+---
+import { t, type Lang } from "@/locales/multilingual";
+
+type Props = {
+  lang: Lang;
+  basePath: string; // "/ja" | "/en"
+  action: string; // Formspree endpoint
+};
+
+const { lang, basePath, action } = Astro.props as Props;
+const thanksPath = `${basePath}/contact/thanks/`;
+---
+
+<form
+  class="c-contactForm"
+  method="POST"
+  action={action}
+  data-formspree
+  data-thanks={thanksPath}
+  data-lang={lang}
+  novalidate
+>
+  <input type="hidden" name="_subject" value="[Nihon Etching] Contact" />
+
+  <!-- honeypot -->
+  <div class="c-contactForm__hp" aria-hidden="true">
+    <label>
+      Don’t fill this out:
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+    </label>
+  </div>
+
+  <div class="c-contactForm__grid">
+    <!-- 御社名* -->
+    <div class="c-contactForm__field">
+      <label class="c-contactForm__label" for="company">
+        {t(lang, "contact.form.company")}
+        <span class="c-contactForm__req">*</span>
+      </label>
+      <input
+        class="c-contactForm__input"
+        id="company"
+        name="company"
+        type="text"
+        required
+      />
+      <span class="c-contactForm__error" aria-live="polite"></span>
+    </div>
+
+    <!-- 部署名 -->
+    <div class="c-contactForm__field">
+      <label class="c-contactForm__label" for="department">
+        {t(lang, "contact.form.department")}
+      </label>
+      <input
+        class="c-contactForm__input"
+        id="department"
+        name="department"
+        type="text"
+      />
+      <span class="c-contactForm__error" aria-live="polite"></span>
+    </div>
+
+    <!-- 御氏名* -->
+    <div class="c-contactForm__field">
+      <label class="c-contactForm__label" for="name">
+        {t(lang, "contact.form.name")}
+        <span class="c-contactForm__req">*</span>
+      </label>
+      <input
+        class="c-contactForm__input"
+        id="name"
+        name="name"
+        type="text"
+        required
+      />
+    </div>
+
+    <!-- email* -->
+    <div class="c-contactForm__field">
+      <label class="c-contactForm__label" for="email">
+        {t(lang, "contact.form.email")}
+        <span class="c-contactForm__req">*</span>
+      </label>
+      <input
+        class="c-contactForm__input"
+        id="email"
+        name="email"
+        type="email"
+        required
+      />
+      <span class="c-contactForm__error" aria-live="polite"></span>
+    </div>
+
+    <!-- 郵便番号 -->
+    <div class="c-contactForm__field">
+      <label class="c-contactForm__label" for="postal">
+        {t(lang, "contact.form.postal")}
+        <span class="c-contactForm__req">*</span>
+      </label>
+      <input
+        class="c-contactForm__input"
+        id="postal"
+        name="postal"
+        type="text"
+        inputmode="numeric"
+        autocomplete="new-password"
+        placeholder={t(lang, "contact.form.postalPlaceholder")}
+      />
+      <span class="c-contactForm__error" aria-live="polite"></span>
+    </div>
+
+    <!-- 電話* -->
+    <div class="c-contactForm__field">
+      <label class="c-contactForm__label" for="tel">
+        {t(lang, "contact.form.tel")}
+        <span class="c-contactForm__req">*</span>
+      </label>
+      <input
+        class="c-contactForm__input"
+        id="tel"
+        name="tel"
+        type="tel"
+        inputmode="tel"
+        autocomplete="tel"
+        required
+      />
+      <span class="c-contactForm__error" aria-live="polite"></span>
+    </div>
+
+    <!-- 住所 -->
+    <div class="c-contactForm__field c-contactForm__field--full">
+      <label class="c-contactForm__label" for="address">
+        {t(lang, "contact.form.address")}
+      </label>
+      <input
+        class="c-contactForm__input"
+        id="address"
+        name="address"
+        type="text"
+        autocomplete="street-address"
+      />
+    </div>
+
+    <!-- 件名 -->
+    <div class="c-contactForm__field c-contactForm__field--full">
+      <label class="c-contactForm__label" for="subject">
+        {t(lang, "contact.form.subject")}
+      </label>
+      <input
+        class="c-contactForm__input"
+        id="subject"
+        name="subject"
+        type="text"
+      />
+    </div>
+
+    <!-- お問い合わせ内容（種別） -->
+    <fieldset
+      class="c-contactForm__field c-contactForm__field--full c-contactForm__fieldset"
+    >
+      <legend class="c-contactForm__legend">
+        {t(lang, "contact.form.category")}
+      </legend>
+
+      <div
+        class="c-contactForm__radios"
+        role="radiogroup"
+        aria-label={t(lang, "contact.form.category")}
+      >
+        <!-- 資料送付：デフォルト選択 -->
+        <label class="c-contactForm__radio">
+          <input type="radio" name="category" value="material" checked />
+          <span>{t(lang, "contact.form.cat.material")}</span>
+        </label>
+
+        <label class="c-contactForm__radio">
+          <input type="radio" name="category" value="recruit" />
+          <span>{t(lang, "contact.form.cat.recruit")}</span>
+        </label>
+
+        <label class="c-contactForm__radio">
+          <input type="radio" name="category" value="quote" />
+          <span>{t(lang, "contact.form.cat.quote")}</span>
+        </label>
+
+        <label class="c-contactForm__radio">
+          <input type="radio" name="category" value="other" />
+          <span>{t(lang, "contact.form.cat.other")}</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <!-- お問い合わせ内容（詳細）* -->
+    <div class="c-contactForm__field c-contactForm__field--full">
+      <label class="c-contactForm__label" for="message">
+        {t(lang, "contact.form.message")}
+        <span class="c-contactForm__req">*</span>
+      </label>
+      <textarea
+        class="c-contactForm__textarea"
+        id="message"
+        name="message"
+        rows="9"
+        required></textarea>
+      <span class="c-contactForm__error" aria-live="polite"></span>
+    </div>
+
+    <div class="c-contactForm__actions c-contactForm__field--full">
+      <button class="c-contactForm__submit" type="submit">
+        {t(lang, "contact.form.submit")}
+      </button>
+    </div>
+  </div>
+</form>
+
+<script>
+  // ─── 型定義 ────────────────────────────────────────────────────
+  type Messages = {
+    required: string;
+    email: string;
+    tel: string;
+    postal: string;
+  };
+
+  type Rule =
+    | { type: "required" }
+    | { type: "pattern"; regex: RegExp; msgKey: keyof Messages };
+
+  // ─── 初期化 ────────────────────────────────────────────────────
+  const form = document.querySelector<HTMLFormElement>("form[data-formspree]")!;
+  // if (!form) throw new Error("form not found");
+
+  const lang = form.getAttribute("data-lang") ?? "ja";
+
+  // ─── エラーメッセージ定義 ───────────────────────────────────────
+  const MESSAGES: Record<string, Messages> = {
+    ja: {
+      required: "必須項目です",
+      email: "メールアドレスの形式が正しくありません",
+      tel: "電話番号は数字とハイフンで入力してください（例：03-1234-5678）",
+      postal: "郵便番号は7桁の数字で入力してください（例：1234567）",
+    },
+    en: {
+      required: "This field is required",
+      email: "Please enter a valid email address",
+      tel: "Please enter a valid phone number (digits and hyphens only, e.g. 03-1234-5678)",
+      postal: "Please enter a 7-digit postal code (e.g. 1234567)",
+    },
+  };
+
+  const msg: Messages = MESSAGES[lang] ?? MESSAGES.ja;
+
+  // ─── バリデーションルール定義 ──────────────────────────────────
+  const RULES: Record<string, Rule[]> = {
+    company: [{ type: "required" }],
+    name: [{ type: "required" }],
+    email: [
+      { type: "required" },
+      { type: "pattern", regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, msgKey: "email" },
+    ],
+    tel: [
+      { type: "required" },
+      { type: "pattern", regex: /^[\d\-+() ]+$/, msgKey: "tel" },
+    ],
+    postal: [
+      { type: "required" },
+      { type: "pattern", regex: /^\d{7}$/, msgKey: "postal" },
+    ],
+    message: [{ type: "required" }],
+  };
+
+  // ─── ユーティリティ ────────────────────────────────────────────
+  function getErrorEl(fieldEl: Element): Element | null {
+    return fieldEl.querySelector(".c-contactForm__error");
+  }
+
+  function setError(input: Element, message: string): void {
+    const field = input.closest(".c-contactForm__field, fieldset");
+    if (!field) return;
+    field.classList.add("is-error");
+    const errorEl = getErrorEl(field);
+    if (errorEl) {
+      errorEl.textContent = message;
+      errorEl.setAttribute("role", "alert");
+    }
+    input.setAttribute("aria-invalid", "true");
+  }
+
+  function clearError(input: Element): void {
+    const field = input.closest(".c-contactForm__field, fieldset");
+    if (!field) return;
+    field.classList.remove("is-error");
+    const errorEl = getErrorEl(field);
+    if (errorEl) {
+      errorEl.textContent = "";
+      errorEl.removeAttribute("role");
+    }
+    input.removeAttribute("aria-invalid");
+  }
+
+  // ─── 1フィールドのバリデーション ──────────────────────────────
+  function validateField(name: string, value: string): string | null {
+    const rules = RULES[name];
+    if (!rules) return null;
+
+    for (const rule of rules) {
+      if (rule.type === "required" && value.trim() === "") {
+        return msg.required;
+      }
+      if (
+        rule.type === "pattern" &&
+        value.trim() !== "" &&
+        !rule.regex.test(value.trim())
+      ) {
+        return msg[rule.msgKey];
+      }
+    }
+    return null;
+  }
+
+  // ─── 郵便番号 → 住所自動入力（ja のみ）─────────────────────────
+  if (lang === "ja") {
+    const postalInput = form.querySelector<HTMLInputElement>("#postal");
+    const addressInput = form.querySelector<HTMLInputElement>("#address");
+
+    if (postalInput && addressInput) {
+      postalInput.addEventListener("input", async () => {
+        const value = postalInput.value.replace(/\D/g, "");
+        if (value.length !== 7) return;
+
+        try {
+          const res = await fetch(
+            `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${value}`,
+          );
+          if (!res.ok) return;
+
+          const data = await res.json();
+
+          if (data.status !== 200 || !data.results) {
+            setError(postalInput, "該当する住所が見つかりませんでした");
+            return;
+          }
+
+          const { address1, address2, address3 } = data.results[0];
+          addressInput.value = `${address1}${address2}${address3}`;
+          clearError(postalInput);
+        } catch {
+          // 通信失敗は無視
+        }
+      });
+    }
+  }
+
+  // ─── フォーム全体のバリデーション ─────────────────────────────
+  function validateAll(): boolean {
+    let firstErrorEl: Element | null = null;
+    let hasError = false;
+
+    for (const name of Object.keys(RULES)) {
+      const input = form.querySelector<HTMLInputElement>(`[name="${name}"]`);
+      if (!input) continue;
+
+      const error = validateField(name, input.value);
+      if (error) {
+        setError(input, error);
+        hasError = true;
+        if (!firstErrorEl) firstErrorEl = input;
+      } else {
+        clearError(input);
+      }
+    }
+
+    if (firstErrorEl instanceof HTMLElement) {
+      firstErrorEl.focus();
+    }
+
+    return !hasError;
+  }
+
+  // ─── submit ────────────────────────────────────────────────────
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    if (!validateAll()) return;
+
+    const action = form.getAttribute("action");
+    if (!action) return;
+
+    const thanksPath = form.getAttribute("data-thanks") ?? "/";
+    const thanksUrl = `${location.origin}${thanksPath}`;
+
+    try {
+      const fd = new FormData(form);
+      const res = await fetch(action, {
+        method: "POST",
+        body: fd,
+        headers: { Accept: "application/json" },
+      });
+
+      if (!res.ok) {
+        alert(
+          lang === "en"
+            ? "Submission failed. Please check your input."
+            : "送信に失敗しました。入力内容をご確認ください。",
+        );
+        return;
+      }
+
+      window.location.assign(thanksUrl);
+    } catch {
+      alert(
+        lang === "en"
+          ? "A network error occurred. Please try again later."
+          : "通信エラーが発生しました。時間をおいて再送してください。",
+      );
+    }
+  });
+</script>

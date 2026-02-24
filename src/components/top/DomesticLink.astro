@@ -3,7 +3,8 @@ import { t, toLang, type Lang } from "@/locales/multilingual";
 
 const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
 const lang: Lang = toLang(rawLang);
-const basePath = `/${lang}`;
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
 ---
 
 <div class="wrapper">
@@ -119,17 +120,19 @@ const basePath = `/${lang}`;
 <!-- svgの切り替え -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".icon-set img").forEach((img) => {
-      const def = img.dataset.default;
-      const hov = img.dataset.hover;
-      if (!def || !hov) return;
+    document
+      .querySelectorAll<HTMLImageElement>(".icon-set img")
+      .forEach((img) => {
+        const def = img.dataset.default;
+        const hov = img.dataset.hover;
+        if (!def || !hov) return;
 
-      img.addEventListener("mouseenter", () => {
-        img.src = hov;
+        img.addEventListener("mouseenter", () => {
+          img.src = hov;
+        });
+        img.addEventListener("mouseleave", () => {
+          img.src = def;
+        });
       });
-      img.addEventListener("mouseleave", () => {
-        img.src = def;
-      });
-    });
   });
 </script>

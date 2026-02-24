@@ -37,3 +37,8 @@
     }
   }
 }
+@include bp-between(md, xl) {
+  .c-info {
+    padding: 10px;
+  }
+}

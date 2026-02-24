@@ -1,0 +1,7 @@
+@use "@styles/var" as *;
+@use "@styles/mixin" as *;
+
+.c-block__title {
+  border-left: solid 4px $color-gray-700;
+  padding-left: 10px;
+}

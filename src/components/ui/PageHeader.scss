@@ -3,8 +3,8 @@
 
 .c-pageHeader {
   position: relative;
-  margin: 0 0 18px 0;
-  min-height: clamp(160px, 14vw, 200px);
+  margin: 0 0 10px 0;
+  min-height: clamp(160px, 16vw, 320px);
   display: grid;
   align-items: end;
 
@@ -122,7 +122,11 @@
     }
   }
 }
-
+@include bp-between(md, xl) {
+  .c-pageHeader {
+    min-height: 280px;
+  }
+}
 @include bp-down(md) {
   .c-pageHeader {
     min-height: 220px;

@@ -24,9 +24,34 @@ type HistoryItem = {
 };
 
 const items = getList<HistoryItem>("company.history.items");
+const title = t(lang, "pageTitle.company.history");
+
+const historySchema = {
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "@id": `https://nihon-etching.co.jp/${lang}/company/history/`,
+  name: t(lang, "company.history.title"),
+  description: t(lang, "company.history.lead"),
+  url: `https://nihon-etching.co.jp/${lang}/company/history/`,
+  inLanguage: lang,
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://nihon-etching.co.jp/",
+  },
+  about: {
+    "@type": "Organization",
+    "@id": "https://nihon-etching.co.jp/#localbusiness",
+    name: "株式会社日本エッチング",
+  },
+};
 ---
 
-<Base lang={lang} title={t(lang, "company.history.meta.title")}>
+<Base lang={lang} title={title}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(historySchema)}
+    slot="head"
+  />
   <PageHeader
     eyebrowText="COMPANY"
     title={t(lang, "company.history.title")}
@@ -35,16 +60,15 @@ const items = getList<HistoryItem>("company.history.items");
     imageAlt=""
   />
 
-  <Breadcrumb
-    ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
-    items={[
-      { label: t(lang, "nav.top"), href: `${basePath}/` },
-      { label: t(lang, "nav.company"), href: `${basePath}/company/` },
-      { label: t(lang, "company.history.title") },
-    ]}
-  />
-
-  <main class="l-container">
+  <div class="l-container p-company">
+    <Breadcrumb
+      ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+      items={[
+        { label: t(lang, "nav.top"), href: `${basePath}/` },
+        { label: t(lang, "nav.company"), href: `${basePath}/company/` },
+        { label: t(lang, "company.history.title") },
+      ]}
+    />
     <section class="l-section">
       <div class="c-history">
         <PageSectionHeading text={t(lang, "company.history.title")} />
@@ -61,25 +85,5 @@ const items = getList<HistoryItem>("company.history.items");
         </dl>
       </div>
     </section>
-  </main>
+  </div>
 </Base>
-
-<style lang="scss">
-  @use "@styles/var" as *;
-  @use "@styles/mixin" as *;
-
-  .c-history {
-    padding: 40px 0;
-    .c-history__dl {
-      .c-history__row {
-        display: flex;
-        gap: 20px;
-        padding: 10px 0;
-        border-bottom: dotted 1px $color-gray-600;
-        .c-history__dt {
-          min-width: 150px;
-        }
-      }
-    }
-  }
-</style>

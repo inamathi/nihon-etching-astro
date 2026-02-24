@@ -84,7 +84,6 @@ const fieldDict: Record<FieldKey, FieldDef> = {
   map: {
     key: "map",
     kind: "link",
-    // 表示テキストは固定（あなたの要望）
     getValue: (_c, lang) => (lang === "ja" ? "Google Map" : "Google Map"),
     getHref: (c, lang) => pick(c.map as any, lang).trim(),
   },

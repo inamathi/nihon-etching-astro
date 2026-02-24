@@ -17,7 +17,6 @@ import CompanyMediaCard from "@/components/group/CompanyMediaCard.astro";
 import { buildRegionBlocks, regionHeadingTextKey } from "@/lib/groupRegion";
 import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
 import HashSmoothScroll from "@/components/group/HashSmoothScroll.astro";
-import HashJumpGuard from "@/components/group/HashJumpGuard.astro";
 
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },
@@ -43,9 +42,33 @@ const headingKeyMap: Record<NeRegionKey, string> = {
   asia: "common.groupName.neAsia",
   "east-asia": "common.groupName.neEastAsia",
 };
+
+const neSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `https://nihon-etching.co.jp/${lang}/group/ne/`,
+  name: t(lang, "common.groupName.ne"),
+  description: t(lang, "group.ne.lead"),
+  url: `https://nihon-etching.co.jp/${lang}/group/ne/`,
+  inLanguage: lang,
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://nihon-etching.co.jp/",
+  },
+  about: {
+    "@type": "Organization",
+    "@id": "https://nihon-etching.co.jp/#localbusiness",
+    name: "株式会社日本エッチング",
+  },
+};
 ---
 
 <Base lang={lang} title={t(lang, "group.ne.pageTitle")}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(neSchema)}
+    slot="head"
+  />
   <PageHeader
     eyebrowText="Group"
     title={t(lang, "common.groupName.ne")}
@@ -53,15 +76,15 @@ const headingKeyMap: Record<NeRegionKey, string> = {
     imageSrc="/images/pageHeader/pageheader-group.webp"
     imageAlt={t(lang, "common.groupName.ne")}
   />
-  <Breadcrumb
-    items={[
-      { label: t(lang, "nav.top"), href: `${basePath}/` },
-      { label: t(lang, "nav.group"), href: `${basePath}/group/` },
-      { label: t(lang, "nav.group_ne"), href: `${basePath}/group/ne/` },
-    ]}
-  />
 
-  <main class="l-main">
+  <div class="l-container p-group">
+    <Breadcrumb
+      items={[
+        { label: t(lang, "nav.top"), href: `${basePath}/` },
+        { label: t(lang, "nav.group"), href: `${basePath}/group/` },
+        { label: t(lang, "nav.group_ne"), href: `${basePath}/group/ne/` },
+      ]}
+    />
     <!-- Loop -->
     <section class="l-wrapper">
       <GroupRegionList
@@ -76,27 +99,25 @@ const headingKeyMap: Record<NeRegionKey, string> = {
     </section>
     <!-- 遷移してきたときにhashを持っていたらSmoothScroll -->
     <HashSmoothScroll offset={92} />
-  </main>
+  </div>
 </Base>
 
-<style lang="scss">
+<!-- <style lang="scss">
   @use "@styles/var" as *;
   @use "@styles/mixin" as *;
   @use "@styles/font" as *;
 
-  // html.is-groupNav-visible {
-  //   .l-main {
-  //     padding-top: calc(64px + 96px);
-  //   }
-  // }
-  .l-main {
+  .p-group {
+    @include bp-between(md, xl) {
+      padding: 0 10px;
+    }
     @include bp-down(md) {
-      padding-top: calc(64px + 100px);
+      padding: 0 10px;
     }
   }
+
   .l-wrapper {
     position: relative;
-    width: $container-max;
     margin: auto;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 260px;
@@ -126,4 +147,4 @@ const headingKeyMap: Record<NeRegionKey, string> = {
       padding: 0 20px;
     }
   }
-</style>
+</style> -->

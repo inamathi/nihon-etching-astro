@@ -34,9 +34,35 @@ const linkButtons: LinkItem[] = [
     target: "_blank",
   },
 ];
+
+const title = t(lang, "pageTitle.career");
+
+const recruitSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `https://nihon-etching.co.jp/${lang}/recruit/`,
+  name: t(lang, "recruit.page.title"),
+  url: `https://nihon-etching.co.jp/${lang}/recruit/`,
+  inLanguage: lang,
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://nihon-etching.co.jp/",
+  },
+  about: {
+    "@type": "Organization",
+    "@id": "https://nihon-etching.co.jp/#localbusiness",
+    name: "株式会社日本エッチング",
+    url: "https://nihon-etching.co.jp/",
+  },
+};
 ---
 
-<Base lang={lang} title={t(lang, "recruit.page.title")}>
+<Base lang={lang} title={title}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(recruitSchema)}
+    slot="head"
+  />
   <PageHeader
     eyebrowText="RECRUIT"
     title={t(lang, "recruit.page.title")}
@@ -45,16 +71,14 @@ const linkButtons: LinkItem[] = [
     imageAlt={t(lang, "recruit.page.imageAlt")}
   />
 
-  <Breadcrumb
-    lang={lang}
-    items={[
-      { label: t(lang, "nav.top"), href: `${basePath}/` },
-      { label: t(lang, "nav.recruit"), href: `${basePath}/recruit/` },
-    ]}
-  />
-
   <main class="l-container">
-    <section class="l-section">
+    <Breadcrumb
+      items={[
+        { label: t(lang, "nav.top"), href: `${basePath}/` },
+        { label: t(lang, "nav.recruit"), href: `${basePath}/recruit/` },
+      ]}
+    />
+    <section class="p-recruit">
       <div class="c-recruit">
         <!-- Introduction -->
         <Introduction lang={lang} arrayKey="recruit.body.intro.paragraphs" />
@@ -155,7 +179,7 @@ const linkButtons: LinkItem[] = [
         </dl>
       </div>
     </section>
-    <section class="l-section">
+    <section>
       <BlockHeading text={t(lang, "technology.peening.body.link.heading")} />
       <div class="p-peening__linkList">
         {
@@ -176,6 +200,9 @@ const linkButtons: LinkItem[] = [
 <style lang="scss">
   @use "@styles/var" as *;
   @use "@styles/mixin" as *;
+  .p-recruit {
+    margin: 40px auto;
+  }
   .c-introduction {
     border: solid 1px $color-gray-600;
     padding: 20px;
@@ -243,6 +270,13 @@ const linkButtons: LinkItem[] = [
       font-weight: 700;
       border-right: solid 2px $color-gray-600;
     }
+    @include bp-down(md) {
+      &__dt {
+        max-width: max-content;
+        padding-right: 10px;
+        margin-bottom: 10px;
+      }
+    }
 
     &__dd {
       margin: 0;
@@ -268,6 +302,9 @@ const linkButtons: LinkItem[] = [
       margin: 0;
       color: $color-gray-200;
       line-height: 1.85;
+    }
+    @include bp-down(md) {
+      font-size: $fs-s;
     }
 
     &__cta {

@@ -61,9 +61,48 @@ const items =
 
 const mapSrc = (lat: number, lng: number, zoom = 16) =>
   `https://www.google.com/maps?q=${lat},${lng}&z=${zoom}&hl=${mapLang}&output=embed`;
+
+const title = t(lang, "pageTitle.company.overview");
+
+const headquarters = Object.values(locations)[0];
+
+const overviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://nihon-etching.co.jp/#localbusiness",
+  name: "株式会社日本エッチング",
+  alternateName: "Nihon Etching Ltd.",
+  url: "https://nihon-etching.co.jp/",
+  telephone: "+81-3-3744-5502",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "本羽田2-8-19",
+    addressLocality: "大田区",
+    addressRegion: "東京都",
+    postalCode: "144-0044",
+    addressCountry: "JP",
+  },
+  geo: headquarters?.map
+    ? {
+        "@type": "GeoCoordinates",
+        latitude: headquarters.map.lat,
+        longitude: headquarters.map.lng,
+      }
+    : undefined,
+  hasMap: "https://www.google.com/maps?q=35.5499,139.7282",
+  sameAs: [
+    "https://www.facebook.com/nihonetchingJPN",
+    "https://x.com/EtchingNihon",
+  ],
+};
 ---
 
-<Base lang={lang} title={t(lang, "company.overview_access.pageTitle")}>
+<Base lang={lang} title={title}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(overviewSchema)}
+    slot="head"
+  />
   <PageHeader
     eyebrowText="COMPANY"
     title={t(lang, "company.overview_access.title")}
@@ -71,19 +110,19 @@ const mapSrc = (lat: number, lng: number, zoom = 16) =>
     imageSrc="/images/pageHeader/pageheader-company.webp"
     imageAlt=""
   />
-  <BreadCrumb
-    ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
-    items={[
-      { label: t(lang, "nav.top"), href: `${basePath}/` },
-      {
-        label: t(lang, "nav.company"),
-        href: `${basePath}/company/overview-access/`,
-      },
-      { label: t(lang, "company.overview_access.title") },
-    ]}
-  />
 
-  <main class="l-container c-page">
+  <div class="l-container p-company">
+    <BreadCrumb
+      ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+      items={[
+        { label: t(lang, "nav.top"), href: `${basePath}/` },
+        {
+          label: t(lang, "nav.company"),
+          href: `${basePath}/company/overview-access/`,
+        },
+        { label: t(lang, "company.overview_access.title") },
+      ]}
+    />
     <section class="c-section">
       <PageSectionHeading
         as="h3"
@@ -197,148 +236,5 @@ const mapSrc = (lat: number, lng: number, zoom = 16) =>
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </Base>
-
-<style lang="scss">
-  @use "@styles/var" as *;
-  @use "@styles/mixin" as *;
-
-  .c-page {
-    padding: 40px 0 60px;
-  }
-
-  .c-dl {
-    margin: 0;
-
-    &__row {
-      display: grid;
-      grid-template-columns: 120px 1fr;
-      gap: 10px;
-      padding: 10px 0;
-      border-top: 1px solid $color-gray-800;
-
-      &:first-child {
-        border-top: none;
-        padding-top: 0;
-      }
-    }
-
-    &__dt {
-      margin: 0;
-      font-size: $fs-sm;
-      color: $color-gray-500;
-    }
-
-    &__dd {
-      margin: 0;
-      font-size: $fs-m;
-      color: $color-gray-200;
-      line-height: 1.8;
-    }
-  }
-
-  .c-accessList {
-    display: grid;
-    gap: 22px;
-  }
-  // Google Map & 関連文字
-  .c-accessCard {
-    border-top: 1px solid $color-gray-900;
-    padding-top: 18px;
-
-    &__title {
-      margin: 0 0 12px 0;
-      font-size: $fs-m;
-      color: $color-gray-200;
-    }
-
-    &__dl {
-      margin: 0 0 14px 0;
-    }
-
-    &__row {
-      display: grid;
-      grid-template-columns: 80px 1fr;
-      gap: 10px;
-      padding: 8px 0;
-      border-top: 1px solid $color-gray-900;
-
-      &:first-child {
-        border-top: none;
-        padding-top: 0;
-      }
-    }
-
-    &__dt {
-      margin: 0;
-      font-size: $fs-s;
-      color: $color-gray-500;
-      width: 100px;
-    }
-
-    &__dd {
-      margin: 0;
-      font-size: $fs-s;
-      color: $color-gray-200;
-      line-height: 1.8;
-    }
-
-    &__map {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      max-height: 360px;
-      border: 1px solid $color-gray-800;
-      overflow: hidden;
-      background: $color-gray-900;
-    }
-
-    &__iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    &__notes {
-      margin-top: 14px;
-      display: grid;
-      gap: 8px;
-    }
-
-    &__note {
-      margin: 0;
-      font-size: $fs-s;
-      line-height: 1.8;
-      color: $color-gray-300;
-    }
-
-    &__noteLabel {
-      font-weight: 600;
-      color: $color-gray-200;
-    }
-  }
-
-  @include bp-down(md) {
-    .c-accessCard {
-      &__row {
-        grid-template-columns: 1fr;
-      }
-
-      &__map {
-        aspect-ratio: 4 / 3;
-        max-height: 300px;
-      }
-    }
-  }
-
-  @include bp-down(md) {
-    .c-page {
-      padding: 0 20px;
-    }
-    .c-dl {
-      &__row {
-        grid-template-columns: 1fr;
-      }
-    }
-  }
-</style>

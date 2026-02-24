@@ -35,26 +35,49 @@ const headingKeyMap: Record<SecRegionKey, string> = {
   "north-america": "common.groupName.secNorthAmerica",
   "south-america": "common.groupName.secSouthAmerica",
 };
+
+const secSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `https://nihon-etching.co.jp/${lang}/group/sec/`,
+  name: t(lang, "common.groupName.sec"),
+  description: t(lang, "group.sec.lead"),
+  url: `https://nihon-etching.co.jp/${lang}/group/sec/`,
+  inLanguage: lang,
+  isPartOf: {
+    "@type": "WebSite",
+    url: "https://nihon-etching.co.jp/",
+  },
+  about: {
+    "@type": "Organization",
+    "@id": "https://nihon-etching.co.jp/#localbusiness",
+    name: "株式会社日本エッチング",
+  },
+};
 ---
 
 <Base lang={lang} title={t(lang, "group.sec.pageTitle")}>
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(secSchema)}
+    slot="head"
+  />
   <PageHeader
     eyebrowText="Group"
     title={t(lang, "common.groupName.sec")}
     lead={t(lang, "group.sec.lead")}
-    imageSrc="/images/pageHeader/pageHeader-group-nwn.webp"
+    imageSrc="/images/pageHeader/pageheader-group.webp"
     imageAlt={t(lang, "common.groupName.sec")}
   />
 
-  <Breadcrumb
-    items={[
-      { label: t(lang, "nav.top"), href: `${basePath}/` },
-      { label: t(lang, "nav.group"), href: `${basePath}/group/` },
-      { label: t(lang, "nav.group_sec"), href: `${basePath}/group/sec/` },
-    ]}
-  />
-
-  <main class="l-main">
+  <div class="l-container p-group">
+    <Breadcrumb
+      items={[
+        { label: t(lang, "nav.top"), href: `${basePath}/` },
+        { label: t(lang, "nav.group"), href: `${basePath}/group/` },
+        { label: t(lang, "nav.group_sec"), href: `${basePath}/group/sec/` },
+      ]}
+    />
     <section class="l-wrapper">
       <GroupRegionList
         group="sec"
@@ -68,50 +91,5 @@ const headingKeyMap: Record<SecRegionKey, string> = {
     </section>
     <!-- 遷移してきたときにhashを持っていたらSmoothScroll -->
     <HashSmoothScroll offset={92} />
-  </main>
+  </div>
 </Base>
-
-<style lang="scss">
-  @use "@styles/var" as *;
-  @use "@styles/mixin" as *;
-  @use "@styles/font" as *;
-
-  .l-main {
-    @include bp-down(md) {
-      padding-top: calc(64px + 100px);
-    }
-  }
-
-  .l-wrapper {
-    position: relative;
-    width: $container-max;
-    margin: auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 260px;
-    padding-bottom: 40px;
-    gap: 40px;
-  }
-
-  .l-section {
-    padding: 20px 0 40px;
-  }
-
-  .c-companyCards {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-  }
-
-  @include bp-down(md) {
-    .l-wrapper {
-      width: 100%;
-      display: flex;
-      flex-direction: column-reverse;
-      padding-bottom: 40px;
-      gap: 40px;
-    }
-    .l-section {
-      padding: 0 20px;
-    }
-  }
-</style>
