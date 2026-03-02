@@ -104,7 +104,12 @@ const laserSchema = {
 };
 ---
 
-<Base lang={lang} title={title}>
+<Base
+  lang={lang}
+  title={title}
+  description={t(lang, "meta.description.technology.laser")}
+  ogImage="/ogp/ogp_technology.webp"
+>
   <script
     type="application/ld+json"
     set:html={JSON.stringify(laserSchema)}

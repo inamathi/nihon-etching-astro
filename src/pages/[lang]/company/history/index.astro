@@ -46,7 +46,12 @@ const historySchema = {
 };
 ---
 
-<Base lang={lang} title={title}>
+<Base
+  lang={lang}
+  title={title}
+  description={t(lang, "meta.description.company.history")}
+  ogImage="/ogp/ogp_company.webp"
+>
   <script
     type="application/ld+json"
     set:html={JSON.stringify(historySchema)}

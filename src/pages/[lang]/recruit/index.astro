@@ -35,7 +35,7 @@ const linkButtons: LinkItem[] = [
   },
 ];
 
-const title = t(lang, "pageTitle.career");
+const title = t(lang, "pageTitle.careers");
 
 const recruitSchema = {
   "@context": "https://schema.org",
@@ -57,7 +57,12 @@ const recruitSchema = {
 };
 ---
 
-<Base lang={lang} title={title}>
+<Base
+  lang={lang}
+  title={title}
+  description={t(lang, "meta.description.careers")}
+  ogImage="/ogp/ogp_careers.webp"
+>
   <script
     type="application/ld+json"
     set:html={JSON.stringify(recruitSchema)}

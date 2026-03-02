@@ -63,7 +63,12 @@ const downloadSchema = {
 };
 ---
 
-<Base lang={lang} title={title}>
+<Base
+  lang={lang}
+  title={title}
+  description={t(lang, "meta.description.download")}
+  ogImage="/ogp/ogp_download.webp"
+>
   <script
     type="application/ld+json"
     set:html={JSON.stringify(downloadSchema)}

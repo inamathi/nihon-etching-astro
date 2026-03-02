@@ -1,8 +1,25 @@
 ---
-const { lang = "ja", title = "" } = Astro.props;
-const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en)/, "");
+import type { Lang } from "@/locales/multilingual";
+import SvgSprite from "@/components/svg/SvgSprite.astro";
+import Footer from "@/components/common/Footer.astro";
+import HeaderDesktop from "@/components/common/HeaderDesktop.astro";
+import HeaderMobile from "@/components/common/HeaderMobile.astro";
+import ScrollToTop from "@/components/common/ScrollToTop.astro";
+import "@/styles/main.scss";
 
-/* JSON-LD */
+const {
+  lang = "ja",
+  title = "",
+  description = "",
+  ogImage = "/ogp/default.webp",
+  ogType = "website",
+} = Astro.props;
+
+const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en)/, "");
+const siteUrl = "https://nihon-etching.co.jp";
+const canonicalUrl = `${siteUrl}/${lang}${pathNoLang}`;
+const ogImageUrl = `${siteUrl}${ogImage}`;
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -23,24 +40,42 @@ const organizationSchema = {
     "https://x.com/EtchingNihon",
   ],
 };
-
-/* main.css */
-import "@/styles/main.scss";
-
-import SvgSprite from "@/components/svg/SvgSprite.astro";
-import Footer from "@/components/common/Footer.astro";
-import HeaderDesktop from "@/components/common/HeaderDesktop.astro";
-import HeaderMobile from "@/components/common/HeaderMobile.astro";
-import ScrollToTop from "@/components/common/ScrollToTop.astro";
 ---
 
 <html lang={lang}>
   <head>
     <meta charset="utf-8" />
-    <title>{title ? `${title} | Nihon Etching Ltd.` : "Nihon Etching"}</title>
-    <link rel="alternate" hreflang="ja" href={`/ja${pathNoLang}`} />
-    <link rel="alternate" hreflang="en" href={`/en${pathNoLang}`} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title ? `${title} | Nihon Etching Ltd.` : "Nihon Etching"}</title>
+    {description && <meta name="description" content={description} />}
+
+    <!-- canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- hreflang -->
+    <link rel="alternate" hreflang="ja" href={`${siteUrl}/ja${pathNoLang}`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en${pathNoLang}`} />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href={`${siteUrl}/ja${pathNoLang}`}
+    />
+
+    <!-- OGP -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta
+      property="og:title"
+      content={title ? `${title} | Nihon Etching Ltd.` : "Nihon Etching"}
+    />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={lang === "ja" ? "ja_JP" : "en_US"} />
+    <meta property="og:site_name" content="Nihon Etching Ltd." />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={ogImageUrl} />
 
     <!-- JSON-LD -->
     <script
@@ -52,10 +87,26 @@ import ScrollToTop from "@/components/common/ScrollToTop.astro";
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+      id="google-fonts"
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+JP:wght@600;700&display=swap"
     />
-    <!-- JSON-LD 差し込み -->
+    <script>
+      const el = document.getElementById("google-fonts");
+      if (el) {
+        el.onload = null;
+        el.setAttribute("rel", "stylesheet");
+      }
+    </script>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+JP:wght@600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- JSON-LD 差し込み / Hero preload など -->
     <slot name="head" />
   </head>
   <body>

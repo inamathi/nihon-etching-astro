@@ -12,6 +12,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@fontsource/cormorant-garamond": "^5.2.11",
+    "@fontsource/noto-sans-jp": "^5.2.9",
     "astro": "^5.15.4",
     "pdfjs-dist": "^5.4.530"
   },
