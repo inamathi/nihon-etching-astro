@@ -83,7 +83,12 @@ const groupListSchema = {
 };
 ---
 
-<Base lang={lang} title={t(lang, "group.listpage.title")}>
+<Base
+  title={t(lang, "pageTitle.group.top")}
+  lang={lang}
+  description={t(lang, "meta.description.careers")}
+  ogImage="/ogp/ogp_careers.webp"
+>
   <script
     type="application/ld+json"
     set:html={JSON.stringify(groupListSchema)}

@@ -8,6 +8,64 @@ export type Lang = (typeof languages)[number];
  * 同じキーに ja / en を並べて管理する
  */
 const messages = {
+  meta: {
+    description: {
+      top: {
+        ja: "株式会社日本エッチングは昭和46年創業。プラスチック・金属などあらゆる素材へのシボ加工・5軸レーザー彫刻・ピーニング加工を専門とする表面処理のリーディングカンパニーです。",
+        en: "Since 1971, Nihon Etching specializes in surface texturing—Shibo, 5-axis laser engraving, and peening—for plastics, metals, and more. A trusted leader in surface treatment.",
+      },
+      company: {
+        overview: {
+          ja: "株式会社日本エッチングの会社概要・アクセス情報。東京都大田区本羽田に本社を構え、国内外で表面処理加工を展開しています。",
+          en: "Company profile and access information for Nihon Etching Co., Ltd., headquartered in Ota-ku, Tokyo, with operations in Japan and abroad.",
+        },
+        philosophy: {
+          ja: "日本エッチングの経営理念・品質方針・環境方針。高品質な表面処理加工を通じて社会に貢献することを使命としています。",
+          en: "Our corporate philosophy, quality policy, and environmental policy at Nihon Etching Co., Ltd.",
+        },
+        history: {
+          ja: "株式会社日本エッチングの沿革。昭和46年の創業から現在に至るまでの歩みをご紹介します。",
+          en: "The history of Nihon Etching Co., Ltd., from its founding in 1971 to the present day.",
+        },
+      },
+      technology: {
+        laser: {
+          ja: "日本エッチングの5軸レーザー彫刻技術。高精度なレーザーによる金型シボ加工で、複雑な3D形状にも対応します。",
+          en: "Nihon Etching's 5-axis laser engraving technology for precision mold texturing, capable of handling complex 3D geometries.",
+        },
+        shibo: {
+          ja: "日本エッチングのシボ加工技術。プラスチック・金属・ガラスなど多様な素材に対応した表面テクスチャ加工です。",
+          en: "Nihon Etching's Shibo (texture) processing for plastics, metals, glass, and more—enhancing both design and function.",
+        },
+        peening: {
+          ja: "スイス・イエプコ社のピーニング加工機を導入。サンドブラストとショットピーニングを組み合わせたマイクロブラスト処理で、金属部品の性能向上・長寿命化を実現します。金型のメンテナンスも対応。",
+          en: "Using Swiss IEPCO peening machines, our micro-blast process combines sandblasting and shot peening to improve metal part performance and extend service life. Mold maintenance also available.",
+        },
+      },
+      group: {
+        top: {
+          ja: "日本エッチングのグループ会社一覧。国内直営工場から海外ネットワークまで、世界規模で表面処理加工を展開しています。",
+          en: "Nihon Etching Group companies worldwide, from domestic factories to an extensive overseas network.",
+        },
+      },
+      careers: {
+        ja: "株式会社日本エッチングの採用情報。表面処理加工のリーディングカンパニーで、ともに成長できる仲間を募集しています。",
+        en: "Career opportunities at Nihon Etching Co., Ltd. Join our team and grow with a leader in surface treatment technology.",
+      },
+      contact: {
+        ja: "株式会社日本エッチングへのお問い合わせ。シボ加工・レーザー彫刻・ピーニング加工に関するご質問はこちらからどうぞ。",
+        en: "Contact Nihon Etching Co., Ltd. for inquiries about Shibo texturing, laser engraving, and peening services.",
+      },
+      download: {
+        ja: "日本エッチングの技術資料ダウンロード。シボ加工・5軸レーザー彫刻に関するPDF資料をご用意しています。",
+        en: "Download technical documents from Nihon Etching, including PDFs on Shibo texturing and 5-axis laser engraving.",
+      },
+      privacypolicy: {
+        ja: "株式会社日本エッチングのプライバシーポリシー。お客様の個人情報保護に関する方針をご確認いただけます。",
+        en: "Privacy Policy of Nihon Etching Co., Ltd. regarding the protection of personal information.",
+      },
+    },
+  },
   common: {
     corpName: {
       ja: "株式会社 日本エッチング",
@@ -1371,18 +1429,21 @@ const messages = {
       },
     ],
     ne: {
+      pageTitle: { ja: "NEグループ（直営）", en: "NE Group(Direct)" },
       lead: {
         ja: "世界中に日本の技術を伝えるべく、海外進出や現地の工場との提携を精力的に進めています",
         en: "We are expanding globally to bring Japanese technology to the world.",
       },
     },
     nwn: {
+      pageTitle: { ja: "NWNグループ", en: "NWN Group" },
       lead: {
         ja: "ＮＷＮグループの確立によって、より強力な開発力と国内のみならずアジア全域をカバーするグローバルな技術の提携が可能となりました",
         en: "Through the NWN Group, we have strengthened our development capabilities across Asia.",
       },
     },
     sec: {
+      pageTitle: { ja: "SECグループ", en: "SEC Group" },
       lead: {
         ja: "ヨーロッパ・アメリカ・オセアニアをカバーするＳＥＣグループとの結びつきにより、文字通り全世界に技術の拠点をおいています",
         en: "Together with the SEC Group, we have established a truly global technological network.",

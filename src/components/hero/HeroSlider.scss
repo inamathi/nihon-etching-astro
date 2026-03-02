@@ -50,7 +50,16 @@
 /* ==============================================================
    グラデーションオーバーレイ（z-index: 2）
    ============================================================== */
+.hero {
+  // デフォルトはdesktop
+  background-image: var(--hero-bg-initial-desktop);
+  background-size: cover;
+  background-position: center;
 
+  @media (max-width: 768px) {
+    background-image: var(--hero-bg-initial-mobile);
+  }
+}
 .hero__bg {
   position: absolute;
   inset: 0;
@@ -386,5 +395,25 @@
     font-size: clamp(32px, 7.2vw, 40px);
     line-height: 1.6;
     letter-spacing: 0.28em;
+  }
+}
+/* ==============================================================
+   Desktop と Mobile で出しわけ
+   ============================================================== */
+.hero__bg-images {
+  &--desktop {
+    display: block;
+  }
+  &--mobile {
+    display: none;
+  }
+
+  @include bp-down(md) {
+    &--desktop {
+      display: none;
+    }
+    &--mobile {
+      display: block;
+    }
   }
 }

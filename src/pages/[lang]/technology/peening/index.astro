@@ -88,7 +88,12 @@ const peeningSchema = {
 };
 ---
 
-<Base lang={lang} title={title}>
+<Base
+  lang={lang}
+  title={title}
+  description={t(lang, "meta.description.technology.peening")}
+  ogImage="/ogp/ogp_technology.webp"
+>
   <script
     type="application/ld+json"
     set:html={JSON.stringify(peeningSchema)}

@@ -32,7 +32,12 @@ const contactSchema = {
 };
 ---
 
-<Base lang={lang} title={title}>
+<Base
+  lang={lang}
+  title={title}
+  description={t(lang, "meta.description.contact")}
+  ogImage="/ogp/ogp_contact.webp"
+>
   <PageHeader
     eyebrowText="CONTACT"
     title={t(lang, "contact.page.title")}

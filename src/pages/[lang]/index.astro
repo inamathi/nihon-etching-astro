@@ -57,13 +57,19 @@ const topSchema = {
 };
 ---
 
-<Base lang={lang} title={title}>
+<Base
+  lang={lang}
+  title={title}
+  description={t(lang, "meta.description.top")}
+  ogImage="/ogp/ogp_top.webp"
+>
   <!-- JSON-LD -->
   <script
     type="application/ld+json"
     set:html={JSON.stringify(topSchema)}
     slot="head"
   />
+
   <!-- HeroSlider S -->
   <HeroSlider lang={lang} />
   <!-- Scroll後のコンテンツ S -->

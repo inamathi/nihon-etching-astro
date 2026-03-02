@@ -14,28 +14,65 @@ const slides = heroSlides.map((s) => ({
   html: tHero(lang, s.key) as string,
 }));
 
-const bgImages = heroBgImages;
+// baseを付与
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+const bgImages = {
+  desktop: heroBgImages.desktop.map((src) => `${baseRoot}${src}`),
+  mobile: heroBgImages.mobile.map((src) => `${baseRoot}${src}`),
+};
+
+// “初期は1枚だけ” を決め打ち（SSR段階ではPC想定でOK。SPはJSで差し替える）
+const initialDesktop = bgImages.desktop[0];
+const initialMobile = bgImages.mobile[0];
 ---
 
 <section
   class="hero"
+  data-hero
   aria-label="Hero"
   data-interval={SLIDE_MS}
   data-lottie-src="/assets/lottie/ne-logo-nega.json"
   data-stop-at-end="true"
   data-lottie-freeze-last="true"
 >
-  <div class="hero__bg-images" aria-hidden="true">
+  <!-- Desktop -->
+  <div class="hero__bg-images hero__bg-images--desktop" aria-hidden="true">
     {
-      bgImages.map((src) => (
-        <div class="hero__bg-image" data-hero-bgimage>
+      bgImages.desktop.map((src, i) => (
+        <div
+          class="hero__bg-image"
+          data-hero-bgimage
+          data-src={i === 0 ? undefined : src}
+        >
           <div
             class="hero__bg-image__a"
-            style={`background-image: url('${src}')`}
+            style={i === 0 ? `background-image: url('${src}')` : ""}
           />
           <div
             class="hero__bg-image__b"
-            style={`background-image: url('${src}')`}
+            style={i === 0 ? `background-image: url('${src}')` : ""}
+          />
+        </div>
+      ))
+    }
+  </div>
+  <!-- Mobile -->
+  <div class="hero__bg-images hero__bg-images--mobile" aria-hidden="true">
+    {
+      bgImages.desktop.map((src, i) => (
+        <div
+          class="hero__bg-image"
+          data-hero-bgimage
+          data-src={i === 0 ? undefined : src}
+        >
+          <div
+            class="hero__bg-image__a"
+            style={i === 0 ? `background-image: url('${src}')` : ""}
+          />
+          <div
+            class="hero__bg-image__b"
+            style={i === 0 ? `background-image: url('${src}')` : ""}
           />
         </div>
       ))
@@ -122,9 +159,15 @@ const bgImages = heroBgImages;
     );
     if (!slides.length) return;
 
+    /* デバイス判定 */
+    // デバイス判定
+    const isMobile = window.innerWidth < 768;
+    const activeContainer = root.querySelector(
+      isMobile ? ".hero__bg-images--mobile" : ".hero__bg-images--desktop",
+    );
     /** @type {HTMLElement[]} */
     const bgImageEls: HTMLElement[] = Array.from(
-      root.querySelectorAll("[data-hero-bgimage]"),
+      activeContainer?.querySelectorAll("[data-hero-bgimage]") ?? [],
     );
 
     const DEFAULT_INTERVAL = Number(root.getAttribute("data-interval")) || 6000;
@@ -333,6 +376,14 @@ const bgImages = heroBgImages;
 
       if (!elA || !elB) return;
 
+      // 遅延ロード：data-srcがあれば画像をセット
+      const lazySrc = el.getAttribute("data-src");
+      if (lazySrc) {
+        elA.style.backgroundImage = `url('${lazySrc}')`;
+        elB.style.backgroundImage = `url('${lazySrc}')`;
+        el.removeAttribute("data-src");
+      }
+
       // リセット
       el.getAnimations().forEach((a) => a.cancel());
       elA.getAnimations().forEach((a) => a.cancel());
@@ -406,6 +457,6 @@ const bgImages = heroBgImages;
     scheduleTextNext();
 
     // 背景は少し遅らせてスタート
-    bgTimerId = window.setTimeout(() => applyBg(0), 500);
+    bgTimerId = window.setTimeout(() => applyBg(0), 0);
   })();
 </script>
