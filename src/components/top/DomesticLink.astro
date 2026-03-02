@@ -109,11 +109,15 @@ const basePath = `${baseRoot}/${lang}`;
         {t(lang, "domesticLink.contact.label")}
       </a>
     </li>
-    <li class="list-item">
-      <a href={`${basePath}${t(lang, "domesticLink.download.href")}`}>
-        {t(lang, "domesticLink.download.label")}
-      </a>
-    </li>
+    {
+      lang === "ja" && (
+        <li class="list-item">
+          <a href={`${basePath}${t(lang, "domesticLink.download.href")}`}>
+            {t(lang, "domesticLink.download.label")}
+          </a>
+        </li>
+      )
+    }
   </ul>
 </div>
 

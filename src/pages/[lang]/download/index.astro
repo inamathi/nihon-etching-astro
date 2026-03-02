@@ -89,13 +89,15 @@ const downloadSchema = {
       <BlockHeading text={t(lang, "download.page.title")} />
       <ul class="fnc-btn-list">
         {
-          downloadFiles.map((file) => (
-            <li class="list-item">
-              <a class="btn" href={file.fileUrl} download>
-                {file.title[lang]}
-              </a>
-            </li>
-          ))
+          downloadFiles
+            .filter((file) => !(lang === "en" && file.id === "dl01"))
+            .map((file) => (
+              <li class="list-item">
+                <a class="btn" href={file.fileUrl} download>
+                  {file.title[lang]}
+                </a>
+              </li>
+            ))
         }
       </ul>
     </section>
