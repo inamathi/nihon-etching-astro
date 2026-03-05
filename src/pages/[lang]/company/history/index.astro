@@ -7,6 +7,8 @@ import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
 import { t, toLang, type Lang, getList } from "@/locales/multilingual";
 import { pick } from "@/lib/companyView";
 
+import "@/styles/company/_company-index.scss";
+
 // ✅ [lang] 動的ルートなので必須
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },

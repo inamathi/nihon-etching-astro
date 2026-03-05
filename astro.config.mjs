@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import path from "node:path";
+import sitemap from "@astrojs/sitemap";
 
 console.log("MODE =", process.env.NODE_ENV);
 console.log("ASTRO_BASE =", process.env.ASTRO_BASE);
@@ -34,6 +35,12 @@ export default defineConfig({
   site: isStaging ? "https://xs313918.xsrv.jp" : "https://nihon-etching.co.jp",
 
   base: isStaging ? "/ne-staging/" : "/",
+
+  integrations: [sitemap()],
+
+  build: {
+    assets: "_astro",
+  },
 
   devToolbar: {
     enabled: false,

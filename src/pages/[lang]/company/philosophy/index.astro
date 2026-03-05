@@ -7,6 +7,8 @@ import Introduction from "@/components/common/Introduction.astro";
 
 import { t, toLang, type Lang, getArray } from "@/locales/multilingual";
 
+import "@/styles/company/_company-index.scss";
+
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },
   { params: { lang: "en" } },

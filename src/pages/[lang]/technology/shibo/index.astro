@@ -7,6 +7,8 @@ import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
 import { t, toLang, type Lang } from "@/locales/multilingual";
 import Introduction from "@/components/common/Introduction.astro";
 
+import "@/styles/technology/_technology-index.scss";
+
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },
   { params: { lang: "en" } },

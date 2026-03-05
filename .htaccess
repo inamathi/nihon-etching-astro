@@ -13,3 +13,47 @@ RewriteRule ^ https://nihon-etching.co.jp%{REQUEST_URI} [R=301,L]
 # ルートだけ → /ja/（絶対URL）
 RewriteRule ^$ https://nihon-etching.co.jp/ja/ [R=301,L]
 RewriteRule ^index\.html$ https://nihon-etching.co.jp/ja/ [R=301,L]
+
+# 旧ページ → /ja/technology/shibo
+RewriteRule ^page_biz-laser-etching\.php$ https://nihon-etching.co.jp/ja/technology/shibo [R=301,L]
+RewriteRule ^page_biz-peening\.php$ https://nihon-etching.co.jp/ja/technology/shibo [R=301,L]
+RewriteRule ^page_biz-top\.php$ https://nihon-etching.co.jp/ja/technology/shibo [R=301,L]
+
+# 旧 /jp/page_corp-* → /ja/company/overview-access/
+RewriteRule ^page_corp-access\.php$ https://nihon-etching.co.jp/ja/company/overview-access/ [R=301,L]
+RewriteRule ^page_corp-env\.php$ https://nihon-etching.co.jp/ja/company/overview-access/ [R=301,L]
+RewriteRule ^page_corp-history\.php$ https://nihon-etching.co.jp/ja/company/overview-access/ [R=301,L]
+RewriteRule ^page_corp-profile\.php$ https://nihon-etching.co.jp/ja/company/overview-access/ [R=301,L]
+RewriteRule ^page_corp-top\.php$ https://nihon-etching.co.jp/ja/company/overview-access/ [R=301,L]
+
+# 旧 /page_group-* → /ja/group/
+RewriteRule ^page_group-ne-asia\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-ne-easia\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-ne-jpn\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-nwn-easia\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-nwn-east-asia\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-nwn-indUsa\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-nwn-jpn\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-nwn-korea\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-sec-brazil\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-sec-europe\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-sec-usa\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+RewriteRule ^page_group-top\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+
+# --- cache
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|svg|png|jpg|jpeg|js|mjs|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

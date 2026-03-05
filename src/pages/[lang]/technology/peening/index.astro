@@ -9,6 +9,8 @@ import BlockHeading from "@/components/ui/BlockHeading.astro";
 import { t, toLang, type Lang } from "@/locales/multilingual";
 import LinkButton from "@/components/ui/LinkButton.astro";
 
+import "@/styles/technology/_technology-index.scss";
+
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },
   { params: { lang: "en" } },

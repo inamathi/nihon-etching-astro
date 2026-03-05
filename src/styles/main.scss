@@ -7,14 +7,14 @@
 /* utility */
 @use "@styles/utility/u-index";
 
-/* company */
-@use "@styles/company/company-index";
+/* company Globalから切り離し*/
+// @use "@styles/company/company-index";
 
-/* technology */
-@use "@styles/technology/technology-index";
+/* technology Globalから切り離し*/
+// @use "@styles/technology/technology-index";
 
-/* group */
-@use "@styles/group/group-index";
+/* group Globalから切り離し*/
+// @use "@styles/group/group-index";
 
 /* common */
 @use "@styles/common/common-index";

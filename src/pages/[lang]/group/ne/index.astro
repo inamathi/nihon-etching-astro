@@ -18,6 +18,8 @@ import { buildRegionBlocks, regionHeadingTextKey } from "@/lib/groupRegion";
 import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
 import HashSmoothScroll from "@/components/group/HashSmoothScroll.astro";
 
+import "@/styles/group/_group-index.scss";
+
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },
   { params: { lang: "en" } },
