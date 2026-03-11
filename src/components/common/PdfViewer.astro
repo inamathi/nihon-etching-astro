@@ -64,19 +64,27 @@ const {
 <script>
   import { mountPdfViewer } from "@/scripts/pdf-viewer";
 
-  (() => {
-    const roots = Array.from(document.querySelectorAll("[data-pdf-root]"));
+  const roots = Array.from(document.querySelectorAll("[data-pdf-root]"));
 
-    roots.forEach((root) => {
-      if (!(root instanceof HTMLElement)) return;
-
-      mountPdfViewer(root, {
-        initialPage: 1,
-        initialScale: 1.0,
-        minScale: 0.6,
-        maxScale: 3.0,
-        scaleStep: 0.1,
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        if (!(entry.target instanceof HTMLElement)) return;
+        mountPdfViewer(entry.target, {
+          initialPage: 1,
+          initialScale: 1.0,
+          minScale: 0.6,
+          maxScale: 3.0,
+          scaleStep: 0.1,
+        });
+        observer.unobserve(entry.target); // 一度だけ実行
       });
-    });
-  })();
+    },
+    {
+      rootMargin: "200px", // 200px手前から読み込み開始
+    },
+  );
+
+  roots.forEach((root) => observer.observe(root));
 </script>

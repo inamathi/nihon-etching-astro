@@ -5,11 +5,13 @@ import SectionHeading from "../ui/SectionHeading.astro";
 const {
   lang: rawLang = "ja",
   images,
+  verticalImages = [],
   alt = "",
   scale = 2.5,
 } = Astro.props as {
   lang?: string;
   images: string[];
+  verticalImages?: string[];
   alt?: string;
   scale?: number;
 };
@@ -17,6 +19,9 @@ const {
 const lang: Lang = toLang(rawLang);
 const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
 const basePath = `${baseRoot}/${lang}`;
+
+const horKeys = ["hor01", "hor02", "hor03", "hor04"];
+const verKeys = ["ver01", "ver02", "ver03"];
 ---
 
 <section>
@@ -28,49 +33,126 @@ const basePath = `${baseRoot}/${lang}`;
     align="center"
     accent="line"
   />
+
   <div class="zoom-gallery">
+    <!-- 左ブロック：横型2×2 -->
+    <div class="zoom-gallery__hor">
+      {
+        images.map((src, i) => (
+          <div class="zoom-gallery__item">
+            <div class="zoom-viewer" data-zoom-viewer data-scale={scale}>
+              <div class="zoom-viewer__frame" data-zoom-frame>
+                <img
+                  class="zoom-viewer__img"
+                  src={src}
+                  alt={t(lang, `zoomViewer.items.${horKeys[i]}.alt`)}
+                  draggable="false"
+                  data-zoom-img
+                />
+              </div>
+              <div
+                class="zoom-viewer__cursor"
+                data-zoom-cursor
+                aria-hidden="true"
+              >
+                <svg
+                  class="zoom-viewer__icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <circle cx="11" cy="11" r="7" />
+                  <line x1="16.5" y1="16.5" x2="22" y2="22" />
+                  <line
+                    class="zoom-viewer__icon-h"
+                    x1="8"
+                    y1="11"
+                    x2="14"
+                    y2="11"
+                  />
+                  <line
+                    class="zoom-viewer__icon-v"
+                    x1="11"
+                    y1="8"
+                    x2="11"
+                    y2="14"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="zoom-gallery__title">
+              {t(lang, `zoomViewer.items.${horKeys[i]}.title`)}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- 右ブロック：縦型（ブチ抜き） -->
     {
-      images.map((src, i) => (
-        <div class="zoom-viewer" data-zoom-viewer data-scale={scale}>
-          <div class="zoom-viewer__frame" data-zoom-frame>
-            <img
-              class="zoom-viewer__img"
-              src={src}
-              alt={`${alt} ${i + 1}`}
-              draggable="false"
-              data-zoom-img
-            />
-          </div>
-          <div class="zoom-viewer__cursor" data-zoom-cursor aria-hidden="true">
-            <svg
-              class="zoom-viewer__icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.8"
-            >
-              <circle cx="11" cy="11" r="7" />
-              <line x1="16.5" y1="16.5" x2="22" y2="22" />
-              <line
-                class="zoom-viewer__icon-h"
-                x1="8"
-                y1="11"
-                x2="14"
-                y2="11"
-              />
-              <line
-                class="zoom-viewer__icon-v"
-                x1="11"
-                y1="8"
-                x2="11"
-                y2="14"
-              />
-            </svg>
-          </div>
+      verticalImages.length > 0 && (
+        <div class="zoom-gallery__ver">
+          {verticalImages.map((src, i) => (
+            <div class="zoom-gallery__item zoom-gallery__item--ver">
+              <div
+                class="zoom-viewer zoom-viewer--ver"
+                data-zoom-viewer
+                data-scale={scale}
+              >
+                <div
+                  class="zoom-viewer__frame zoom-viewer__frame--ver"
+                  data-zoom-frame
+                >
+                  <img
+                    class="zoom-viewer__img"
+                    src={src}
+                    alt={t(lang, `zoomViewer.items.${verKeys[i]}.alt`)}
+                    draggable="false"
+                    data-zoom-img
+                  />
+                </div>
+                <div
+                  class="zoom-viewer__cursor"
+                  data-zoom-cursor
+                  aria-hidden="true"
+                >
+                  <svg
+                    class="zoom-viewer__icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                  >
+                    <circle cx="11" cy="11" r="7" />
+                    <line x1="16.5" y1="16.5" x2="22" y2="22" />
+                    <line
+                      class="zoom-viewer__icon-h"
+                      x1="8"
+                      y1="11"
+                      x2="14"
+                      y2="11"
+                    />
+                    <line
+                      class="zoom-viewer__icon-v"
+                      x1="11"
+                      y1="8"
+                      x2="11"
+                      y2="14"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <p class="zoom-gallery__title">
+                {t(lang, `zoomViewer.items.${verKeys[i]}.title`)}
+              </p>
+            </div>
+          ))}
         </div>
-      ))
+      )
     }
   </div>
+
   <ul class="fnc-btn-list">
     <li class="list-item">
       <a class="btn" href={`${basePath}${t(lang, "domesticLink.laser.href")}`}>
@@ -83,43 +165,41 @@ const basePath = `${baseRoot}/${lang}`;
 <script>
   document.querySelectorAll("[data-zoom-viewer]").forEach((viewer) => {
     const frame = viewer.querySelector("[data-zoom-frame]");
-    const img = viewer.querySelector("[data-zoom-img]");
-    const cursor = viewer.querySelector("[data-zoom-cursor]");
-    const iconV = viewer.querySelector(".zoom-viewer__icon-v");
+    const img = viewer.querySelector<HTMLImageElement>("[data-zoom-img]");
+    const cursor = viewer.querySelector<HTMLElement>("[data-zoom-cursor]");
+    const iconV = viewer.querySelector<SVGLineElement>(".zoom-viewer__icon-v");
 
     if (!frame || !img || !cursor) return;
 
+    const safeImg = img;
     const SCALE = parseFloat(viewer.getAttribute("data-scale") || "2.5");
     let isZoomed = false;
     let mouseX = 0.5;
     let mouseY = 0.5;
 
     frame.addEventListener("mousemove", (e) => {
+      const me = e as MouseEvent;
       const rect = frame.getBoundingClientRect();
-      mouseX = (e.clientX - rect.left) / rect.width;
-      mouseY = (e.clientY - rect.top) / rect.height;
-
+      mouseX = (me.clientX - rect.left) / rect.width;
+      mouseY = (me.clientY - rect.top) / rect.height;
       if (isZoomed) applyZoom();
-
-      cursor.style.left = `${e.clientX - rect.left}px`;
-      cursor.style.top = `${e.clientY - rect.top}px`;
+      cursor.style.left = `${me.clientX - rect.left}px`;
+      cursor.style.top = `${me.clientY - rect.top}px`;
     });
 
     frame.addEventListener("mouseenter", () => {
       cursor.style.opacity = "1";
     });
-
     frame.addEventListener("mouseleave", () => {
       cursor.style.opacity = "0";
     });
 
     frame.addEventListener("click", (e) => {
+      const me = e as MouseEvent;
       const rect = frame.getBoundingClientRect();
-      mouseX = (e.clientX - rect.left) / rect.width;
-      mouseY = (e.clientY - rect.top) / rect.height;
-
+      mouseX = (me.clientX - rect.left) / rect.width;
+      mouseY = (me.clientY - rect.top) / rect.height;
       isZoomed = !isZoomed;
-
       if (isZoomed) {
         applyZoom();
         if (iconV) iconV.style.opacity = "0";
@@ -132,13 +212,13 @@ const basePath = `${baseRoot}/${lang}`;
     function applyZoom() {
       const ox = mouseX * 100;
       const oy = mouseY * 100;
-      img.style.transformOrigin = `${ox}% ${oy}%`;
-      img.style.transform = `scale(${SCALE})`;
+      safeImg.style.transformOrigin = `${ox}% ${oy}%`;
+      safeImg.style.transform = `scale(${SCALE})`;
     }
 
     function resetZoom() {
-      img.style.transform = "scale(1)";
-      img.style.transformOrigin = "center center";
+      safeImg.style.transform = "scale(1)";
+      safeImg.style.transformOrigin = "center center";
     }
   });
 </script>
@@ -146,33 +226,66 @@ const basePath = `${baseRoot}/${lang}`;
 <style lang="scss">
   @use "@styles/var" as *;
   @use "@styles/mixin" as *;
-  /* ギャラリー：横2枚並び、最大640px */
+
+  /* ギャラリー全体：hor＋verを横並び */
   .zoom-gallery {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
     gap: 16px;
-    max-width: calc(640px * 2 + 16px);
+    max-width: calc(640px * 3 + 16px * 2 + 40px);
     margin: 0 auto;
     padding: 20px;
     background: rgba(0, 0, 0, 0.3);
     margin-bottom: 20px;
   }
 
-  /* SP：縦並び */
-  @include bp-down(md) {
-    .zoom-gallery {
-      grid-template-columns: 1fr;
-    }
+  /* 左ブロック：2×2グリッド */
+  .zoom-gallery__hor {
+    flex: 2;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
   }
 
-  /* 各ビューア */
+  /* 右ブロック：縦型ブチ抜き */
+  .zoom-gallery__ver {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* アイテム共通 */
+  .zoom-gallery__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 縦型アイテム：高さいっぱいに伸ばす */
+  .zoom-gallery__item--ver {
+    flex: 1;
+  }
+
+  /* タイトル */
+  .zoom-gallery__title {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* ビューア共通 */
   .zoom-viewer {
     position: relative;
-    max-width: 640px;
     width: 100%;
-    margin: 0 auto;
   }
 
+  /* 縦型ビューア：高さいっぱいに */
+  .zoom-viewer--ver {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* フレーム共通 */
   .zoom-viewer__frame {
     position: relative;
     overflow: hidden;
@@ -180,6 +293,14 @@ const basePath = `${baseRoot}/${lang}`;
     width: 100%;
     aspect-ratio: 4 / 3;
     background: #111;
+  }
+
+  /* 縦型フレーム：aspect-ratio解除、高さいっぱい */
+  .zoom-viewer__frame--ver {
+    aspect-ratio: unset;
+    flex: 1;
+    height: 0; /* flexで伸びるためのリセット */
+    min-height: 100%;
   }
 
   .zoom-viewer__img {
@@ -224,7 +345,23 @@ const basePath = `${baseRoot}/${lang}`;
     transition: opacity 0.15s ease;
   }
 
-  /* SP：カーソルは非表示（タップ操作のため） */
+  /* SP：縦積み */
+  @include bp-down(md) {
+    .zoom-gallery {
+      flex-direction: column;
+    }
+    .zoom-gallery__hor {
+      grid-template-columns: 1fr;
+    }
+    .zoom-viewer__frame--ver {
+      aspect-ratio: 3 / 4;
+      height: auto;
+      min-height: unset;
+      flex: unset;
+    }
+  }
+
+  /* SP：カーソル非表示 */
   @media (max-width: 767px) {
     .zoom-viewer__frame {
       cursor: pointer;

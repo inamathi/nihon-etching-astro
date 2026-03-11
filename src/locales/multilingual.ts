@@ -425,13 +425,25 @@ const messages = {
       en: "Surface Texture Technology",
     },
     items: {
-      t01: {
+      hor01: {
         alt: { ja: "ランダムパターン", en: "Rumdom Pattern" },
         title: { ja: "ランダムパターン", en: "Rumdom Pattern" },
       },
-      t02: {
+      hor02: {
         alt: { ja: "グリッドパターン", en: "Grid Pattern" },
         title: { ja: "グリッドパターン", en: "Grid Pattern" },
+      },
+      hor03: {
+        alt: { ja: "ウォーターマーク", en: "Watermark" },
+        title: { ja: "ウォーターマーク", en: "Watermark" },
+      },
+      hor04: {
+        alt: { ja: "NUNOME調プレート", en: 'Fabric Grain Pattern "NUNOME"' },
+        title: { ja: "NUNOME調プレート", en: 'Fabric Grain Pattern "NUNOME"' },
+      },
+      ver01: {
+        alt: { ja: "撥水効果シボ", en: "Hydrophobic Grain Pattern" },
+        title: { ja: "撥水効果シボ", en: "Hydrophobic Grain Pattern" },
       },
     },
   },
