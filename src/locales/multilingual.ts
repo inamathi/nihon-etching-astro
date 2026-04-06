@@ -11,7 +11,7 @@ const messages = {
   meta: {
     description: {
       top: {
-        ja: "株式会社日本エッチングは昭和46年創業。プラスチック・金属などあらゆる素材へのシボ加工・5軸レーザー彫刻・ピーニング加工を専門とする表面処理のリーディングカンパニーです。",
+        ja: "シボ加工・5軸レーザー彫刻・ピーニング加工の専門企業｜株式会社日本エッチング（昭和46年創業）。金型・プラスチック・自動車内装など幅広い素材・用途に対応。まずはお気軽にご相談ください。",
         en: "Since 1971, Nihon Etching specializes in surface texturing—Shibo, 5-axis laser engraving, and peening—for plastics, metals, and more. A trusted leader in surface treatment.",
       },
       company: {
