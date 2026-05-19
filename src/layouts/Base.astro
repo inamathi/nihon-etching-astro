@@ -13,7 +13,24 @@ const {
   description = "",
   ogImage = "/ogp/default.webp",
   ogType = "website",
+  breadcrumbItems = [],
 } = Astro.props;
+
+const breadcrumbSchema =
+  breadcrumbItems.length >= 2
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbItems.map((item, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          name: item.label,
+          ...(item.href
+            ? { item: `https://nihon-etching.co.jp${item.href}` }
+            : {}),
+        })),
+      }
+    : null;
 
 const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en)/, "");
 const siteUrl = "https://nihon-etching.co.jp";
@@ -23,9 +40,23 @@ const ogImageUrl = `${siteUrl}${ogImage}`;
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
+  "@id": "https://nihon-etching.co.jp/#organization",
   name: "株式会社日本エッチング",
-  alternateName: "Nihon Etching Ltd.",
-  url: "https://nihon-etching.co.jp/",
+  alternateName: "Nihon Etching Co., Ltd.",
+  url: "https://nihon-etching.co.jp/ja/",
+  logo: {
+    "@type": "ImageObject",
+    url: "https://nihon-etching.co.jp/assets/svg/logo-footer.svg",
+  },
+  image: "https://nihon-etching.co.jp/ogp/ogp_top.webp",
+  foundingDate: "1971-06-10",
+  numberOfEmployees: {
+    "@type": "QuantitativeValue",
+    value: 420,
+    description: "国内70名・海外350名",
+  },
+  description:
+    "昭和46年創業のシボ加工専門企業。フォトエッチング・5軸レーザーテクスチャリング・ショットピーニング加工により、プラスチック金型・自動車内装・家電製品の表面処理を国内外で提供。世界11カ国に生産拠点を持つグローバル企業。",
   address: {
     "@type": "PostalAddress",
     streetAddress: "本羽田2-8-19",
@@ -35,10 +66,51 @@ const organizationSchema = {
     addressCountry: "JP",
   },
   telephone: "+81-3-3744-5502",
+  faxNumber: "+81-3-3745-1898",
+  areaServed: "Worldwide",
+  knowsAbout: [
+    "シボ加工",
+    "フォトエッチング",
+    "レーザーテクスチャリング",
+    "ショットピーニング",
+    "金型表面処理",
+    "梨地加工",
+    "サンドブラスト",
+    "CMF設計",
+    "表面加飾",
+  ],
   sameAs: [
     "https://www.facebook.com/nihonetchingJPN",
     "https://x.com/EtchingNihon",
+    "https://www.instagram.com/nihonetching55/",
   ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "シボ加工・表面処理サービス一覧",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "シボ加工（フォトエッチング・梨地・皮シボ・サンドブラスト）",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "5軸レーザーテクスチャリング（GFMS LS2500）",
+        },
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "ショットピーニング・マイクロブラスト処理（イエプコ方式）",
+        },
+      },
+    ],
+  },
 };
 ---
 
@@ -46,7 +118,7 @@ const organizationSchema = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title ? `${title} | Nihon Etching Ltd.` : "Nihon Etching"}</title>
+    <title>{title ? `${title}` : "Nihon Etching"}</title>
     {description && <meta name="description" content={description} />}
 
     <!-- canonical -->
@@ -108,6 +180,15 @@ const organizationSchema = {
 
     <!-- JSON-LD 差し込み / Hero preload など -->
     <slot name="head" />
+    <!-- breadcrumb 構造化データ -->
+    {
+      breadcrumbSchema && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(breadcrumbSchema)}
+        />
+      )
+    }
   </head>
   <body>
     <SvgSprite />

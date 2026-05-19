@@ -11,13 +11,13 @@ const messages = {
   meta: {
     description: {
       top: {
-        ja: "シボ加工・5軸レーザー彫刻・ピーニング加工の専門企業｜株式会社日本エッチング（昭和46年創業）。金型・プラスチック・自動車内装など幅広い素材・用途に対応。まずはお気軽にご相談ください。",
-        en: "Since 1971, Nihon Etching specializes in surface texturing—Shibo, 5-axis laser engraving, and peening—for plastics, metals, and more. A trusted leader in surface treatment.",
+        ja: "シボ加工・5軸レーザーテクスチャリング・ピーニング加工の専門企業。自動車内装・家電・化粧品容器の金型表面処理を創業53年の実績で対応。東京大田区・世界11カ国展開。サンプル・お見積もりご相談ください。",
+        en: "Specialists in shibo texturing, 5-axis laser texturing, and peening. Over 53 years of expertise in mold surface treatment for automotive interiors, home appliances, and cosmetic containers. Based in Ota-ku, Tokyo, operating across 11 countries. Contact us for samples and quotes.",
       },
       company: {
         overview: {
-          ja: "株式会社日本エッチングの会社概要・アクセス情報。東京都大田区本羽田に本社を構え、国内外で表面処理加工を展開しています。",
-          en: "Company profile and access information for Nihon Etching Co., Ltd., headquartered in Ota-ku, Tokyo, with operations in Japan and abroad.",
+          ja: "株式会社日本エッチング（東京都大田区本羽田）の会社概要。昭和46年創業、資本金1,000万円、国内従業員70名・海外350名。シボ加工・レーザーテクスチャリング・ピーニング加工を世界11カ国で展開するグローバル専門企業。",
+          en: "18:48Company overview of Nihon Etching Co.,Ltd. (Motohaneda, Ota-ku, Tokyo). Founded in 1971, capital of ¥10 million, with 70 domestic and 350 overseas employees. A global specialist in shibo texturing, laser texturing, and peening, operating across 11 countries worldwide.",
         },
         philosophy: {
           ja: "日本エッチングの経営理念・品質方針・環境方針。高品質な表面処理加工を通じて社会に貢献することを使命としています。",
@@ -30,16 +30,16 @@ const messages = {
       },
       technology: {
         laser: {
-          ja: "日本エッチングの5軸レーザー彫刻技術。高精度なレーザーによる金型シボ加工で、複雑な3D形状にも対応します。",
-          en: "Nihon Etching's 5-axis laser engraving technology for precision mold texturing, capable of handling complex 3D geometries.",
+          ja: "GFマシニングソリューションズ社製5軸レーザー彫刻機（GFMS LS2500）を国内最大規模で導入。複雑な3D曲面へのデジタルテクスチャリング・レーザーシボ加工に対応。CMF設計・試作から量産まで一貫して対応いたします。",
+          en: "Home to Japan's largest fleet of GF Machining Solutions 5-axis laser engravers (GFMS LS2500). Capable of digital texturing and laser shibo processing on complex 3D curved surfaces. We provide end-to-end support from CMF design and prototyping through to mass production.",
         },
         shibo: {
-          ja: "日本エッチングのシボ加工技術。プラスチック・金属・ガラスなど多様な素材に対応した表面テクスチャ加工です。",
-          en: "Nihon Etching's Shibo (texture) processing for plastics, metals, glass, and more—enhancing both design and function.",
+          ja: "シボ加工とは金型や素材の表面にテクスチャーを施す表面処理技術です。フォトエッチング・梨地・皮シボ・サンドブラスト・グラフィックパターンを自動車内装・家電・OA機器など幅広い用途に対応。東京大田区のシボ加工専門企業。",
+          en: "Shibo texturing is a surface treatment technique that applies texture to molds and materials. We offer a full range of methods—photo etching, matte finish, leather grain, sandblasting, and graphic patterns—for automotive interiors, home appliances, OA equipment, and more. Your shibo texturing specialists in Ota-ku, Tokyo.",
         },
         peening: {
-          ja: "スイス・イエプコ社のピーニング加工機を導入。サンドブラストとショットピーニングを組み合わせたマイクロブラスト処理で、金属部品の性能向上・長寿命化を実現します。金型のメンテナンスも対応。",
-          en: "Using Swiss IEPCO peening machines, our micro-blast process combines sandblasting and shot peening to improve metal part performance and extend service life. Mold maintenance also available.",
+          ja: "スイス・イエプコ（IEPCO）社製ピーニング加工機によるマイクロブラスト処理で、射出成形金型の加工変質層除去・離型不良改善・長寿命化を実現。加熱・溶剤不使用で素材劣化ゼロ。東京大田区の金型メンテナンス専門企業。",
+          en: "Using Swiss-made IEPCO peening machines for micro blasting, we eliminate altered surface layers, resolve ejection defects, and extend the service life of injection molds. No heat or solvents — zero material degradation. Your mold maintenance specialists in Ota-ku, Tokyo.",
         },
       },
       group: {
@@ -303,9 +303,15 @@ const messages = {
     },
   },
   pageTitle: {
-    top: { ja: "トップ", en: "Top" },
+    top: {
+      ja: "シボ加工の専門企業｜株式会社日本エッチング【創業1971年・世界11カ国】",
+      en: "Shibo Texturing Experts | Nihon Etching Co.,Ltd. — Est. 1971 · 11 Countries Worldwide",
+    },
     company: {
-      overview: { ja: "会社概要／アクセス", en: "Company Profile/Access" },
+      overview: {
+        ja: "会社概要｜株式会社日本エッチング — シボ加工・金型表面処理の専門企業（東京都大田区）",
+        en: "Company Overview | Nihon Etching Co.,Ltd. — Shibo Texturing & Mold Surface Treatment Specialists (Ota-ku, Tokyo)",
+      },
       philosophy: {
         ja: "理念・品質・環境方針",
         en: "Philosophy, Quality & Environmental Policy",
@@ -313,9 +319,18 @@ const messages = {
       history: { ja: "沿革", en: "History" },
     },
     technology: {
-      laser: { ja: "５軸レーザー彫刻機", en: "5-Axis Laser Engraving" },
-      shibo: { ja: "シボ加工", en: "Texture(Shibo)" },
-      peening: { ja: "ピーニング加工", en: "Peening" },
+      laser: {
+        ja: "5軸レーザーシボ加工・レーザーテクスチャリング｜国内最大規模GFMS LS2500導入｜日本エッチング",
+        en: "5-Axis Laser Shibo & Laser Texturing | Japan's Largest GFMS LS2500 Fleet | Nihon Etching",
+      },
+      shibo: {
+        ja: "シボ加工とは？フォトエッチング・梨地・皮シボの専門加工｜日本エッチング",
+        en: "Shibo Texturing Specialists | Molds, Plastics & Automotive Interiors",
+      },
+      peening: {
+        ja: "ショットピーニング・マイクロブラスト処理｜金型長寿命化・表面改質｜日本エッチング",
+        en: "Shot Peening & Micro Blasting | Mold Life Extension & Surface Modification | Nihon Etching",
+      },
     },
     group: {
       top: { ja: "グループ一覧", en: "Group List" },

@@ -58,7 +58,15 @@ const secSchema = {
 };
 ---
 
-<Base lang={lang} title={t(lang, "pageTitle.group.sec")}>
+<Base
+  lang={lang}
+  title={t(lang, "pageTitle.group.sec")}
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `${basePath}/` },
+    { label: t(lang, "nav.group"), href: `${basePath}/group/` },
+    { label: t(lang, "nav.group_sec") },
+  ]}
+>
   <script
     type="application/ld+json"
     set:html={JSON.stringify(secSchema)}
@@ -77,7 +85,7 @@ const secSchema = {
       items={[
         { label: t(lang, "nav.top"), href: `${basePath}/` },
         { label: t(lang, "nav.group"), href: `${basePath}/group/` },
-        { label: t(lang, "nav.group_sec"), href: `${basePath}/group/sec/` },
+        { label: t(lang, "nav.group_sec") },
       ]}
     />
     <section class="l-wrapper">

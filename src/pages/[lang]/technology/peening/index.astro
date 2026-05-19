@@ -72,20 +72,33 @@ const title = t(lang, "pageTitle.technology.peening");
 const peeningSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "@id": `https://nihon-etching.co.jp/${lang}/technology/peening/`,
-  name: t(lang, "technology.peening.page.title"),
-  description: t(lang, "technology.peening.page.lead"),
-  url: `https://nihon-etching.co.jp/${lang}/technology/peening/`,
-  inLanguage: lang,
-  provider: {
-    "@type": "Organization",
-    "@id": "https://nihon-etching.co.jp/#localbusiness",
-    name: "株式会社日本エッチング",
-  },
-  serviceType: "ピーニング加工",
-  areaServed: {
-    "@type": "Country",
-    name: "Japan",
+  name: "ショットピーニング・マイクロブラスト処理（イエプコ方式）",
+  alternateName: "IEPCO Shot Peening / Micro Blasting",
+  description:
+    "スイス・イエプコ（IEPCO）社製ピーニング加工機によるマイクロブラスト処理。加熱・溶剤不使用で金型の加工変質層除去・残留応力改善・長寿命化を実現。射出成形金型の離型不良改善・放電加工後の変質層除去に効果的。",
+  provider: { "@id": "https://nihon-etching.co.jp/#organization" },
+  serviceType: "金型メンテナンス・表面改質加工",
+  url: "https://nihon-etching.co.jp/ja/technology/peening/",
+  additionalProperty: [
+    {
+      "@type": "PropertyValue",
+      name: "使用機器",
+      value: "イエプコ（IEPCO）社製ピーニング加工機",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "処理方式",
+      value: "低圧マイクロブラスト（サンドブラスト＋ショットピーニング複合）",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "主な効果",
+      value: "加工変質層除去・離型不良改善・金型長寿命化・表面欠陥閉塞",
+    },
+  ],
+  offers: {
+    "@type": "Offer",
+    url: "https://nihon-etching.co.jp/ja/contact/",
   },
 };
 ---
@@ -95,6 +108,14 @@ const peeningSchema = {
   title={title}
   description={t(lang, "meta.description.technology.peening")}
   ogImage="/ogp/ogp_technology.webp"
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `${basePath}/` },
+    {
+      label: t(lang, "nav.technology"),
+      href: `${basePath}/technology/peening/`,
+    },
+    { label: t(lang, "technology.peening.page.title") },
+  ]}
 >
   <script
     type="application/ld+json"

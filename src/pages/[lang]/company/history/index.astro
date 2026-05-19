@@ -53,6 +53,11 @@ const historySchema = {
   title={title}
   description={t(lang, "meta.description.company.history")}
   ogImage="/ogp/ogp_company.webp"
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `/${lang}/` },
+    { label: t(lang, "nav.company"), href: `/${lang}/company/history/` },
+    { label: t(lang, "company.history.page.title") },
+  ]}
 >
   <script
     type="application/ld+json"

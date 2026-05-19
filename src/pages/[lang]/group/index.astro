@@ -88,8 +88,12 @@ const groupListSchema = {
 <Base
   title={t(lang, "pageTitle.group.top")}
   lang={lang}
-  description={t(lang, "meta.description.careers")}
-  ogImage="/ogp/ogp_careers.webp"
+  description={t(lang, "meta.description.group")}
+  ogImage="/ogp/ogp_group.webp"
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `${basePath}/` },
+    { label: t(lang, "nav.group") },
+  ]}
 >
   <script
     type="application/ld+json"
@@ -107,7 +111,7 @@ const groupListSchema = {
     <Breadcrumb
       items={[
         { label: t(lang, "nav.top"), href: `${basePath}/` },
-        { label: t(lang, "nav.group"), href: `${basePath}/group/` },
+        { label: t(lang, "nav.group") },
       ]}
     />
     <!-- =========================

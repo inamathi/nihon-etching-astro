@@ -65,7 +65,15 @@ const neSchema = {
 };
 ---
 
-<Base lang={lang} title={t(lang, "pageTitle.group.ne")}>
+<Base
+  lang={lang}
+  title={t(lang, "pageTitle.group.ne")}
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `${basePath}/` },
+    { label: t(lang, "nav.group"), href: `${basePath}/group/` },
+    { label: t(lang, "nav.group_ne") },
+  ]}
+>
   <script
     type="application/ld+json"
     set:html={JSON.stringify(neSchema)}
@@ -84,7 +92,7 @@ const neSchema = {
       items={[
         { label: t(lang, "nav.top"), href: `${basePath}/` },
         { label: t(lang, "nav.group"), href: `${basePath}/group/` },
-        { label: t(lang, "nav.group_ne"), href: `${basePath}/group/ne/` },
+        { label: t(lang, "nav.group_ne") },
       ]}
     />
     <!-- Loop -->

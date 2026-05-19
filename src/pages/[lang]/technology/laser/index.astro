@@ -88,20 +88,40 @@ const title = t(lang, "pageTitle.technology.laser");
 const laserSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "@id": `https://nihon-etching.co.jp/${lang}/technology/laser/`,
-  name: t(lang, "technology.laser.page.title"),
-  description: t(lang, "technology.laser.page.lead"),
-  url: `https://nihon-etching.co.jp/${lang}/technology/laser/`,
-  inLanguage: lang,
-  provider: {
-    "@type": "Organization",
-    "@id": "https://nihon-etching.co.jp/#localbusiness",
-    name: "株式会社日本エッチング",
-  },
-  serviceType: "5軸レーザー加工",
-  areaServed: {
-    "@type": "Country",
-    name: "Japan",
+  name: "5軸レーザーテクスチャリング・レーザーシボ加工",
+  alternateName: "5-Axis Laser Texturing / Digital Laser Texturing",
+  description:
+    "GFマシニングソリューションズ社製GFMS LS2500を用いた5軸レーザーシボ加工。2D平面から複雑な3D曲面まで、デジタルデータを基に精密なテクスチャーを直接彫刻。CMF設計における次世代の表面加飾技術。",
+  provider: { "@id": "https://nihon-etching.co.jp/#organization" },
+  serviceType: "レーザーテクスチャリング加工",
+  url: "https://nihon-etching.co.jp/ja/technology/laser/",
+  additionalProperty: [
+    {
+      "@type": "PropertyValue",
+      name: "使用機器",
+      value: "GFマシニングソリューションズ GFMS LS2500（国内最大規模導入）",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "加工軸数",
+      value: "5軸",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "対応形状",
+      value: "2D平面・3D曲面・複雑形状",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "特長",
+      value: "デジタル処理による高再現性・マスク不要・設計変更対応迅速",
+    },
+  ],
+  offers: {
+    "@type": "Offer",
+    description:
+      "レーザーシボ加工のサンプル・お見積もりはお問い合わせフォームより",
+    url: "https://nihon-etching.co.jp/ja/contact/",
   },
 };
 ---
@@ -111,6 +131,11 @@ const laserSchema = {
   title={title}
   description={t(lang, "meta.description.technology.laser")}
   ogImage="/ogp/ogp_technology.webp"
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `${basePath}/` },
+    { label: t(lang, "nav.technology"), href: `${basePath}/technology/laser/` },
+    { label: t(lang, "technology.laser.page.title") },
+  ]}
 >
   <script
     type="application/ld+json"

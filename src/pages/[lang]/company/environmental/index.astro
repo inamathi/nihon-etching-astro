@@ -24,7 +24,15 @@ const envItems = getArray(lang, "company.philosophy.environment.items");
 const histItems = getArray(lang, "company.philosophy.history.items");
 ---
 
-<Base lang={lang} title={t(lang, "company.philosophy.page.title")}>
+<Base
+  lang={lang}
+  title={t(lang, "company.philosophy.page.title")}
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `/${lang}/` },
+    { label: t(lang, "nav.company"), href: `/${lang}/company/environmental/` },
+    { label: t(lang, "company.environmental.page.title") },
+  ]}
+>
   <PageHeader
     eyebrowText="company.philosophy"
     title={t(lang, "company.philosophy.page.title")}

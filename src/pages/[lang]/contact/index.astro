@@ -37,6 +37,14 @@ const contactSchema = {
   title={title}
   description={t(lang, "meta.description.contact")}
   ogImage="/ogp/ogp_contact.webp"
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `/${lang}/` },
+    {
+      label: t(lang, "nav.company"),
+      href: `/${lang}/company/contact/`,
+    },
+    { label: t(lang, "company.contact.page.title") },
+  ]}
 >
   <PageHeader
     eyebrowText="CONTACT"

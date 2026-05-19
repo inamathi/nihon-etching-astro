@@ -103,6 +103,14 @@ const overviewSchema = {
   title={title}
   description={t(lang, "meta.description.company.overview")}
   ogImage="/ogp/ogp_company.webp"
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `/${lang}/` },
+    {
+      label: t(lang, "nav.company"),
+      href: `/${lang}/company/overview-access/`,
+    },
+    { label: t(lang, "company.overview.page.title") },
+  ]}
 >
   <script
     type="application/ld+json"

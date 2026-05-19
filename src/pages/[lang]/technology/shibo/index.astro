@@ -139,20 +139,54 @@ const title = t(lang, "pageTitle.technology.shibo");
 const shiboSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  "@id": `https://nihon-etching.co.jp/${lang}/technology/shibo/`,
-  name: t(lang, "technology.shibo.page.title"),
-  description: t(lang, "technology.shibo.page.lead"),
+  name: "シボ加工（金型テクスチャリング）",
+  alternateName: "Mold Texturing / Grain Texturing",
+  description: t(lang, "meta.description.technology.shibo"), // 多言語対応するならt()を使う
+  provider: { "@id": "https://nihon-etching.co.jp/#organization" },
+  serviceType: "金型表面処理加工",
+  areaServed: "Worldwide",
   url: `https://nihon-etching.co.jp/${lang}/technology/shibo/`,
-  inLanguage: lang,
-  provider: {
-    "@type": "Organization",
-    "@id": "https://nihon-etching.co.jp/#localbusiness",
-    name: "株式会社日本エッチング",
+  offers: {
+    "@type": "Offer",
+    description:
+      "シボ加工のお見積もり・サンプル請求はお問い合わせフォームより承ります",
+    url: `https://nihon-etching.co.jp/${lang}/contact/`,
   },
-  serviceType: "シボ加工",
-  areaServed: {
-    "@type": "Country",
-    name: "Japan",
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "シボ加工の種類",
+    itemListElement: [
+      {
+        "@type": "Service",
+        name: "フォトエッチング",
+        description:
+          "感光材と化学薬品で金属表面を精密腐食させるシボ加工技法。幾何学・木目・皮革など多様なパターンに対応。",
+      },
+      {
+        "@type": "Service",
+        name: "皮シボ加工",
+        description:
+          "主に自動車内装パネルに使用される皮革調テクスチャー。高級感と耐傷性を同時に実現。",
+      },
+      {
+        "@type": "Service",
+        name: "梨地加工",
+        description:
+          "家電・音響機器に多用される均一な細目〜粗目パターン。サンドブラストの倍近い耐久性。",
+      },
+      {
+        "@type": "Service",
+        name: "サンドブラスト（ホーニング）",
+        description:
+          "砂・ガラスビーズを吹きつけて細かい模様を付ける表面処理。細目〜粗目まで選択可能。",
+      },
+      {
+        "@type": "Service",
+        name: "グラフィックパターン加工",
+        description:
+          "精密なパターン・ロゴ・微細グラフィックを金型表面に再現するシボ加工。",
+      },
+    ],
   },
 };
 ---
@@ -162,6 +196,11 @@ const shiboSchema = {
   title={title}
   description={t(lang, "meta.description.technology.shibo")}
   ogImage="/ogp/ogp_technology.webp"
+  breadcrumbItems={[
+    { label: t(lang, "nav.top"), href: `${basePath}/` },
+    { label: t(lang, "nav.technology"), href: `${basePath}/technology/shibo/` },
+    { label: t(lang, "technology.shibo.page.title") },
+  ]}
 >
   <script
     type="application/ld+json"
