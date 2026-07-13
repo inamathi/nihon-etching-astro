@@ -151,12 +151,12 @@ export const companies: CompanyData[] = [
       en: "Bldg. U-4 Lot 22B, Phase 1B, FPIP Tanauan City, Batangas 4232 Philippines",
     },
     phone: {
-      ja: "+63(0)-43-277-9006",
-      en: "+63-43-277-9006",
+      ja: "",
+      en: "",
     },
     fax: {
-      ja: "+63(0)-43-455-9912",
-      en: "+63-43-455-9912",
+      ja: "",
+      en: "",
     },
     mobile: { ja: "+63(0)-917-593-7298", en: "+63-917-593-7298" },
     contact: {
