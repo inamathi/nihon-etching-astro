@@ -169,3 +169,19 @@
     }
   }
 }
+
+// NEW
+.c-badge-new {
+  display: inline-block;
+  margin-left: 0.35em;
+  padding: 0.1em 0.4em;
+  font-size: 0.62em;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: #e60012; /* 赤系。既存のアクセントカラーに合わせて調整 */
+  border-radius: 3px;
+  vertical-align: middle;
+  transform: translateY(-0.15em);
+}

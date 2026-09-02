@@ -1,6 +1,9 @@
 ---
 import { t, toLang, type Lang } from "@/locales/multilingual";
 
+const NEW_UNTIL = new Date("2026-10-31"); // この日まで表示
+const showNew = new Date() < NEW_UNTIL;
+
 // 親から渡される lang（なければ ja）
 const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
 const lang: Lang = toLang(rawLang);
@@ -37,6 +40,16 @@ const basePath = `${baseRoot}/${lang}`;
     <nav class="c-gnav" aria-label="Global navigation">
       <a class="c-gnav__link" href={`${basePath}/`}>
         {t(lang, "nav.top")}
+      </a>
+      <a class="c-gnav__link" href={`${basePath}/knowledge/`}>
+        {t(lang, "nav.knowledge")}
+        {
+          showNew && (
+            <span class="c-badge-new" aria-hidden="true">
+              NEW
+            </span>
+          )
+        }
       </a>
 
       <div class="c-gnav__item has-sub">

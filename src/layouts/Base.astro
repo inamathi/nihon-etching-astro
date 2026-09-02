@@ -32,6 +32,9 @@ const breadcrumbSchema =
       }
     : null;
 
+// base が /ne-staging/ ならステージングとみなす（modeに依存しない）
+const isStaging = import.meta.env.BASE_URL.startsWith("/ne-staging");
+
 const pathNoLang = Astro.url.pathname.replace(/^\/(ja|en)/, "");
 const siteUrl = "https://nihon-etching.co.jp";
 const canonicalUrl = `${siteUrl}/${lang}${pathNoLang}`;
@@ -123,6 +126,8 @@ const organizationSchema = {
 
     <!-- canonical -->
     <link rel="canonical" href={canonicalUrl} />
+    <!-- stagingではIndexを拒否 -->
+    {isStaging && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- hreflang -->
     <link rel="alternate" hreflang="ja" href={`${siteUrl}/ja${pathNoLang}`} />

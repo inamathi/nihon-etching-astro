@@ -173,7 +173,7 @@
       grid-template-columns: repeat(1, minmax(0, 1fr));
       gap: 0;
     }
-
+    &__block:nth-child(n + 2),
     &__block[data-acc-item] {
       border-top: 1px solid rgba($color-gray-600, 0.5);
       padding: 10px 0;

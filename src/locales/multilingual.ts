@@ -14,6 +14,10 @@ const messages = {
         ja: "シボ加工・5軸レーザーテクスチャリング・ピーニング加工の専門企業。自動車内装・家電・化粧品容器の金型表面処理を創業53年の実績で対応。東京大田区・世界11カ国展開。サンプル・お見積もりご相談ください。",
         en: "Specialists in shibo texturing, 5-axis laser texturing, and peening. Over 53 years of expertise in mold surface treatment for automotive interiors, home appliances, and cosmetic containers. Based in Ota-ku, Tokyo, operating across 11 countries. Contact us for samples and quotes.",
       },
+      shibo_design: {
+        ja: "シボは3D形状を作り込む前に決める設計判断です。抜き勾配との関係、番手の選び方、ウェルドライン・ヒケ・キズ対策を、シボ加工専門の日本エッチングが解説します。",
+        en: "Shibo texturing is a design decision to settle before finalizing 3D geometry, not a final surface treatment. Guidance on draft angle, grain selection, and hiding weld lines and sink marks.",
+      },
       company: {
         overview: {
           ja: "株式会社日本エッチング（東京都大田区本羽田）の会社概要。昭和46年創業、資本金1,000万円、国内従業員70名・海外350名。シボ加工・レーザーテクスチャリング・ピーニング加工を世界11カ国で展開するグローバル専門企業。",
@@ -221,6 +225,11 @@ const messages = {
       en: "Top",
       zh: "Top",
     },
+    knowledge: {
+      ja: "設計ガイド",
+      en: "Design Guide",
+      zh: "Design Guide",
+    },
     company: {
       ja: "会社情報",
       en: "Company",
@@ -306,6 +315,10 @@ const messages = {
     top: {
       ja: "シボ加工の専門企業｜株式会社日本エッチング【創業1971年・世界11カ国】",
       en: "Shibo Texturing Experts | Nihon Etching Co.,Ltd. — Est. 1971 · 11 Countries Worldwide",
+    },
+    shibo_design: {
+      ja: "シボ設計ガイド｜抜き勾配・番手の選び方とウェルド／ヒケ対策｜日本エッチング",
+      en: "Shibo Design Guide | Draft Angle & Grain Selection, Weld/Sink Mark Solutions | Nihon Etching",
     },
     company: {
       overview: {
@@ -1701,10 +1714,288 @@ const messages = {
       },
     ],
   },
+  /*================================================
+  Knowledge */
+  knowledge: {
+    // 親ハブ /knowledge/ 用
+    page: {
+      title: { ja: "設計ガイド", en: "Design Guide" },
+      lead: {
+        ja: "シボ・レーザー・ピーニングの設計と選定に役立つ技術情報をまとめています。",
+        en: "Technical resources to help with the design and selection of shibo, laser, and peening.",
+      },
+    },
+
+    // ── シボ設計ガイド /knowledge/shibo-design/ ──
+    shiboDesign: {
+      page: {
+        title: { ja: "シボ設計ガイド", en: "Shibo Design Guide" },
+        lead: {
+          ja: "シボは、意匠を仕上げてから選ぶ「表面処理」ではなく、3D形状を作り込む前に決める設計判断です。抜き勾配との関係、番手の選び方、ウェルドライン・ヒケ・キズへの対策を、シボ加工専門の日本エッチングの視点で解説します。",
+          en: "Shibo texturing is a design decision to settle before you finalize the 3D geometry—not a surface finish chosen at the end. This guide explains its relationship to draft angle, how to select the grain, and how to address weld lines, sink marks, and scratches, from the perspective of Nihon Etching, a shibo texturing specialist.",
+        },
+      },
+      body: {
+        // セクション1：思想
+        why: {
+          heading: {
+            ja: "なぜシボは「最初」に決めるのか",
+            en: "Why shibo should be decided first",
+          },
+          paragraphs: {
+            ja: [
+              "シボの選定は、3D形状を作り込む前に済ませておくべき設計判断です。多くの現場では、意匠が固まったあと、量産直前に番手を選びます。しかし実際には、シボは部品形状に制約を課します。",
+              "シボが深くなるほど、金型から抜くために必要な抜き勾配は大きくなります。意匠面の傾斜が足りなければ、望んだシボは入りません。後から決めると、勾配不足による意匠変更か、シボの妥協かの二択になります。だからシボは「最後」ではなく「最初」に決めます。",
+            ],
+            en: [
+              "Selecting the shibo is a design decision that should be settled before you finalize the 3D geometry. On many projects the grain is chosen just before mass production, after the design is fixed. In reality, however, shibo imposes constraints on part geometry.",
+              "The deeper the shibo, the greater the draft angle required to release the part from the mold. If the design surface lacks enough taper, the intended shibo cannot be applied. Deciding late leaves only two options: change the design for insufficient draft, or compromise on the shibo. That is why shibo is decided first, not last.",
+            ],
+          },
+        },
+
+        // セクション2：課題→解決テーブル
+        solve: {
+          heading: {
+            ja: "シボで解決できる課題",
+            en: "Problems shibo can solve",
+          },
+          intro: {
+            ja: "シボは外観の演出だけの技術ではありません。ここでは外観に関わる代表的な課題と、シボによる解決のしかたを整理します。",
+            en: "Shibo is not only about appearance. Here we summarize typical appearance-related problems and how texturing addresses them.",
+          },
+          label: {
+            problem: { ja: "課題", en: "Problem" },
+            solution: { ja: "解決", en: "Solution" },
+          },
+          table: {
+            head: {
+              problem: { ja: "課題", en: "Problem" },
+              solution: { ja: "シボによる解決", en: "How shibo solves it" },
+            },
+            rows: {
+              ja: [
+                {
+                  problem: "塗装をやめたいが安っぽく見える",
+                  solution:
+                    "塗装と同じ凹凸構造を成形面で再現し、塗装調の外観を得る",
+                },
+                {
+                  problem: "ウェルドラインが見える",
+                  solution:
+                    "パターンによる視覚的なカムフラージュに加え、樹脂流動の改善により発生自体を抑える",
+                },
+                {
+                  problem: "肉厚変化部のヒケが目立つ",
+                  solution:
+                    "拡散反射により、映り込みの歪みとして知覚されにくくする",
+                },
+                {
+                  problem: "キズが目立つ",
+                  solution:
+                    "凸部を滑らかにして露出面積を減らし、傷の起点と視認性を下げる",
+                },
+                {
+                  problem: "指紋・皮脂が目立つ",
+                  solution: "凸部の接触面積が小さいため、付着が目立ちにくい",
+                },
+              ],
+              en: [
+                {
+                  problem: "Want to drop painting, but it looks cheap",
+                  solution:
+                    "Reproduces the same micro-relief as paint on the molded surface for a paint-like finish",
+                },
+                {
+                  problem: "Weld lines are visible",
+                  solution:
+                    "Camouflages the line with the pattern and improves resin flow to reduce its formation",
+                },
+                {
+                  problem: "Sink marks stand out on thickness transitions",
+                  solution:
+                    "Diffuse reflection makes them less perceptible as distortion in reflections",
+                },
+                {
+                  problem: "Scratches stand out",
+                  solution:
+                    "Smooths the peaks to reduce exposed area, lowering both scratch initiation and visibility",
+                },
+                {
+                  problem: "Fingerprints and oils stand out",
+                  solution:
+                    "The small contact area of the peaks makes deposits less noticeable",
+                },
+              ],
+            },
+          },
+        },
+
+        // セクション3：FAQ
+        faq: {
+          heading: { ja: "よくあるご質問", en: "Frequently asked questions" },
+          items: {
+            ja: [
+              {
+                q: "シボを深くすれば、ウェルドはより隠れますか。",
+                a: "深さと隠蔽力は比例しません。日本エッチングの工法は、同じ深さの従来梨地と比べて目立ちにくくなることを確認しています。深さを増やすより、工法を変えるほうが効果的です。深くすれば、その分だけ必要な抜き勾配も増えます。",
+              },
+              {
+                q: "同じ番手なら、樹脂が変わっても同じ見え方になりますか。",
+                a: "なりません。樹脂の種類・色・流動性・金型温度などによって、光沢や質感は変わります。実際に使用する材料でのサンプル成形をおすすめします。",
+              },
+              {
+                q: "再生材を使う予定です。シボで外観の課題を吸収できますか。",
+                a: "一定の効果が見込めます。ウェルドをカムフラージュする原理は、異物や色ムラに対しても同じように働きます。ただし材料のばらつきの程度によりますので、実材料での確認をお願いします。",
+              },
+              {
+                q: "触感シリーズを使いたいのですが、抜き勾配が足りません。",
+                a: "深さを下げれば、必要な勾配も下がります。光沢を保ったまま質感を付けたい場合は、抜き勾配1〜1.5°で使える Enjoy Touch をご検討ください。",
+              },
+              {
+                q: "HN-DS と STEP・N-TONE・TFC、どちらを選べばよいですか。",
+                a: "キズと汚れに対しては、いずれも効果があります。塗装調の外観やウェルド対策が目的であれば STEP・N-TONE・TFC、成形時のかじりや深物形状への適用が目的であれば HN-DS をおすすめします。",
+              },
+              {
+                q: "金型を海外に移管する予定があります。",
+                a: "海外工場でも日本と同品質の加工が可能です。海外提携工場ではメンテナンスにも対応しています。移管先を早めにお知らせいただければ、体制をご案内します。",
+              },
+              {
+                q: "3次元曲面が多い形状です。",
+                a: "エッチングは平面のマスキングを前提とするため、曲面ではパターンに伸びが生じることがあります。5軸レーザー加工（HN-LTシリーズ）であれば CAD データを基準に加工でき、曲面追従や部位ごとの調整が可能です。",
+                linkTo: "technology/laser",
+                linkLabel: "5軸レーザー彫刻",
+              },
+              {
+                q: "8µm という浅いシボで、ウェルドやヒケは隠せますか。",
+                a: "隠せません。ウェルド隠蔽には20µm以上、ヒケには30µm以上が一般的な目安です。8µmを維持するなら、リブ厚を本体の50〜60%（肉厚2mmなら1.0〜1.2mm）に抑え、ゲート位置でウェルドを非意匠面へ逃がすなど、設計側で完結させる必要があります。",
+              },
+            ],
+            en: [
+              {
+                q: "Will deeper shibo hide weld lines better?",
+                a: "Depth and hiding power are not proportional. Our method has been confirmed to make weld lines less noticeable than a conventional matte finish of the same depth. Changing the method is more effective than increasing depth—and deeper shibo also requires a larger draft angle.",
+              },
+              {
+                q: "With the same grain number, will it look the same across resins?",
+                a: "No. Gloss and texture change with the resin type, color, flowability, and mold temperature. We recommend sample molding with the actual material.",
+              },
+              {
+                q: "We plan to use recycled material. Can shibo absorb the appearance issues?",
+                a: "A certain effect can be expected. The principle that camouflages weld lines works similarly on foreign matter and color unevenness. The degree depends on material variability, so please verify with the actual material.",
+              },
+              {
+                q: "We want a tactile series, but there isn't enough draft angle.",
+                a: "Reducing the depth lowers the required draft. To add texture while keeping gloss, consider Enjoy Touch, which works with a draft angle of 1–1.5°.",
+              },
+              {
+                q: "HN-DS or STEP / N-TONE / TFC—which should we choose?",
+                a: "All are effective against scratches and dirt. For a paint-like appearance or weld-line countermeasures, choose STEP / N-TONE / TFC; for galling during molding or deep-draw shapes, we recommend HN-DS.",
+              },
+              {
+                q: "We plan to transfer the mold overseas.",
+                a: "The same quality as in Japan is available at our overseas plants, and our overseas partner plants also handle maintenance. Let us know the destination early and we will arrange the setup.",
+              },
+              {
+                q: "The shape has many 3D curved surfaces.",
+                a: "Because etching assumes flat masking, patterns can stretch on curved surfaces. With 5-axis laser processing (HN-LT series), machining is based on CAD data, allowing curve-following and area-by-area adjustment.",
+                linkTo: "technology/laser",
+                linkLabel: "5-axis laser engraving",
+              },
+              {
+                q: "Can an 8µm shallow shibo hide weld lines or sink marks?",
+                a: "No. A common guideline is 20µm or more to hide weld lines and 30µm or more for sink marks. To keep 8µm, resolve it on the design side: keep rib thickness to 50–60% of the wall (1.0–1.2mm for a 2mm wall), and use gate position to move weld lines to non-design surfaces.",
+              },
+            ],
+          },
+        },
+
+        // セクション4：用語ミニ解説
+        glossary: {
+          heading: { ja: "用語ミニ解説", en: "Key terms" },
+          intro: {
+            ja: "このページで使う専門用語を簡単に説明します。",
+            en: "Brief definitions of the terms used on this page.",
+          },
+          note: {
+            ja: "各用語は、今後公開する用語集ページで詳しく解説します。",
+            en: "Each term will be explained in more detail in the upcoming glossary.",
+          },
+          terms: {
+            ja: [
+              {
+                term: "ウェルド（ウェルドライン）",
+                definition:
+                  "複数方向から流れた樹脂が合流する箇所にできる線状の跡。意匠面に出ると目立ちます。",
+              },
+              {
+                term: "ヒケ",
+                definition:
+                  "肉厚部が冷却収縮する際、表面が内側へ引かれてできる凹み。映り込みの歪みとして視認されます。",
+              },
+              {
+                term: "リブ厚",
+                definition:
+                  "部品を補強するリブの厚み。本体肉厚に対して厚すぎると、その裏側にヒケが出やすくなります。",
+              },
+              {
+                term: "抜き勾配",
+                definition:
+                  "成形品を金型から抜くために意匠面へ付ける傾斜。シボが深いほど大きな勾配が必要です。",
+              },
+              {
+                term: "Enjoy Touch",
+                definition:
+                  "日本エッチング独自の技術である「Enjoy Touch」は・・・・",
+              },
+            ],
+            en: [
+              {
+                term: "Weld (weld line)",
+                definition:
+                  "A line-like mark where resin flowing from multiple directions meets. It stands out when it appears on a design surface.",
+              },
+              {
+                term: "Sink mark",
+                definition:
+                  "A depression formed when a thick section shrinks on cooling and pulls the surface inward. It is perceived as distortion in reflections.",
+              },
+              {
+                term: "Rib thickness",
+                definition:
+                  "The thickness of a reinforcing rib. If it is too thick relative to the main wall, a sink mark tends to appear behind it.",
+              },
+              {
+                term: "Draft angle",
+                definition:
+                  "The taper given to design surfaces so the part can be released from the mold. The deeper the shibo, the larger the draft angle needed.",
+              },
+              {
+                term: "Enjoy Touch",
+                definition: "What 'Enjoy Touch' Technology are ・・・・",
+              },
+            ],
+          },
+        },
+        // セクション５：hub
+        hub: {
+          heading: { ja: "関連ページ", en: "Link of Site" },
+          lead: {
+            ja: "シボの技法や設備、ご相談窓口はこちらからご覧いただけます。",
+            en: "Explore our texturing methods, equipment, and how to get in touch.",
+          },
+        },
+      },
+    },
+  },
+
   /* Footer */
   footer: {
     top: {
       title: { ja: "トップ", en: "Top" },
+    },
+    shibo_design: {
+      title: { ja: "シボ設計ガイド", en: "Shibo Design Guide" },
     },
     company: {
       title: { ja: "会社情報", en: "Company" },

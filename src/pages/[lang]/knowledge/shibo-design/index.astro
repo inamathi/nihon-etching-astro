@@ -1,0 +1,460 @@
+---
+// ============================================================
+//  シボ設計ガイド  /ja/knowledge/shibo-design/
+//  配置場所: src/pages/[lang]/knowledge/shibo-design/index.astro
+//  （既存 [lang]/technology/shibo/index.astro を雛形に、import を合わせる）
+// ============================================================
+
+import Base from "@/layouts/Base.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Breadcrumb from "@/components/common/BreadCrumb.astro";
+import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
+
+import { t, toLang, getMessage, type Lang } from "@/locales/multilingual";
+
+export const getStaticPaths = () => [
+  { params: { lang: "ja" } },
+  { params: { lang: "en" } },
+];
+
+const { lang } = Astro.params as { lang: Lang };
+
+// BASE_URL（/ne-staging/ 等）込みの内部リンク用パス
+const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
+const basePath = `${baseRoot}/${lang}`;
+
+// canonical / スキーマ用の本番絶対URL（baseRoot は含めない）
+const pageUrl = `https://nihon-etching.co.jp/${lang}/knowledge/shibo-design/`;
+
+// { ja:[...], en:[...] } 形式のノードから現在言語の配列/構造を取り出すヘルパー
+function loc<T>(key: string): T {
+  const node = getMessage<Record<string, T>>(key) as any;
+  return (node?.[lang] ?? node?.en ?? node?.ja) as T;
+}
+
+const K = "knowledge.shiboDesign";
+
+// 本文データ（locale から取得）
+type Row = { problem: string; solution: string };
+type Faq = { q: string; a: string; linkTo?: string; linkLabel?: string };
+type Term = { term: string; definition: string };
+
+const whyParagraphs = loc<string[]>(`${K}.body.why.paragraphs`);
+const rows = loc<Row[]>(`${K}.body.solve.table.rows`);
+const faqItems = loc<Faq[]>(`${K}.body.faq.items`);
+const terms = loc<Term[]>(`${K}.body.glossary.terms`);
+
+// SEO タイトル（Base.astro が「｜日本エッチング」を自動付与する実装なら、末尾の
+// 「｜日本エッチング」を外した文字列に差し替えて重複を避ける）
+const seoTitle =
+  lang === "ja"
+    ? "シボ設計ガイド｜抜き勾配・番手の選び方とウェルド／ヒケ対策｜日本エッチング"
+    : "Shibo Design Guide | Draft Angle & Grain Selection, Weld/Sink Solutions | Nihon Etching";
+
+// meta description は既存の meta.description.shibo_design を流用
+const description = t(lang, "meta.description.shibo_design");
+
+// パンくず（Base 用＝JSON-LD生成／表示用 Breadcrumb の両方で使う）
+const breadcrumbItems = [
+  { label: t(lang, "nav.top"), href: `${basePath}/` },
+  { label: t(lang, "nav.knowledge"), href: `${basePath}/knowledge/` },
+  { label: t(lang, `${K}.page.title`) },
+];
+
+// ── JSON-LD: FAQPage（可視テキストと一致させる） ──
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": `${pageUrl}#faq`,
+  inLanguage: lang,
+  mainEntity: faqItems.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: f.linkTo
+        ? `${f.a} <a href="https://nihon-etching.co.jp/${lang}/${f.linkTo}/">${f.linkLabel}</a>`
+        : f.a,
+    },
+  })),
+};
+
+// ── JSON-LD: TechArticle（主張の機械可読化。publisher @id は Base の Organization に合わせる） ──
+const techArticleSchema = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "@id": `${pageUrl}#article`,
+  headline: t(lang, `${K}.page.title`),
+  description,
+  inLanguage: lang,
+  url: pageUrl,
+  publisher: { "@id": "https://nihon-etching.co.jp/#organization" },
+  about: ["シボ加工", "金型表面処理", "抜き勾配", "テクスチャリング"],
+};
+---
+
+<Base
+  lang={lang}
+  title={seoTitle}
+  description={description}
+  ogImage="/ogp/ogp_technology.webp"
+  breadcrumbItems={breadcrumbItems}
+>
+  {
+    /* 新規スキーマは slot="head"。BreadcrumbList は Base 側の既存パターンに任せ二重注入しない */
+  }
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(faqSchema)}
+    slot="head"
+  />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(techArticleSchema)}
+    slot="head"
+  />
+
+  {
+    /* キービジュアル（既存 shibo ページと同じ PageHeader。画像は暫定で shibo のKVを流用） */
+  }
+  <PageHeader
+    eyebrowText="KNOWLEDGE"
+    title={t(lang, `${K}.page.title`)}
+    lead={t(lang, `${K}.page.lead`)}
+    imageSrc="/images/pageHeader/pageheader-shibo.webp"
+    imageAlt=""
+  />
+
+  <div class="l-container p-knowledge">
+    <Breadcrumb
+      ariaLabel={lang === "ja" ? "パンくずリスト" : "Breadcrumb"}
+      items={breadcrumbItems}
+    />
+
+    {/* ── セクション1：思想（差別化の核） ── */}
+    <section class="l-section why-block">
+      <PageSectionHeading text={t(lang, `${K}.body.why.heading`)} />
+      <div class="p-knowledge__why">
+        <figure class="p-knowledge__whyImg">
+          <img
+            src="/images/knowledge/shibo-design/why-first.webp"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+        <div class="c-techIntro__box c-techIntro__box--compact">
+          {whyParagraphs.map((p) => <p class="c-techIntro__text">{p}</p>)}
+        </div>
+      </div>
+    </section>
+
+    {/* ── セクション2：課題→解決テーブル ── */}
+    <section class="l-section">
+      <PageSectionHeading text={t(lang, `${K}.body.solve.heading`)} />
+      <div class="c-techIntro__box c-techIntro__box--compact">
+        <p class="c-techIntro__text">{t(lang, `${K}.body.solve.intro`)}</p>
+      </div>
+      <dl class="p-knowledge__solve">
+        {
+          rows.map((row) => (
+            <div class="solve-card">
+              <dt class="solve-card__problem">
+                <span class="solve-card__label">
+                  {t(lang, `${K}.body.solve.label.problem`)}
+                </span>
+                <span class="solve-card__text">{row.problem}</span>
+              </dt>
+              <dd class="solve-card__solution">
+                <span class="solve-card__label solve-card__label--solve">
+                  <span class="solve-card__arrow" aria-hidden="true">
+                    →
+                  </span>
+                  {t(lang, `${K}.body.solve.label.solution`)}
+                </span>
+                <span class="solve-card__text">{row.solution}</span>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    {
+      /* ── セクション3：FAQ（大きいQカード・アコーディオンなし・全問オープン） ── */
+    }
+    <section class="l-section">
+      <PageSectionHeading text={t(lang, `${K}.body.faq.heading`)} />
+      <div class="p-knowledge__faq">
+        {
+          faqItems.map((f) => (
+            <article class="qa-card">
+              <p class="qa-card__q">
+                <img
+                  class="qa-card__badge"
+                  src="/images/common/icon__bullet--question.webp"
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="qa-card__qtext">{f.q}</span>
+              </p>
+              <div class="qa-card__a">
+                <p>{f.a}</p>
+                {f.linkTo && (
+                  <p class="qa-card__link">
+                    <a href={`${basePath}/${f.linkTo}/`}>→ {f.linkLabel}</a>
+                  </p>
+                )}
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    {
+      /* ── セクション4：用語ミニ解説（後日 /knowledge/glossary/ へ差し替え可能） ── */
+    }
+    <section class="l-section">
+      <PageSectionHeading text={t(lang, `${K}.body.glossary.heading`)} />
+      <div class="c-techIntro__box c-techIntro__box--compact">
+        <p class="c-techIntro__text">{t(lang, `${K}.body.glossary.intro`)}</p>
+      </div>
+      <dl class="p-knowledge__glossary">
+        {
+          terms.map((term) => (
+            <div class="glossary__item">
+              <dt>{term.term}</dt>
+              <dd>{term.definition}</dd>
+            </div>
+          ))
+        }
+      </dl>
+      <p class="p-knowledge__note">{t(lang, `${K}.body.glossary.note`)}</p>
+    </section>
+
+    {/* ── 関連導線（内部リンクのハブ化） ── */}
+    <section class="l-section">
+      <PageSectionHeading text={t(lang, `${K}.body.hub.heading`)} />
+      <p>{t(lang, `${K}.body.hub.lead`)}</p>
+      <nav
+        class="p-knowledge__related"
+        aria-label={lang === "ja" ? "関連ページ" : "Related"}
+      >
+        <a href={`${basePath}/technology/shibo/`}>{t(lang, "nav.tech_shibo")}</a
+        >
+        <a href={`${basePath}/technology/laser/`}>{t(lang, "nav.tech_laser")}</a
+        >
+        <a href={`${basePath}/contact/`}>{t(lang, "nav.contact")}</a>
+      </nav>
+    </section>
+  </div>
+</Base>
+
+<style lang="scss">
+  @use "@styles/var" as *;
+  @use "@styles/mixin" as *;
+
+  .why-block {
+    padding: 10px 30px 25px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    border: solid 1px rgba(255, 255, 255, 0.3);
+  }
+
+  .p-knowledge {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+  /* why ブロック */
+  .p-knowledge__why {
+    display: grid;
+    grid-template-columns: minmax(0, 40%) 1fr;
+    gap: 2rem;
+    align-items: start;
+    .c-techIntro__box {
+      font-weight: 400;
+      font-size: $fs-l;
+      line-height: 2;
+    }
+  }
+  .p-knowledge__whyImg {
+    margin: 0;
+  }
+  .p-knowledge__whyImg img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+  @media (max-width: 768px) {
+    .p-knowledge__why {
+      grid-template-columns: 1fr; /* スマホは縦積み：画像→本文 */
+      gap: 1.25rem;
+    }
+  }
+
+  /* 課題→解決テーブル */
+  .p-knowledge__solve {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    .solve-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr; // 左:課題 / 右:解決
+      border: 1px solid rgba(#fff, 0.14);
+      border-radius: 12px;
+      overflow: hidden;
+
+      &__problem,
+      &__solution {
+        margin: 0;
+        padding: 1.3rem 1.5rem 1.4rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.55rem;
+        line-height: 1.9;
+      }
+
+      &__problem {
+        background: rgba(#fff, 0.03);
+
+        .solve-card__text {
+          font-weight: 700; // 課題文を強調
+        }
+      }
+
+      &__solution {
+        background: rgba($color-secondary, 0.3); // アクセントの淡いティント
+        border-left: 1px solid rgba(#fff, 0.14);
+      }
+
+      &__label {
+        align-self: flex-start;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3em;
+        padding: 0.2em 1.5em;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        color: #fff;
+        background: rgba(#fff, 0.22); // 課題ラベル：ニュートラル
+
+        &--solve {
+          background: $color-secondary; // 解決ラベル：アクセント
+        }
+      }
+
+      &__text {
+        font-size: $fs-l;
+      }
+
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr; // スマホは縦積み：課題→解決
+
+        &__solution {
+          border-left: 0;
+          border-top: 1px solid rgba(#fff, 0.14);
+        }
+      }
+    }
+  }
+
+  /* FAQ：大きいQカード */
+  .p-knowledge__faq {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .qa-card {
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    background: rgba(112, 174, 237, 0.2);
+  }
+  .qa-card__q {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 0 0 0.9rem;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    font-weight: 700;
+  }
+  .qa-card__badge {
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+  .qa-card__qtext {
+    padding-top: 0.15rem;
+  }
+  .qa-card__a {
+    padding-left: 2.75rem;
+    line-height: 1.9;
+    font-size: $fs-l;
+  }
+  .qa-card__a p {
+    margin: 0;
+  }
+  .qa-card__link {
+    margin-top: 0.6rem !important;
+  }
+  @media (max-width: 640px) {
+    .qa-card {
+      padding: 1.25rem;
+    }
+    .qa-card__q {
+      font-size: 1.1rem;
+    }
+    .qa-card__a {
+      padding-left: 0;
+    }
+  }
+
+  /* 用語ミニ解説 */
+  .p-knowledge__glossary {
+    margin-top: 1.5rem;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .glossary__item {
+    padding: 0.9rem 0;
+    border-bottom: 1px solid $color-gray-700;
+  }
+  .p-knowledge__glossary dt {
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-size: $fs-l;
+    border-left: solid 3px $color-primary;
+    padding-left: 0.5rem;
+    line-height: 1;
+  }
+  .p-knowledge__glossary dd {
+    margin: 0;
+    line-height: 1.8;
+  }
+  .p-knowledge__note {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  /* 関連導線 */
+  .p-knowledge__related {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+</style>

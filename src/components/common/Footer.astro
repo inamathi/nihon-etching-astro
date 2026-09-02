@@ -15,15 +15,25 @@ const basePath = `${baseRoot}/${lang}`;
         <!-- TOP -->
         <section class="c-footerSitemap__block" data-footer-col="top">
           <h2 class="c-footerSitemap__title">
-            <a
-              class="c-footerSitemap__titleLink"
-              href={`${basePath}/company/overview-access/`}
-            >
+            <a class="c-footerSitemap__titleLink" href={`${basePath}/`}>
               {t(lang, "footer.top.title")}
             </a>
           </h2>
         </section>
-
+        <!-- Shibo Design Guide -->
+        <section
+          class="c-footerSitemap__block"
+          data-acc-item　data-footer-col="shibo-design"
+        >
+          <h2 class="c-footerSitemap__title">
+            <a
+              class="c-footerSitemap__titleLink"
+              href={`${basePath}/shibo-design`}
+            >
+              {t(lang, "footer.shibo_design.title")}
+            </a>
+          </h2>
+        </section>
         <!-- Company -->
         <section
           class="c-footerSitemap__block"

@@ -1,6 +1,10 @@
 ---
 import { t, toLang, type Lang } from "@/locales/multilingual";
 
+// [NEW]バッジの表示期間（デスクトップと同じ日付に合わせる）
+const NEW_UNTIL = new Date("2026-10-31");
+const showNew = new Date() < NEW_UNTIL;
+
 // 親から渡される lang（なければ ja）
 const { lang: rawLang = "ja" } = Astro.props as { lang?: string };
 const lang: Lang = toLang(rawLang);
@@ -59,7 +63,21 @@ const pathNoLang = appPath.replace(/^\/(ja|en)(\/|$)/, "/");
 <aside class="c-drawer" id="drawerPanel" data-drawer-panel>
   <div class="c-drawer__inner l-container">
     <nav class="c-drawer__nav" aria-label="Mobile navigation">
-      <a class="c-drawer__link" href={`${basePath}/`}>{t(lang, "nav.top")}</a>
+      <div class="c-drawer__group">
+        <a class="c-drawer__link" href={`${basePath}/`}>{t(lang, "nav.top")}</a>
+      </div>
+      <div class="c-drawer__group">
+        <a class="c-drawer__link" href={`${basePath}/knowledge/shibo-design/`}>
+          {t(lang, "nav.knowledge")}
+          {
+            showNew && (
+              <span class="c-badge-new" aria-hidden="true">
+                NEW
+              </span>
+            )
+          }
+        </a>
+      </div>
 
       <div class="c-drawer__group">
         <span class="c-drawer__label">{t(lang, "nav.company")}</span>

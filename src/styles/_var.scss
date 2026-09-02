@@ -35,8 +35,8 @@ $color-border: $color-gray-200;
 $color-text-opp: $color-gray-900;
 
 /* Utility */
-$color-link: $color-primary;
-$color-focus: rgba(213, 29, 29, 0.35);
+$color-link: $color-accent;
+$color-focus: rgba(#6da6e4, 0.35);
 
 /* company */
 $color-card-bg: #d1d2b8;
@@ -47,11 +47,14 @@ $color-country-japan: rgb(214, 127, 154);
 $color-country-global: rgb(91, 180, 171);
 $color-bg-topnav: rgba(20, 23, 33, 0.95);
 
+/* for dl */
+/* knowledge */
+$color-dt-liteblue: #a5e1ff;
+
 /* =========================
    Typography
    ========================= */
 $font-size-root: 16px;
-
 $line-height-body: 1.7;
 $line-height-heading: 1.25;
 
