@@ -44,7 +44,7 @@ const verKeys = ["ver01", "ver02", "ver03"];
               <div class="zoom-viewer__frame" data-zoom-frame>
                 <img
                   class="zoom-viewer__img"
-                  src={src}
+                  src={`${baseRoot}${src}`}
                   alt={t(lang, `zoomViewer.items.${horKeys[i]}.alt`)}
                   draggable="false"
                   data-zoom-img
@@ -106,7 +106,7 @@ const verKeys = ["ver01", "ver02", "ver03"];
                 >
                   <img
                     class="zoom-viewer__img"
-                    src={src}
+                    src={`${baseRoot}${src}`}
                     alt={t(lang, `zoomViewer.items.${verKeys[i]}.alt`)}
                     draggable="false"
                     data-zoom-img

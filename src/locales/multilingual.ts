@@ -1712,6 +1712,14 @@ const messages = {
         },
         fileUrl: "/pdf/technote-tfc-2508.pdf",
       },
+      {
+        id: "dl04",
+        title: {
+          ja: "CMFデザインの新次元：５軸レーザーテクスチャリング [2026.9 NEW]",
+          en: "A New Dimension in CMF Design: 5-Axis Laser Texturing [2026.9 NEW]",
+        },
+        fileUrl: "/pdf/Next-Dimension-CMF.pdf",
+      },
     ],
   },
   /*================================================
@@ -1943,11 +1951,6 @@ const messages = {
                 definition:
                   "成形品を金型から抜くために意匠面へ付ける傾斜。シボが深いほど大きな勾配が必要です。",
               },
-              {
-                term: "Enjoy Touch",
-                definition:
-                  "日本エッチング独自の技術である「Enjoy Touch」は・・・・",
-              },
             ],
             en: [
               {
@@ -1969,10 +1972,6 @@ const messages = {
                 term: "Draft angle",
                 definition:
                   "The taper given to design surfaces so the part can be released from the mold. The deeper the shibo, the larger the draft angle needed.",
-              },
-              {
-                term: "Enjoy Touch",
-                definition: "What 'Enjoy Touch' Technology are ・・・・",
               },
             ],
           },
