@@ -20,9 +20,9 @@ RewriteRule ^$ https://nihon-etching.co.jp/ja/ [R=301,L]
 RewriteRule ^index\.html$ https://nihon-etching.co.jp/ja/ [R=301,L]
 
 # 旧ページ → /ja/technology/shibo
-RewriteRule ^page_biz-laser-etching\.php$ https://nihon-etching.co.jp/ja/technology/shibo [R=301,L]
-RewriteRule ^page_biz-peening\.php$ https://nihon-etching.co.jp/ja/technology/shibo [R=301,L]
-RewriteRule ^page_biz-top\.php$ https://nihon-etching.co.jp/ja/technology/shibo [R=301,L]
+RewriteRule ^page_biz-laser-etching\.php$ https://nihon-etching.co.jp/ja/technology/shibo/ [R=301,L]
+RewriteRule ^page_biz-peening\.php$ https://nihon-etching.co.jp/ja/technology/shibo/ [R=301,L]
+RewriteRule ^page_biz-top\.php$ https://nihon-etching.co.jp/ja/technology/shibo/ [R=301,L]
 
 # 旧 /jp/page_corp-* → /ja/company/overview-access/
 RewriteRule ^page_corp-access\.php$ https://nihon-etching.co.jp/ja/company/overview-access/ [R=301,L]
@@ -44,6 +44,14 @@ RewriteRule ^page_group-sec-brazil\.php$ https://nihon-etching.co.jp/ja/group/ [
 RewriteRule ^page_group-sec-europe\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
 RewriteRule ^page_group-sec-usa\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
 RewriteRule ^page_group-top\.php$ https://nihon-etching.co.jp/ja/group/ [R=301,L]
+
+# カテゴリ親ディレクトリ（403回避）→ 主要子ページ　※ハブページができたら削除すること
+RewriteRule ^ja/technology/?$ https://nihon-etching.co.jp/ja/technology/shibo/ [R=301,L]
+RewriteRule ^en/technology/?$ https://nihon-etching.co.jp/en/technology/shibo/ [R=301,L]
+RewriteRule ^ja/company/?$ https://nihon-etching.co.jp/ja/company/overview-access/ [R=301,L]
+RewriteRule ^en/company/?$ https://nihon-etching.co.jp/en/company/overview-access/ [R=301,L]
+RewriteRule ^ja/knowledge/?$ https://nihon-etching.co.jp/ja/knowledge/shibo-design/ [R=301,L]
+RewriteRule ^en/knowledge/?$ https://nihon-etching.co.jp/en/knowledge/shibo-design/ [R=301,L]
 
 # --- cache
 <IfModule mod_expires.c>
