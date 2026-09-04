@@ -11,8 +11,8 @@ const messages = {
   meta: {
     description: {
       top: {
-        ja: "シボ加工・5軸レーザーテクスチャリング・ピーニング加工の専門企業。自動車内装・家電・化粧品容器の金型表面処理を創業53年の実績で対応。東京大田区・世界11カ国展開。サンプル・お見積もりご相談ください。",
-        en: "Specialists in shibo texturing, 5-axis laser texturing, and peening. Over 53 years of expertise in mold surface treatment for automotive interiors, home appliances, and cosmetic containers. Based in Ota-ku, Tokyo, operating across 11 countries. Contact us for samples and quotes.",
+        ja: "シボ加工・5軸レーザーテクスチャリング・ピーニング加工の専門企業。自動車内装・家電・化粧品容器の金型表面処理を50年以上（創業1971年）積み重ねた実績で対応。東京大田区・世界11カ国展開。サンプル・お見積もりご相談ください。",
+        en: "Shibo texturing, 5-axis laser & peening specialists. 50+ years (est. 1971) in mold surface treatment for automotive, appliances & cosmetic packaging. Tokyo-based.",
       },
       shibo_design: {
         ja: "シボは3D形状を作り込む前に決める設計判断です。抜き勾配との関係、番手の選び方、ウェルドライン・ヒケ・キズ対策を、シボ加工専門の日本エッチングが解説します。",

@@ -107,10 +107,23 @@ const pathNoLang = appPath.replace(/^\/(ja|en)(\/|$)/, "/");
           {t(lang, "nav.tech_peening")}
         </a>
       </div>
+      <div class="c-drawer__group">
+        <span class="c-drawer__label">
+          <a class="c-drawer__labelLink" href={`${basePath}/group/`}>
+            {t(lang, "nav.group")}
+          </a>
+        </span>
+        <a class="c-drawer__subLink" href={`${basePath}/group/ne/`}>
+          {t(lang, "footer.group.ne")}
+        </a>
+        <a class="c-drawer__subLink" href={`${basePath}/group/nwn/`}>
+          {t(lang, "footer.group.nwn")}
+        </a>
+        <a class="c-drawer__subLink" href={`${basePath}/group/sec/`}>
+          {t(lang, "footer.group.sec")}
+        </a>
+      </div>
 
-      <a class="c-drawer__link" href={`${basePath}/group/`}
-        >{t(lang, "nav.group")}</a
-      >
       <a class="c-drawer__link" href={`${basePath}/recruit/`}
         >{t(lang, "nav.recruit")}</a
       >

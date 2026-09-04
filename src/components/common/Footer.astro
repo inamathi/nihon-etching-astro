@@ -29,7 +29,7 @@ const basePath = `${baseRoot}/${lang}`;
           <h2 class="c-footerSitemap__title">
             <a
               class="c-footerSitemap__titleLink"
-              href={`${basePath}/shibo-design/`}
+              href={`${basePath}/knowledge/shibo-design/`}
             >
               {t(lang, "footer.shibo_design.title")}
             </a>
@@ -152,13 +152,13 @@ const basePath = `${baseRoot}/${lang}`;
                   {t(lang, "footer.group.ne")}
                 </a>
               </h3>
-
+              <!-- NE -->
               <div class="c-footerSitemap__panel" data-acc-panel>
                 <ul class="c-footerSitemap__list">
                   <li>
                     <a
                       class="c-footerSitemap__link"
-                      href={`${basePath}/group/ne/`}
+                      href={`${basePath}/group/ne/#ne-japan`}
                     >
                       {t(lang, "footer.group.ne01")}
                     </a>
@@ -166,7 +166,7 @@ const basePath = `${baseRoot}/${lang}`;
                   <li>
                     <a
                       class="c-footerSitemap__link"
-                      href={`${basePath}/group/nwn/`}
+                      href={`${basePath}/group/ne/#ne-asia`}
                     >
                       {t(lang, "footer.group.ne02")}
                     </a>
@@ -174,7 +174,7 @@ const basePath = `${baseRoot}/${lang}`;
                   <li>
                     <a
                       class="c-footerSitemap__link"
-                      href={`${basePath}/group/sec/`}
+                      href={`${basePath}/group/ne/#ne-east-asia`}
                     >
                       {t(lang, "footer.group.ne03")}
                     </a>
@@ -200,7 +200,7 @@ const basePath = `${baseRoot}/${lang}`;
                   <li>
                     <a
                       class="c-footerSitemap__link"
-                      href={`${basePath}/group/ne/`}
+                      href={`${basePath}/group/nwn/#nwn-japan`}
                     >
                       {t(lang, "footer.group.nwn01")}
                     </a>
@@ -208,7 +208,7 @@ const basePath = `${baseRoot}/${lang}`;
                   <li>
                     <a
                       class="c-footerSitemap__link"
-                      href={`${basePath}/group/nwn/`}
+                      href={`${basePath}/group/nwn/#nwn-overseas`}
                     >
                       {t(lang, "footer.group.nwn02")}
                     </a>
@@ -216,7 +216,7 @@ const basePath = `${baseRoot}/${lang}`;
                   <li>
                     <a
                       class="c-footerSitemap__link"
-                      href={`${basePath}/group/sec/`}
+                      href={`${basePath}/group/nwn/#nwn-east-asia`}
                     >
                       {t(lang, "footer.group.nwn03")}
                     </a>
@@ -242,7 +242,7 @@ const basePath = `${baseRoot}/${lang}`;
                   <li>
                     <a
                       class="c-footerSitemap__link"
-                      href={`${basePath}/group/ne/`}
+                      href={`${basePath}/group/sec/#sec-europe`}
                     >
                       {t(lang, "footer.group.sec01")}
                     </a>
@@ -250,7 +250,7 @@ const basePath = `${baseRoot}/${lang}`;
                   <li>
                     <a
                       class="c-footerSitemap__link"
-                      href={`${basePath}/group/nwn/`}
+                      href={`${basePath}/group/sec/#sec-north-america`}
                     >
                       {t(lang, "footer.group.sec02")}
                     </a>
@@ -258,7 +258,7 @@ const basePath = `${baseRoot}/${lang}`;
                   <li>
                     <a
                       class="c-footerSitemap__link"
-                      href={`${basePath}/group/sec/`}
+                      href={`${basePath}/group/sec/#sec-south-america`}
                     >
                       {t(lang, "footer.group.sec03")}
                     </a>
@@ -314,44 +314,44 @@ const basePath = `${baseRoot}/${lang}`;
       {t(lang, "footer.copyright")}
     </p>
   </div>
-</footer>
 
-<script>
-  (() => {
-    const root = document.querySelector("[data-site-footer]");
-    if (!root) return;
+  <script>
+    (() => {
+      const root = document.querySelector("[data-site-footer]");
+      if (!root) return;
 
-    const isSP = () => window.matchMedia("(max-width: 768px)").matches;
+      const isSP = () => window.matchMedia("(max-width: 768px)").matches;
 
-    const applyInitial = () => {
-      root.querySelectorAll("[data-acc-item]").forEach((item) => {
-        item.setAttribute("data-acc-state", isSP() ? "closed" : "open");
+      const applyInitial = () => {
+        root.querySelectorAll("[data-acc-item]").forEach((item) => {
+          item.setAttribute("data-acc-state", isSP() ? "closed" : "open");
+        });
+      };
+
+      applyInitial();
+      window.addEventListener("resize", applyInitial, { passive: true });
+
+      root.addEventListener("click", (e) => {
+        if (!isSP()) return;
+
+        // e.target can be null in some environments; ensure it's an Element before calling closest
+        const target = e.target;
+        if (!target || !(target instanceof Element)) return;
+
+        const trigger = target.closest("[data-acc-trigger]");
+        if (!trigger) return;
+
+        const item = trigger.closest("[data-acc-item]");
+        if (!item) return;
+
+        // panelが無ければトグルしない（誤爆防止）
+        if (!item.querySelector("[data-acc-panel]")) return;
+
+        e.preventDefault();
+
+        const isOpen = item.getAttribute("data-acc-state") === "open";
+        item.setAttribute("data-acc-state", isOpen ? "closed" : "open");
       });
-    };
-
-    applyInitial();
-    window.addEventListener("resize", applyInitial, { passive: true });
-
-    root.addEventListener("click", (e) => {
-      if (!isSP()) return;
-
-      // e.target can be null in some environments; ensure it's an Element before calling closest
-      const target = e.target;
-      if (!target || !(target instanceof Element)) return;
-
-      const trigger = target.closest("[data-acc-trigger]");
-      if (!trigger) return;
-
-      const item = trigger.closest("[data-acc-item]");
-      if (!item) return;
-
-      // panelが無ければトグルしない（誤爆防止）
-      if (!item.querySelector("[data-acc-panel]")) return;
-
-      e.preventDefault();
-
-      const isOpen = item.getAttribute("data-acc-state") === "open";
-      item.setAttribute("data-acc-state", isOpen ? "closed" : "open");
-    });
-  })();
-</script>
+    })();
+  </script>
+</footer>

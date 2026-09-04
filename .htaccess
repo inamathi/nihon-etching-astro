@@ -52,6 +52,8 @@ RewriteRule ^ja/company/?$ https://nihon-etching.co.jp/ja/company/overview-acces
 RewriteRule ^en/company/?$ https://nihon-etching.co.jp/en/company/overview-access/ [R=301,L]
 RewriteRule ^ja/knowledge/?$ https://nihon-etching.co.jp/ja/knowledge/shibo-design/ [R=301,L]
 RewriteRule ^en/knowledge/?$ https://nihon-etching.co.jp/en/knowledge/shibo-design/ [R=301,L]
+# 旧 /ja/shibo-design/ を /knowledge/ 配下の正本へ統一（2026-09 追加）
+RewriteRule ^ja/shibo-design/?$ https://nihon-etching.co.jp/ja/knowledge/shibo-design/ [R=301,L]
 
 # --- cache
 <IfModule mod_expires.c>

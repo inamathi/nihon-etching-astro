@@ -357,3 +357,11 @@ html.is-drawer-open {
     }
   }
 }
+
+/* グループ一覧のリンク用 */
+.c-drawer__labelLink {
+  color: inherit;
+}
+.c-drawer__labelLink:hover {
+  text-decoration: underline;
+}
