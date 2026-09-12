@@ -305,12 +305,12 @@ export const companies: CompanyData[] = [
       en: "Nihon Mould Texturing Sdn. Bhd.",
     },
     companyNameSecondary: {
-      ja: "Shar Alam Selangor",
-      en: "Shar Alam Selangor",
+      ja: "Shah Alam Selangor",
+      en: "Shah Alam Selangor",
     },
     address: {
-      ja: "No.32 Jalan Pemberita U1/49, Temasya Industrial Park Seksyen U1, Shar Alam Selangor, 40150, Malaysia",
-      en: "No.32 Jalan Pemberita U1/49, Temasya Industrial Park Seksyen U1, Shar Alam Selangor, 40150, Malaysia",
+      ja: "No.32 Jalan Pemberita U1/49, Temasya Industrial Park Seksyen U1, Shah Alam Selangor, 40150, Malaysia",
+      en: "No.32 Jalan Pemberita U1/49, Temasya Industrial Park Seksyen U1, Shah Alam Selangor, 40150, Malaysia",
     },
     phone: {
       ja: "+60(0)-3-5569-1008",
@@ -345,12 +345,12 @@ export const companies: CompanyData[] = [
       en: "PT. Nihon Etching",
     },
     companyNameSecondary: {
-      ja: "Cikaran Bekasi",
-      en: "Cikaran Bekasi",
+      ja: "Cikarang Bekasi",
+      en: "Cikarang Bekasi",
     },
     address: {
-      ja: "Kawasan Industri Jababeka Block GG-20, Cikaran Bekasi, 17550, Indonesia",
-      en: "Kawasan Industri Jababeka Block GG-20, Cikaran Bekasi, 17550, Indonesia",
+      ja: "Kawasan Industri Jababeka Block GG-20, Cikarang Bekasi, 17550, Indonesia",
+      en: "Kawasan Industri Jababeka Block GG-20, Cikarang Bekasi, 17550, Indonesia",
     },
     phone: {
       ja: "+62(0)-21-898-35264",
@@ -824,7 +824,7 @@ export const companies: CompanyData[] = [
     group: "sec",
     region: "europe",
     country: "Portugal",
-    location: { ja: "ポルトガル", en: "Portgual" },
+    location: { ja: "ポルトガル", en: "Portugal" },
     companyName: {
       ja: "J & F KRUTH PORTUGAL, LDA",
       en: "J & F KRUTH PORTUGAL, LDA",
@@ -898,20 +898,20 @@ export const companies: CompanyData[] = [
     map: "https://goo.gl/maps/8Zz2PwGCVDUZaybw5",
     photoSrc: "img_group_sec_austria.webp",
   },
-  /* Itary */
+  /* Italy */
   {
     id: "sec-europe-italy",
     group: "sec",
     region: "europe",
-    country: "Itary",
-    location: { ja: "イタリア", en: "Itary" },
+    country: "Italy",
+    location: { ja: "イタリア", en: "Italy" },
     companyName: {
       ja: "ML ENGRAVING srl",
       en: "ML ENGRAVING srl",
     },
     companyNameSecondary: {
-      ja: "Itary",
-      en: "Itary",
+      ja: "Italy",
+      en: "Italy",
     },
     address: {
       ja: "Via Presolana 114, 24020 Onore (BG)",
@@ -943,7 +943,7 @@ export const companies: CompanyData[] = [
     id: "sec-europe-dket",
     group: "sec",
     region: "europe",
-    country: "Turky",
+    country: "Turkey",
     location: { ja: "トルコ", en: "Turkey" },
     companyName: {
       ja: "DKET – Global Mold Texturing",

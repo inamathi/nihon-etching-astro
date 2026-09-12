@@ -6,7 +6,6 @@ import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
 import Introduction from "@/components/common/Introduction.astro";
 
 import { t, toLang, type Lang, getList } from "@/locales/multilingual";
-import LinkButton from "@/components/ui/LinkButton.astro";
 import BlockHeading from "@/components/ui/BlockHeading.astro";
 
 export const getStaticPaths = () => [
@@ -18,23 +17,7 @@ const lang: Lang = toLang(Astro.params.lang);
 const baseRoot = import.meta.env.BASE_URL.replace(/\/$/, "");
 const basePath = `${baseRoot}/${lang}`;
 
-/* =========================
- * Link Buttons（実体）
- * ========================= */
-type LinkItem = {
-  href: string;
-  labelKeyIndex: number; // multilingual.ts の buttons 配列 index
-  target?: "_self" | "_blank";
-};
-
-const linkButtons: LinkItem[] = [
-  {
-    href: "https://plastron.co.jp/",
-    labelKeyIndex: 0,
-    target: "_blank",
-  },
-];
-const title = t(lang, "pageTitle.download");
+const title = t(lang, "pageTitle.privacypolicy");
 
 type PrivacyPolicy = {
   index: Record<string, string>;

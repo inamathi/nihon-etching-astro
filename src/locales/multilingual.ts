@@ -21,7 +21,7 @@ const messages = {
       company: {
         overview: {
           ja: "株式会社日本エッチング（東京都大田区本羽田）の会社概要。昭和46年創業、資本金1,000万円、国内従業員70名・海外350名。シボ加工・レーザーテクスチャリング・ピーニング加工を世界11カ国で展開するグローバル専門企業。",
-          en: "18:48Company overview of Nihon Etching Co.,Ltd. (Motohaneda, Ota-ku, Tokyo). Founded in 1971, capital of ¥10 million, with 70 domestic and 350 overseas employees. A global specialist in shibo texturing, laser texturing, and peening, operating across 11 countries worldwide.",
+          en: "Company overview of Nihon Etching Co.,Ltd. (Motohaneda, Ota-ku, Tokyo). Founded in 1971, capital of ¥10 million, with 70 domestic and 350 overseas employees. A global specialist in shibo texturing, laser texturing, and peening, operating across 11 countries worldwide.",
         },
         philosophy: {
           ja: "日本エッチングの経営理念・品質方針・環境方針。高品質な表面処理加工を通じて社会に貢献することを使命としています。",
@@ -1405,6 +1405,16 @@ const messages = {
           ],
         },
       },
+      assets: {
+        imageAlt01: {
+          ja: "イエプコ（IEPCO）社製ピーニング機によるマイクロブラスト処理",
+          en: "Micro-blast peening with an IEPCO peening machine",
+        },
+        imageAlt02: {
+          ja: "イエプコ（IEPCO）社製ピーニング加工機（グローブ付きブラストキャビネット）",
+          en: "IEPCO peening machine (glove-box blast cabinet)",
+        },
+      },
     },
   },
   /*================================================
@@ -1537,8 +1547,8 @@ const messages = {
         },
         employment: { ja: "正社員", en: "Full-time" },
         qualification: {
-          ja: "短大/専門/高専/大学/大学院 卒業または卒業見込みの方（2021年3月～2023年3月卒または2024年3月卒業見込み）",
-          en: "Applicants who have graduated or are expected to graduate from a junior college, vocational school, technical college, university, or graduate school (graduates from Mar 2021–Mar 2023, or expected to graduate in Mar 2024).",
+          ja: "短大/専門/高専/大学/大学院 卒業または卒業見込みの方（2024年3月～2026年3月卒または2027年3月卒業見込み）",
+          en: "Applicants who have graduated or are expected to graduate from a junior college, vocational school, technical college, university, or graduate school (graduates from Mar 2024–Mar 2026, or expected to graduate in Mar 2027).",
         },
         location: { ja: "東京都大田区", en: "Ota-ku, Tokyo" },
         period: {
