@@ -2,7 +2,7 @@ import type { Lang } from "@/locales/multilingual";
 
 export const heroText: Record<Lang, Record<string, string>> = {
   ja: {
-    "hero.s1": "ETCHING BEYOND LIMITS",
+    "hero.s1": "その凹凸は<br>意匠であり、機能でもある",
     "hero.s2": "限界突破",
     "hero.s3": "質感向上＋機能性",
     "hero.s4": "CMF+Fで<br>未来をデザインする",

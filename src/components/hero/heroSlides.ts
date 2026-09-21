@@ -34,9 +34,9 @@ export type HeroBgImage = (typeof heroBgImages)[HeroDevice][number];
 export const heroSlides: HeroSlide[] = [
   {
     type: "text",
-    variant: "en-serif",
+    variant: "jp-strong",
     key: "hero.s1",
-    className: "hero__line--en",
+    // className: "hero__line--en",
   },
   { type: "text", variant: "jp-strong", key: "hero.s2" },
   { type: "text", variant: "jp-strong", key: "hero.s3" },
