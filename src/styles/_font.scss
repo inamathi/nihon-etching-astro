@@ -1,12 +1,17 @@
 /* 日本語・英語 共通ベース */
 :root {
-  --font-body: "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  --font-body:
+    "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 
   --font-heading: var(--font-body);
 
   --line-height-body: 1.7;
   --line-height-heading: 1.25;
+
+  --font-weight-body: 500;
+  --font-weight-heading: 700;
+  --font-weight-heavy: 900;
 }
 
 /* 日本語 */

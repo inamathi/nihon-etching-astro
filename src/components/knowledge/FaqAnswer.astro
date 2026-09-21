@@ -1,0 +1,211 @@
+---
+// ============================================================
+//  FaqAnswer.astro  — 技術Q&A の回答ブロックを描画
+//  配置想定: src/components/knowledge/FaqAnswer.astro
+//  ブロック種別ごとに描画。テキストは既に単一言語に解決済みのものを受ける
+// ============================================================
+import type { FaqBlock } from "@/locales/faq/tech-faq";
+
+interface Props {
+  blocks: FaqBlock[];
+}
+const { blocks } = Astro.props;
+---
+
+{
+  blocks.map((b) => (
+    <>
+      {b.type === "p" && <p class="faq-p">{b.text}</p>}
+
+      {b.type === "note" && <p class="faq-note">{b.text}</p>}
+
+      {b.type === "cases" && (
+        <div class="faq-cases">
+          {b.items.map((it) => (
+            <div class="faq-case">
+              <b class="faq-case__label">{it.label}</b>
+              <span class="faq-case__text">{it.text}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {b.type === "defs" && (
+        <dl class="faq-defs">
+          {b.items.map((it) => (
+            <>
+              <dt>{it.dt}</dt>
+              <dd>{it.dd}</dd>
+            </>
+          ))}
+        </dl>
+      )}
+
+      {b.type === "table" && (
+        <div class="faq-tableWrap">
+          <table>
+            <thead>
+              <tr>
+                {b.head.map((h) => (
+                  <th scope="col">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {b.rows.map((r) => (
+                <tr>
+                  {r.map((c, i) =>
+                    i === 0 ? <th scope="row">{c}</th> : <td>{c}</td>,
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {b.type === "list" &&
+        (b.ordered ? (
+          <ol class="faq-list faq-list--num">
+            {b.items.map((x) => (
+              <li>{x}</li>
+            ))}
+          </ol>
+        ) : (
+          <ul class="faq-list">
+            {b.items.map((x) => (
+              <li>{x}</li>
+            ))}
+          </ul>
+        ))}
+    </>
+  ))
+}
+
+<style lang="scss">
+  @use "@styles/var" as *;
+
+  .faq-p {
+    margin: 0 0 0.9rem;
+    line-height: 1.9;
+  }
+  .faq-p:last-child {
+    margin-bottom: 0;
+  }
+
+  .faq-note {
+    margin: 0.8rem 0 0;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    background: rgba(#fff, 0.04);
+    border-left: 3px solid $color-primary;
+    border-radius: 4px;
+  }
+
+  /* 二分岐 */
+  .faq-cases {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0.4rem 0 0.9rem;
+  }
+  .faq-case {
+    padding: 0.9rem 1.1rem;
+    background: rgba(#fff, 0.04);
+    border: 1px solid rgba(#fff, 0.12);
+    border-radius: 10px;
+  }
+  .faq-case__label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+  }
+  .faq-case__text {
+    line-height: 1.85;
+  }
+
+  /* 定義（記号・機器など） */
+  .faq-defs {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem 1.25rem;
+    margin: 0.4rem 0 0.9rem;
+  }
+  .faq-defs dt {
+    font-weight: 700;
+    color: $color-secondary;
+    white-space: nowrap;
+  }
+  .faq-defs dd {
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  /* 表（狭幅は横スクロール） */
+  .faq-tableWrap {
+    margin: 0.4rem 0 0.9rem;
+    overflow-x: auto;
+    border: 1px solid rgba(#fff, 0.14);
+    border-radius: 10px;
+  }
+  .faq-tableWrap table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 460px;
+    font-size: 0.95rem;
+  }
+  .faq-tableWrap th,
+  .faq-tableWrap td {
+    padding: 0.7rem 0.95rem;
+    text-align: left;
+    vertical-align: top;
+    line-height: 1.75;
+    border-bottom: 1px solid rgba(#fff, 0.1);
+  }
+  .faq-tableWrap thead th {
+    background: rgba(#fff, 0.06);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .faq-tableWrap tbody th {
+    font-weight: 500;
+    white-space: nowrap;
+    background: rgba(#fff, 0.02);
+  }
+  .faq-tableWrap tr:last-child th,
+  .faq-tableWrap tr:last-child td {
+    border-bottom: 0;
+  }
+
+  /* リスト（箇条／番号） */
+  .faq-list {
+    margin: 0.4rem 0 0.9rem;
+    padding: 0;
+    list-style: none;
+    counter-reset: faqli;
+  }
+  .faq-list li {
+    position: relative;
+    padding: 0.55rem 0 0.55rem 1.7rem;
+    line-height: 1.8;
+    border-bottom: 1px dashed rgba(#fff, 0.12);
+  }
+  .faq-list li:last-child {
+    border-bottom: 0;
+  }
+  .faq-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0.2rem;
+    color: $color-secondary;
+  }
+  .faq-list--num li::before {
+    counter-increment: faqli;
+    content: counter(faqli);
+    left: 0.1rem;
+    top: 0.55rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+</style>
