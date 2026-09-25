@@ -516,11 +516,11 @@ export const companies: CompanyData[] = [
       en: "8-9-6 Mistui, Ichinomiya-Shi, Aichi 491-0827 Japan",
     },
     phone: {
-      ja: "+81(0)-586-76-7108",
+      ja: "0586-76-7108",
       en: "+81-586-76-7108",
     },
     fax: {
-      ja: "+81(0)-586-76-5551",
+      ja: "0586-76-5551",
       en: "+81-586-76-5551",
     },
     contact: {
@@ -556,11 +556,11 @@ export const companies: CompanyData[] = [
       en: "1-46 Nakata, Yao-Shi, Osaka 581-0014 Japan",
     },
     phone: {
-      ja: "+81(0)-729-95-2545",
+      ja: "0729-95-2545",
       en: "+81-729-95-2545",
     },
     fax: {
-      ja: "+81(0)-729-95-5752",
+      ja: "0729-95-5752",
       en: "+81-729-95-5752",
     },
     contact: {
