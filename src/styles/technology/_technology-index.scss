@@ -177,7 +177,7 @@
 
   &__pdfLabel {
     font-size: $fs-s;
-    font-weight: 600;
+    font-weight: var(--font-weight-body);
     margin: 0;
   }
   &__linkList {
@@ -310,7 +310,7 @@
 
   &__pdfLabel {
     font-size: $fs-s;
-    font-weight: 600;
+    font-weight: var(--font-weight-body);
     margin: 0;
   }
 }

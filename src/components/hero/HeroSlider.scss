@@ -233,7 +233,7 @@
     "Hiragino Sans",
     "Noto Sans JP",
     sans-serif;
-  font-weight: 600;
+  font-weight: var(--font-weight-emphasis);
   font-size: clamp(24px, 5vw, 56px);
   letter-spacing: 0.3em;
   line-height: 1.2;
@@ -288,7 +288,7 @@
 .hero__line--en {
   font-size: clamp(22px, 3.2vw, 56px);
   letter-spacing: 0.08em;
-  font-weight: 600;
+  font-weight: var(--font-weight-emphasis);
 }
 
 .hero__line--spaced {

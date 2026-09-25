@@ -13,9 +13,9 @@
     .c-companyCard__companyName {
       display: flex;
       flex-direction: column;
-      font-weight: 600;
+      font-weight: var(--font-weight-emphasis);
       span:nth-child(2) {
-        font-weight: 600;
+        font-weight: var(--font-weight-emphasis);
         font-size: $fs-m;
         color: $color-gray-500;
         letter-spacing: 0.05rem;
@@ -43,7 +43,7 @@
       }
       .c-companyCard__countryLabel {
         font-size: $fs-xs;
-        font-weight: 600;
+        font-weight: var(--font-weight-emphasis);
       }
     }
   }
