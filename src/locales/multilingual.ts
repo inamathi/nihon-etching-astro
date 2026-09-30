@@ -11,7 +11,7 @@ const messages = {
   meta: {
     description: {
       top: {
-        ja: "シボ加工・5軸レーザーテクスチャリング・ピーニング加工の専門企業。自動車内装・家電・化粧品容器の金型表面処理を50年以上（創業1971年）積み重ねた実績で対応。東京大田区・世界11カ国展開。サンプル・お見積もりご相談ください。",
+        ja: "シボ加工・５軸レーザーテクスチャリング・ピーニング加工の専門企業。自動車内装・家電・化粧品容器の金型表面処理を50年以上（創業1971年）積み重ねた実績で対応。東京大田区・世界11カ国展開。サンプル・お見積もりご相談ください。",
         en: "Shibo texturing, 5-axis laser & peening specialists. 50+ years (est. 1971) in mold surface treatment for automotive, appliances & cosmetic packaging. Tokyo-based.",
       },
       shibo_design: {
@@ -34,8 +34,8 @@ const messages = {
       },
       technology: {
         laser: {
-          ja: "GFマシニングソリューションズ社製5軸レーザー彫刻機（GFMS LS2500）を国内最大規模で導入。複雑な3D曲面へのデジタルテクスチャリング・レーザーシボ加工に対応。CMF設計・試作から量産まで一貫して対応いたします。",
-          en: "Home to Japan's largest fleet of GF Machining Solutions 5-axis laser engravers (GFMS LS2500). Capable of digital texturing and laser shibo processing on complex 3D curved surfaces. We provide end-to-end support from CMF design and prototyping through to mass production.",
+          ja: "GFマシニングソリューションズ社製５軸レーザー彫刻機（GFMS-LS2500）を国内最大規模で導入。複雑な3D曲面へのデジタルテクスチャリング・レーザーシボ加工に対応。CMF設計・試作から量産まで一貫して対応いたします。",
+          en: "Home to Japan's largest fleet of GF Machining Solutions 5-axis laser engravers (GFMS-LS2500). Capable of digital texturing and laser shibo processing on complex 3D curved surfaces. We provide end-to-end support from CMF design and prototyping through to mass production.",
         },
         shibo: {
           ja: "シボ加工とは金型や素材の表面にテクスチャーを施す表面処理技術です。フォトエッチング・梨地・皮シボ・サンドブラスト・グラフィックパターンを自動車内装・家電・OA機器など幅広い用途に対応。東京大田区のシボ加工専門企業。",
@@ -51,6 +51,18 @@ const messages = {
           ja: "日本エッチングのグループ会社一覧。国内直営工場から海外ネットワークまで、世界規模で表面処理加工を展開しています。",
           en: "Nihon Etching Group companies worldwide, from domestic factories to an extensive overseas network.",
         },
+        ne: {
+          ja: "日本エッチングの直営工場（NEグループ）一覧。東京大田区の本社工場をはじめ、フィリピン・シンガポール・ベトナム・マレーシア・インドネシア・中国・台湾の拠点でシボ加工に対応します。",
+          en: "Nihon Etching's directly operated factories (NE Group): our Tokyo head office plants and facilities in the Philippines, Singapore, Vietnam, Malaysia, Indonesia, China, and Taiwan.",
+        },
+        nwn: {
+          ja: "NWNグループの拠点一覧。ニューテックス・ワールドエッチング・日本エッチングの3社で設立したネットワークで、日本・インド・タイ・北米・中国・韓国をカバーします。",
+          en: "NWN Group locations: a network founded by Newtex, World Etching, and Nihon Etching, covering Japan, India, Thailand, North America, China, and Korea.",
+        },
+        sec: {
+          ja: "SECグループの提携拠点一覧。ドイツ・ポルトガル・オーストリア・イタリア・トルコなどのヨーロッパ各国と、アメリカ・ブラジルで、日本エッチングと同水準のシボ加工に対応します。",
+          en: "SEC Group partner locations across Europe (Germany, Portugal, Austria, Italy, Turkey), the United States, and Brazil, delivering texturing to the same standards as Nihon Etching.",
+        },
       },
       careers: {
         ja: "株式会社日本エッチングの採用情報。表面処理加工のリーディングカンパニーで、ともに成長できる仲間を募集しています。",
@@ -61,7 +73,7 @@ const messages = {
         en: "Contact Nihon Etching Co., Ltd. for inquiries about Shibo texturing, laser engraving, and peening services.",
       },
       download: {
-        ja: "日本エッチングの技術資料ダウンロード。シボ加工・5軸レーザー彫刻に関するPDF資料をご用意しています。",
+        ja: "日本エッチングの技術資料ダウンロード。シボ加工・５軸レーザー彫刻に関するPDF資料をご用意しています。",
         en: "Download technical documents from Nihon Etching, including PDFs on Shibo texturing and 5-axis laser engraving.",
       },
       privacypolicy: {
@@ -256,7 +268,7 @@ const messages = {
       zh: "Technology",
     },
     tech_laser: {
-      ja: "5軸レーザー彫刻",
+      ja: "５軸レーザー彫刻",
       en: "5-Axis Laser Engraving",
       zh: "5-Axis Laser Engraving",
     },
@@ -317,7 +329,7 @@ const messages = {
       en: "Shibo Texturing Experts | Nihon Etching Co.,Ltd. — Est. 1971 · 11 Countries Worldwide",
     },
     shibo_design: {
-      ja: "シボ設計ガイド｜抜き勾配・番手の選び方とウェルド／ヒケ対策｜日本エッチング",
+      ja: "シボ設計ガイド｜抜き勾配・番手の選び方とウェルド／ヒケ対策｜株式会社日本エッチング",
       en: "Shibo Design Guide | Draft Angle & Grain Selection, Weld/Sink Mark Solutions | Nihon Etching",
     },
     company: {
@@ -326,36 +338,66 @@ const messages = {
         en: "Company Overview | Nihon Etching Co.,Ltd. — Shibo Texturing & Mold Surface Treatment Specialists (Ota-ku, Tokyo)",
       },
       philosophy: {
-        ja: "理念・品質・環境方針",
-        en: "Philosophy, Quality & Environmental Policy",
+        ja: "理念・品質・環境方針｜株式会社日本エッチング【創業1971年・世界11カ国】",
+        en: "Philosophy, Quality & Environmental Policy | Nihon Etching",
       },
-      history: { ja: "沿革", en: "History" },
+      history: {
+        ja: "沿革｜株式会社日本エッチング【創業1971年・世界11カ国】",
+        en: "History | Nihon Etching",
+      },
     },
     technology: {
       laser: {
-        ja: "5軸レーザーシボ加工・レーザーテクスチャリング｜国内最大規模GFMS LS2500導入｜日本エッチング",
-        en: "5-Axis Laser Shibo & Laser Texturing | Japan's Largest GFMS LS2500 Fleet | Nihon Etching",
+        ja: "５軸レーザーシボ加工・レーザーテクスチャリング｜国内最大規模GFMS-LS2500導入｜株式会社日本エッチング",
+        en: "5-Axis Laser Shibo & Laser Texturing | Japan's Largest GFMS-LS2500 Fleet | Nihon Etching",
       },
       shibo: {
-        ja: "シボ加工とは？フォトエッチング・梨地・皮シボの専門加工｜日本エッチング",
+        ja: "シボ加工とは？フォトエッチング・梨地・皮シボの専門加工｜株式会社日本エッチング",
         en: "Shibo Texturing Specialists | Molds, Plastics & Automotive Interiors",
       },
       peening: {
-        ja: "ショットピーニング・マイクロブラスト処理｜金型長寿命化・表面改質｜日本エッチング",
+        ja: "ショットピーニング・マイクロブラスト処理｜金型長寿命化・表面改質｜株式会社日本エッチング",
         en: "Shot Peening & Micro Blasting | Mold Life Extension & Surface Modification | Nihon Etching",
       },
     },
     group: {
-      top: { ja: "グループ一覧", en: "Group List" },
-      ne: { ja: "NE（直営）グループ", en: "NE(Direct) Group" },
-      nwn: { ja: "NWNグループ", en: "NWN Group" },
-      sec: { ja: "SECグループ", en: "SEC Group" },
+      top: {
+        ja: "グループ一覧｜株式会社日本エッチング",
+        en: "Group List | Nihon Etching",
+      },
+      ne: {
+        ja: "NE（直営）グループ｜株式会社日本エッチング",
+        en: "NE(Direct) Group | Nihon Etching",
+      },
+      nwn: {
+        ja: "NWNグループ｜株式会社日本エッチング",
+        en: "NWN Group | Nihon Etching",
+      },
+      sec: {
+        ja: "SECグループ｜株式会社日本エッチング",
+        en: "SEC Group | Nihon Etching",
+      },
     },
-    careers: { ja: "採用情報", en: "Careers" },
-    contact: { ja: "お問い合わせ", en: "Contact" },
-    thanks: { ja: "送信完了", en: "Submission Successful" },
-    download: { ja: "ダウンロード", en: "Download" },
-    privacypolicy: { ja: "プライバシーポリシー", en: "Privacy Policy" },
+    careers: {
+      ja: "採用情報｜株式会社日本エッチング",
+      en: "Careers | Nihon Etching",
+    },
+    contact: {
+      ja: "お問い合わせ｜株式会社日本エッチング",
+      en: "Contact | Nihon Etching",
+    },
+    thanks: {
+      ja: "送信完了｜株式会社日本エッチング",
+      en: "Submission Successful | Nihon Etching",
+    },
+    download: {
+      ja: "ダウンロード｜株式会社日本エッチング",
+      en: "Download | Nihon Etching",
+    },
+    privacypolicy: {
+      ja: "プライバシーポリシー｜株式会社日本エッチング",
+      en: "Privacy Policy | Nihon Etching",
+    },
   },
   /* top about */
   topAbout: {
@@ -763,7 +805,7 @@ const messages = {
             address: {
               label: { ja: "住　所", en: "Address" },
               ja: "〒144-0044 東京都大田区本羽田 2-8-19",
-              en: "2-8-19 Honhaneda, Oota-ku, Tokyo 144-0044 Japan",
+              en: "2-8-19 Honhaneda, Ota-ku, Tokyo 144-0044 Japan",
             },
             phone: {
               label: { ja: "電　話", en: "Phone" },
@@ -812,7 +854,7 @@ const messages = {
             address: {
               label: { ja: "住　所", en: "Address" },
               ja: "〒144-0044 東京都大田区本羽田 2-11-11",
-              en: "2-11-11 Honhaneda, Oota-ku, Tokyo 144-0044 Japan",
+              en: "2-11-11 Honhaneda, Ota-ku, Tokyo 144-0044 Japan",
             },
             map: {
               lat: 35.546460821214616,
@@ -833,7 +875,7 @@ const messages = {
             address: {
               label: { ja: "住　所", en: "Address" },
               ja: "〒144-0044 東京都大田区本羽田 2-2-10",
-              en: "2-2-10 Honhaneda, Oota-ku, Tokyo 144-0044 Japan",
+              en: "2-2-10 Honhaneda, Ota-ku, Tokyo 144-0044 Japan",
             },
             map: {
               lat: 35.548555774025374,
@@ -1239,7 +1281,7 @@ const messages = {
     laser: {
       page: {
         title: {
-          ja: '５軸レーザー彫刻機 "GFマシニングソリューションズ GFMS LS2500"',
+          ja: '５軸レーザー彫刻機 "GFマシニングソリューションズ GFMS-LS2500"',
           en: "GF Machining Solutions GFMS-LS2500",
         },
         lead: {
@@ -1264,12 +1306,12 @@ const messages = {
           },
         },
         imageTitle: {
-          ja: "5軸レーザー彫刻機「GFMS-LS2500」",
+          ja: "５軸レーザー彫刻機「GFMS-LS2500」",
           en: "5-axis laser engraving [GFMS-LS2500]",
         },
         description: {
           ja: [
-            "5軸レーザー彫刻機は、レーザー技術と多方向（５軸）からの彫刻技術をすべてデジタル処理で行います。シボ加工、彫刻、マーキング、微細加工等を2D平面だけではなく、3D曲面へ効率的に再現することが可能となりました。",
+            "５軸レーザー彫刻機は、レーザー技術と多方向（５軸）からの彫刻技術をすべてデジタル処理で行います。シボ加工、彫刻、マーキング、微細加工等を2D平面だけではなく、3D曲面へ効率的に再現することが可能となりました。",
             "このシステムにより、これまでのシボ加工の限界を打ち破り、金型デザインの可能性を驚異的に拡大することができます。",
           ],
           en: [
@@ -1297,7 +1339,7 @@ const messages = {
           ],
         },
         youtubeTitle: {
-          ja: "5軸レーザー彫刻機 デモ動画",
+          ja: "５軸レーザー彫刻機 デモ動画",
           en: "5-Axis Laser Engraving Demo",
         },
         pdfTitle: {
@@ -1324,7 +1366,7 @@ const messages = {
 
       assets: {
         imageAlt: {
-          ja: "5軸レーザー彫刻機の加工イメージ",
+          ja: "５軸レーザー彫刻機の加工イメージ",
           en: "5-axis laser engraving process image",
         },
         pdfs: [
@@ -1880,9 +1922,9 @@ const messages = {
               },
               {
                 q: "3次元曲面が多い形状です。",
-                a: "エッチングは平面のマスキングを前提とするため、曲面ではパターンに伸びが生じることがあります。5軸レーザー加工（HN-LTシリーズ）であれば CAD データを基準に加工でき、曲面追従や部位ごとの調整が可能です。",
+                a: "エッチングは平面のマスキングを前提とするため、曲面ではパターンに伸びが生じることがあります。５軸レーザー加工（HN-LTシリーズ）であれば CAD データを基準に加工でき、曲面追従や部位ごとの調整が可能です。",
                 linkTo: "technology/laser",
-                linkLabel: "5軸レーザー彫刻",
+                linkLabel: "５軸レーザー彫刻",
               },
               {
                 q: "8µm という浅いシボで、ウェルドやヒケは隠せますか。",
@@ -2015,7 +2057,7 @@ const messages = {
 
     technology: {
       title: { ja: "技術情報", en: "Technology" },
-      axis5: { ja: "5軸レーザー", en: "5-Axis Laser" },
+      axis5: { ja: "５軸レーザー", en: "5-Axis Laser" },
       shibo: { ja: "シボ加工", en: "Texturing" },
       peening: { ja: "ピーニング", en: "Peening" },
     },
@@ -2065,8 +2107,14 @@ const messages = {
     },
     body: {
       intro: {
-        ja: "株式会社日本エッチング（以降、弊社）はお客様の個人情報をお預かりすることになりますが、そのお預かりした個人情報の取扱いについて下記のように定め、保護に努めております。",
-        en: 'Nihon Etching Co., Ltd. (hereinafter referred to as "the Company") may collect personal information from our customers. We have established the following policy regarding the handling of such personal information and are committed to its protection.',
+        paragraphs: {
+          ja: [
+            "株式会社日本エッチング（以降、弊社）はお客様の個人情報をお預かりすることになりますが、そのお預かりした個人情報の取扱いについて下記のように定め、保護に努めております。",
+          ],
+          en: [
+            'Nihon Etching Co., Ltd. (hereinafter referred to as "the Company") may collect personal information from our customers. We have established the following policy regarding the handling of such personal information and are committed to its protection.',
+          ],
+        },
       },
       paragraphs: [
         {
@@ -2079,10 +2127,10 @@ const messages = {
         },
         {
           id: "p02",
-          index: { ja: "第三者への提携", en: "Disclosure to Third Parties" },
+          index: { ja: "第三者への提供", en: "Disclosure to Third Parties" },
           body: {
-            ja: "お客様からのお問い合わせに対する回答を行うために使用します。",
-            en: "Except as required by law, the Company will not disclose personal information to any third party without the prior consent of the individual concerned.",
+            ja: "お客様の個人情報は、ご本人の同意がある場合を除き、第三者に提供いたしません。ただし、法令に基づき公的機関から開示を求められた場合など、法令で認められる場合には提供することがあります。",
+            en: "The Company will not provide personal information to any third party without the prior consent of the individual concerned, except where permitted or required by law.",
           },
         },
         {
@@ -2114,7 +2162,7 @@ const messages = {
             en: "Requests for Disclosure of Personal Information",
           },
           body: {
-            ja: "お客様には、貴殿の個人情報の利用目的の通知、開示、訂正、追加、削除および利用又は提携の拒否権を要求する権利があります。詳細につきましては下記の窓口までご連絡をお願いします。",
+            ja: "お客様は、ご自身の個人情報について、利用目的の通知、開示、訂正、追加、削除、および利用または提供の停止を求めることができます。詳細につきましては、下記の窓口までご連絡ください。",
             en: "Customers have the right to request notification of the purpose of use, disclosure, correction, addition, deletion, and the right to opt out of the use or sharing of their personal information. For further details, please contact us at the information provided below.",
           },
         },
@@ -2238,7 +2286,7 @@ const INFORMATION_ITEMS: InformationItem[] = [
   {
     ym: "2017.03",
     text: {
-      ja: "中国・深せん工場を東莞へ移転",
+      ja: "中国・深セン工場を東莞へ移転",
       en: "The Shenzhen factory in China has been relocated to Dongguan.",
     },
   },
@@ -2252,7 +2300,7 @@ const INFORMATION_ITEMS: InformationItem[] = [
   {
     ym: "2012.03",
     text: {
-      ja: "本社工場に5軸レーザー彫刻機を導入",
+      ja: "本社工場に５軸レーザー彫刻機を導入",
       en: "A 5-axis laser engraving machine has been installed at our headquarters factory.",
     },
   },

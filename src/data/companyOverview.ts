@@ -124,20 +124,20 @@ export const companies: CompanyData[] = [
     established: "1971",
     employees: "70",
     facilities: {
-      ja: "主要巻上げ装置：5t × 5t",
-      en: "Main Hoist: 5t × 5t",
+      ja: "主要巻上げ装置：5 t × 5 t",
+      en: "Main Hoist: 5 t × 5 t",
     },
     map: "https://maps.app.goo.gl/Mn83DVSUejaRutcN8",
     photoSrc: "img_group_ne_ne3rd.webp",
   },
   /** NE Asia */
-  /* philippine */
+  /* philippines */
   {
-    id: "ph-manila",
+    id: "ph-batangas",
     group: "ne",
     region: "asia",
-    country: "Philippine",
-    location: { ja: "フィリピン", en: "Philippine" },
+    country: "Philippines",
+    location: { ja: "フィリピン", en: "Philippines" },
     companyName: {
       ja: "New World Nihon Etching Inc.",
       en: "New World Nihon Etching Inc.",
@@ -158,7 +158,7 @@ export const companies: CompanyData[] = [
       ja: "",
       en: "",
     },
-    mobile: { ja: "+63(0)-917-593-7298", en: "+63-917-593-7298" },
+    mobile: { ja: "+63-917-593-7298", en: "+63-917-593-7298" },
     contact: {
       ja: "Yasumasa Nakagawa (Managing Director)",
       en: "Yasumasa Nakagawa (Managing Director)",
@@ -166,8 +166,8 @@ export const companies: CompanyData[] = [
     established: "2016",
     employees: "10",
     facilities: {
-      ja: "主要巻上げ装置：１t",
-      en: "Main Hoist: １t",
+      ja: "主要巻上げ装置：1 t",
+      en: "Main Hoist: 1 t",
     },
     map: "https://goo.gl/maps/2SmheeiQprSsMbKR7",
     photoSrc: "img_group_ne_batangas.webp",
@@ -192,11 +192,11 @@ export const companies: CompanyData[] = [
       en: "Blk 3029A Ubi Road 3 #01-100, 408661, Singapore",
     },
     phone: {
-      ja: "+65(0)-6748-9833",
+      ja: "+65-6748-9833",
       en: "+65-6748-9833",
     },
     fax: {
-      ja: "+65(0)-6743-7357",
+      ja: "+65-6743-7357",
       en: "+65-6743-7357",
     },
     mobile: { ja: "", en: "" },
@@ -207,13 +207,14 @@ export const companies: CompanyData[] = [
     established: "1988",
     employees: "10",
     facilities: {
-      ja: "主要巻上げ装置：３t×３t",
-      en: "Main Hoist: ３t×３t",
+      ja: "主要巻上げ装置：3 t × 3 t",
+      en: "Main Hoist: 3 t × 3 t",
     },
     map: "https://goo.gl/maps/GNUbMMBiTnVz5Qzh6",
     photoSrc: "img_group_ne_ubiRoad.webp",
   },
   /* vietnam */
+  // TODO: 住所・電話番号は先方に確認中
   {
     id: "vn-hanoi",
     group: "ne",
@@ -233,11 +234,11 @@ export const companies: CompanyData[] = [
       en: "Lot.37, Quang Minh Industrial Area, Me Linh District, Province Vinch Phuc, Hanoi, Vietnam",
     },
     phone: {
-      ja: "+84(0)-4-3525-0346",
+      ja: "+84-4-3525-0346",
       en: "+84-4-3525-0346",
     },
     fax: {
-      ja: "+84(0)-4-3525-0345",
+      ja: "+84-4-3525-0345",
       en: "+84-4-3525-0345",
     },
     contact: {
@@ -247,8 +248,8 @@ export const companies: CompanyData[] = [
     established: "2008",
     employees: "10",
     facilities: {
-      ja: "主要巻上げ装置：５t×10t",
-      en: "Main Hoist: ５t×10t",
+      ja: "主要巻上げ装置：5 t × 10 t",
+      en: "Main Hoist: 5 t × 10 t",
     },
     map: "https://goo.gl/maps/MM5VQKV5rZCZ2FAK9",
     photoSrc: "img_group_ne_hanoi.webp",
@@ -273,12 +274,12 @@ export const companies: CompanyData[] = [
       en: "No.15 Jalan Mutiara Emas 7/7, Taman Mount Austin, Johor Bahru Johor, 81100, Malaysia",
     },
     phone: {
-      ja: "+60(0)-7351-3615",
-      en: "+60-7351-3615",
+      ja: "+60-7-351-3615",
+      en: "+60-7-351-3615",
     },
     fax: {
-      ja: "+60(0)-7351-7357",
-      en: "+60-7351-7357",
+      ja: "+60-7-351-7357",
+      en: "+60-7-351-7357",
     },
     contact: {
       ja: "蔡先生",
@@ -288,9 +289,9 @@ export const companies: CompanyData[] = [
     employees: "10",
     facilities: {
       ja: "巻上げ装置耐荷重：3 t × 3 t",
-      en: "Main Hoist: 3 t * 3 t",
+      en: "Main Hoist: 3 t × 3 t",
     },
-    map: "https://goo.gl/maps/MM5VQKV5rZCZ2FAK9",
+    map: "https://maps.app.goo.gl/nY2YrcC9WrG43zgr9",
     photoSrc: "img_group_ne_johorBahru.webp",
   },
   /* Malaysia KL */
@@ -313,11 +314,11 @@ export const companies: CompanyData[] = [
       en: "No.32 Jalan Pemberita U1/49, Temasya Industrial Park Seksyen U1, Shah Alam Selangor, 40150, Malaysia",
     },
     phone: {
-      ja: "+60(0)-3-5569-1008",
+      ja: "+60-3-5569-1008",
       en: "+60-3-5569-1008",
     },
     fax: {
-      ja: "+60(0)-3-5569-1009",
+      ja: "+60-3-5569-1009",
       en: "+60-3-5569-1009",
     },
     contact: {
@@ -328,14 +329,14 @@ export const companies: CompanyData[] = [
     employees: "20",
     facilities: {
       ja: "巻上げ装置耐荷重：8 t × 8 t",
-      en: "Main Hoist: 8 t * 8 t",
+      en: "Main Hoist: 8 t × 8 t",
     },
     map: "https://goo.gl/maps/e4dU2Zd46j6EDrQ78",
     photoSrc: "img_group_ne_sharAlamSelangor.webp",
   },
   /* Indonesia */
   {
-    id: "indnesia-cb",
+    id: "indonesia-cb",
     group: "ne",
     region: "asia",
     country: "Indonesia",
@@ -353,12 +354,12 @@ export const companies: CompanyData[] = [
       en: "Kawasan Industri Jababeka Block GG-20, Cikarang Bekasi, 17550, Indonesia",
     },
     phone: {
-      ja: "+62(0)-21-898-35264",
-      en: "+62-21-898-35264",
+      ja: "+62-21-8983-5264",
+      en: "+62-21-8983-5264",
     },
     fax: {
-      ja: "+62(0)-21-898-35265",
-      en: "+62-21-898-35265",
+      ja: "+62-21-8983-5265",
+      en: "+62-21-8983-5265",
     },
     contact: {
       ja: "Mr. Takahisa Hayashi (Managing Director)",
@@ -368,7 +369,7 @@ export const companies: CompanyData[] = [
     employees: "30",
     facilities: {
       ja: "巻上げ装置耐荷重：5 t × 10 t",
-      en: "Main Hoist: 5 t * 10 t",
+      en: "Main Hoist: 5 t × 10 t",
     },
     map: "https://goo.gl/maps/GauFZ1zUyxdsd65H7",
     photoSrc: "img_group_ne_cikaranBekasi.webp",
@@ -394,11 +395,11 @@ export const companies: CompanyData[] = [
       en: "No.6 Mingda Rd., Zhoushi Zhen, Kunshan, Jiangsu, 215300, China",
     },
     phone: {
-      ja: "+86(0)-512-5761-8975～76",
-      en: "+86-512-5761-8975～76",
+      ja: "+86-512-5761-8975~76",
+      en: "+86-512-5761-8975~76",
     },
     fax: {
-      ja: "+86(0)-512-5761-8977",
+      ja: "+86-512-5761-8977",
       en: "+86-512-5761-8977",
     },
     contact: {
@@ -409,7 +410,7 @@ export const companies: CompanyData[] = [
     employees: "50",
     facilities: {
       ja: "巻上げ装置耐荷重：10 t × 5 t",
-      en: "Main Hoist: 10 t * 5 t",
+      en: "Main Hoist: 10 t × 5 t",
     },
     map: "https://maps.app.goo.gl/wfVMkqahwARsE2hBA",
     photoSrc: "img_group_ne_kunshan.webp",
@@ -430,15 +431,15 @@ export const companies: CompanyData[] = [
       en: "Dong Guan",
     },
     address: {
-      ja: "Building A No.1, Dapinp Gao Qiao, Long Road Tangxiatown, Dong Guan Gu, 323000, China",
-      en: "Building A No.1, Dapinp Gao Qiao, Long Road Tangxiatown, Dong Guan Gu, 323000, China",
+      ja: "Building A No.1, Daping Gao Qiao, Long Road Tangxiatown, Dong Guan Gu, 523000, China",
+      en: "Building A No.1, Daping Gao Qiao, Long Road Tangxiatown, Dong Guan Gu, 523000, China",
     },
     phone: {
-      ja: "+86(0)-769-8216-9992 ~6",
-      en: "+86-769-8216-9992 ~6",
+      ja: "+86-769-8216-9992~6",
+      en: "+86-769-8216-9992~6",
     },
     fax: {
-      ja: "+86(0)-769-8216-9991",
+      ja: "+86-769-8216-9991",
       en: "+86-769-8216-9991",
     },
     contact: {
@@ -449,7 +450,7 @@ export const companies: CompanyData[] = [
     employees: "60",
     facilities: {
       ja: "巻上げ装置耐荷重：10 t × 10 t",
-      en: "Main Hoist: 10 t * 10 t",
+      en: "Main Hoist: 10 t × 10 t",
     },
     map: "https://maps.app.goo.gl/PxKSLbtDZpRwWPNw7",
     photoSrc: "img_group_ne_dongGuan.webp",
@@ -459,7 +460,7 @@ export const companies: CompanyData[] = [
     id: "taiwan-taipei",
     group: "ne",
     region: "east-asia",
-    country: "China",
+    country: "Taiwan",
     location: { ja: "台湾", en: "Taiwan" },
     companyName: {
       ja: "Nihon Etching Co., Ltd.",
@@ -474,12 +475,12 @@ export const companies: CompanyData[] = [
       en: "No. 102, Shoushan Rd., Taishan Dist., New Taipei City 243089, Taiwan (R.O.C.)",
     },
     phone: {
-      ja: "+886(0)-22-297-3865",
-      en: "+886-22-297-3865",
+      ja: "+886-2-2297-3865",
+      en: "+886-2-2297-3865",
     },
     fax: {
-      ja: "+886(0)-22-297-3734",
-      en: "+886-22-297-3734",
+      ja: "+886-2-2297-3734",
+      en: "+886-2-2297-3734",
     },
     contact: {
       ja: "Mr. Karashima / Mr. Su Liang Yu",
@@ -489,7 +490,7 @@ export const companies: CompanyData[] = [
     employees: "15",
     facilities: {
       ja: "巻上げ装置耐荷重：5 t × 10 t",
-      en: "Main Hoist: 5 t * 10 t",
+      en: "Main Hoist: 5 t × 10 t",
     },
     map: "https://maps.app.goo.gl/YWCEQ3F8QTZyTQ4QA",
     photoSrc: "img_group_ne_taipei.webp",
@@ -512,8 +513,8 @@ export const companies: CompanyData[] = [
       en: "Aichi",
     },
     address: {
-      ja: "愛知県一宮市三ツ井8-9-6",
-      en: "8-9-6 Mistui, Ichinomiya-Shi, Aichi 491-0827 Japan",
+      ja: "〒491-0827 愛知県一宮市三ツ井8-9-6",
+      en: "8-9-6 Mitsui, Ichinomiya-Shi, Aichi 491-0827 Japan",
     },
     phone: {
       ja: "0586-76-7108",
@@ -531,7 +532,7 @@ export const companies: CompanyData[] = [
     employees: "100",
     facilities: {
       ja: "巻上げ装置耐荷重：15 t × 7.5 t",
-      en: "Main Hoist: 15 t * 7.5 t",
+      en: "Main Hoist: 15 t × 7.5 t",
     },
     map: "https://goo.gl/maps/jxUQRALGb73VTMDz7",
     photoSrc: "img_group_nwn_we-aichi.webp",
@@ -552,16 +553,16 @@ export const companies: CompanyData[] = [
       en: "Osaka",
     },
     address: {
-      ja: "大阪府八尾市中田1-46",
+      ja: "〒581-0014 大阪府八尾市中田1-46",
       en: "1-46 Nakata, Yao-Shi, Osaka 581-0014 Japan",
     },
     phone: {
-      ja: "0729-95-2545",
-      en: "+81-729-95-2545",
+      ja: "072-995-2545",
+      en: "+81-72-995-2545",
     },
     fax: {
-      ja: "0729-95-5752",
-      en: "+81-729-95-5752",
+      ja: "072-995-5752",
+      en: "+81-72-995-5752",
     },
     contact: {
       ja: "",
@@ -571,9 +572,9 @@ export const companies: CompanyData[] = [
     employees: "40",
     facilities: {
       ja: "巻上げ装置耐荷重：10 t × 5 t",
-      en: "Main Hoist: 10 t * 5 t",
+      en: "Main Hoist: 10 t × 5 t",
     },
-    map: "https://goo.gl/maps/jxUQRALGb73VTMDz7",
+    map: "https://maps.app.goo.gl/CS5w1WvHijbx5AFdA",
     photoSrc: "img_group_nwn_newtex-osaka.webp",
   },
   /* India */
@@ -581,7 +582,7 @@ export const companies: CompanyData[] = [
     id: "nwn-oversea-india",
     group: "nwn",
     region: "overseas",
-    country: "India Dharuhera",
+    country: "India Gurgaon",
     location: { ja: "インド", en: "India" },
     companyName: {
       ja: "World Etching Overseas Premium Mouldings & Pressings Pvt. Ltd.",
@@ -592,16 +593,16 @@ export const companies: CompanyData[] = [
       en: "Haryana",
     },
     address: {
-      ja: "185-Udyog vihar, Phase-1, Gurgaon, Haryana, India",
-      en: "185-Udyog vihar, Phase-1, Gurgaon, Haryana, India",
+      ja: "185-Udyog vihar, Phase-1, Gurgaon, Haryana 122016, India",
+      en: "185-Udyog vihar, Phase-1, Gurgaon, Haryana 122016, India",
     },
     phone: {
-      ja: "+91(0)-127-426-7151 ~3",
-      en: "+91-127-426-7151 ~3",
+      ja: "+91-124-426-7151~3",
+      en: "+91-124-426-7151~3",
     },
     fax: {
-      ja: "+91(0)-127-426-7150",
-      en: "+91-127-426-7150",
+      ja: "+91-124-426-7150",
+      en: "+91-124-426-7150",
     },
     contact: {
       ja: "",
@@ -611,17 +612,17 @@ export const companies: CompanyData[] = [
     employees: "10",
     facilities: {
       ja: "巻上げ装置耐荷重：10 t × 10 t",
-      en: "Main Hoist: 10 t * 10 t",
+      en: "Main Hoist: 10 t × 10 t",
     },
     map: "https://goo.gl/maps/uEXfAoyTCALsenz46",
     photoSrc: "img_group_nwn_haryana.webp",
   },
   /* Thai */
   {
-    id: "nwn-oversea-india",
+    id: "nwn-oversea-thailand",
     group: "nwn",
     region: "overseas",
-    country: "India Dharuhera",
+    country: "Thailand",
     location: { ja: "タイ", en: "Thailand" },
     companyName: {
       ja: "World Sibo-Tech Co., Ltd.",
@@ -636,11 +637,11 @@ export const companies: CompanyData[] = [
       en: "700/185, Moo 1 Amata Nakorn Industrial Estate, T.Bankao, A.PhanThong Chonburi, 20160, Thailand",
     },
     phone: {
-      ja: "+66(0)-38-457-051",
+      ja: "+66-38-457-051",
       en: "+66-38-457-051",
     },
     fax: {
-      ja: "+66(0)-38-457-051",
+      ja: "+66-38-457-051",
       en: "+66-38-457-051",
     },
     contact: {
@@ -651,7 +652,7 @@ export const companies: CompanyData[] = [
     employees: "20",
     facilities: {
       ja: "巻上げ装置耐荷重：15 t × 10 t",
-      en: "Main Hoist: 15 t * 10 t",
+      en: "Main Hoist: 15 t × 10 t",
     },
     map: "https://goo.gl/maps/MUHdNKGaFJvWXQUY8",
     photoSrc: "img_group_nwn_chonburi.webp",
@@ -676,11 +677,11 @@ export const companies: CompanyData[] = [
       en: "33870 Riviera Drive Fraser, MI 48026, U.S.A",
     },
     phone: {
-      ja: "+1(0)-586-296-8082(ext.17)",
+      ja: "+1-586-296-8082",
       en: "+1-586-296-8082",
     },
     fax: {
-      ja: "+1(0)-586-296-8014",
+      ja: "+1-586-296-8014",
       en: "+1-586-296-8014",
     },
     contact: {
@@ -691,7 +692,7 @@ export const companies: CompanyData[] = [
     employees: "20",
     facilities: {
       ja: "巻上げ装置耐荷重：20 t × 10 t",
-      en: "Main Hoist: 20 t * 10 t",
+      en: "Main Hoist: 20 t × 10 t",
     },
     map: "https://goo.gl/maps/kHZXYatS6LVjjJF56",
     photoSrc: "img_group_nwn_riviera.webp",
@@ -716,11 +717,11 @@ export const companies: CompanyData[] = [
       en: "370 North Beidou Road, Xinxing Industrial Park, Ninghai, Ningbo, Zhejiang Province, China",
     },
     phone: {
-      ja: "+86(0)-574-6553-0857",
+      ja: "+86-574-6553-0857",
       en: "+86-574-6553-0857",
     },
     fax: {
-      ja: "+86(0)-574-6553-0866",
+      ja: "+86-574-6553-0866",
       en: "+86-574-6553-0866",
     },
     contact: {
@@ -756,11 +757,11 @@ export const companies: CompanyData[] = [
       en: "98-11, Barangongdan-ro 4-gil, Hyangnam-eup, Hwaseong-si, Gyeonggi-do, 18623, Korea",
     },
     phone: {
-      ja: "+82(0)-31-8047-0222",
+      ja: "+82-31-8047-0222",
       en: "+82-31-8047-0222",
     },
     fax: {
-      ja: "+82(0)-31-8047-4957",
+      ja: "+82-31-8047-4957",
       en: "+82-31-8047-4957",
     },
     contact: {
@@ -771,7 +772,7 @@ export const companies: CompanyData[] = [
     employees: "",
     facilities: {
       ja: "巻上げ装置耐荷重：8 t × 8 t",
-      en: "Main Hoist: 8 t * 8 t",
+      en: "Main Hoist: 8 t × 8 t",
     },
     map: "https://goo.gl/maps/s2So5EkHJe3w18UbA",
     photoSrc: "img_group_nwn_hwa.webp",
@@ -798,11 +799,11 @@ export const companies: CompanyData[] = [
       en: "Stubbenerstr 96-100 42719, Solingen(Wald) Germany",
     },
     phone: {
-      ja: "+49(0)-212-311061",
+      ja: "+49-212-311061",
       en: "+49-212-311061",
     },
     fax: {
-      ja: "+49(0)-212-313741",
+      ja: "+49-212-313741",
       en: "+49-212-313741",
     },
     contact: {
@@ -813,7 +814,7 @@ export const companies: CompanyData[] = [
     employees: "20",
     facilities: {
       ja: "巻上げ装置耐荷重：20 t × 10 t",
-      en: "Main Hoist: 20 t * 10 t",
+      en: "Main Hoist: 20 t × 10 t",
     },
     map: "https://goo.gl/maps/nNZgTKPzEmCSHuRg6",
     photoSrc: "img_group_sec_germany.webp",
@@ -838,12 +839,12 @@ export const companies: CompanyData[] = [
       en: "ZI de Adães, Lote 4, 3720-581 UL OAZ, Portugal",
     },
     phone: {
-      ja: "+351(0)-2566-09243",
-      en: "+351-2566-09243",
+      ja: "+351-256-609-243",
+      en: "+351-256-609-243",
     },
     fax: {
-      ja: "+351(0)-2566-09244",
-      en: "+351-2566-09244",
+      ja: "+351-256-609-244",
+      en: "+351-256-609-244",
     },
     contact: {
       ja: "",
@@ -853,7 +854,7 @@ export const companies: CompanyData[] = [
     employees: "20",
     facilities: {
       ja: "巻上げ装置耐荷重：20 t × 10 t",
-      en: "Main Hoist: 20 t * 10 t",
+      en: "Main Hoist: 20 t × 10 t",
     },
     map: "https://maps.app.goo.gl/SWLyWF1YsKu5uNTP7",
     photoSrc: "img_group_sec_portgual.webp",
@@ -874,15 +875,15 @@ export const companies: CompanyData[] = [
       en: "AUSTRIA",
     },
     address: {
-      ja: "Eumigstrase 6, 8753 Fohnsdorf, Judenburg, Steiermark, Austria",
-      en: "Eumigstrase 6, 8753 Fohnsdorf, Judenburg, Steiermark, Austria",
+      ja: "Eumigstraße 6, 8753 Fohnsdorf, Judenburg, Steiermark, Austria",
+      en: "Eumigstraße 6, 8753 Fohnsdorf, Judenburg, Steiermark, Austria",
     },
     phone: {
-      ja: "+43(0)-3573-27543-12",
+      ja: "+43-3573-27543-12",
       en: "+43-3573-27543-12",
     },
     fax: {
-      ja: "+43(0)-3573-27543-43",
+      ja: "+43-3573-27543-43",
       en: "+43-3573-27543-43",
     },
     contact: {
@@ -893,7 +894,7 @@ export const companies: CompanyData[] = [
     employees: "",
     facilities: {
       ja: "巻上げ装置耐荷重：3 t × 3 t",
-      en: "Main Hoist: 3 t * 3 t",
+      en: "Main Hoist: 3 t × 3 t",
     },
     map: "https://goo.gl/maps/8Zz2PwGCVDUZaybw5",
     photoSrc: "img_group_sec_austria.webp",
@@ -914,26 +915,26 @@ export const companies: CompanyData[] = [
       en: "Italy",
     },
     address: {
-      ja: "Via Presolana 114, 24020 Onore (BG)",
-      en: "Via Presolana 114, 24020 Onore (BG)",
+      ja: "Via Presolana 114, 24020 Onore (BG), Italy",
+      en: "Via Presolana 114, 24020 Onore (BG), Italy",
     },
     phone: {
-      ja: "+39(0)-346-72410",
-      en: "+39-346-72410",
+      ja: "+39-0346-72410",
+      en: "+39-0346-72410",
     },
     fax: {
-      ja: "+39(0)-346-7441",
-      en: "+39-346-7441",
+      ja: "+39-0346-7441",
+      en: "+39-0346-7441",
     },
     contact: {
-      ja: "+39(0)-346-72410",
-      en: "+39-346-72410",
+      ja: "",
+      en: "",
     },
     established: "2005",
     employees: "",
     facilities: {
       ja: "巻上げ装置耐荷重：3 t × 3 t",
-      en: "Main Hoist: 3 t * 3 t",
+      en: "Main Hoist: 3 t × 3 t",
     },
     map: "https://maps.app.goo.gl/LDTe2oNsSahnE9df8",
     photoSrc: "img_group_sec_italy.webp",
@@ -958,8 +959,8 @@ export const companies: CompanyData[] = [
       en: "Akçaburgaz Mah. 1585 Sk. Tem34 Sanayi Sitesi B3/No:22, Esenyurt, İstanbul, Turkey",
     },
     phone: {
-      ja: "+90(0)-212-858-0387",
-      en: "+39-346-72410",
+      ja: "+90-212-858-0387",
+      en: "+90-212-858-0387",
     },
     fax: {
       ja: "",
@@ -978,7 +979,6 @@ export const companies: CompanyData[] = [
     map: "https://maps.app.goo.gl/kWX1a2GcCnzhP4b87",
     photoSrc: "img_group_sec_dket.webp",
   },
-  /* North America */
   /* North America */
   {
     id: "sec-north-america-wisconsin",
@@ -999,11 +999,11 @@ export const companies: CompanyData[] = [
       en: "2435 South 170th Street Berlin, WI 53151 United States",
     },
     phone: {
-      ja: "+1(0)-262-786-4521",
+      ja: "+1-262-786-4521",
       en: "+1-262-786-4521",
     },
     fax: {
-      ja: "+1(0)-262-786-8110",
+      ja: "+1-262-786-8110",
       en: "+1-262-786-8110",
     },
     contact: {
@@ -1014,7 +1014,7 @@ export const companies: CompanyData[] = [
     employees: "",
     facilities: {
       ja: "巻上げ装置耐荷重：5 t × 5 t",
-      en: "Main Hoist: 5 t * 5 t",
+      en: "Main Hoist: 5 t × 5 t",
     },
     map: "https://goo.gl/maps/uwNsuvFL6dH9S3ZY6",
     photoSrc: "img_group_sec_wisconsin.webp",
@@ -1038,11 +1038,11 @@ export const companies: CompanyData[] = [
       en: "1813 W State St, New Castle, PA 16101 United States",
     },
     phone: {
-      ja: "+1(0)-724-652-7117",
+      ja: "+1-724-652-7117",
       en: "+1-724-652-7117",
     },
     fax: {
-      ja: "+1(0)-724-260-6804",
+      ja: "+1-724-260-6804",
       en: "+1-724-260-6804",
     },
     contact: {
@@ -1077,11 +1077,11 @@ export const companies: CompanyData[] = [
       en: "1809 Rochester Industrial Dr, Rochester Hills, MI 48309, United States",
     },
     phone: {
-      ja: "+1(0)-248-656-9000",
+      ja: "+1-248-656-9000",
       en: "+1-248-656-9000",
     },
     fax: {
-      ja: "+1(0)-248-656-9005",
+      ja: "+1-248-656-9005",
       en: "+1-248-656-9005",
     },
     contact: {
@@ -1114,15 +1114,15 @@ export const companies: CompanyData[] = [
       en: "Brazil",
     },
     address: {
-      ja: "RUA Eugenia S Vitale, 1129, CEP 09965-000 Sao Bernando do, Campo-SP",
-      en: "RUA Eugenia S Vitale, 1129, CEP 09965-000 Sao Bernando do, Campo-SP",
+      ja: "Rua Eugenia S Vitale, 1129, CEP 09965-000 São Bernardo do Campo - SP, Brazil",
+      en: "Rua Eugenia S Vitale, 1129, CEP 09965-000 São Bernardo do Campo - SP, Brazil",
     },
     phone: {
-      ja: "+55(0)-11-4361-2000",
+      ja: "+55-11-4361-2000",
       en: "+55-11-4361-2000",
     },
     fax: {
-      ja: "+55(0)-11-4361-2000",
+      ja: "+55-11-4361-2000",
       en: "+55-11-4361-2000",
     },
     contact: {
@@ -1133,7 +1133,7 @@ export const companies: CompanyData[] = [
     employees: "",
     facilities: {
       ja: "巻上げ装置耐荷重：15 t × 10 t",
-      en: "Main Hoist: 15 t * 10 t",
+      en: "Main Hoist: 15 t × 10 t",
     },
     map: "https://goo.gl/maps/bgS7zTVVa7jDB5yv7",
     photoSrc: "img_group_sec_brazil.webp",

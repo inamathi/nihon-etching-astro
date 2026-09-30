@@ -29,7 +29,11 @@ const privacyPolicy = getList(
 ) as PrivacyPolicy[];
 ---
 
-<Base lang={lang} title={title}>
+<Base
+  lang={lang}
+  title={title}
+  description={t(lang, "meta.description.privacypolicy")}
+>
   <PageHeader
     eyebrowText="PRIVACY POLICY"
     title={t(lang, "pageTitle.privacypolicy")}
@@ -48,6 +52,8 @@ const privacyPolicy = getList(
         },
       ]}
     />
+    <!-- Intro -->
+    <Introduction lang={lang} arrayKey="privacyPolicy.body.intro.paragraphs" />
     <section class="p-privacypolicy">
       <BlockHeading text={t(lang, "privacyPolicy.page.title")} />
       <dl class="p-privacypolicy-paragraph">

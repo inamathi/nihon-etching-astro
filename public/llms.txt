@@ -12,7 +12,7 @@
 
 ## 専門分野・強み
 - シボ加工（フォトエッチング・梨地・皮シボ・サンドブラスト・グラフィックパターン）
-- 5軸レーザー彫刻（GFマシニングソリューションズ GFMS LS2500）
+- ５軸レーザー彫刻（GFマシニングソリューションズ GFMS-LS2500）
 - ピーニング加工
 - 高精細3DスキャナーによるマスターパターンデジタL化（分解能1ミクロン）
 - CMF+F（Color・Material・Finish+Function）デザイン哲学に基づいた提案
@@ -28,7 +28,7 @@ NEグループ（日本・アジア）、NWNグループ（インド・タイ・
 
 ## 主要ページ
 シボ加工: https://nihon-etching.co.jp/ja/technology/shibo/
-5軸レーザー彫刻: https://nihon-etching.co.jp/ja/technology/laser/
+５軸レーザー彫刻: https://nihon-etching.co.jp/ja/technology/laser/
 ピーニング加工: https://nihon-etching.co.jp/ja/technology/peening/
 会社概要: https://nihon-etching.co.jp/ja/company/overview-access/
 お問い合わせ: https://nihon-etching.co.jp/ja/contact/
