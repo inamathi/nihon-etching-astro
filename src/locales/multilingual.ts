@@ -1928,6 +1928,10 @@ const messages = {
               },
             ],
           },
+          more: {
+            ja: "さらに詳しい技術Q&Aを見る",
+            en: "See the full Technical Q&A",
+          },
         },
 
         // セクション4：用語ミニ解説

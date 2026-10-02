@@ -30,10 +30,31 @@ const basePath = `${baseRoot}/${lang}`;
             <a
               class="c-footerSitemap__titleLink"
               href={`${basePath}/knowledge/shibo-design/`}
+              data-acc-trigger
             >
               {t(lang, "footer.shibo_design.title")}
             </a>
           </h2>
+          <div class="c-footerSitemap__panel" data-acc-panel>
+            <ul class="c-footerSitemap__list">
+              <li>
+                <a
+                  class="c-footerSitemap__link"
+                  href={`${basePath}/knowledge/shibo-design/`}
+                >
+                  {t(lang, "nav.knowledge_shibo_design")}
+                </a>
+              </li>
+              <li>
+                <a
+                  class="c-footerSitemap__link"
+                  href={`${basePath}/knowledge/tech-faq/`}
+                >
+                  {t(lang, "nav.knowledge_tech_faq")}
+                </a>
+              </li>
+            </ul>
+          </div>
         </section>
         <!-- Company -->
         <section

@@ -17,6 +17,7 @@ import {
   faqItems,
   faqBlocksToText,
 } from "@/locales/faq/tech-faq";
+import LinkButton from "@/components/ui/LinkButton.astro";
 
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },
@@ -48,6 +49,10 @@ const ui = {
   emptyMsg: {
     ja: "該当する質問がありません。別のキーワードで絞り込んでください。",
     en: "No matching questions. Try another keyword.",
+  },
+  guideLink: {
+    ja: "シボ設計ガイド｜課題と解決のまとめ",
+    en: "Shibo Design Guide: Problems & Solutions",
   },
 };
 
@@ -218,6 +223,14 @@ const techArticleSchema = {
             </section>
           ))
         }
+        {/* 相互リンク用 */}
+        <div class="p-techfaq__guideLink">
+          <LinkButton
+            href={`${basePath}/knowledge/shibo-design/`}
+            label={L(ui.guideLink)}
+            variant="secondary"
+          />
+        </div>
         <p class="p-techfaq__empty" id="faqEmpty">{L(ui.emptyMsg)}</p>
       </div>
     </div>
@@ -467,6 +480,34 @@ const techArticleSchema = {
     display: none;
     padding: 3rem 0.25rem;
     opacity: 0.7;
+  }
+  // Q7を強調表示
+  #q7 .p-techfaq__tag {
+    animation: qGlow 2.4s ease-in-out infinite;
+  }
+
+  @keyframes qGlow {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgba(106, 166, 232, 0);
+    }
+    50% {
+      box-shadow: 0 0 14px 8px rgba(106, 166, 232, 0.6);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #q7 .p-techfaq__tag {
+      animation: none;
+      box-shadow: 0 0 10px 3px rgba(106, 166, 232, 0.45);
+    }
+  }
+
+  /*相互リンクボタン*/
+  .p-techfaq__guideLink {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
   }
 
   /* ── モバイル（既存の 768 ブレイクに合わせる） ── */

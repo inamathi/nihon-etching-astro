@@ -11,6 +11,7 @@ import Breadcrumb from "@/components/common/BreadCrumb.astro";
 import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
 
 import { t, toLang, getMessage, type Lang } from "@/locales/multilingual";
+import LinkButton from "@/components/ui/LinkButton.astro";
 
 export const getStaticPaths = () => [
   { params: { lang: "ja" } },
@@ -211,6 +212,14 @@ const techArticleSchema = {
             </article>
           ))
         }
+      </div>
+      <!-- 技術FAQへの相互リンク -->
+      <div class="p-knowledge__faqMore">
+        <LinkButton
+          href={`${basePath}/knowledge/tech-faq/`}
+          label={t(lang, `${K}.body.faq.more`)}
+          variant="secondary"
+        />
       </div>
     </section>
 
@@ -456,5 +465,12 @@ const techArticleSchema = {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
+  }
+
+  /* 技術FAQへの相互リンク */
+  .p-knowledge__faqMore {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
   }
 </style>
