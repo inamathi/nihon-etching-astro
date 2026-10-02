@@ -41,16 +41,29 @@ const basePath = `${baseRoot}/${lang}`;
       <a class="c-gnav__link" href={`${basePath}/`}>
         {t(lang, "nav.top")}
       </a>
-      <a class="c-gnav__link" href={`${basePath}/knowledge/shibo-design/`}>
-        {t(lang, "nav.knowledge")}
-        {
-          showNew && (
-            <span class="c-badge-new" aria-hidden="true">
-              NEW
-            </span>
-          )
-        }
-      </a>
+      <div class="c-gnav__item has-sub">
+        <a class="c-gnav__link" href={`${basePath}/knowledge/shibo-design/`}>
+          {t(lang, "nav.knowledge")}
+          {
+            showNew && (
+              <span class="c-badge-new" aria-hidden="true">
+                NEW
+              </span>
+            )
+          }
+        </a>
+        <div class="c-gnav__sub">
+          <a
+            class="c-gnav__subLink"
+            href={`${basePath}/knowledge/shibo-design/`}
+          >
+            {t(lang, "nav.knowledge_shibo_design")}
+          </a>
+          <a class="c-gnav__subLink" href={`${basePath}/knowledge/tech-faq/`}>
+            {t(lang, "nav.knowledge_tech_faq")}
+          </a>
+        </div>
+      </div>
 
       <div class="c-gnav__item has-sub">
         <a class="c-gnav__link" href={`${basePath}/company/overview-access/`}>

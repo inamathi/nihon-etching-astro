@@ -230,6 +230,8 @@ const messages = {
       en: "Design Guide",
       zh: "Design Guide",
     },
+    knowledge_shibo_design: { ja: "シボ設計ガイド", en: "Shibo Design Guide" },
+    knowledge_tech_faq: { ja: "技術Q&A", en: "Technical Q&A" },
     company: {
       ja: "会社情報",
       en: "Company",

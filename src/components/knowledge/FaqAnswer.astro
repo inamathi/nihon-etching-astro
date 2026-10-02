@@ -94,13 +94,13 @@ const { blocks } = Astro.props;
   }
 
   .faq-note {
-    margin: 0.8rem 0 0;
+    margin: 1rem 0;
     padding: 0.75rem 1rem;
     font-size: 0.9rem;
     line-height: 1.8;
     background: rgba(#fff, 0.04);
-    border-left: 3px solid $color-primary;
     border-radius: 4px;
+    border: solid 1px $color-gray-800;
   }
 
   /* 二分岐 */
@@ -128,25 +128,29 @@ const { blocks } = Astro.props;
   .faq-defs {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 0.5rem 1.25rem;
+    gap: 0.5rem 0rem;
     margin: 0.4rem 0 0.9rem;
   }
   .faq-defs dt {
     font-weight: 700;
-    color: $color-secondary;
+    color: $color-gray-400;
     white-space: nowrap;
+    text-align: right;
+    border-right: solid 1px $color-gray-700;
+    padding-right: 1rem;
   }
   .faq-defs dd {
     margin: 0;
     line-height: 1.8;
+    margin-left: 1rem;
   }
 
   /* 表（狭幅は横スクロール） */
   .faq-tableWrap {
     margin: 0.4rem 0 0.9rem;
     overflow-x: auto;
-    border: 1px solid rgba(#fff, 0.14);
-    border-radius: 10px;
+    border: 1px solid $color-gray-800;
+    border-radius: 4px;
   }
   .faq-tableWrap table {
     border-collapse: collapse;
@@ -161,6 +165,8 @@ const { blocks } = Astro.props;
     vertical-align: top;
     line-height: 1.75;
     border-bottom: 1px solid rgba(#fff, 0.1);
+    font-size: $fs-s;
+    font-weight: var(--font-weight-body);
   }
   .faq-tableWrap thead th {
     background: rgba(#fff, 0.06);
@@ -194,18 +200,22 @@ const { blocks } = Astro.props;
     border-bottom: 0;
   }
   .faq-list li::before {
-    content: "—";
+    content: "•";
     position: absolute;
-    left: 0.2rem;
-    color: $color-secondary;
+    left: 0.85rem;
+    color: $color-gray-500;
+    font-family: var(--font-accent);
+    font-weight: var(--font-weight-heading);
+    font-size: var(--fs-r-ml);
   }
   .faq-list--num li::before {
     counter-increment: faqli;
     content: counter(faqli);
     left: 0.1rem;
-    top: 0.55rem;
-    font-size: 0.8rem;
-    font-weight: 700;
+    top: 0.35rem;
+    font-size: var(--fs-r-xl);
     font-variant-numeric: tabular-nums;
+    font-family: var(--font-accent);
+    font-weight: var(--font-weight-heading);
   }
 </style>

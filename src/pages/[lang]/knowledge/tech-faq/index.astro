@@ -11,7 +11,6 @@ import PageHeader from "@/components/ui/PageHeader.astro";
 import Breadcrumb from "@/components/common/BreadCrumb.astro";
 import PageSectionHeading from "@/components/ui/PageSectionHeading.astro";
 import FaqAnswer from "@/components/knowledge/FaqAnswer.astro";
-
 import { t, type Lang } from "@/locales/multilingual";
 import {
   faqCategories,
@@ -44,7 +43,7 @@ const ui = {
     en: "Technical questions and answers on mold texturing and etching. Browse by category on the left, or filter by keyword. Each question has its own shareable URL (e.g. #q36).",
   },
   filterPlaceholder: { ja: "キーワードで絞り込む", en: "Filter by keyword" },
-  tocLabel: { ja: "カテゴリ目次", en: "Categories" },
+  tocLabel: { ja: "カテゴリリスト", en: "Categories" },
   termsLabel: { ja: "用語", en: "Terms" },
   emptyMsg: {
     ja: "該当する質問がありません。別のキーワードで絞り込んでください。",
@@ -133,7 +132,7 @@ const techArticleSchema = {
     eyebrowText="KNOWLEDGE"
     title={L(ui.pageTitle)}
     lead={L(ui.lead)}
-    imageSrc={`${baseRoot}/images/pageHeader/pageheader-knowledge-shibo-design.webp`}
+    imageSrc={`${baseRoot}/images/pageHeader/pageheader-knowledge-tech-faq.webp`}
     imageAlt=""
   />
 
@@ -192,7 +191,7 @@ const techArticleSchema = {
             >
               <div class="p-techfaq__catHead">
                 <span class="p-techfaq__catMk">{cat.mark}</span>
-                <PageSectionHeading text={L(cat.label)} />
+                <h2 class="p-techfaq__catLabel">{cat.label[lang]}</h2>
               </div>
               {cat.items.map((it) => (
                 <article class="p-techfaq__qa" id={it.id}>
@@ -247,6 +246,21 @@ const techArticleSchema = {
     max-height: calc(100dvh - var(--rail-top) - 2rem);
     overflow-y: auto;
     padding-right: 0.25rem;
+    // Firefox / Chrome 121以降
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+
+    // Safari
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 3px;
+    }
   }
 
   .p-techfaq__filter {
@@ -305,7 +319,7 @@ const techArticleSchema = {
   .p-techfaq__cat {
     display: block;
     padding: 0.35rem 0.5rem;
-    font-size: 0.72rem;
+    font-size: var(--fs-r-s);
     font-weight: 700;
     letter-spacing: 0.03em;
     opacity: 0.8;
@@ -313,28 +327,35 @@ const techArticleSchema = {
   .p-techfaq__mk {
     display: inline-block;
     margin-right: 0.4rem;
-    color: $color-secondary;
+    color: #fff;
+    font-family: var(--font-accent);
     font-weight: 700;
+    font-size: var(--fs-r-m);
+    border-left: solid 4px $color-primary;
+    padding-left: 10px;
   }
   .p-techfaq__link {
     display: grid;
     grid-template-columns: 2.1rem 1fr;
     align-items: baseline;
-    gap: 0.15rem;
+    gap: 8px;
     padding: 0.35rem 0.5rem;
     border-left: 2px solid transparent;
     border-radius: 0 6px 6px 0;
-    color: inherit;
     text-decoration: none;
   }
   .p-techfaq__qn {
-    font-size: 0.72rem;
-    opacity: 0.65;
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-heading);
     font-variant-numeric: tabular-nums;
+    font-family: var(--font-accent);
+    text-align: right;
+    color: $color-accent;
   }
   .p-techfaq__qt {
     font-size: 0.8rem;
-    line-height: 1.4;
+    line-height: 1.5;
+    color: #fff;
   }
   .p-techfaq__link:hover {
     background: rgba(#fff, 0.05);
@@ -360,6 +381,7 @@ const techArticleSchema = {
     align-items: center;
     gap: 0.7rem;
     margin-top: 2.5rem;
+    border-bottom: solid 1px $color-primary;
   }
   .p-techfaq__cat-sec:first-child .p-techfaq__catHead {
     margin-top: 0;
@@ -371,11 +393,15 @@ const techArticleSchema = {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
-    background: $color-secondary;
     color: #fff;
+    font-family: var(--font-accent);
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: var(--fs-r-xxl);
+  }
+  .p-techfaq__catLabel {
+    font-size: var(--fs-r-xl);
+    color: #fff;
+    margin: 10px 0;
   }
 
   .p-techfaq__qa {
@@ -391,19 +417,28 @@ const techArticleSchema = {
     margin-bottom: 0.9rem;
   }
   .p-techfaq__tag {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: $color-secondary;
+    display: grid;
+    place-items: center;
+    font-size: var(--fs-r-l);
+    font-family: var(--font-accent);
+    font-weight: var(--font-weight-body);
+    color: #fff;
     font-variant-numeric: tabular-nums;
+    background: $color-accent;
+    border-radius: 4px;
+    width: 40px;
+    aspect-ratio: 1 / 1;
   }
   .p-techfaq__q h3 {
     margin: 0;
-    font-size: 1.15rem;
+    font-size: var(--fs-r-l);
     line-height: 1.55;
     font-weight: 700;
   }
   .p-techfaq__a {
-    font-size: $fs-l;
+    font-size: var(--fs-r-m);
+    font-weight: $fw-regular;
+    text-align: justify;
   }
 
   /* 用語チップ */
@@ -424,7 +459,7 @@ const techArticleSchema = {
     padding: 0.15rem 0.6rem;
     border-radius: 20px;
     background: rgba(#fff, 0.06);
-    border: 1px dashed rgba(#fff, 0.25);
+    border: 1px solid rgba($color-gray-600, 1);
     opacity: 0.85;
   }
 
@@ -449,8 +484,10 @@ const techArticleSchema = {
       position: sticky;
       top: var(--rail-top);
       z-index: 5;
-      padding: 0.6rem 0;
-      background: $color-gray-700; // ヘッダー下に潜り込む際の下地。実サイトの背景トークンに合わせて調整
+      padding: 0 0;
+      background: rgba(0, 0, 0, 0.5);
+      -webkit-backdrop-filter: blur(6px); // Safari用
+      backdrop-filter: blur(6px);
     }
     .p-techfaq__toc summary {
       display: flex;
@@ -459,26 +496,31 @@ const techArticleSchema = {
       list-style: none;
       cursor: pointer;
       padding: 0.7rem 0.5rem;
-      font-size: 0.85rem;
       font-weight: 700;
+      position: relative;
+      padding-left: 1.5rem;
     }
     .p-techfaq__toc summary::-webkit-details-marker {
       display: none;
     }
     .p-techfaq__toc summary::before {
-      content: "▸";
-      color: $color-secondary;
-      transition: transform 0.15s;
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 6px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 0 6px 10px; // 上 右 下 左
+      border-color: transparent transparent transparent $color-accent;
     }
     .p-techfaq__toc[open] summary::before {
       transform: rotate(90deg);
+      border-color: transparent transparent transparent $color-gray-700;
     }
     .p-techfaq__cat-sec,
     .p-techfaq__qa {
       scroll-margin-top: calc(var(--rail-top) + 3.5rem);
-    }
-    .p-techfaq__q h3 {
-      font-size: 1.05rem;
     }
   }
 </style>
@@ -602,5 +644,17 @@ const techArticleSchema = {
       const a = (e.target as HTMLElement).closest(".p-techfaq__link");
       if (a && toc && !desktop.matches) toc.open = false;
     });
+  }
+</script>
+
+<script>
+  const TARGET_ID = "q7"; // Q7要素の実際のidに合わせてください
+
+  const nav = performance.getEntriesByType("navigation")[0] as
+    PerformanceNavigationTiming | undefined;
+  const isFreshVisit = nav?.type === "navigate";
+
+  if (isFreshVisit && !location.hash) {
+    document.getElementById(TARGET_ID)?.scrollIntoView({ block: "start" });
   }
 </script>
