@@ -318,9 +318,15 @@ const messages = {
       ja: "シボ加工の専門企業｜株式会社日本エッチング【創業1971年・世界11カ国】",
       en: "Shibo Texturing Experts | Nihon Etching Co.,Ltd. — Est. 1971 · 11 Countries Worldwide",
     },
-    shibo_design: {
-      ja: "シボ設計ガイド｜抜き勾配・番手の選び方とウェルド／ヒケ対策｜日本エッチング",
-      en: "Shibo Design Guide | Draft Angle & Grain Selection, Weld/Sink Mark Solutions | Nihon Etching",
+    knowledge: {
+      shibo_design: {
+        ja: "シボ設計ガイド｜抜き勾配・番手の選び方とウェルド／ヒケ対策｜株式会社日本エッチング",
+        en: "Shibo Design Guide | Draft Angle & Grain Selection, Weld/Sink Mark Solutions | Nihon Etching Co.,Ltd.",
+      },
+      tech_faq: {
+        ja: "シボ加工の技術Q&A｜抜き勾配・型材・成形不良の対策｜株式会社日本エッチング",
+        en: "Shibo Texturing Technical Q&A | Draft Angles, Mold Steel & Defect Solutions | Nihon Etching Co.,Ltd.",
+      },
     },
     company: {
       overview: {
@@ -328,36 +334,66 @@ const messages = {
         en: "Company Overview | Nihon Etching Co.,Ltd. — Shibo Texturing & Mold Surface Treatment Specialists (Ota-ku, Tokyo)",
       },
       philosophy: {
-        ja: "理念・品質・環境方針",
-        en: "Philosophy, Quality & Environmental Policy",
+        ja: "理念・品質・環境方針｜株式会社日本エッチング",
+        en: "Philosophy, Quality & Environmental Policy | Nihon Etching Co.,Ltd.",
       },
-      history: { ja: "沿革", en: "History" },
+      history: {
+        ja: "沿革｜株式会社日本エッチング",
+        en: "History | Nihon Etching Co.,Ltd.",
+      },
     },
     technology: {
       laser: {
-        ja: "5軸レーザーシボ加工・レーザーテクスチャリング｜国内最大規模GFMS LS2500導入｜日本エッチング",
-        en: "5-Axis Laser Shibo & Laser Texturing | Japan's Largest GFMS LS2500 Fleet | Nihon Etching",
+        ja: "5軸レーザーシボ加工・レーザーテクスチャリング｜国内最大規模GFMS LS2500導入｜株式会社日本エッチング",
+        en: "5-Axis Laser Shibo & Laser Texturing | Japan's Largest GFMS LS2500 Fleet | Nihon Etching Co.,Ltd.",
       },
       shibo: {
-        ja: "シボ加工とは？フォトエッチング・梨地・皮シボの専門加工｜日本エッチング",
-        en: "Shibo Texturing Specialists | Molds, Plastics & Automotive Interiors",
+        ja: "シボ加工とは？フォトエッチング・梨地・皮シボの専門加工｜株式会社日本エッチング",
+        en: "Shibo Texturing Specialists | Molds, Plastics & Automotive Interiors | Nihon Etching Co.,Ltd.",
       },
       peening: {
-        ja: "ショットピーニング・マイクロブラスト処理｜金型長寿命化・表面改質｜日本エッチング",
-        en: "Shot Peening & Micro Blasting | Mold Life Extension & Surface Modification | Nihon Etching",
+        ja: "ショットピーニング・マイクロブラスト処理｜金型長寿命化・表面改質｜株式会社日本エッチング",
+        en: "Shot Peening & Micro Blasting | Mold Life Extension & Surface Modification | Nihon Etching Co.,Ltd.",
       },
     },
     group: {
-      top: { ja: "グループ一覧", en: "Group List" },
-      ne: { ja: "NE（直営）グループ", en: "NE(Direct) Group" },
-      nwn: { ja: "NWNグループ", en: "NWN Group" },
-      sec: { ja: "SECグループ", en: "SEC Group" },
+      top: {
+        ja: "グループ一覧｜株式会社日本エッチング",
+        en: "Group List | Nihon Etching Co.,Ltd.",
+      },
+      ne: {
+        ja: "NE（直営）グループ｜株式会社日本エッチング",
+        en: "NE(Direct) Group | Nihon Etching Co.,Ltd.",
+      },
+      nwn: {
+        ja: "NWNグループ｜株式会社日本エッチング",
+        en: "NWN Group | Nihon Etching Co.,Ltd.",
+      },
+      sec: {
+        ja: "SECグループ｜株式会社日本エッチング",
+        en: "SEC Group | Nihon Etching Co.,Ltd.",
+      },
     },
-    careers: { ja: "採用情報", en: "Careers" },
-    contact: { ja: "お問い合わせ", en: "Contact" },
-    thanks: { ja: "送信完了", en: "Submission Successful" },
-    download: { ja: "ダウンロード", en: "Download" },
-    privacypolicy: { ja: "プライバシーポリシー", en: "Privacy Policy" },
+    careers: {
+      ja: "採用情報｜株式会社日本エッチング",
+      en: "Careers | Nihon Etching Co.,Ltd.",
+    },
+    contact: {
+      ja: "お問い合わせ｜株式会社日本エッチング",
+      en: "Contact | Nihon Etching Co.,Ltd.",
+    },
+    thanks: {
+      ja: "送信完了｜株式会社日本エッチング",
+      en: "Submission Successful | Nihon Etching Co.,Ltd.",
+    },
+    download: {
+      ja: "ダウンロード｜株式会社日本エッチング",
+      en: "Download | Nihon Etching Co.,Ltd.",
+    },
+    privacypolicy: {
+      ja: "プライバシーポリシー｜株式会社日本エッチング",
+      en: "Privacy Policy | Nihon Etching Co.,Ltd.",
+    },
   },
   /* top about */
   topAbout: {

@@ -45,12 +45,8 @@ const rows = loc<Row[]>(`${K}.body.solve.table.rows`);
 const faqItems = loc<Faq[]>(`${K}.body.faq.items`);
 const terms = loc<Term[]>(`${K}.body.glossary.terms`);
 
-// SEO タイトル（Base.astro が「｜日本エッチング」を自動付与する実装なら、末尾の
-// 「｜日本エッチング」を外した文字列に差し替えて重複を避ける）
-const seoTitle =
-  lang === "ja"
-    ? "シボ設計ガイド｜抜き勾配・番手の選び方とウェルド／ヒケ対策｜日本エッチング"
-    : "Shibo Design Guide | Draft Angle & Grain Selection, Weld/Sink Solutions | Nihon Etching";
+// SEO タイトル
+const seoTitle = t(lang, "pageTitle.knowledge.shibo_design");
 
 // meta description は既存の meta.description.shibo_design を流用
 const description = t(lang, "meta.description.shibo_design");
@@ -58,7 +54,10 @@ const description = t(lang, "meta.description.shibo_design");
 // パンくず（Base 用＝JSON-LD生成／表示用 Breadcrumb の両方で使う）
 const breadcrumbItems = [
   { label: t(lang, "nav.top"), href: `${basePath}/` },
-  { label: t(lang, "nav.knowledge"), href: `${basePath}/knowledge/` },
+  {
+    label: t(lang, "nav.knowledge"),
+    href: `${basePath}/knowledge/shibo-design/`,
+  },
   { label: t(lang, `${K}.page.title`) },
 ];
 

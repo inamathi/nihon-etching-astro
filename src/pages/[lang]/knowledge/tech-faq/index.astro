@@ -56,10 +56,8 @@ const ui = {
   },
 };
 
-const seoTitle =
-  lang === "ja"
-    ? "技術Q&A｜シボ・エッチングの技術FAQ｜日本エッチング"
-    : "Technical Q&A | Shibo & Etching FAQ | Nihon Etching";
+// SEO タイトル
+const seoTitle = t(lang, "pageTitle.knowledge.tech_faq");
 
 // meta description（既存流儀では meta.description.* を使用。専用キー追加までは直書き）
 const description =
@@ -70,7 +68,10 @@ const description =
 // パンくず（最終要素は href なし）
 const breadcrumbItems = [
   { label: t(lang, "nav.top"), href: `${basePath}/` },
-  { label: t(lang, "nav.knowledge"), href: `${basePath}/knowledge/` },
+  {
+    label: t(lang, "nav.knowledge"),
+    href: `${basePath}/knowledge/shibo-design/`,
+  },
   { label: L(ui.pageTitle) },
 ];
 
@@ -112,6 +113,10 @@ const techArticleSchema = {
   publisher: { "@id": "https://nihon-etching.co.jp/#organization" },
   about: ["シボ加工", "金型表面処理", "エッチング", "品質管理"],
 };
+
+// 英語版の公開準備ができたら true にする
+const EN_READY = true;
+const showWip = lang === "en" && !EN_READY;
 ---
 
 <Base
@@ -120,17 +125,36 @@ const techArticleSchema = {
   description={description}
   ogImage="/ogp/ogp_technology.webp"
   breadcrumbItems={breadcrumbItems}
+  noindex={showWip}
+  hideEnAlternate={!EN_READY}
 >
-  <script
-    type="application/ld+json"
-    set:html={JSON.stringify(faqSchema)}
-    slot="head"
-  />
-  <script
-    type="application/ld+json"
-    set:html={JSON.stringify(techArticleSchema)}
-    slot="head"
-  />
+  {
+    /*
+  構造化データ（FAQPage / TechArticle）
+  ・英語版の準備中（showWip）は出力しない
+    画面に質問・回答が表示されていないのに構造化データだけ出すと、
+    Google のガイドライン違反になるため
+  ・slot は Base の直接の子に付ける必要があるので、Fragment に slot="head" を付け、
+    条件分岐はその内側で行う
+  ・英語版を公開するときは frontmatter の EN_READY を true にする
+*/
+  }
+  <Fragment slot="head">
+    {
+      !showWip && (
+        <>
+          <script
+            type="application/ld+json"
+            set:html={JSON.stringify(faqSchema)}
+          />
+          <script
+            type="application/ld+json"
+            set:html={JSON.stringify(techArticleSchema)}
+          />
+        </>
+      )
+    }
+  </Fragment>
 
   {/* KVは暫定で shibo-design のヘッダー画像を流用 */}
   <PageHeader
@@ -147,93 +171,121 @@ const techArticleSchema = {
       items={breadcrumbItems}
     />
 
-    <div class="p-techfaq" data-lang={lang}>
-      {/* ── 左：操作パレット（固定ナビ＋フィルタ＋連動ハイライト） ── */}
-      <aside class="p-techfaq__rail">
-        <div class="p-techfaq__filter">
-          <input
-            id="faqFilter"
-            type="search"
-            autocomplete="off"
-            placeholder={L(ui.filterPlaceholder)}
-            aria-label={L(ui.filterPlaceholder)}
-          />
-          <button id="faqClear" type="button" aria-label="clear">×</button>
-        </div>
-        <p class="p-techfaq__count" id="faqCount"></p>
-
-        <details class="p-techfaq__toc" id="faqToc" open>
-          <summary>{L(ui.tocLabel)}</summary>
-          <nav class="p-techfaq__nav" id="faqNav" aria-label={L(ui.tocLabel)}>
-            {
-              cats.map((cat) => (
-                <div class="p-techfaq__group" data-cat={cat.id}>
-                  <span class="p-techfaq__cat">
-                    <span class="p-techfaq__mk">{cat.mark}</span>
-                    {L(cat.label)}
-                  </span>
-                  {cat.items.map((it) => (
-                    <a class="p-techfaq__link" href={`#${it.id}`}>
-                      <span class="p-techfaq__qn">{it.id.toUpperCase()}</span>
-                      <span class="p-techfaq__qt">{it.c.q}</span>
-                    </a>
-                  ))}
-                </div>
-              ))
-            }
-          </nav>
-        </details>
-      </aside>
-
-      {/* ── 中央：回答本文 ── */}
-      <div class="p-techfaq__main">
-        {
-          cats.map((cat) => (
-            <section
-              class="p-techfaq__cat-sec"
-              id={`cat-${cat.id}`}
-              data-cat={cat.id}
-            >
-              <div class="p-techfaq__catHead">
-                <span class="p-techfaq__catMk">{cat.mark}</span>
-                <h2 class="p-techfaq__catLabel">{cat.label[lang]}</h2>
-              </div>
-              {cat.items.map((it) => (
-                <article class="p-techfaq__qa" id={it.id}>
-                  <div class="p-techfaq__q">
-                    <span class="p-techfaq__tag">{it.id.toUpperCase()}</span>
-                    <h3>{it.c.q}</h3>
-                  </div>
-                  <div class="p-techfaq__a">
-                    <FaqAnswer blocks={it.c.a} />
-                  </div>
-                  {it.terms.length > 0 && (
-                    <div class="p-techfaq__terms">
-                      <span class="p-techfaq__termsLabel">
-                        {L(ui.termsLabel)}
-                      </span>
-                      {/* 用語集ページ実装後は <a href={`${basePath}/knowledge/glossary/#...`}> に差し替え */}
-                      {it.terms.map((term) => (
-                        <span class="p-techfaq__term">{term}</span>
-                      ))}
-                    </div>
-                  )}
-                </article>
-              ))}
-            </section>
-          ))
-        }
-        {/* 相互リンク用 */}
-        <div class="p-techfaq__guideLink">
+    {
+      showWip ? (
+        <div class="p-techfaq__wip">
+          <p class="p-techfaq__wipTitle">Under Construction</p>
+          <p>
+            The English version of this page is under construction. The Japanese
+            version is available now.
+          </p>
           <LinkButton
-            href={`${basePath}/knowledge/shibo-design/`}
-            label={L(ui.guideLink)}
+            href={`${baseRoot}/ja/knowledge/tech-faq/`}
+            label="View the Japanese version"
             variant="secondary"
           />
         </div>
-        <p class="p-techfaq__empty" id="faqEmpty">{L(ui.emptyMsg)}</p>
-      </div>
-    </div>
+      ) : (
+        <>
+          {" "}
+          <div class="p-techfaq" data-lang={lang}>
+            {/* ── 左：操作パレット（固定ナビ＋フィルタ＋連動ハイライト） ── */}
+            <aside class="p-techfaq__rail">
+              <div class="p-techfaq__filter">
+                <input
+                  id="faqFilter"
+                  type="search"
+                  autocomplete="off"
+                  placeholder={L(ui.filterPlaceholder)}
+                  aria-label={L(ui.filterPlaceholder)}
+                />
+                <button id="faqClear" type="button" aria-label="clear">
+                  ×
+                </button>
+              </div>
+              <p class="p-techfaq__count" id="faqCount" />
+
+              <details class="p-techfaq__toc" id="faqToc" open>
+                <summary>{L(ui.tocLabel)}</summary>
+                <nav
+                  class="p-techfaq__nav"
+                  id="faqNav"
+                  aria-label={L(ui.tocLabel)}
+                >
+                  {cats.map((cat) => (
+                    <div class="p-techfaq__group" data-cat={cat.id}>
+                      <span class="p-techfaq__cat">
+                        <span class="p-techfaq__mk">{cat.mark}</span>
+                        {L(cat.label)}
+                      </span>
+                      {cat.items.map((it) => (
+                        <a class="p-techfaq__link" href={`#${it.id}`}>
+                          <span class="p-techfaq__qn">
+                            {it.id.toUpperCase()}
+                          </span>
+                          <span class="p-techfaq__qt">{it.c.q}</span>
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+                </nav>
+              </details>
+            </aside>
+
+            {/* ── 中央：回答本文 ── */}
+            <div class="p-techfaq__main">
+              {cats.map((cat) => (
+                <section
+                  class="p-techfaq__cat-sec"
+                  id={`cat-${cat.id}`}
+                  data-cat={cat.id}
+                >
+                  <div class="p-techfaq__catHead">
+                    <span class="p-techfaq__catMk">{cat.mark}</span>
+                    <h2 class="p-techfaq__catLabel">{cat.label[lang]}</h2>
+                  </div>
+                  {cat.items.map((it) => (
+                    <article class="p-techfaq__qa" id={it.id}>
+                      <div class="p-techfaq__q">
+                        <span class="p-techfaq__tag">
+                          {it.id.toUpperCase()}
+                        </span>
+                        <h3>{it.c.q}</h3>
+                      </div>
+                      <div class="p-techfaq__a">
+                        <FaqAnswer blocks={it.c.a} />
+                      </div>
+                      {it.terms.length > 0 && (
+                        <div class="p-techfaq__terms">
+                          <span class="p-techfaq__termsLabel">
+                            {L(ui.termsLabel)}
+                          </span>
+                          {/* 用語集ページ実装後は <a href={`${basePath}/knowledge/glossary/#...`}> に差し替え */}
+                          {it.terms.map((term) => (
+                            <span class="p-techfaq__term">{term}</span>
+                          ))}
+                        </div>
+                      )}
+                    </article>
+                  ))}
+                </section>
+              ))}
+              {/* 相互リンク用 */}
+              <div class="p-techfaq__guideLink">
+                <LinkButton
+                  href={`${basePath}/knowledge/shibo-design/`}
+                  label={L(ui.guideLink)}
+                  variant="secondary"
+                />
+              </div>
+              <p class="p-techfaq__empty" id="faqEmpty">
+                {L(ui.emptyMsg)}
+              </p>
+            </div>
+          </div>
+        </>
+      )
+    }
   </div>
 </Base>
 
@@ -290,8 +342,8 @@ const techArticleSchema = {
     border-radius: 8px;
   }
   .p-techfaq__filter input:focus {
-    outline: 2px solid $color-secondary;
-    outline-offset: 1px;
+    outline: 2px solid $color-accent;
+    outline-offset: -2px;
     border-color: transparent;
   }
   .p-techfaq__filter button {
@@ -508,6 +560,21 @@ const techArticleSchema = {
     margin-top: 2rem;
     display: flex;
     justify-content: center;
+  }
+
+  /* 英語版のUnderConstruction画面 */
+  .p-techfaq__wip {
+    padding-block: 4rem;
+    text-align: center;
+
+    p {
+      margin: 0 0 1.5rem;
+    }
+  }
+
+  .p-techfaq__wipTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
   }
 
   /* ── モバイル（既存の 768 ブレイクに合わせる） ── */

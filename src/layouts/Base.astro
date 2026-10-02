@@ -14,6 +14,8 @@ const {
   ogImage = "/ogp/default.webp",
   ogType = "website",
   breadcrumbItems = [],
+  noindex = false,
+  hideEnAlternate = false,
 } = Astro.props;
 
 const breadcrumbSchema =
@@ -126,12 +128,27 @@ const organizationSchema = {
 
     <!-- canonical -->
     <link rel="canonical" href={canonicalUrl} />
-    <!-- stagingではIndexを拒否 -->
-    {isStaging && <meta name="robots" content="noindex, nofollow" />}
+
+    {/* stagingまたはnoindex指定ページではIndexを拒否 */}
+    {
+      isStaging ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : (
+        noindex && <meta name="robots" content="noindex, follow" />
+      )
+    }
 
     <!-- hreflang -->
     <link rel="alternate" hreflang="ja" href={`${siteUrl}/ja${pathNoLang}`} />
-    <link rel="alternate" hreflang="en" href={`${siteUrl}/en${pathNoLang}`} />
+    {
+      !hideEnAlternate && (
+        <link
+          rel="alternate"
+          hreflang="en"
+          href={`${siteUrl}/en${pathNoLang}`}
+        />
+      )
+    }
     <link
       rel="alternate"
       hreflang="x-default"
@@ -141,10 +158,7 @@ const organizationSchema = {
     <!-- OGP -->
     <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta
-      property="og:title"
-      content={title ? `${title} | Nihon Etching Ltd.` : "Nihon Etching"}
-    />
+    <meta property="og:title" content={title ? `${title}` : "Nihon Etching"} />
     {description && <meta property="og:description" content={description} />}
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:locale" content={lang === "ja" ? "ja_JP" : "en_US"} />
