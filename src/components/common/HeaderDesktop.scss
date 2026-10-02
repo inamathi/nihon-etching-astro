@@ -73,7 +73,7 @@
     &__link {
       color: $color-text;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: var(--font-weight-emphasis);
       white-space: nowrap;
       padding: 12px 0;
 
@@ -154,7 +154,7 @@
   margin-left: 12px;
 
   &__item {
-    font-weight: 600;
+    font-weight: var(--font-weight-emphasis);
     color: $color-text;
     text-decoration: none;
     opacity: 0.6;
@@ -180,7 +180,7 @@
   line-height: 1;
   letter-spacing: 0.05em;
   color: #fff;
-  background: #e60012; /* 赤系。既存のアクセントカラーに合わせて調整 */
+  background: $color-primary; /* 赤系。既存のアクセントカラーに合わせて調整 */
   border-radius: 3px;
   vertical-align: middle;
   transform: translateY(-0.15em);

@@ -113,3 +113,12 @@ $fs-eyebrow: clamp(16px, 2vw, 22px);
 
 // page-section-title
 $fs-section-title: clamp(14px, 1vw, 18px);
+
+// =========================
+// Font Weight
+// =========================
+
+$fw-regular: 400; // 本文
+$fw-medium: 500; // ナビ・ラベル・弱い強調
+$fw-bold: 700; // 見出し
+$fw-heavy: 900; // ヒーロー・ディスプレイ

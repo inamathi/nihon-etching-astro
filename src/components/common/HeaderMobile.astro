@@ -67,8 +67,17 @@ const pathNoLang = appPath.replace(/^\/(ja|en)(\/|$)/, "/");
         <a class="c-drawer__link" href={`${basePath}/`}>{t(lang, "nav.top")}</a>
       </div>
       <div class="c-drawer__group">
-        <a class="c-drawer__link" href={`${basePath}/knowledge/shibo-design/`}>
+        <span class="c-drawer__label">
           {t(lang, "nav.knowledge")}
+        </span>
+        <a
+          class="c-drawer__subLink"
+          href={`${basePath}/knowledge/shibo-design/`}
+        >
+          {t(lang, "nav.knowledge_shibo_design")}
+        </a>
+        <a class="c-drawer__subLink" href={`${basePath}/knowledge/tech-faq/`}>
+          {t(lang, "nav.knowledge_tech_faq")}
           {
             showNew && (
               <span class="c-badge-new" aria-hidden="true">

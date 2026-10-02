@@ -110,7 +110,7 @@
   }
 
   &__noteLabel {
-    font-weight: 600;
+    font-weight: var(--font-weight-emphasis);
     color: $color-gray-200;
   }
 }
