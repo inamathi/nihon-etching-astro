@@ -90,16 +90,16 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "生地の『絞り』から派生した言葉で、織物の織り方・織り地・生地、手触りや感触・質感、そして金属表面をエッチングやサンドブラストによって加飾する工法、という複数の意味を持ちます。実務では最後の意味で使い、家電・自動車・雑貨品などあらゆるプラスチック製品に用いられている表面加工を指します。",
+          text: "生地の『絞り（しぼり）』から派生した言葉で、織物の織り方・織り地・生地、手触りや感触・質感、そして金属表面をエッチングやサンドブラストによって加飾する工法、という複数の意味を持ちます。実務では最後の意味で使い、家電・自動車・雑貨品などあらゆるプラスチック製品に用いられている表面加工を指します。",
         },
       ],
     },
     en: {
-      q: "What is shibo?",
+      q: "What exactly is “shibo”?",
       a: [
         {
           type: "p",
-          text: "The word comes from shibori, a Japanese term for fabric, and has several meanings: the weave or texture of a fabric, a tactile feel or quality, and a method of decorating metal surfaces by etching or sandblasting. In industry it is used in the last sense, referring to the surface finish found on plastic products of every kind, from home appliances and automotive parts to everyday goods.",
+          text: "The word derives from shibori, a Japanese term for wrinkled or crinkled fabric. It has several meanings: the weave or texture of a fabric, the feel or quality of a surface to the touch, and a method of decorating metal surfaces by etching or sandblasting. In industry, it is used in the last sense, referring to the surface texturing applied to all kinds of plastic products, including home appliances, automotive parts, and consumer goods.",
         },
       ],
     },
@@ -152,7 +152,7 @@ export const faqItems: FaqItem[] = [
     id: "q4",
     cat: "a",
     ja: {
-      q: "シボを付けると、どんなメリットがありますか。",
+      q: "シボ加工を施すと、どんなメリットがありますか。",
       a: [
         { type: "p", text: "主に次の4点です。" },
         {
@@ -246,7 +246,7 @@ export const faqItems: FaqItem[] = [
     id: "q7",
     cat: "a",
     ja: {
-      q: "なぜ設計の初期に決める必要があるのですか。",
+      q: "シボ設計を、なぜ設計の初期に決める必要があるのですか。",
       a: [
         {
           type: "p",
@@ -279,7 +279,7 @@ export const faqItems: FaqItem[] = [
         },
         {
           type: "p",
-          text: "平滑面であっても樹脂の収縮・粘着で1〜1.5度は必要であり、シボの分はそこへ追加で積み上げます。深さ40μmの皮シボであれば、1.5度＋5度＝6.5度が設計値です。",
+          text: "シボによる追加勾配の目安は、シボ深さ（μm）÷8程度を基本とします。例えばシボ深さ40μmの場合、シボによる追加勾配の目安は約5°です。実際の製品設計では、これに製品形状として必要な基本抜き勾配を加えて検討します。ただし、必要な勾配は樹脂、シボ形状、成形条件、製品形状などによって変化します。",
         },
       ],
     },
@@ -296,7 +296,7 @@ export const faqItems: FaqItem[] = [
         },
         {
           type: "p",
-          text: "Even a smooth surface needs 1–1.5° because of resin shrinkage and adhesion, and the draft for the shibo is added on top of that. For a leather-grain texture 40 μm deep, the design value is 1.5° + 5° = 6.5°.",
+          text: "As a guideline, the additional draft required for shibo is approximately the shibo depth (μm) ÷ 8. For example, a shibo depth of 40 μm calls for about 5° of additional draft. In actual product design, this is added to the base draft required by the part geometry. However, the required draft varies depending on the resin, shibo pattern, molding conditions, and part geometry.",
         },
       ],
     },
@@ -367,11 +367,11 @@ export const faqItems: FaqItem[] = [
     id: "q10",
     cat: "b",
     ja: {
-      q: "一般に言われる「シボ深さ10μに対して1度」ではないのですか。",
+      q: "一般に言われる「シボ深さ10μmに対して1度」ではないのですか。",
       a: [
         {
           type: "p",
-          text: "その値は好条件下でようやく成立する限界値に近い設定であり、離型時に側面を擦ってシボが伸びる・白化する・テカるという事故がこの水準で現実に発生します。当社が1度あたり8μmに絞っているのは、その2割分を安全代として先に引いておく考え方です。深シボや軟質材では特に妥当と考えております。",
+          text: "「シボ深さ10μmに対して1度」は好条件下でようやく成立する限界値に近い設定であり、離型時に側面を擦ってシボが伸びる・白化する・意図しない光沢が出るという不具合がこの水準でも発生することがあります。当社が1度あたり8μmに絞っているのは、離型不良のリスクを抑えるため2割分を先に引いておく考え方です。深シボや軟質材では特にこの余裕が有効と考えております。",
         },
       ],
     },
@@ -380,7 +380,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "That figure is close to the limit and holds only under favorable conditions. At that level, real problems do occur: the side walls are scraped during ejection, causing the shibo to stretch, whiten, or turn glossy. We set our rule at 8 μm per degree to build in a 20% safety margin from the start, and we consider this especially appropriate for deep textures and soft materials.",
+          text: "The figure of 1° per 10 μm of shibo depth is close to the limit and holds only under favorable conditions. Even at this level, defects can occur during ejection: the side walls are scraped, causing the shibo to stretch, whiten, or take on unintended gloss. We set our rule at 8 μm per degree, building in a 20% margin from the start to reduce the risk of release defects. We consider this margin especially effective for deep shibo and soft materials.",
         },
       ],
     },
@@ -495,7 +495,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "5軸レーザー彫刻で谷底や側壁の断面形状そのものを制御して離型させる、面ごとにシボ深さを変える、スライドや傾斜コアで抜き方向を変える、といった方法がございます。",
+          text: "5軸レーザー彫刻で谷底や側壁の断面形状そのものを制御して離型させる、面ごとにシボ深さを変える、スライドや傾斜コアで抜き方向を変える、といった方法があります。",
         },
       ],
     },
@@ -517,7 +517,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "0.5度以下および0度は原則として不可です。POM・PPのような高収縮材では、収縮によって成形品がシボ面から離れるため、0度でもカジリ等なく離型した実例はございます。ただし離型できることと狙った意匠が出ることは別問題で、この条件では転写不良・艶ムラが生じることがあります。",
+          text: "0度を含む0.5度以下は、原則として不可となります。POM・PPのような高収縮材では、収縮によって成形品がシボ面から離れるため、0度でもカジリなく離型できる場合がありますが、離型できることと狙った意匠を表現できることは別問題です。この条件では、転写不良やツヤむらが生じやすくなります。",
         },
       ],
     },
@@ -526,7 +526,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "As a rule, drafts of 0.5° or less, including 0°, are not possible. With high-shrinkage materials such as POM and PP, the part shrinks away from the textured surface, and there have been cases of clean release at 0° without scuffing. However, releasing the part and achieving the intended appearance are separate issues; under these conditions, poor transfer and uneven gloss can occur.",
+          text: "As a rule, drafts of 0.5° or less, including 0°, are not possible. With high-shrinkage materials such as POM and PP, the part shrinks away from the shibo surface, so it may release cleanly without scuffing even at 0°. However, releasing the part and achieving the intended appearance are separate issues. Under these conditions, poor transfer and uneven gloss are more likely to occur.",
         },
       ],
     },
@@ -539,7 +539,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "Rエンドよりやや下が望ましいです。Rエンドでマスキングするとアンダーカットとなり、カジリが発生します。",
+          text: "Rエンドよりやや下が望ましいです。Rエンドでマスキングするとアンダーカットとなり、カジリが発生しやすくなります。",
         },
       ],
     },
@@ -548,7 +548,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "Slightly below the end of the radius is preferable. Masking right at the end of the radius creates an undercut, which causes scuffing.",
+          text: "Slightly below the end of the radius is preferable. Masking right at the end of the radius creates an undercut, making scuffing more likely.",
         },
       ],
     },
@@ -562,7 +562,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "この指示は多いのですが、Rの終端に段差が発生し、カジリ・バリのトラブルになることがあります。回避のため見切り点を45度方向にとることがありますので、図面上で明確かつ安全な指示があることが好ましいです。",
+          text: "この指示は多いのですが、Rエンドに段差が発生し、カジリ・バリの不具合をおこしやすくなります。これらの不具合を回避するため見切り点を45度方向にとることがありますので、図面上で明確かつ安全な指示があることが望ましいです。",
         },
       ],
     },
@@ -571,7 +571,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "This instruction is common, but it can create a step at the end of the radius, leading to scuffing and flash. To avoid this, the boundary is sometimes placed in the 45° direction, so a clear and safe instruction on the drawing is preferable.",
+          text: "This instruction is common, but it can create a step at the end of the radius, making defects such as scuffing and flash more likely. To avoid these defects, the shibo boundary is sometimes placed in the 45° direction, so a clear and safe instruction on the drawing is preferable.",
         },
       ],
     },
@@ -584,7 +584,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "R稜線などでシボ深さを段階的に浅くしていく手法です。抜け勾配2度の箇所では、35μ→30μ→25μ→20μ→15μ→10μと徐々にマスキングを行います。極端な深さで急にマスキングするとマスキングラインが目立つため、できるだけ徐々に行うことが望ましいです。",
+          text: "R稜線などでシボ深さを段階的に浅くしていく手法です。例として、勾配が小さくなり最小抜き勾配が2度となる箇所に向けて、35μm→30μm→25μm→20μm→15μm→10μmと段階的に浅くなるようにマスキングを行います。深い状態から急にマスキングで切り替えるとマスキングラインが目立つため、できるだけ自然に見えるように変化させることが望ましいです。",
         },
       ],
     },
@@ -593,7 +593,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "A technique for reducing shibo depth in stages, for example along a radius edge. On a surface with 2° of draft, masking is applied step by step: 35 → 30 → 25 → 20 → 15 → 10 μm. Masking abruptly at an extreme depth makes the masking line conspicuous, so the transition should be as gradual as possible.",
+          text: "A technique for reducing shibo depth in stages in areas such as radius edges. For example, toward an area where the draft decreases to a minimum of 2°, masking is applied so that the depth decreases step by step: 35 → 30 → 25 → 20 → 15 → 10 μm. Masking abruptly from a deep state makes the masking line conspicuous, so the transition should look as natural as possible.",
         },
       ],
     },
@@ -723,7 +723,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "It works in four steps: the surface is masked with an acid-resistant film; the mold is immersed in etching solution and corroded (depth is controlled by time); the steel surface not covered by the mask becomes recessed; and the film is removed to leave the intended shape.",
+          text: "It works in four steps: the surface is masked with an acid-resistant film; the mold is immersed in the etchant and etched (depth is controlled by time); the steel surface not covered by the mask becomes recessed; and the film is removed to leave the intended shape.",
         },
       ],
     },
@@ -739,13 +739,17 @@ export const faqItems: FaqItem[] = [
           items: [
             {
               dt: "マスキング",
-              dd: "加工したくない部分をテープや塗料などで覆う工程。求められる性能は工法によって異なる（サンドブラスト用は耐圧、エッチング用は耐水・耐圧）",
+              dd: "加工したくない部分をテープや塗料などで覆う工程。求められる性能は工法によって異なる（サンドブラスト用は耐圧、エッチング用は耐酸・耐薬品）",
             },
             {
               dt: "耐酸性膜",
               dd: "エッチングの際に腐食させたくない部分を保護する膜。この膜がない部分だけが腐食して凹になる",
             },
           ],
+        },
+        {
+          type: "note",
+          text: "エッチング用マスキングには、使用する薬液に対する耐酸性・耐薬品性と、加工中に剥離しにくい密着性が求められます。（サンドブラスト用は耐圧性が求められる）",
         },
       ],
     },
@@ -757,13 +761,17 @@ export const faqItems: FaqItem[] = [
           items: [
             {
               dt: "Masking",
-              dd: "The process of covering areas that should not be processed with tape, coating, or similar. The required properties depend on the method: pressure resistance for sandblasting, and water and pressure resistance for etching.",
+              dd: "The process of covering areas that should not be processed with tape, coating, or similar. The required properties depend on the method: pressure resistance for sandblasting, and acid and chemical resistance for etching.",
             },
             {
               dt: "Acid-resistant film",
-              dd: "A film that protects areas that should not be corroded during etching. Only the areas without this film are corroded and become recessed.",
+              dd: "A film that protects areas that should not be etched. Only the areas without this film are etched and become recessed.",
             },
           ],
+        },
+        {
+          type: "note",
+          text: "Masking for etching must be resistant to acids and chemicals in the etchant used, and must adhere well enough not to peel during processing. (Masking for sandblasting requires pressure resistance.)",
         },
       ],
     },
@@ -813,7 +821,7 @@ export const faqItems: FaqItem[] = [
         },
         {
           type: "p",
-          text: "目標の深さ・粗さになるまでパターン転写とエッチングを繰り返します。深さ検査は硬質ゴム状粘土で反転させ、ルーペで目視確認します。なお金型が入荷してから最初に行うのは脱脂洗浄で、油分や汚れを除去してからマスキング工程に入ります。",
+          text: "目標の深さ・粗さになるまでパターン転写とエッチングを繰り返します。加工工程中は反転材などを使用してシボ形状を確認することがあります。最終的なシボ深さや表面粗さについては、必要に応じて表面粗さ測定機、形状測定機などを用いて数値で確認します。なお金型が入荷してから最初に行うのは脱脂洗浄で、油分や汚れを除去してからマスキング工程に入ります。",
         },
       ],
     },
@@ -837,7 +845,7 @@ export const faqItems: FaqItem[] = [
         },
         {
           type: "p",
-          text: "Pattern transfer and etching are repeated until the target depth and roughness are achieved. Depth is inspected by taking a reverse impression with a hard, rubber-like putty and checking it visually with a loupe. The first step after a mold arrives is degreasing and cleaning, which removes oil and dirt before masking begins.",
+          text: "Pattern transfer and etching are repeated until the target depth and roughness are achieved. During processing, the shibo pattern may be checked using replica material or similar. The final shibo depth and surface roughness are verified numerically as needed, using instruments such as surface roughness testers and profilometers. The first step after a mold arrives is degreasing and cleaning, which removes oil and dirt before masking begins.",
         },
       ],
     },
@@ -896,15 +904,11 @@ export const faqItems: FaqItem[] = [
     id: "q26",
     cat: "c",
     ja: {
-      q: "マスクリムーブ工法にすると、何が良くなりますか。",
+      q: "マスクリムーブ工法の利点とは。",
       a: [
         {
           type: "p",
-          text: "工数が大幅に削減されること、そして金型間の仕上がりが揃うことの2点です。多段シボで最も手間のかかるフィルム貼りの工数が減り、段数が多いほど、また曲面や複雑形状が多い金型ほど効果が大きくなります。",
-        },
-        {
-          type: "p",
-          text: "また同じデータを使うため、複数の同じ金型でも同じ仕上がりになります。手貼りでは型ごと・作業者ごとにわずかな差が生じますが、データ由来であればその差が出ません。",
+          text: "マスクリムーブ工法の大きなメリットは、デジタルデータを基準に工程管理できるため、従来の手作業による多段シボと比較して、作業者によるばらつきを抑えやすいことです。また、同一データを使用することで、追加型や海外型などでも高い再現性を得やすくなります。ただし、金型材質、表面状態、加工条件、設備状態などによって仕上がりに差が生じる場合があります。",
         },
       ],
     },
@@ -913,11 +917,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "There are two: a significant reduction in labor, and consistent results across molds. It cuts the hours spent applying film, the most labor-intensive part of multi-stage shibo, and the effect grows with the number of stages and with the amount of curved or complex geometry on the mold.",
-        },
-        {
-          type: "p",
-          text: "And because the same data is used, multiple identical molds come out with the same finish. Hand-applied film produces slight differences between molds and between workers, but data-driven masking does not.",
+          text: "The main advantage of the Mask Remove method is that the process is controlled based on digital data, which makes it easier to reduce variation between workers compared with conventional hand-applied multi-stage shibo. Using the same data also makes it easier to achieve high reproducibility for additional molds and molds made overseas. However, the finish may vary depending on the mold material, surface condition, processing conditions, and equipment condition.",
         },
       ],
     },
@@ -934,7 +934,7 @@ export const faqItems: FaqItem[] = [
         },
         {
           type: "p",
-          text: "組み合わせる相手はエッチングだけではなく、粒子を吹き付けるイエプコピーニングで仕上げる選択肢もございます。また、切削加工＋レーザー、レーザー＋マイクロエッチングといった組み合わせもございます。",
+          text: "組み合わせる工法はエッチングに限らず、粒子を吹き付けるイエプコピーニングで仕上げる方法もあります。このほか、切削加工とレーザー、レーザーとマイクロエッチングを組み合わせる方法もあります。",
         },
       ],
     },
@@ -947,7 +947,7 @@ export const faqItems: FaqItem[] = [
         },
         {
           type: "p",
-          text: "Etching is not the only option for the second process: IEPCO peening, which blasts particles onto the surface, is another finishing choice. Combinations such as machining + laser and laser + micro-etching are also available.",
+          text: "Combinations are not limited to etching; another option is finishing with IEPCO peening, which blasts fine particles onto the surface. Other combinations include machining with laser, and laser with micro-etching.",
         },
       ],
     },
@@ -960,7 +960,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "断面形状を制御できるかどうかが決定的な差です。勾配が取れない部位では、レーザーで断面形状を制御して離型させられます。",
+          text: "5軸レーザー加工では、谷底形状や側壁角度などの断面形状をデータ上で設計できるため、化学エッチングでは対応が難しい低勾配部や複雑形状についても、離型性を考慮したテクスチャー設計が可能です。",
         },
         {
           type: "table",
@@ -974,12 +974,12 @@ export const faqItems: FaqItem[] = [
             ],
             [
               "再現性",
-              "マスターと職人技に依存",
+              "原版（マスターフィルム）と作業者の技能に依存",
               "データで再現。国内外の拠点で同一のシボを出せる",
             ],
             [
               "表現力",
-              "梨地・皮シボ・幾何学に強い",
+              "梨地・皮シボ・幾何学模様に強み",
               "深彫り・大胆な立体加飾・機能性パターン",
             ],
             [
@@ -993,16 +993,16 @@ export const faqItems: FaqItem[] = [
         },
         {
           type: "p",
-          text: "なお当社はレーザー万能主義ではありません。化学エッチングの利点（広範囲を短時間で均一に加工できる、コスト面で有利な場合がある）も熟知したうえで使い分けております。",
+          text: "いずれの工法も、必要な抜き勾配は、シボ深さ、形状、樹脂、成形条件などを含めて総合的に判断する必要があります。レーザーが万能ということではなく、化学エッチングの利点（広範囲を短時間で均一に加工できる、コスト面で有利な場合がある）も考慮したうえで使い分けております。",
         },
       ],
     },
     en: {
-      q: "Should I choose etching or laser?",
+      q: "Which should I choose: etching or laser?",
       a: [
         {
           type: "p",
-          text: "The decisive difference is whether the cross-sectional profile can be controlled. Where draft cannot be secured, laser can control the profile so that the part releases.",
+          text: "With 5-axis laser processing, the cross-sectional profile, such as the shape of the valley bottoms and the side-wall angles, can be designed in the data. This makes it possible to design textures with mold release in mind, even for low-draft areas and complex geometries that are difficult to handle with chemical etching.",
         },
         {
           type: "table",
@@ -1010,44 +1010,44 @@ export const faqItems: FaqItem[] = [
           rows: [
             [
               "Principle",
-              "Isotropic corrosion by chemicals",
+              "Isotropic etching by chemicals",
               "Direct engraving based on data",
             ],
             [
               "Cross-sectional profile",
-              "Cannot be chosen (isotropic corrosion)",
+              "Cannot be chosen (due to isotropic etching)",
               "Valley bottoms and side-wall angles can be designed",
             ],
             [
               "Reproducibility",
-              "Depends on the master and craftsmanship",
-              "Reproduced from data; identical shibo at sites in Japan and abroad",
+              "Depends on the master film and operator skill",
+              "Reproduced from data; the same shibo can be produced at sites in Japan and overseas",
             ],
             [
-              "Expressive range",
+              "Range of expression",
               "Strong in matte, leather grain, and geometric patterns",
               "Deep engraving, bold 3D decoration, functional patterns",
             ],
             [
-              "Reproducing materials",
-              "Based on pattern originals",
+              "Material reproduction",
+              "Based on original pattern sheets",
               "Reproduces fabric, wood, and stone via 3D scanning (1 μm resolution)",
             ],
             [
               "Repairability",
-              "Re-texturing tends to leave visible seams",
+              "Re-applying shibo tends to leave visible seams",
               "Can be reprocessed from data",
             ],
             [
               "Cost and lead time",
               "Relatively short",
-              "Processing time dominates for deep engraving and large areas",
+              "Machining time dominates for deep engraving and large areas",
             ],
           ],
         },
         {
           type: "p",
-          text: "We do not treat laser as the answer to everything. We choose between methods with a thorough understanding of the advantages of chemical etching: it can process large areas uniformly in a short time, and it can be more cost-effective.",
+          text: "For either method, the required draft must be determined comprehensively, taking into account shibo depth, geometry, resin, molding conditions, and other factors. Laser is not a universal solution. We choose between the methods while also considering the advantages of chemical etching, such as uniform processing of large areas in a short time and, in some cases, lower cost.",
         },
       ],
     },
@@ -1112,24 +1112,24 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "凹凸がつぶれて丸みを帯び、シボが浅く表面がなめらかになります。光が反射しやすくなるためツヤが出ます（グロス値が高くなる）。この処理で削られる深さは5ミクロン以下です。",
+          text: "凹凸がつぶれて丸みを帯び、シボが浅く表面がなめらかになります。光が反射しやすくなるためツヤが出ます（グロス値が高くなる）。削られる深さは、当社標準条件では概ね5μm以下となります。",
         },
         {
           type: "p",
-          text: "サンドブラスト加工のみの場合は、シボが深く表面がデコボコになり、ツヤが消えます。",
+          text: "サンドブラスト加工のみの場合は、シボが深く表面が凹凸になり、ツヤが消え（グロス値が低くなる）マットな仕上がりとなります。",
         },
       ],
     },
     en: {
-      q: "How does glass bead treatment change the shibo?",
+      q: "How does glass bead blasting change the shibo?",
       a: [
         {
           type: "p",
-          text: "The peaks are flattened and rounded, making the shibo shallower and the surface smoother. Because the surface reflects light more readily, gloss increases (higher gloss value). The depth removed by this treatment is 5 μm or less.",
+          text: "The peaks are flattened and rounded, making the shibo shallower and the surface smoother. Because the surface reflects light more readily, it becomes glossier (the gloss value increases). The depth removed is generally 5 μm or less under our standard conditions.",
         },
         {
           type: "p",
-          text: "With sandblasting alone, the shibo is deep, the surface is rough, and the finish is matte.",
+          text: "With sandblasting alone, the shibo remains deeper and the surface stays rough, giving a matte finish with the gloss removed (the gloss value decreases).",
         },
       ],
     },
@@ -1171,7 +1171,7 @@ export const faqItems: FaqItem[] = [
             ["線シボ", "ガス抜きを目的とした線状のシボ。ウェルド対策に用いる"],
             [
               "ウラシボ",
-              "アンダーカット部などに追加するシボ。離型バランスの調整に用いる",
+              "キャビティ側から製品が取られるのを防ぎ、コア側に製品を保持させる目的で設けるテクスチャー",
             ],
           ],
         },
@@ -1217,8 +1217,8 @@ export const faqItems: FaqItem[] = [
               "A linear shibo for gas venting. Used to counter weld lines",
             ],
             [
-              "Ura-shibo",
-              "Shibo added to areas such as undercuts. Used to balance mold release",
+              "Ura-shibo (core-side retention texture)",
+              "A texture applied to prevent the part from sticking to the cavity side and to keep it held on the core",
             ],
           ],
         },
@@ -1285,17 +1285,17 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "制約の強い順に絞り、意匠は最後に決めてください。意匠から入ると、後で勾配に弾かれてやり直しになります。",
+          text: "シボ柄は、制約条件の厳しい項目から順に絞り込み、意匠は最後に決定することを推奨します。意匠を先に決めた場合、抜き勾配の制約により採用できず、選定をやり直すことになる場合があります。",
         },
         {
           type: "list",
           ordered: true,
           items: [
             "抜き勾配 … 深さ上限の足切り。金型設計の初期に確定させる",
-            "樹脂と転写率 … PPは浅く出る／GFは繊維が浮いて潰れる／軟質は艶が下がる",
-            "要求機能 … 防眩はランダム、グリップは山が平坦、洗浄性は浅く丸い谷",
-            "光沢度 … 深さと艶は独立変数。60度グロス値で数値管理する",
-            "色との相互作用 … 黒は深く粗く見え、淡色は浅く見える。艶が高いほど深く見え、低いほど浅く見える。中間色で決める",
+            "樹脂と転写率 … PPは浅く出る／GFは繊維が浮いて潰れる／軟質はツヤ（グロス値）が下がる",
+            "要求機能 … 防眩性にはランダムな柄、グリップ性には山頂部が平坦な形状、洗浄性には浅く丸みを帯びた谷形状が適する",
+            "光沢度 … 深さとツヤは独立変数。60度グロス値で数値管理する",
+            "色との相互作用 … 黒は深く粗く見え、淡色は浅く見える。グロス値が高いほど深く見え、低いほど浅く見える。中間色で決める",
             "部品形状・型構成 … シボ合わせ、R部の深浅、PL・ピン跡・ゲート跡との相性",
             "後工程との両立 … 印刷・箔押し・溶着・シール面はシボを抜く（マスキング）",
             "補修性とコスト … 型修理を想定するなら補修しやすい梨地系。深彫りは時間が支配的",
@@ -1309,21 +1309,21 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "Narrow down from the strongest constraints first, and decide the design last. If you start from the design, it will later be ruled out by the draft and you will have to start over.",
+          text: "We recommend narrowing down shibo patterns starting with the most restrictive constraints and deciding the design last. If the design is decided first, it may be ruled out by draft constraints, and the selection may have to start over.",
         },
         {
           type: "list",
           ordered: true,
           items: [
-            "Draft angle: sets the depth ceiling. Finalize it early in mold design",
-            "Resin and transfer rate: PP transfers shallower; with GF, fibers rise to the surface and flatten the texture; soft materials lower gloss",
-            "Required function: random patterns for anti-glare, flat peaks for grip, shallow rounded valleys for cleanability",
-            "Gloss: depth and gloss are independent variables. Control gloss numerically with the 60° gloss value",
-            "Interaction with color: black looks deeper and coarser, light colors look shallower; higher gloss looks deeper, lower gloss looks shallower. Decide using a mid-tone color",
-            "Part geometry and mold layout: texture matching between parts, depth variation on radii, and compatibility with the parting line, pin marks, and gate marks",
-            "Compatibility with secondary processes: leave shibo off (mask) surfaces for printing, hot stamping, welding, and sealing",
-            "Repairability and cost: if mold repairs are expected, choose matte-type textures that are easy to repair. For deep engraving, processing time dominates",
-            "Approval process: record the texture plaque, mass-production condition trials, limit samples, and master control number",
+            "Draft angle: sets the upper limit on depth. Finalize it early in mold design",
+            "Resin and transfer rate: PP transfers shallower; with GF, fibers rise to the surface and flatten the texture; soft materials lower the gloss (gloss value)",
+            "Required function: random patterns suit anti-glare, flat-topped peaks suit grip, and shallow, rounded valleys suit cleanability",
+            "Gloss: depth and gloss are independent variables. Control gloss numerically using the 60° gloss value",
+            "Interaction with color: black looks deeper and coarser, light colors look shallower. Higher gloss looks deeper, lower gloss looks shallower. Decide using a mid-tone color",
+            "Part geometry and mold configuration: shibo matching between parts, depth variation on radii, and compatibility with the parting line, ejector pin marks, and gate marks",
+            "Compatibility with downstream processes: keep printing, hot stamping, welding, and sealing surfaces free of shibo (masking)",
+            "Repairability and cost: if mold repair is anticipated, matte-type shibo is easier to repair. For deep engraving, machining time dominates",
+            "Approval process: texture plaque, trials under mass-production conditions, limit samples, and recording the master control number",
           ],
         },
       ],
@@ -1338,11 +1338,11 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "メーカー名＋番号＋深さで特定してください。見本帳は各社が独自の柄番号を持っており、同じ番号名でもメーカーが違えば別物です。パターン番号だけの図面指示は、数年後の追加生産で必ず揉めます。",
+          text: "メーカー名＋番号＋深さで特定すると同時に、基準サンプル、粗さ、グロス値などの管理項目を併用してください。パターン番号だけで図面指示した場合、加工メーカーや加工拠点によって解釈に差が生じ、追加型、補修型、海外移管型などで仕上がり差が発生する可能性があります。",
         },
         {
-          type: "p",
-          text: "シボ加工先を統一したうえで専用シボ番号を運用いただくと、型間・拠点間のばらつきを抑えられます。",
+          type: "note",
+          text: "シボ加工依頼先を統一したうえで専用シボ番号を運用することで、型間・拠点間のばらつきを抑えられます。",
         },
       ],
     },
@@ -1351,11 +1351,11 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "Specify it by maker name + pattern number + depth. Each maker's sample book has its own pattern numbers, and the same number from a different maker is a different pattern. A drawing that gives only a pattern number will inevitably lead to disputes when additional production is needed years later.",
+          text: "Identify the pattern by manufacturer name, number, and depth, and also use control items such as a reference sample, roughness, and gloss value. If a drawing specifies only the pattern number, interpretation may differ between texturing suppliers and processing sites, which can lead to differences in finish on additional molds, repair molds, and molds transferred overseas.",
         },
         {
-          type: "p",
-          text: "Standardizing on a single texturing supplier and using a dedicated shibo number helps reduce variation between molds and between sites.",
+          type: "note",
+          text: "Using a single texturing supplier and managing patterns with dedicated shibo numbers helps reduce variation between molds and between sites.",
         },
       ],
     },
@@ -1433,20 +1433,20 @@ export const faqItems: FaqItem[] = [
         },
         {
           type: "p",
-          text: "なおツヤむら・ヒケ・ウェルド・傷付きという4つの不具合は、いずれも見え方が光沢に左右されるため、『ツヤ調整』が共通して有効な対策になります。",
+          text: "なお、ツヤむら・ヒケ・ウェルド・傷付きという4つの不具合は、いずれも見え方が光沢に左右されるため、シボ形状やグロスを適切に設計することで、これらを目立ちにくくできる場合があります。ただし、シボ加工だけでヒケやウェルドそのものを解消するものではありません。製品設計、金型設計、ゲート位置、成形条件などと併せた対策が必要です。",
         },
       ],
     },
     en: {
-      q: "How do you control shibo quality?",
+      q: "How is shibo quality controlled?",
       a: [
         {
           type: "p",
-          text: "We control it numerically with two types of instruments: gloss meters and depth/roughness measuring instruments.",
+          text: "We control quality numerically using two types of instruments: gloss meters, and instruments that measure depth and roughness.",
         },
         {
           type: "p",
-          text: "The visibility of four defects—uneven gloss, sink marks, weld lines, and scratches—depends on gloss, so gloss adjustment is an effective countermeasure common to all of them.",
+          text: "Uneven gloss, sink marks, weld lines, and scratches are all defects whose visibility depends on gloss. Designing the shibo pattern and gloss appropriately can therefore make them less noticeable in some cases. However, shibo alone does not eliminate sink marks or weld lines themselves. Countermeasures must be combined with part design, mold design, gate location, molding conditions, and other factors.",
         },
       ],
     },
@@ -1497,7 +1497,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "Yes. Because the result of etching depends on how the steel corrodes, the uniformity of the steel's microstructure is the dominant factor.",
+          text: "Yes. Because the result of etching depends on how the steel is etched, the uniformity of the steel's microstructure is the dominant factor.",
         },
         {
           type: "table",
@@ -1516,7 +1516,7 @@ export const faqItems: FaqItem[] = [
             [
               "Hot-work tool steel",
               "SKD61",
-              "High hardness means slow corrosion. Uniformity depends on heat treatment",
+              "High hardness means slow etching. Uniformity depends on heat treatment",
             ],
             [
               "Stainless steels",
@@ -1541,7 +1541,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "硬度が高いほど腐食は遅く、同じ薬液・時間では浅くなります。硬度指定と柄指定はセットでご確認ください。",
+          text: "同じエッチング条件（薬液・温度・時間）では、硬度が高いほど腐食は遅く、浅くなるという傾向にあります。ただし、化学エッチングの加工特性は、金型材の種類や硬度だけでなく、化学成分、熱処理状態、組織、表面状態、薬液条件などによって変化します。そのため、材質ごとの特性を確認した上で加工条件を設定します。",
         },
       ],
     },
@@ -1550,7 +1550,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "The harder the steel, the slower it corrodes, so the same solution and time produce a shallower result. Please confirm the hardness specification and the pattern specification together.",
+          text: "Under the same etching conditions (etchant, temperature, and time), harder steel tends to etch more slowly and to a shallower depth. However, the behavior of chemical etching depends not only on the type and hardness of the mold steel but also on its chemical composition, heat treatment condition, microstructure, surface condition, and etchant conditions. We therefore set processing conditions after checking the characteristics of each material.",
         },
       ],
     },
@@ -2139,7 +2139,7 @@ export const faqItems: FaqItem[] = [
             },
             {
               dt: "POM",
-              dd: "離型性は良好ですが、意匠面では転写不良・艶ムラが出やすい側の材料です。",
+              dd: "離型性は良好ですが、意匠面では転写不良・ツヤムラが出やすい側の材料です。",
             },
             {
               dt: "ABS",
@@ -2155,7 +2155,7 @@ export const faqItems: FaqItem[] = [
             },
             {
               dt: "軟質材（TPO・TPE・TPU）",
-              dd: "離型時に弾性変形して抜けるため基本則が当てはまらず、艶が下がりやすくなります。必ず現物トライで確認してください。",
+              dd: "離型時に弾性変形して抜けるため基本則が当てはまらず、ツヤが下がりやすくなります。必ず現物トライで確認してください。",
             },
           ],
         },
@@ -2442,7 +2442,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "いいえ。かじりには2つのメカニズムがあり、対策が正反対に近くなります。材料名だけで対策を決めず、まずどちらかを判別してください。",
+          text: "異なります。かじりには2つのメカニズムがあり、対策が正反対に近くなります。材料名だけで対策を決めず、まずどちらかの対策が必要かを判別してください。",
         },
         {
           type: "table",
@@ -2470,7 +2470,7 @@ export const faqItems: FaqItem[] = [
             ],
             [
               "効きにくい対策",
-              "シボ深さ低減は効くが本質ではない。まず摩擦低減",
+              "シボ深さ低減は一定の効果が見込まれるが本質ではない。まず摩擦低減",
               "勾配拡大・コーティングのみでは効果が薄い（機械的係合のため）",
             ],
           ],
@@ -2647,11 +2647,15 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "転写不良には、キャビ表面温度を上げるのが最も効きます。保圧・保圧時間の増加と材料の予備乾燥も併せてご検討ください。",
+          text: "転写不良には、キャビ表面温度を上げることで一定の効果が見込めます。保圧・保圧時間の増加と材料の予備乾燥も併せてご検討ください。",
         },
         {
           type: "note",
-          text: "高収縮材で勾配が小さい（0度に近い）場合は、離型に問題がなくても転写不良・艶ムラが出ることがあります。カジリという分かりやすい症状が出ないため気づきにくい不具合です。",
+          text: "キャビ表面温度の調整は有効な対策の一つですが、同時に、樹脂温度、射出速度、保圧、保圧時間、材料乾燥状態なども確認します。ただし、型温や保圧を上げることで、離型抵抗、収縮、バリなど別の問題が生じる場合があるため、製品寸法・外観・離型性を確認しながら最適条件を設定します。",
+        },
+        {
+          type: "note",
+          text: "高収縮材で勾配が小さい（0度に近い）場合は、離型に問題がなくても転写不良・ツヤムラが出ることがあります。カジリという分かりやすい症状が出ないため気づきにくい不具合です。",
         },
       ],
     },
@@ -2660,7 +2664,11 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "For poor transfer, raising the cavity surface temperature is the most effective measure. Also consider increasing holding pressure and holding time, and pre-drying the material.",
+          text: "For poor transfer, raising the cavity surface temperature can be expected to have a certain effect. Also consider increasing holding pressure and holding time, and pre-drying the material.",
+        },
+        {
+          type: "note",
+          text: "Adjusting the cavity surface temperature is one effective measure, but we also check resin temperature, injection speed, holding pressure, holding time, and how well the material has been dried. Raising the mold temperature or holding pressure can cause other problems, such as higher release resistance, shrinkage, or flash, so we set the optimal conditions while checking part dimensions, appearance, and release.",
         },
         {
           type: "note",
@@ -2677,7 +2685,7 @@ export const faqItems: FaqItem[] = [
       a: [
         {
           type: "p",
-          text: "離型バランスを疑ってください。製品は可動側（コア）に抱きつかせて突き出すのが原則ですが、シボは固定側（キャビ）に彫刻されることが多く、キャビ側の離型抵抗がコア側の保持力を上回った瞬間に両者が同時発生します。シボ面積が大きいほどキャビ側の抵抗は増えますので、コア側の梨地処理で保持力を補強する手法もございます。",
+          text: "離型バランスを疑ってください。製品は可動側（コア）に抱きつかせて突き出すのが原則ですが、シボは固定側（キャビ）に彫刻されることが多く、キャビ側の離型抵抗がコア側の保持力を上回った瞬間に両者が同時発生します。シボ面積が大きいほどキャビ側の抵抗は増えますので、コア側の梨地処理で保持力を補強する手法もあります。",
         },
         {
           type: "p",
@@ -2883,7 +2891,7 @@ export const faqItems: FaqItem[] = [
             "型材の鋼種・硬度・熱処理状態",
             "補修・溶接の有無（共材かどうかを含む）",
             "成形樹脂・色・GFの有無",
-            "現状の抜き勾配（→ 深さ÷8 で検算）",
+            "現状の抜き勾配（→ シボ深さ÷8 で検算）",
             "製品肉厚と立ち壁高さ",
             "抱きつく面／離れる面の区別",
             "分割線・入れ子の位置、柄の切れ方の許容",
@@ -2994,7 +3002,7 @@ export const faqItems: FaqItem[] = [
     id: "q67",
     cat: "h",
     ja: {
-      q: "御社側ではどんな予防策を取っていますか。",
+      q: "仕様の行き違いによるトラブルを防ぐため、どのような予防策を取っていますか。",
       a: [
         { type: "p", text: "以下を仕組みとして運用しております。" },
         {
@@ -3009,7 +3017,7 @@ export const faqItems: FaqItem[] = [
       ],
     },
     en: {
-      q: "What preventive measures do you take?",
+      q: "What measures do you take to prevent problems caused by miscommunication about specifications?",
       a: [
         { type: "p", text: "We operate the following as standard procedure:" },
         {

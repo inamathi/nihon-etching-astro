@@ -8,7 +8,6 @@ import ScrollToTop from "@/components/common/ScrollToTop.astro";
 import "@/styles/main.scss";
 
 const {
-  lang = "ja",
   title = "",
   description = "",
   ogImage = "/ogp/default.webp",
@@ -17,6 +16,8 @@ const {
   noindex = false,
   hideEnAlternate = false,
 } = Astro.props;
+
+const lang = (Astro.params.lang ?? Astro.props.lang ?? "ja") as Lang;
 
 const breadcrumbSchema =
   breadcrumbItems.length >= 2
@@ -117,6 +118,10 @@ const organizationSchema = {
     ],
   },
 };
+
+// 言語切り替え
+const showHreflang =
+  !noindex && !hideEnAlternate && (lang === "ja" || lang === "en");
 ---
 
 <html lang={lang}>
@@ -139,21 +144,15 @@ const organizationSchema = {
     }
 
     <!-- hreflang -->
-    <link rel="alternate" hreflang="ja" href={`${siteUrl}/ja${pathNoLang}`} />
     {
-      !hideEnAlternate && (
-        <link
-          rel="alternate"
-          hreflang="en"
-          href={`${siteUrl}/en${pathNoLang}`}
-        />
+      showHreflang && (
+        <>
+          <link rel="alternate" hreflang="ja" href={`${siteUrl}/ja${pathNoLang}`} />
+          <link rel="alternate" hreflang="en" href={`${siteUrl}/en${pathNoLang}`} />
+          <link rel="alternate" hreflang="x-default" href={`${siteUrl}/ja${pathNoLang}`} />
+        </>
       )
     }
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href={`${siteUrl}/ja${pathNoLang}`}
-    />
 
     <!-- OGP -->
     <meta property="og:type" content={ogType} />
@@ -197,7 +196,7 @@ const organizationSchema = {
     <noscript>
       <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+JP:wght@600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Noto+Sans+JP:wght@400..900&display=swap"
       />
     </noscript>
 

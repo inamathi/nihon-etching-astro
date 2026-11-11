@@ -57,7 +57,7 @@ const topSchema = {
 };
 ---
 
-<h1 class="u-visually-hidden">{t(lang, "pageTitle.top")}</h1>
+
 <Base
   lang={lang}
   title={title}
@@ -71,7 +71,7 @@ const topSchema = {
     set:html={JSON.stringify(topSchema)}
     slot="head"
   />
-
+  <h1 class="u-visually-hidden">{t(lang, "pageTitle.top")}</h1>
   <!-- HeroSlider S -->
   <HeroSlider lang={lang} />
   <!-- Scroll後のコンテンツ S -->

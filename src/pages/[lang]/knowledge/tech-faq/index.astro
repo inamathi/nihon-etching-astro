@@ -255,17 +255,18 @@ const showWip = lang === "en" && !EN_READY;
                       <div class="p-techfaq__a">
                         <FaqAnswer blocks={it.c.a} />
                       </div>
+                      {/* 
                       {it.terms.length > 0 && (
                         <div class="p-techfaq__terms">
                           <span class="p-techfaq__termsLabel">
                             {L(ui.termsLabel)}
                           </span>
-                          {/* 用語集ページ実装後は <a href={`${basePath}/knowledge/glossary/#...`}> に差し替え */}
                           {it.terms.map((term) => (
                             <span class="p-techfaq__term">{term}</span>
                           ))}
                         </div>
                       )}
+                        */}
                     </article>
                   ))}
                 </section>

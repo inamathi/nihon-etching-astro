@@ -134,6 +134,12 @@ const graphicGallery = [
   },
 ];
 
+// ギャラリー画像の alt（キャプション＋サフィックス）
+const altOf = (key: string) =>
+  lang === "ja"
+    ? `${t(lang, key)}のシボ加工サンプル`
+    : `Shibo sample: ${t(lang, key)}`;
+
 const title = t(lang, "pageTitle.technology.shibo");
 
 const shiboSchema = {
@@ -252,7 +258,7 @@ const shiboSchema = {
                 <img
                   class="c-techGallery__img"
                   src={item.src}
-                  alt=""
+                  alt={altOf(item.captionKey)}
                   loading="lazy"
                   decoding="async"
                 />
@@ -282,7 +288,7 @@ const shiboSchema = {
                 <img
                   class="c-techGallery__img"
                   src={item.src}
-                  alt=""
+                  alt={altOf(item.captionKey)}
                   loading="lazy"
                   decoding="async"
                 />
@@ -312,7 +318,7 @@ const shiboSchema = {
                 <img
                   class="c-techGallery__img"
                   src={item.src}
-                  alt=""
+                  alt={altOf(item.captionKey)}
                   loading="lazy"
                   decoding="async"
                 />
@@ -342,7 +348,7 @@ const shiboSchema = {
                 <img
                   class="c-techGallery__img"
                   src={item.src}
-                  alt=""
+                  alt={altOf(item.captionKey)}
                   loading="lazy"
                   decoding="async"
                 />
@@ -375,7 +381,7 @@ const shiboSchema = {
                 <img
                   class="c-techGallery__img"
                   src={item.src}
-                  alt=""
+                  alt={altOf(item.captionKey)}
                   loading="lazy"
                   decoding="async"
                 />

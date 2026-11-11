@@ -11,74 +11,74 @@ const messages = {
   meta: {
     description: {
       top: {
-        ja: "シボ加工・５軸レーザーテクスチャリング・ピーニング加工の専門企業。自動車内装・家電・化粧品容器の金型表面処理を50年以上（創業1971年）積み重ねた実績で対応。東京大田区・世界11カ国展開。サンプル・お見積もりご相談ください。",
-        en: "Shibo texturing, 5-axis laser & peening specialists. 50+ years (est. 1971) in mold surface treatment for automotive, appliances & cosmetic packaging. Tokyo-based.",
+        ja: "日本エッチングはシボ加工・５軸レーザーテクスチャリング・ピーニング加工を専門とする金型シボ加工メーカーです。自動車内装・家電・化粧品容器の金型表面処理を50年以上（創業1971年）積み重ねた実績で対応。東京大田区を拠点に世界11カ国に展開。",
+        en: "Nihon Etching, a mold texturing manufacturer since 1971: shibo, 5-axis laser texturing, and peening for automotive, appliance, and cosmetics molds in 11 countries.",
       },
       shibo_design: {
-        ja: "シボは3D形状を作り込む前に決める設計判断です。抜き勾配との関係、番手の選び方、ウェルドライン・ヒケ・キズ対策を、シボ加工専門の日本エッチングが解説します。",
-        en: "Shibo texturing is a design decision to settle before finalizing 3D geometry, not a final surface treatment. Guidance on draft angle, grain selection, and hiding weld lines and sink marks.",
+        ja: "シボは3D形状を作り込む前に決める設計判断です。抜き勾配との関係、番手の選び方、ウェルドライン・ヒケ・キズ対策を、金型シボ加工メーカーの日本エッチングが解説します。",
+        en: "Decide shibo before finalizing 3D geometry. Nihon Etching explains draft angles, texture grade selection, and preventing weld lines, sink marks, and scratches.",
       },
       company: {
         overview: {
-          ja: "株式会社日本エッチング（東京都大田区本羽田）の会社概要。昭和46年創業、資本金1,000万円、国内従業員70名・海外350名。シボ加工・レーザーテクスチャリング・ピーニング加工を世界11カ国で展開するグローバル専門企業。",
-          en: "Company overview of Nihon Etching Co.,Ltd. (Honhaneda, Ota-ku, Tokyo). Founded in 1971, capital of ¥10 million, with 70 domestic and 350 overseas employees. A global specialist in shibo texturing, laser texturing, and peening, operating across 11 countries worldwide.",
+          ja: "金型シボ加工メーカー日本エッチング（東京都大田区本羽田）の会社概要。昭和46年創業、国内・海外の従業員420名。シボ加工・レーザーテクスチャリング・ピーニング加工を世界11カ国で展開するグローバル専門企業。",
+          en: "Nihon Etching company profile: a mold texturing manufacturer in Ota, Tokyo, founded 1971. Shibo, laser texturing, and peening in 11 countries, with 420 employees.",
         },
         philosophy: {
-          ja: "日本エッチングの経営理念・品質方針・環境方針。高品質な表面処理加工を通じて社会に貢献することを使命としています。",
-          en: "Our corporate philosophy, quality policy, and environmental policy at Nihon Etching Co., Ltd.",
+          ja: "金型シボ加工メーカー日本エッチングの経営理念・品質方針・環境方針。高品質な表面処理加工の提供を通じて社会に貢献することを使命としています。",
+          en: "Nihon Etching's corporate philosophy, quality policy, and environmental policy: contributing to society through high-quality mold surface finishing.",
         },
         history: {
-          ja: "株式会社日本エッチングの沿革。昭和46年の創業から現在に至るまでの歩みをご紹介します。",
-          en: "The history of Nihon Etching Co., Ltd., from its founding in 1971 to the present day.",
+          ja: "金型シボ加工メーカー株式会社日本エッチングの沿革。昭和46年の創業から現在に至るまでの歩みをご紹介します。",
+          en: "The history of Nihon Etching, a mold texturing manufacturer, from its founding in 1971 to the present day.",
         },
       },
       technology: {
         laser: {
-          ja: "GFマシニングソリューションズ社製５軸レーザー彫刻機（GFMS-LS2500）を国内最大規模で導入。複雑な3D曲面へのデジタルテクスチャリング・レーザーシボ加工に対応。CMF設計・試作から量産まで一貫して対応いたします。",
-          en: "Home to Japan's largest fleet of GF Machining Solutions 5-axis laser engravers (GFMS-LS2500). Capable of digital texturing and laser shibo processing on complex 3D curved surfaces. We provide end-to-end support from CMF design and prototyping through to mass production.",
+          ja: "金型シボ加工メーカー日本エッチングでは、GFマシニングソリューションズ社製５軸レーザー彫刻機（GFMS-LS2500）を国内最大規模で導入。複雑な3D曲面へのデジタルテクスチャリング・レーザーシボ加工に対応。CMF設計・試作から量産まで一貫して対応いたします。",
+          en: "Group companies of Nihon Etching, a mold texturing manufacturer. From directly operated plants in Japan to an overseas network, we provide surface finishing worldwide.",
         },
         shibo: {
-          ja: "シボ加工とは金型や素材の表面にテクスチャーを施す表面処理技術です。フォトエッチング・梨地・皮シボ・サンドブラスト・グラフィックパターンを自動車内装・家電・OA機器など幅広い用途に対応。東京大田区のシボ加工専門企業。",
-          en: "Shibo texturing is a surface treatment technique that applies texture to molds and materials. We offer a full range of methods—photo etching, matte finish, leather grain, sandblasting, and graphic patterns—for automotive interiors, home appliances, OA equipment, and more. Your shibo texturing specialists in Ota-ku, Tokyo.",
+          ja: "日本エッチングは金型や素材の表面にテクスチャーを施す表面処理技術であるシボ加工を専門とする金型シボ加工メーカーです。フォトエッチング・梨地・皮シボ・サンドブラスト・グラフィックパターンを自動車内装・家電・OA機器など幅広い用途に対応。",
+          en: "Nihon Etching's shibo mold texturing: photo etching, nashiji, leather grain, sandblasting, and graphic patterns for automotive interiors, appliances, and office equipment.",
         },
         peening: {
-          ja: "スイス・イエプコ（IEPCO）社製ピーニング加工機によるマイクロブラスト処理で、射出成形金型の加工変質層除去・離型不良改善・長寿命化を実現。加熱・溶剤不使用で素材劣化ゼロ。東京大田区の金型メンテナンス専門企業。",
-          en: "Using Swiss-made IEPCO peening machines for micro blasting, we eliminate altered surface layers, resolve ejection defects, and extend the service life of injection molds. No heat or solvents — zero material degradation. Your mold maintenance specialists in Ota-ku, Tokyo.",
+          ja: "金型シボ加工メーカー日本エッチングでは、スイス・イエプコ（IEPCO）社製ピーニング加工機によるマイクロブラスト処理で、射出成形金型の加工変質層除去・離型不良改善・長寿命化を実現。加熱・溶剤不使用で素材劣化ゼロ。",
+          en: "Micro-blast peening by Nihon Etching with Swiss IEPCO equipment: removes damaged surface layers, improves mold release, and extends injection mold life without heat or solvents.",
         },
       },
       group: {
         top: {
-          ja: "日本エッチングのグループ会社一覧。国内直営工場から海外ネットワークまで、世界規模で表面処理加工を展開しています。",
+          ja: "金型シボ加工メーカー日本エッチングのグループ会社一覧。国内直営工場から海外ネットワークまで、世界規模で表面処理加工を展開しています。",
           en: "Nihon Etching Group companies worldwide, from domestic factories to an extensive overseas network.",
         },
         ne: {
-          ja: "日本エッチングの直営工場（NEグループ）一覧。東京大田区の本社工場をはじめ、フィリピン・シンガポール・ベトナム・マレーシア・インドネシア・中国・台湾の拠点でシボ加工に対応します。",
-          en: "Nihon Etching's directly operated factories (NE Group): our Tokyo head office plants and facilities in the Philippines, Singapore, Vietnam, Malaysia, Indonesia, China, and Taiwan.",
+          ja: "金型シボ加工メーカー日本エッチングの直営工場（NEグループ）一覧。東京大田区の本社工場をはじめ、フィリピン・シンガポール・ベトナム・マレーシア・インドネシア・中国・台湾の拠点でシボ加工に対応します。",
+          en: "Nihon Etching's directly operated plants (NE Group): our Ota, Tokyo HQ and sites in the Philippines, Singapore, Vietnam, Malaysia, Indonesia, China, and Taiwan.",
         },
         nwn: {
-          ja: "NWNグループの拠点一覧。ニューテックス・ワールドエッチング・日本エッチングの3社で設立したネットワークで、日本・インド・タイ・北米・中国・韓国をカバーします。",
-          en: "NWN Group locations: a network founded by Newtex, World Etching, and Nihon Etching, covering Japan, India, Thailand, North America, China, and Korea.",
+          ja: "金型シボ加工メーカー日本エッチングがニューテックス・ワールドエッチングとの３社間で設立したNWNグループの拠点一覧。日本・インド・タイ・北米・中国・韓国をカバーします。",
+          en: "NWN Group locations, a joint network founded by Nihon Etching, Newtex, and World Etching. Covering Japan, India, Thailand, North America, China, and South Korea.",
         },
         sec: {
-          ja: "SECグループの提携拠点一覧。ドイツ・ポルトガル・オーストリア・イタリア・トルコなどのヨーロッパ各国と、アメリカ・ブラジルで、日本エッチングと同水準のシボ加工に対応します。",
-          en: "SEC Group partner locations across Europe (Germany, Portugal, Austria, Italy, Turkey), the United States, and Brazil, delivering texturing to the same standards as Nihon Etching.",
+          ja: "金型シボ加工メーカー日本エッチングが同水準のシボ加工に対応するために提携したSECグループの拠点一覧。ドイツ・ポルトガル・オーストリア・イタリア・トルコなどのヨーロッパ各国と、アメリカ・ブラジルで高い水準のシボ加工を提供します。",
+          en: "SEC Group: Nihon Etching's partners delivering equal-standard shibo texturing in Germany, Portugal, Austria, Italy, Turkey and other European countries, the USA, and Brazil.",
         },
       },
       careers: {
-        ja: "株式会社日本エッチングの採用情報。表面処理加工のリーディングカンパニーで、ともに成長できる仲間を募集しています。",
-        en: "Career opportunities at Nihon Etching Co., Ltd. Join our team and grow with a leader in surface treatment technology.",
+        ja: "金型シボ加工メーカー日本エッチングの採用情報。表面処理加工のリーディングカンパニーで、ともに成長できる仲間を募集しています。",
+        en: "Careers at Nihon Etching, a leading mold texturing manufacturer. Join us and grow with a leader in surface finishing.",
       },
       contact: {
-        ja: "株式会社日本エッチングへのお問い合わせ。シボ加工・レーザー彫刻・ピーニング加工に関するご質問はこちらからどうぞ。",
-        en: "Contact Nihon Etching Co., Ltd. for inquiries about Shibo texturing, laser engraving, and peening services.",
+        ja: "金型シボ加工メーカー日本エッチングへのお問い合わせ。シボ加工・レーザー彫刻・ピーニング加工に関するご質問はこちらからどうぞ。",
+        en: "Contact Nihon Etching, a mold texturing manufacturer. Send us your questions about shibo texturing, laser texturing, and peening.",
       },
       download: {
-        ja: "日本エッチングの技術資料ダウンロード。シボ加工・５軸レーザー彫刻に関するPDF資料をご用意しています。",
-        en: "Download technical documents from Nihon Etching, including PDFs on Shibo texturing and 5-axis laser engraving.",
+        ja: "金型シボ加工メーカー日本エッチングの技術資料ダウンロード。シボ加工・５軸レーザー彫刻に関するPDF資料をご用意しています。",
+        en: "Download technical documents from Nihon Etching, a mold texturing manufacturer. PDF materials on shibo texturing and 5-axis laser texturing are available.",
       },
       privacypolicy: {
-        ja: "株式会社日本エッチングのプライバシーポリシー。お客様の個人情報保護に関する方針をご確認いただけます。",
-        en: "Privacy Policy of Nihon Etching Co., Ltd. regarding the protection of personal information.",
+        ja: "金型シボ加工メーカー日本エッチングのプライバシーポリシー。お客様の個人情報保護に関する方針をご確認いただけます。",
+        en: "Privacy policy of Nihon Etching, a mold texturing manufacturer, describing how we protect your personal information.",
       },
     },
   },
@@ -327,7 +327,7 @@ const messages = {
   },
   pageTitle: {
     top: {
-      ja: "シボ加工の専門企業｜株式会社日本エッチング【創業1971年・世界11カ国】",
+      ja: "金型シボ加工メーカー｜株式会社日本エッチング【創業1971年・世界11カ国】",
       en: "Shibo Texturing Experts | Nihon Etching Co.,Ltd. — Est. 1971 · 11 Countries Worldwide",
     },
     knowledge: {
@@ -342,7 +342,7 @@ const messages = {
     },
     company: {
       overview: {
-        ja: "会社概要｜株式会社日本エッチング — シボ加工・金型表面処理の専門企業（東京都大田区）",
+        ja: "会社概要｜株式会社日本エッチング — 金型シボ加工メーカー（東京都大田区）",
         en: "Company Overview | Nihon Etching Co.,Ltd. — Shibo Texturing & Mold Surface Treatment Specialists (Ota-ku, Tokyo)",
       },
       philosophy: {
@@ -356,15 +356,15 @@ const messages = {
     },
     technology: {
       laser: {
-        ja: "5軸レーザーシボ加工・レーザーテクスチャリング｜国内最大規模GFMS LS2500導入｜株式会社日本エッチング",
+        ja: "5軸レーザーシボ加工・レーザーテクスチャリングの金型シボ加工メーカー｜国内最大規模GFMS LS2500導入｜株式会社日本エッチング",
         en: "5-Axis Laser Shibo & Laser Texturing | Japan's Largest GFMS LS2500 Fleet | Nihon Etching Co.,Ltd.",
       },
       shibo: {
-        ja: "シボ加工とは？フォトエッチング・梨地・皮シボの専門加工｜株式会社日本エッチング",
+        ja: "シボ加工とは？フォトエッチング・梨地・皮シボの金型シボ加工メーカー｜株式会社日本エッチング",
         en: "Shibo Texturing Specialists | Molds, Plastics & Automotive Interiors | Nihon Etching Co.,Ltd.",
       },
       peening: {
-        ja: "ショットピーニング・マイクロブラスト処理｜金型長寿命化・表面改質｜株式会社日本エッチング",
+        ja: "ショットピーニング・マイクロブラスト処理・金型長寿命化・表面改質の金型シボ加工メーカー｜株式会社日本エッチング",
         en: "Shot Peening & Micro Blasting | Mold Life Extension & Surface Modification | Nihon Etching Co.,Ltd.",
       },
     },
@@ -416,7 +416,7 @@ const messages = {
     },
 
     p1: {
-      ja: "株式会社日本エッチングは昭和46年の創業以来、プラスティックや金属をはじめとするあらゆる素材に「シボ加工」を施す専門企業として、国内外で高い評価を得続けています。",
+      ja: "金型シボ加工メーカー、株式会社日本エッチングは昭和46年の創業以来、プラスティックや金属をはじめとするあらゆる素材に「シボ加工」を施す専門企業として、国内外で高い評価を得続けています。",
       en: "Since 1971, Nihon Etching has specialized in surface texturing for a wide range of materials—including plastics and metals—earning trust and recognition in Japan and abroad.",
     },
     p2: {
@@ -504,24 +504,54 @@ const messages = {
     },
     items: {
       hor01: {
-        alt: { ja: "ランダムパターン", en: "Rumdom Pattern" },
-        title: { ja: "ランダムパターン", en: "Rumdom Pattern" },
+        alt: {
+          ja: "ランダムパターンのレーザー加工サンプル",
+          en: "Laser pattern sample: Rumdom Pattern",
+        },
+        title: {
+          ja: "ランダムパターン",
+          en: "Rumdom Pattern",
+        },
       },
       hor02: {
-        alt: { ja: "グリッドパターン", en: "Grid Pattern" },
-        title: { ja: "グリッドパターン", en: "Grid Pattern" },
+        alt: {
+          ja: "グリッドパターンのレーザー加工サンプル",
+          en: "Laser pattern sample: Grid Pattern",
+        },
+        title: {
+          ja: "グリッドパターン",
+          en: "Grid Pattern",
+        },
       },
       hor03: {
-        alt: { ja: "ウォーターマーク", en: "Watermark" },
-        title: { ja: "ウォーターマーク", en: "Watermark" },
+        alt: {
+          ja: "ウォーターマークのレーザー加工サンプル",
+          en: "Laser pattern sample: Watermark",
+        },
+        title: {
+          ja: "ウォーターマーク",
+          en: "Watermark",
+        },
       },
       hor04: {
-        alt: { ja: "NUNOME調プレート", en: 'Fabric Grain Pattern "NUNOME"' },
-        title: { ja: "NUNOME調プレート", en: 'Fabric Grain Pattern "NUNOME"' },
+        alt: {
+          ja: "NUNOME調プレートのレーザー加工サンプル",
+          en: 'Laser pattern sample: Fabric Grain Pattern "NUNOME"',
+        },
+        title: {
+          ja: "NUNOME調プレート",
+          en: 'Fabric Grain Pattern "NUNOME"',
+        },
       },
       ver01: {
-        alt: { ja: "撥水効果シボ", en: "Hydrophobic Grain Pattern" },
-        title: { ja: "撥水効果シボ", en: "Hydrophobic Grain Pattern" },
+        alt: {
+          ja: "撥水効果シボのレーザー加工サンプル",
+          en: "Laser pattern sample: Hydrophobic Grain Pattern",
+        },
+        title: {
+          ja: "撥水効果シボ",
+          en: "Hydrophobic Grain Pattern",
+        },
       },
     },
   },
@@ -532,7 +562,10 @@ const messages = {
       subtitle: { ja: "日本エッチングの技術", en: "Nihon Etching TECHNOLOGY" },
       items: {
         t01: {
-          alt: { ja: "ホーニング no.12", en: "Honing no.12" },
+          alt: {
+            ja: "シボ加工：ホーニング no.12",
+            en: "Shibo pattern sample: Honing no.12",
+          },
           title: {
             ja: "ホーニング no.12",
             en: "Honing no.12",
@@ -732,7 +765,7 @@ const messages = {
     overview_access: {
       eyebrow: { ja: "Company", en: "Company" },
       lead: {
-        ja: "日本エッチングの企業情報と、本社へのアクセス方法をご紹介します",
+        ja: "金型シボ加工メーカー日本エッチングの企業情報と、本社へのアクセス方法をご紹介します",
         en: "An overview of Nihon Etching and access information for our headquarters.",
       },
       title: { ja: "会社概要／アクセス", en: "Company Profile & Access" },
@@ -746,7 +779,7 @@ const messages = {
           name: {
             label: { ja: "名　称", en: "Company Name" },
             value: {
-              ja: "株式会社 日本エッチング",
+              ja: "株式会社日本エッチング",
               en: "Nihon Etching Co., Ltd.",
             },
           },
@@ -807,7 +840,7 @@ const messages = {
         locations: {
           hq1: {
             name: {
-              ja: "株式会社 日本エッチング（本社・第１工場）",
+              ja: "株式会社日本エッチング（本社・第１工場）",
               en: "Nihon Etching Co., Ltd. Head Office & 1st Factory",
             },
             address: {
@@ -856,7 +889,7 @@ const messages = {
 
           tokyo2: {
             name: {
-              ja: "株式会社 日本エッチング（第２工場）",
+              ja: "株式会社日本エッチング（第２工場）",
               en: "Tokyo 2nd Factory",
             },
             address: {
@@ -877,7 +910,7 @@ const messages = {
 
           tokyo3: {
             name: {
-              ja: "株式会社 日本エッチング（第３工場）",
+              ja: "株式会社日本エッチング（第３工場）",
               en: "Tokyo 3rd Factory",
             },
             address: {
@@ -1150,7 +1183,7 @@ const messages = {
       page: {
         title: { ja: "シボ加工", en: "Shibo" },
         lead: {
-          ja: "日本エッチングの高いテクスチャリング技術が、素材の表情を引き出し、機能性を向上させます",
+          ja: "金型シボ加工メーカー日本エッチングの高いテクスチャリング技術が、素材の表情を引き出し、機能性を向上させます",
           en: "Nihon Etching’s advanced texturing technology brings out the character of materials while enhancing their functionality.",
         },
       },
@@ -1159,7 +1192,7 @@ const messages = {
           paragraphs: {
             ja: [
               "金属（金型・平板・ロール）・プラスチック・ガラス・石など、あらゆる物が持っている素材の表情を引き出し、 高級感や付加価値を高めるために表面処理を施すことをシボ加工といいます。",
-              "当社がシボ加工を施した素材は、パソコンやプリンターといったOA機器から、 自動車の内装パネル、携帯電話や家庭用ゲーム機等さまざまな製品に使用されています。",
+              "金型シボ加工メーカー日本エッチングがシボ加工を施した素材は、パソコンやプリンターといったOA機器から、 自動車の内装パネル、携帯電話や家庭用ゲーム機等さまざまな製品に使用されています。",
               "化学薬品の作用によって金属物の表面を浸食除去する「エッチング」をはじめとするシボ加工。 素材の表面に梨地や砂目、岩目といった均一なパターンを刻むことにより、 製品の寿命を長く保ち、外観の美しさや高級感を演出します。",
             ],
             en: [
@@ -1178,7 +1211,10 @@ const messages = {
           en: "This method involves etching various patterns into metal substances by subjecting them to the action of chemical agents.",
         },
         gallery: {
-          cap01: { ja: "幾何学模様-1", en: "Geometric Pattern 1" },
+          cap01: {
+            ja: "幾何学模様-1",
+            en: "Geometric Pattern 1",
+          },
           cap02: { ja: "幾何学模様-2", en: "Geometric Pattern 2" },
           cap03: { ja: "幾何学模様-3", en: "Geometric Pattern 3" },
           cap04: { ja: "木目", en: "Wood Pattern" },
@@ -1302,9 +1338,9 @@ const messages = {
         intro: {
           paragraphs: {
             ja: [
-              "昨今、CMF（カラーマテリアルフィニッシュ）の重要性から、F（フィニッシング）にも非常に注目が集まっており、プラスチック製品自体の製品価値/商品価値/デザイン価値をいかに高めるか、レーザーテクスチャリングでの新しい可能性について常に模索しております。",
+              "CMF（カラーマテリアルフィニッシュ）の重要性から、F（フィニッシング）にも非常に注目が集まっており、プラスチック製品自体の製品価値/商品価値/デザイン価値をいかに高めるか、レーザーテクスチャリングでの新しい可能性について常に模索しております。",
               "シボ加工のデジタル化への移行は日々進んでおり、レーザーテクスチャリングは伝統的な加工方法における限界を打破する技術のひとつです。 ",
-              "デザイン変更に対する難しさ、完成品質の誤差、新しいビジネス開拓のための機能的表面の施作という今日の挑戦にデジタルレーザーテクスチャリングの加工技術をご提案します。",
+              "金型シボ加工メーカー日本エッチングではデザイン変更に対する難しさ、完成品質の誤差、新しいビジネス開拓のための機能的表面の施作という今日の挑戦にデジタルレーザーテクスチャリングの加工技術をご提案します。",
             ],
             en: [
               "Recently, due to the growing importance of CMF (Color Material Finish), significant attention has also been focused on the “F” (Finishing). We are constantly exploring new possibilities through laser texturing to enhance the product value, commercial value, and design value of plastic products themselves.",
@@ -1319,7 +1355,7 @@ const messages = {
         },
         description: {
           ja: [
-            "５軸レーザー彫刻機は、レーザー技術と多方向（５軸）からの彫刻技術をすべてデジタル処理で行います。シボ加工、彫刻、マーキング、微細加工等を2D平面だけではなく、3D曲面へ効率的に再現することが可能となりました。",
+            "金型シボ加工メーカー日本エッチングでは５軸レーザー彫刻機を使用し、多方向（５軸）からの彫刻技術をすべてデジタル処理で行います。シボ加工、彫刻、マーキング、微細加工等を2D平面だけではなく、3D曲面へ効率的に再現することが可能となりました。",
             "このシステムにより、これまでのシボ加工の限界を打ち破り、金型デザインの可能性を驚異的に拡大することができます。",
           ],
           en: [
@@ -1403,7 +1439,7 @@ const messages = {
         intro: {
           paragraphs: {
             ja: [
-              "スイスのイエプコ（IEPCO）社のピーニング加工機は、 航空機ジェットエンジンのタービンブレード折損防止の研究に端を発して生み出された技術です。",
+              "金型シボ加工メーカー日本エッチングの導入する、スイスのイエプコ（IEPCO）社のピーニング加工機は、 航空機ジェットエンジンのタービンブレード折損防止の研究に端を発して生み出された技術です。",
               "イエプコ表面処理はサンドブラスト技術とショットピーニング技術を組み合わせた低圧方式のマイクロブラスト処理で、 加熱も溶剤も一切使用せずに、 表面改質のために開発された粉体（エージェント）を吹き付けるだけで、加工変質層の除去や表面欠陥の閉塞を行い、 金属部品の性能向上、長寿命化に効果を上げることができます。",
               "お客様からお預かりする貴重な金型を共有の財産と考え、金型の生産性向上や長寿命化にも重点をおいており、最新技術・機器を導入し、より品質の高いものを提供します",
               "また、古い金型に新しく息を吹き込む努力も惜しみません。 経年劣化よる摩耗やひび割れ・酸化した金型も丁寧にメンテナンスします。",
@@ -1474,7 +1510,7 @@ const messages = {
     listpage: {
       title: { ja: "グループリスト", en: "Group list" },
       lead: {
-        ja: "世界中に日本の技術を伝えるべく、海外進出や現地の工場との提携を精力的に進めています",
+        ja: "金型シボ加工メーカー日本エッチングは世界中に日本の技術を伝えるべく、海外進出や現地の工場との提携を精力的に進めています",
         en: "We are actively expanding overseas and partnering with local factories to bring Japanese technology to the world.",
       },
       section: {
@@ -1501,7 +1537,7 @@ const messages = {
         slug: "tokyo-hq",
 
         companyName: {
-          ja: "株式会社 日本エッチング（本社・第１工場）",
+          ja: "株式会社日本エッチング（本社・第１工場）",
           en: "Nihon Etching Co., Ltd. Head Office & 1st Factory",
         },
         address: {
@@ -1531,7 +1567,7 @@ const messages = {
     ne: {
       pageTitle: { ja: "NEグループ（直営）", en: "NE Group(Direct)" },
       lead: {
-        ja: "世界中に日本の技術を伝えるべく、海外進出や現地の工場との提携を精力的に進めています",
+        ja: "金型シボ加工メーカー日本エッチングは世界中に日本の技術を伝えるべく、海外進出や現地の工場との提携を精力的に進めています",
         en: "We are expanding globally to bring Japanese technology to the world.",
       },
     },
@@ -1557,7 +1593,7 @@ const messages = {
     page: {
       title: { ja: "採用情報", en: "Recruit" },
       lead: {
-        ja: "事業拡大につき、正社員を募集しています。",
+        ja: "金型シボ加工メーカー日本エッチングでは、事業拡大につき正社員を募集しています。",
         en: "We are hiring full-time employees to support our business growth.",
       },
       imageAlt: { ja: "採用情報", en: "Recruit" },
@@ -1567,7 +1603,7 @@ const messages = {
       intro: {
         paragraphs: {
           ja: [
-            "事業拡大のため正社員を大募集しています。",
+            "金型シボ加工メーカー日本エッチングでは、事業拡大のため正社員を大募集しています。",
             "世界に拡がる技術革新の追従だけではなく、環境や人に対しての投資を重んじる経営方針で躍進を続けています。",
             "社員一人一人のやりがいと仕事に対する誇りを大事に、共に向上を目指す人材を広く募集しています。",
           ],
